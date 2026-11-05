@@ -104,12 +104,12 @@
     "tooth_length": {
       "value": 10,
       "unit": "mm",
-      "provenance": "PATENT_DISCLOSED",
+      "provenance": "PATENT_DERIVED_ESTIMATE",
       "evidence_ids": [
         "SRC-004"
       ],
       "confidence": "medium",
-      "note": "Patent description says the blade-shaped tooth length is approximately twice its width; 10 mm is derived from the approximate 5 mm width and is not a measured retail dimension."
+      "note": "Approximate 10 mm derived from the patent statement that blade length is around twice its approximate 5 mm width; not a separately dimensioned or measured retail value."
     },
     "tooth_height": {
       "value": 12,
