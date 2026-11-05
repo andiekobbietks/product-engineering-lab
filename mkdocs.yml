@@ -17,10 +17,11 @@ nav:
       - Roadmap: roadmap.md
       - Nyfasi case study: experiments/nyfasi.md
       - Validation protocol: experiments/nyfasi-validation.md
+      - Interactive 3D viewer: experiments/viewer.md
   - Commercial:
       - IP register: ip-register.md
       - Commercial proposal: commercial-proposal.md
-      - Licensing status: ../LICENSING.md
+      - Licensing status: licensing.md
 markdown_extensions:
   - admonition
   - attr_list
