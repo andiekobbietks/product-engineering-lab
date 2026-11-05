@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Product Engineering Lab · GLB viewer</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body { margin: 0; padding: 2rem; background: #111827; color: #f9fafb; font: 16px/1.5 system-ui, sans-serif; }
+    main { max-width: 1000px; margin: auto; }
+    model-viewer { width: 100%; height: min(70vh, 650px); background: #f1f5f9; border-radius: 16px; }
+    input, button { margin: 1rem 0; padding: .65rem; }
+    a { color: #93c5fd; }
+    .note { color: #cbd5e1; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Interactive assembly viewer</h1>
+  <p class="note">Choose the GLB exported by the research notebook. Orbit, zoom and inspect the schematic exploded assembly in the viewer.</p>
+  <label for="glb">Load local GLB file</label><br>
+  <input id="glb" type="file" accept=".glb,model/gltf-binary">
+  <model-viewer id="viewer" camera-controls auto-rotate shadow-intensity="1" exposure="1" alt="Illustrative exploded research assembly"></model-viewer>
+  <p class="note">This viewer does not validate dimensions, materials, mechanisms or manufacturing suitability. The model is an illustrative proxy with placeholder dimensions.</p>
+  <p><a href="../nyfasi.md">Return to the Nyfasi research overview</a></p>
+</main>
+<script>
+  const input = document.getElementById('glb');
+  const viewer = document.getElementById('viewer');
+  let previousUrl;
+  input.addEventListener('change', () => {
+    const file = input.files && input.files[0];
+    if (!file) return;
+    if (previousUrl) URL.revokeObjectURL(previousUrl);
+    previousUrl = URL.createObjectURL(file);
+    viewer.src = previousUrl;
+  });
+</script>
+</body>
+</html>
