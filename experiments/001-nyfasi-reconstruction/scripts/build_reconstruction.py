@@ -179,7 +179,7 @@ def build_roller_mechanism():
 def build_elastomeric_spindle_seals():
     """Separate annular elastomer proxies; not validated glands or lip seals."""
     seals = []
-    x_position = P["roller_len"] / 2 + P["roller_endwall_t"] + P["seal_axial_width"] / 2
+    x_position = P["roller_len"] / 2 + P["roller_endwall_t"] + P["spindle_pin_len"] / 2
     for side, sign in (("left", -1), ("right", 1)):
         outer = cylinder_on_x(
             f"{side}_spindle_seal_outer",
