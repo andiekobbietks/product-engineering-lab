@@ -444,6 +444,30 @@ def main():
         "eight-comb-teeth": ["build_comb_teeth"],
         "roller-end-features": ["cylinder_on_x", "build_roller_end_wall", "build_spindle_pin", "build_roller_end_features", "build_elastomeric_spindle_seals"],
     }
+    source_object_prefixes = {
+        "lower-housing": [
+            ("lower_housing_shell_proxy", "build_lower_housing"),
+            ("housing_bearings_and_snap_fit_proxies", "build_housing_retention_features"),
+            ("housing_interface_gasket_proxy", "build_housing_gasket"),
+        ],
+        "upper-housing": [("upper_housing_shell_proxy", "build_upper_housing")],
+        "reservoir": [("reservoir_volume_proxy", "build_reservoir")],
+        "rotatable-roller": [
+            ("roller_smooth_core_and_sealing_lands", "build_roller_core"),
+            ("textured_annular_band_", "build_textured_band"),
+        ],
+        "curved-slotted-wall": [("semi_cylindrical_slotted_wall", "build_curved_wall")],
+        "eight-comb-teeth": [("blade_tooth_", "build_comb_teeth")],
+        "roller-end-features": [
+            ("roller_left_end_wall_component", "build_roller_end_wall"),
+            ("roller_right_end_wall_component", "build_roller_end_wall"),
+            ("roller_left_spindle_pin_component", "build_spindle_pin"),
+            ("roller_right_spindle_pin_component", "build_spindle_pin"),
+            ("elastomeric_spindle_seals_research_proxy", "build_elastomeric_spindle_seals"),
+            ("left_elastomeric_spindle_seal_proxy", "build_elastomeric_spindle_seals"),
+            ("right_elastomeric_spindle_seal_proxy", "build_elastomeric_spindle_seals"),
+        ],
+    }
     (web_dir / "build_reconstruction.py").write_text(source_text, encoding="utf-8")
     (web_dir / "cad-parameters.json").write_text(
         PARAMETER_FILE.read_text(encoding="utf-8"), encoding="utf-8"
@@ -484,6 +508,11 @@ def main():
             "source_symbols": [
                 {"name": symbol, **source_ranges[symbol]}
                 for symbol in component_symbols.get(component_id, [])
+                if symbol in source_ranges
+            ],
+            "source_object_prefixes": [
+                {"prefix": prefix, "symbol": symbol}
+                for prefix, symbol in source_object_prefixes.get(component_id, [])
                 if symbol in source_ranges
             ],
         })
