@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "experiments/001-nyfasi-reconstruction/scripts/**"
+      - "experiments/001-nyfasi-reconstruction/tests/**"
       - "experiments/001-nyfasi-reconstruction/models/cad-parameters.json"
       - "experiments/001-nyfasi-reconstruction/models/tolerance-stackup.json"
       - "requirements-cad.txt"
@@ -13,6 +14,7 @@ on:
     branches: [main]
     paths:
       - "experiments/001-nyfasi-reconstruction/scripts/**"
+      - "experiments/001-nyfasi-reconstruction/tests/**"
       - "experiments/001-nyfasi-reconstruction/models/cad-parameters.json"
       - "experiments/001-nyfasi-reconstruction/models/tolerance-stackup.json"
       - "requirements-cad.txt"
