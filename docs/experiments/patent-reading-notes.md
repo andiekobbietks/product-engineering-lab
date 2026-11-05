@@ -62,3 +62,12 @@ The earlier generic “comb + roller + reservoir” idea is now better grounded 
 - The patent text is not a native CAD model or production drawing package.
 - Patent publication does not establish permission to reproduce protected images or commercialise a reconstruction.
 - The present Sand3D model has been built and exported in CI as a schematic proxy. It has not been checked against authorised reference material or a physical sample.
+
+
+## China family member and international record
+
+The related Chinese family member is [CN115003190B](https://patents.google.com/patent/CN115003190B/en), application CN202180011338.5, with application publication CN115003190A dated 2 September 2022 and B publication/grant event dated 9 April 2024. The shared priority date is 31 January 2020. The [US family record](https://patents.google.com/patent/US20230088345A1/en) lists the Chinese member and the family publication dates.
+
+Google Patents' family view labels the Chinese member active, but that is not a formal CNIPA legal-status certificate. The official verification route is the [CNIPA patent search portal](https://cponline.cnipa.gov.cn/). This project has not yet captured an official CNIPA register extract or verified current fee/payment history and chain of title.
+
+The UK, Chinese, European and US publications belong to the same disclosed applicator family, but national claims and legal events must be checked separately. Do not assume the same claim scope or enforceability applies in every territory.
