@@ -11,6 +11,8 @@ The patent figures are schematic. They do not provide dimensions, tolerances, ma
 
 ## Components now represented in Sand3D
 
+The reconstruction script follows Sand3D's current component-first guidance: one named function per distinct part, dimensions sourced from the provenance ledger, parts placed in a parent frame, and assembly articulation represented explicitly. The roller is now a separate assembly with a continuous X-axis rotation joint. Procedural knurling is used to render the circumferential bands, while the exposed roller core represents the smooth intervening lands. A separate perimeter gasket proxy and rounded housing-shell proxies have also been added. See the [Sand3D demos, API and Hugging Face dataset strategy](sand3d-dataset-strategy.md).
+
 1. Smooth roller core and intervening sealing lands.
 2. Seven raised circumferential bands, aligned with the seven modelled wall slots.
 3. Two roller end walls.
