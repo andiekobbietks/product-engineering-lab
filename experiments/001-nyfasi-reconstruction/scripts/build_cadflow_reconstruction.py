@@ -323,7 +323,7 @@ def build_component_shapes(model: cad.Model):
     return components
 
 
-def export_component(component_id: str, shape):
+def export_component(component_id: str, shape, expected_solids: int = 1):
     report = shape.validate()
     if not report.ok:
         raise RuntimeError(
@@ -349,6 +349,7 @@ def export_component(component_id: str, shape):
         "area_mm2": shape.area,
         "bbox_mm": list(shape.bbox),
         "topology": shape.topology,
+        "expected_solids": expected_solids,
         "validation": report.to_dict(),
         "files": {
             "step": stem.with_suffix(".step").name,
@@ -385,7 +386,8 @@ def build():
             "The roller bands are smooth annular B-rep rings; texture microgeometry is not dimensioned by the patent.",
             "Housing and reservoir corner-radius ledger values are not yet applied as fillets in this build.",
 
-            "The seven-slot/seven-band mapping is an engineering interpretation.",
+            "The seven-slot/seven-band mapping is an engineering interpretation; the slotted wall is represented as eight separate arc solids.",
+
             "No contact, tolerance-stack, seal-compression, fatigue or performance analysis was performed.",
             "Not a manufacturing release or verified digital twin.",
         ],
@@ -394,7 +396,13 @@ def build():
     with cad.Model() as model:
         components = build_component_shapes(model)
         for component_id, shape in components.items():
-            manifest["components"][component_id] = export_component(component_id, shape)
+            # Seven through-slots divide the semi-cylindrical wall into eight
+            # disconnected arc segments. That is intentional in this proxy;
+            # all other named components must remain single solids.
+            expected_solids = P["tooth_count"] if component_id == "curved_slotted_wall" else 1
+            manifest["components"][component_id] = export_component(
+                component_id, shape, expected_solids=expected_solids
+            )
 
         # CadFlow's new Model/Shape frontend and legacy Part/Assembly facade
         # are separate API surfaces. Keep each component as its own validated
