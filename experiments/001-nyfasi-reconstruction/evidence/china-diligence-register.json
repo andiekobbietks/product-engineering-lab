@@ -57,6 +57,39 @@
       "limitations": [
         "No country-level sales, distributor, retail or shipment evidence has been inspected."
       ]
+    },
+    {
+      "id": "MFG-02",
+      "claim": "An 8 October 2025 article reports that a UK government grant helped Nyfasi acquire a manufacturing mould.",
+      "source_url": "https://lejournaldemayotte.yt/2025/10/08/une-invention-mahoraise-presentee-lors-de-levenement-the-colors/",
+      "evidence_type": "secondary_media_report",
+      "confidence": "reported_not_independently_corroborated",
+      "limitations": [
+        "The article does not name the grant programme, award amount or grant agreement.",
+        "It does not independently identify the toolmaker or factory.",
+        "It is unclear whether this is the same funding reported in the 15 October 2025 profile or a separate award."
+      ]
+    },
+    {
+      "id": "FIN-02",
+      "claim": "A 15 October 2025 article attributes a EUR 50000 grant to the Agence Nationale pour la Recherche et le Développement in connection with China mould manufacture and initial production.",
+      "source_url": "https://lejournaldemayotte.yt/articles/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme",
+      "evidence_type": "secondary_media_report",
+      "confidence": "reported_not_independently_corroborated",
+      "limitations": [
+        "A separate 8 October article refers to a UK government grant for mould acquisition; whether the awards are distinct is unresolved.",
+        "The grant award letter, funder identity, eligible expenditure and payment records have not been inspected."
+      ]
+    },
+    {
+      "id": "RAENG-01",
+      "claim": "The Royal Academy of Engineering identifies Dr Youmna Mouhamad as Nyfasi founder and describes the Deluxe Detangler as patented technology combining treatment application and detangling.",
+      "source_url": "https://enterprisehub.raeng.org.uk/about-us/enterprise-hub-10th-anniversary/hub-10-case-study-dr-youmna-mouhamad",
+      "evidence_type": "institutional_case_study",
+      "confidence": "high_for_founder_and_product_context",
+      "limitations": [
+        "This does not independently verify the China factory, tooling supplier, current production or patent legal status."
+      ]
     }
   ],
   "unverified_questions": [
@@ -69,7 +102,8 @@
     "Resin grade, colourants, material declarations and quality controls",
     "First-article inspection, dimensional reports and production acceptance",
     "Batch quantities, shipments and present manufacturing location",
-    "CNIPA current patent legal events and applicant/assignee chain of title"
+    "CNIPA current patent legal events and applicant/assignee chain of title",
+    "Whether the UK government mould grant and the reported EUR 50000 ANR&D grant are separate awards, complementary funding or inconsistent descriptions of one award."
   ],
   "cad_parameter_provenance": {
     "PATENT_DISCLOSED": "Explicitly stated in patent text; not automatically a retail measurement.",
