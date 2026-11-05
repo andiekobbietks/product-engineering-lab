@@ -22,6 +22,7 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "roller_end_features_component_group",
             "superellipse",
             "tooth_tip_taper_deg",
+            "rx=180",
             "housing_outline_profile",
             "upper_retaining_arms",
             'f"upper_retaining_arm_{side}"',
