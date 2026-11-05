@@ -20,6 +20,7 @@ def main():
     checks = [
         (P["wall_segment_angle_deg"] == 180, "Only the 180-degree Figure 6B wall is implemented."),
         (outer_r > seat_r > roller_r, "Expected outer wall radius > seat radius > roller radius."),
+        (P["roller_d"] / 2 - P["roller_projection_overlap"] + P["roller_projection_height"] >= outer_r - 0.1, "Roller projections must reach the curved wall outer envelope through the slots."),
         (P["wall_len"] >= tooth_span, "Wall must span the tooth row."),
         (P["housing_wall_t"] > 0 and P["housing_wall_t"] < min(P["lower_shell_h"], P["upper_shell_h"]) / 2, "Housing shell wall thickness is invalid."),
         (P["housing_corner_r"] > P["housing_wall_t"], "Housing corner radius should exceed shell wall thickness."),
