@@ -39,6 +39,7 @@ class RepositoryIntegrityTests(unittest.TestCase):
     def test_no_manufacturing_release_claim(self):
         model = json.loads((EXP / "models" / "product-model.json").read_text())
         self.assertEqual(model["model_status"], "research")
+        self.assertEqual(model["identity_mapping_status"], "unverified")
 
 
 if __name__ == "__main__":
