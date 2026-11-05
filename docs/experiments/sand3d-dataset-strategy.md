@@ -87,6 +87,23 @@ A more detailed render is not, by itself, high fidelity. The next fidelity gates
 Until those inputs exist, the model remains a traceable patent-led engineering research proxy, not original Nyfasi CAD, a verified digital twin or a manufacturing package.
 
 
+
+## Selected mechanical pattern references
+
+The first automated pass produced **400 metadata references** (80 per collection). From that index, the following records are the most directly relevant to the reconstruction's roller, shaft and bearing decomposition:
+
+| Dataset example | Pattern relevance | Source licence |
+|---|---|---|
+| AutoMate: roller_conveyor | Repeated roller arrangement | CC0-1.0 |
+| AutoMate: shaft_and_bearing_block | Shaft, bore and bearing support | CC0-1.0 |
+| AutoMate: split_pillow_block | Split bearing housing and retention | CC0-1.0 |
+| AutoMate: flanged_bearing | Bearing mounting geometry | CC0-1.0 |
+| SimReady: consumable_bearing_ball_d01 | Bearing component reference | CC-BY-4.0 |
+| Articraft: road_bike_crankset | Rotating multi-part assembly hierarchy | CC-BY-4.0 |
+| Objaverse: finned_motor | Cylindrical housing and radial features | CC-BY-4.0 |
+
+The complete IDs, asset IDs, SHA-256 program hashes and attribution strings are recorded in the [curated exemplar shortlist](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/sand3d-exemplar-shortlist.json). These are modelling-pattern references only. The Nyfasi model's dimensions still come from its evidence ledger, not these unrelated objects.
+
 ## Reproducible exemplar discovery
 
 A metadata-only discovery script scans the five public collections for mechanical terms such as roller, bearing, shaft, housing, gear, seal and fastener. It retains source IDs, item-level licences, attribution and hashes; it does not copy program bodies, USD, meshes or textures into this repository.
