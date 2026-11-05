@@ -18,9 +18,11 @@ This is not simply a text-to-3D showcase. It explores the engineering layer arou
 
 Sand3D remains an independently maintained third-party project. We respect its own licence, notices and API boundaries and integrate through documented adapters rather than assuming ownership of its internals.
 
-## Dual CAD toolchain
+## Canonical Sand3D engineering stack
 
-The lab now separates two complementary layers: [Sand3D](https://sandflow.ai/sand3d/) for editable 3D-as-code patterns and its five [Hugging Face collections](https://huggingface.co/collections/Sandflow/sand3d), and [CadFlow](https://github.com/yhz5613813/CadFlow) for deterministic OpenCascade B-rep construction, topology inspection and STEP export. The [CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md) documents the separate component build. Dataset reuse is governed by row-level source licences and attribution; no generic dataset object is treated as Nyfasi product evidence.
+The Nyfasi reconstruction now uses [Sand3D](https://github.com/Sandflow-ai/sand3d) as its single canonical modelling and assembly engine. The Python program, parameter ledger, assembly hierarchy, joint metadata, GLB/URDF/USDA/OBJ/STL exports, benchmark and source-linked browser gallery form one reproducible path. The gallery follows the core interaction model of Sandflow's [official articulated gallery](https://sand3d.sandflow.ai/gallery.html): inspect the model beside its real source, select a part to trace its construction, and operate exported joints.
+
+CadFlow work is retained as historical research and comparison material, but is no longer part of the active Nyfasi build or publication path. Sand3D does not currently replace CadFlow's OpenCascade B-rep and STEP capability; choosing one canonical stack is an explicit trade-off in favour of coherent program-to-assembly provenance and native articulated exports, not a claim that Sand3D provides STEP or manufacturing-grade B-rep validation. See the [architecture decision records](docs/decisions/index.md) for the rationale and migration boundary.
 
 ## Experiment 001: Nyfasi Deluxe Detangler
 
