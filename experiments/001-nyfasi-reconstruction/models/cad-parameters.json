@@ -427,6 +427,14 @@
       "evidence_ids": [],
       "confidence": "none",
       "note": "Placeholder axial width of schematic spindle seal; must remain within the spindle projection and bearing support width."
+    },
+    "tooth_tip_taper_deg": {
+      "value": 6,
+      "unit": "degree",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Provisional 6-degree taper on the blade walls to approximate the patent-described tapered teeth. The patent does not dimension the taper angle; calibrate against a retail sample or authorised drawing."
     }
   },
   "provenance_legend": {
