@@ -53,6 +53,13 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Verify interactive Sand3D gallery in Chromium
         run: python tests/test_gallery_browser.py --site site
+      - name: Upload Sand3D browser render evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: nyfasi-gallery-browser-preview
+          path: /tmp/nyfasi-gallery-browser.png
+          if-no-files-found: error
+          retention-days: 7
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
