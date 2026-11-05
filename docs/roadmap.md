@@ -2,7 +2,7 @@
 
 | ID | Experiment | Capability | Status |
 |---|---|---|---|
-| 001 | Nyfasi reconstruction | Evidence-to-product model | Research scaffold committed; Sand3D smoke test passes; evidence-based geometry validation pending |
+| 001 | Nyfasi reconstruction | Evidence-to-product model | Canonical Sand3D assembly, source-linked gallery, parameter provenance, tolerance analysis and CI benchmark/build checks implemented; physical/evidence-based validation still pending |
 | 002 | Image-to-parametric CAD | Visual understanding to editable geometry | Planned |
 | 003 | Patent-to-product model | Disclosure extraction and claim mapping | Planned |
 | 004 | Assembly intelligence | Components, joints and constraints | Planned |
