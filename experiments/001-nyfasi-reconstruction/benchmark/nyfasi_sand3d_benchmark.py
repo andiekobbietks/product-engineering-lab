@@ -168,6 +168,19 @@ def main() -> int:
         "constraint_errors": invalid_errors,
     })
 
+    baseline_result = next(item for item in results if item["scenario"] == "baseline")
+    baseline_hashes = baseline_result.get("exports", {})
+    for item in results:
+        if item["scenario"] == "baseline" or item["status"] != "passed" or "exports" not in item:
+            continue
+        changed = any(
+            item["exports"][filename]["sha256"] != baseline_hashes.get(filename, {}).get("sha256")
+            for filename in ("hair_applicator_complete_roller_exploded.glb", "hair_applicator_complete_roller_exploded.obj")
+        )
+        item["geometry_output_changed"] = changed
+        if not changed:
+            item["status"] = "failed"
+            item["reason"] = "Declared parameter edit did not change GLB or OBJ output"
     passed = sum(item["status"] == "passed" for item in results)
     report = {
         "benchmark": "Sand3D-native Nyfasi engineering intelligence",
