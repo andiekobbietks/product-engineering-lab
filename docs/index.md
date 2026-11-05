@@ -7,7 +7,7 @@ An applied research environment for turning product evidence into traceable engi
 ## Explore
 
 - [Vision](vision.md), [methodology](methodology.md), [architecture](architecture.md) and [roadmap](roadmap.md).
-- [Nyfasi independent research case study](experiments/nyfasi.md) and [validation protocol](experiments/nyfasi-validation.md).
+- [Nyfasi independent research case study](experiments/nyfasi.md), [validation protocol](experiments/nyfasi-validation.md) and [interactive 3D viewer](experiments/viewer.md).
 - [IP and provenance register](ip-register.md), [commercial proposal structure](commercial-proposal.md) and [licensing status](../LICENSING.md).
 
 ## Current implementation
