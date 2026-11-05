@@ -3,7 +3,7 @@
   "task_id": "nyfasi-roller-diameter-plus-2mm",
   "agent_model": "GPT-6 (ChatGPT)",
   "proposal_origin": "AI-authored engineering change proposal during this development session; fixture reviewed before execution",
-  "request": "Increase the roller outside diameter by 2 mm. Preserve the declared radial clearance to the curved seat, keep the tooth-root datum tied to the outer seat envelope, retain the smooth core beneath the textured bands, and do not change the roller's rotational axis or joint semantics.",
+  "request": "Increase the smooth roller drum diameter by 2 mm. Preserve the declared radial clearance to the curved seat, keep the tooth-root datum tied to the outer seat envelope, retain the spheroidal projection bands and smooth sealing lands between them, and do not change the roller's rotational axis or joint semantics.",
   "parameter_updates": {
     "roller_d": 26,
     "tooth_root_z": -34.5
@@ -13,15 +13,15 @@
     "tooth_root_z": -34.5
   },
   "rationale": [
-    "A 2 mm increase in outside diameter increases roller radius by 1 mm.",
-    "The seat radius is derived from roller radius plus the declared 0.5 mm radial clearance, so it also moves outward by 1 mm.",
+    "The 2 mm increase in smooth drum diameter increases the drum radius by 1 mm.",
+    "The seat radius is derived from drum radius plus the declared 0.5 mm radial clearance, so it also moves outward by 1 mm.",
     "The outer curved-wall radius follows the seat radius plus wall thickness; the tooth-root datum must therefore move outward by 1 mm to preserve its declared relationship.",
-    "The roller core diameter remains unchanged at 22.6 mm and stays below the new 26 mm outside diameter.",
+    "The spheroidal projection diameter, height, circumferential count and band positions remain unchanged.",
     "The roller axis and continuous +X joint are unchanged."
   ],
   "expected_invariants": [
     "roller_seat_clearance remains 0.5 mm",
-    "roller_core_d remains less than roller_d",
+    "roller_projection_count and projection dimensions remain unchanged",
     "tooth_root_z equals roller_axis_z minus outer_wall_radius minus tooth_height",
     "roller_rotation remains a continuous joint on +X"
   ],
