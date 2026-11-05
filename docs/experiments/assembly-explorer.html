@@ -2,226 +2,294 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Interactive patent-led research visualisation of a hair-treatment applicator assembly.">
-<title>Assembly Explorer · Product Engineering Lab</title>
+<meta name="description" content="Sand3D-native Nyfasi research assembly explorer with articulated GLB inspection and linked Python source.">
+<title>Nyfasi Sand3D Gallery · Product Engineering Lab</title>
 <style>
-:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--line:#293750;--text:#edf3fb;--muted:#9aabc1;--accent:#8ed8c7;--warn:#f2c879}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
-header{padding:22px clamp(18px,4vw,54px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
-.brand{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}.title{font-size:clamp(23px,3vw,34px);font-weight:650;letter-spacing:-.035em;margin:5px 0}.sub{color:var(--muted);max-width:760px}
-main{max-width:1440px;margin:auto;padding:22px clamp(12px,2vw,28px) 48px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px}
-.viewer{background:radial-gradient(ellipse at 50% 40%,#263752 0%,#131d31 54%,#0e1627 100%);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-height:610px;position:relative}
-#stage{height:610px;width:100%;display:block}.viewtag{position:absolute;top:16px;left:16px;padding:6px 10px;border:1px solid #52647d;border-radius:99px;background:#0b1323c9;color:#dce8f5;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-.toolbar{position:absolute;bottom:14px;left:14px;right:14px;display:flex;gap:8px;flex-wrap:wrap}
-button,.filelabel{background:#1b2940;border:1px solid #3a4d68;color:var(--text);padding:9px 12px;border-radius:9px;font:inherit;cursor:pointer}
-button:hover,.filelabel:hover{border-color:var(--accent)}button.primary{background:var(--accent);color:#09201d;border-color:var(--accent);font-weight:700}
-aside{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:16px}
-h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-.rangehead{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px}input[type=range]{width:100%;accent-color:var(--accent)}
-.parts{display:grid;gap:6px}.part{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;background:var(--panel2);border:1px solid transparent;border-radius:9px}.part[aria-pressed=true]{border-color:var(--accent);background:#1c3440}.part small{color:var(--muted);font-size:11px}
-.info{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:12px}.info strong{display:block;font-size:14px;margin-bottom:5px}.info p{margin:0;color:var(--muted);font-size:12px}
-.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.metric b{display:block;font-size:20px}.metric span{font-size:11px;color:var(--muted)}
-.notice{margin-top:16px;border:1px solid #6d5630;background:#302719;border-radius:12px;padding:13px 15px;color:#f4dba9;font-size:12px}
-.footer{color:var(--muted);font-size:12px;margin-top:18px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}a{color:var(--accent)}
-#file{display:none}.hidden{display:none}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.viewer,#stage{min-height:460px;height:58vh}aside{order:2}}
-@media(max-width:520px){.metrics{grid-template-columns:1fr 1fr}.viewer,#stage{height:420px;min-height:420px}}
+:root{color-scheme:dark;--bg:#090e18;--panel:#111a29;--panel2:#172337;--line:#2a3a51;--text:#eaf1fa;--muted:#94a7bf;--accent:#91dfc9;--gold:#edc77f;--red:#f29b8f}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font:13px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{height:68px;padding:10px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;background:#0c1421}
+.brand{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:800}.heading{font-size:19px;font-weight:650;letter-spacing:-.025em}.headright{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:11px}.status{border:1px solid #365e57;color:var(--accent);border-radius:99px;padding:4px 9px}
+a{color:var(--accent)}button,input{font:inherit}button{background:#1b2a40;color:var(--text);border:1px solid #3a4d68;border-radius:7px;padding:7px 10px;cursor:pointer}button:hover{border-color:var(--accent)}button:disabled{opacity:.45;cursor:not-allowed}button.primary{background:var(--accent);border-color:var(--accent);color:#092019;font-weight:750}
+.workspace{height:calc(100vh - 68px);min-height:650px;display:grid;grid-template-columns:235px minmax(380px,1fr) minmax(360px,430px);gap:0}
+.rail,.inspector{background:var(--panel);min-height:0;overflow:auto}.rail{border-right:1px solid var(--line);padding:16px 12px}.inspector{border-left:1px solid var(--line);display:flex;flex-direction:column}
+.section-label{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);font-weight:750;margin:0 0 10px}
+.search{width:100%;background:#0b1422;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:9px;margin-bottom:12px}
+.component-list{display:grid;gap:5px}.component{width:100%;text-align:left;display:block;padding:9px 10px;background:transparent;border-color:transparent}.component[aria-pressed=true]{background:#1c3440;border-color:#38695e}.component strong{display:block;font-size:12px;font-weight:650}.component small{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.rail-note{margin-top:18px;padding:10px;border:1px solid var(--line);border-radius:8px;color:var(--muted);font-size:11px}.rail-note strong{color:var(--gold)}
+.stage-column{min-width:0;min-height:0;display:flex;flex-direction:column;background:radial-gradient(ellipse at 50% 40%,#25364b 0%,#111d2e 54%,#0b1320 100%)}
+.stage-head{padding:12px 15px;display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #29384d;background:#0d1725a8}.stage-head strong{font-size:12px}.stage-head span{color:var(--muted);font-size:10px}
+.stage{position:relative;flex:1;min-height:0}.stage canvas{width:100%;height:100%;display:block;outline:none}.view-controls{position:absolute;bottom:14px;left:14px;display:flex;gap:7px;flex-wrap:wrap}.view-controls button{background:#0d1828d9;backdrop-filter:blur(8px)}
+.view-badge{position:absolute;top:14px;left:14px;background:#0c1727d9;border:1px solid #53677f;border-radius:99px;padding:5px 9px;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#d8e7f6}
+.stage-foot{padding:8px 14px;border-top:1px solid #29384d;color:var(--muted);font-size:10px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.inspector-top{padding:15px 15px 11px;border-bottom:1px solid var(--line)}.part-title{font-size:16px;font-weight:700}.part-desc{color:var(--muted);font-size:11px;margin-top:4px}.evidence{display:inline-block;margin-top:8px;padding:3px 7px;border:1px solid #48566a;border-radius:5px;color:#d8e3f0;font-size:10px}
+.joint-panel{padding:12px 15px;border-bottom:1px solid var(--line);background:#0e1725}.joint-title{display:flex;align-items:center;justify-content:space-between;gap:10px}.joint-title strong{font-size:11px}.joint-title span{color:var(--muted);font-size:10px}.joint-controls{display:flex;align-items:center;gap:8px;margin-top:8px}.joint-controls input{flex:1;min-width:60px;accent-color:var(--accent)}.joint-controls output{min-width:48px;text-align:right;color:var(--accent);font-variant-numeric:tabular-nums}.joint-note{color:var(--muted);font-size:10px;margin-top:5px}
+.code-head{padding:12px 15px 9px;display:flex;align-items:center;justify-content:space-between;gap:8px}.code-head strong{font-size:11px}.code-head small{color:var(--muted);font-size:10px}.symbols{padding:0 15px 10px;display:flex;gap:5px;flex-wrap:wrap}.symbol{font-size:10px;padding:4px 7px;border-radius:5px;background:#1a2a3f;border-color:#314762;color:#d5e6f5}.symbol[aria-pressed=true]{background:#21483f;border-color:#4a8d79;color:#caffef}
+.code-wrap{min-height:0;flex:1;overflow:auto;background:#09111d;border-top:1px solid var(--line);font:11px/1.65 "SFMono-Regular",Consolas,"Liberation Mono",monospace;tab-size:4}.code{padding:10px 0;min-width:max-content}.line{display:block;white-space:pre;padding:0 14px 0 0;color:#c5d1df}.line.active{background:#254b45;color:#f3fff9;box-shadow:inset 3px 0 var(--accent)}.ln{display:inline-block;width:42px;padding-right:10px;text-align:right;color:#60738a;user-select:none}.code-loading{padding:16px;color:var(--muted);font:11px/1.5 system-ui}
+.details{padding:11px 15px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);max-height:130px;overflow:auto}.details strong{color:var(--text)}.details table{border-collapse:collapse;width:100%;margin-top:6px}.details td{padding:3px 5px;border-bottom:1px solid #26364a}.details td:last-child{text-align:right;color:#dce9f6;font-variant-numeric:tabular-nums}
+.error{margin:18px;padding:14px;border:1px solid #8c4a48;background:#321c20;color:#ffd5d0;border-radius:9px}.hidden{display:none}
+@media(max-width:1100px){.workspace{grid-template-columns:190px minmax(300px,1fr)}.inspector{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);min-height:540px}.stage-column{min-height:560px}.workspace{height:auto}.code-wrap{max-height:480px}}
+@media(max-width:650px){header{height:auto;align-items:flex-start;flex-direction:column}.headright{width:100%;justify-content:space-between}.workspace{display:flex;flex-direction:column}.rail{border-right:0;border-bottom:1px solid var(--line)}.component-list{grid-template-columns:repeat(2,minmax(0,1fr))}.stage-column{min-height:500px}.inspector{min-height:560px}.code-wrap{max-height:430px}}
 </style>
 </head>
 <body>
-<header><div><div class="brand">Product Engineering Lab / Experiment 001</div><div class="title">Assembly Explorer</div><div class="sub">An interactive, component-level research visualisation derived from the published patent architecture and a provenance-aware parameter ledger.</div></div><a href="nyfasi/">Research notes ↗</a></header>
-<main>
-<div class="layout">
-<section>
-<div class="viewer">
-<div class="viewtag" id="mode">Parametric research preview</div>
-<canvas id="stage" aria-label="Interactive 3D research assembly"></canvas>
-<div class="toolbar">
-<button class="primary" id="explode">Explode assembly</button><button id="reset">Reset view</button><button id="wire">Wireframe</button><label class="filelabel" for="file">Load GLB parts / assembly</label><input id="file" type="file" accept=".glb,model/gltf-binary" multiple>
-</div></div>
-<div class="metrics">
-<div class="metric"><b>8</b><span>Illustrated teeth</span></div><div class="metric"><b>180°</b><span>Selected wall arc</span></div><div class="metric"><b>24 mm</b><span>Roller diameter proxy</span></div>
+<header>
+ <div><div class="brand">Product Engineering Lab / Experiment 001</div><div class="heading">Nyfasi · Sand3D assembly gallery</div></div>
+ <div class="headright"><span id="engineStatus" class="status">Loading Sand3D assembly…</span><a href="../index.html">Research home ↗</a></div>
+</header>
+<div class="workspace">
+ <aside class="rail">
+  <div class="section-label">Assembly · 7 named groups</div>
+  <input id="searchParts" class="search" type="search" placeholder="Find a component…" aria-label="Find a component">
+  <nav id="componentList" class="component-list" aria-label="Assembly components"></nav>
+  <div class="rail-note"><strong>Evidence boundary</strong><br>This is a patent-led research proxy. The component register and parameter ledger distinguish disclosed features from derived and assumed geometry. It is not verified retail CAD or a manufacturing release.</div>
+ </aside>
+ <section class="stage-column">
+  <div class="stage-head"><strong>Interactive 3D assembly</strong><span id="stageMode">Complete Sand3D GLB · original assembly coordinates</span></div>
+  <div class="stage" id="stage">
+   <canvas id="viewport" aria-label="Interactive Sand3D Nyfasi assembly. Drag to orbit, scroll to zoom, select a component."></canvas>
+   <div class="view-badge" id="viewBadge">Sand3D · articulated assembly</div>
+   <div class="view-controls"><button id="resetCamera">Reset camera</button><button id="isolate">Isolate selected</button><button id="explode">Explode · presentation only</button><button id="wireframe">Wireframe</button></div>
+  </div>
+  <div class="stage-foot"><span>Drag to orbit · scroll to zoom · click a part to inspect its source</span><span id="jointStatus">Joint metadata: checking GLB extras…</span></div>
+ </section>
+ <aside class="inspector">
+  <div class="inspector-top"><div class="part-title" id="partTitle">Assembly overview</div><div class="part-desc" id="partDescription">Select a named component or click its geometry to inspect the Sand3D program that builds it.</div><span class="evidence" id="partEvidence">Research only</span></div>
+  <section class="joint-panel">
+   <div class="joint-title"><strong>Articulation · Sand3D joint</strong><span id="jointName">Discovering joints…</span></div>
+   <div class="joint-controls"><button id="playJoint" class="primary" disabled>Play</button><input id="jointRange" type="range" min="0" max="360" step="1" value="0" disabled aria-label="Roller rotation angle"><output id="jointValue">0°</output></div>
+   <div class="joint-note" id="jointDescription">Controls are enabled only when a real s3d_joint record is present in the assembly GLB.</div>
+  </section>
+  <div class="code-head"><strong>Sand3D Python program</strong><small id="sourceFingerprint">Source-linked · loading…</small></div>
+  <div class="symbols" id="sourceSymbols" aria-label="Functions that build this component"></div>
+  <div class="code-wrap" id="codeWrap"><div class="code-loading">Loading the exact build_reconstruction.py used to generate this assembly…</div></div>
+  <div class="details" id="componentDetails"><strong>Component parameters</strong><div>Select a component to see its provenance and relevant parameter values.</div></div>
+ </aside>
 </div>
-<div class="notice"><strong>Research status:</strong> this is not a verified digital twin of a retail Nyfasi product. It is an editable visual interpretation of selected patent features. Dimensions, tolerances, materials, retail revision and mechanical performance have not been validated against a physical sample or original CAD.</div>
-<div class="footer"><span>Rotate: drag · Zoom: scroll/pinch · Select a component in the right panel</span><span>Three.js · runs client-side · no product data is uploaded</span></div>
-</section>
-<aside>
-<section><h2>Assembly controls</h2><div class="rangehead"><label for="explodeRange">Exploded spacing</label><output id="explodeValue">0%</output></div><input id="explodeRange" type="range" min="0" max="100" value="0"><div style="display:flex;gap:8px;margin-top:8px"><button id="assembled" style="flex:1">Assembled</button><button id="exploded" style="flex:1">Exploded</button></div></section>
-<section><h2>Components</h2><div class="parts" id="parts"></div></section>
-<section><h2>Component record</h2><div class="info" aria-live="polite"><strong id="partName">Assembly overview</strong><p id="partDesc">Select a component to inspect its role and evidence status. The visual geometry is schematic and not dimensionally authoritative.</p></div></section>
-<section><h2>Evidence classes</h2><div class="info"><strong>Patent disclosed</strong><p>Features expressly described or illustrated in the patent embodiment. This does not prove the exact retail configuration.</p></div><div class="info"><strong>Derived / assumed</strong><p>Dimensions and geometric interpretations selected to make an editable research model. These must be replaced by measured or authorised data.</p></div></section>
-</aside>
-</div>
-</main>
+<div id="fatalError" class="error hidden" role="alert"></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
 <script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import * as THREE from 'three';
 import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
 import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
-const canvas=document.querySelector('#stage'), scene=new THREE.Scene();scene.background=new THREE.Color('#111b2d');
-const camera=new THREE.PerspectiveCamera(38,1,.1,2000);camera.position.set(185,150,210);
-const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
-const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,26,0);
-scene.add(new THREE.HemisphereLight(0xdceaff,0x344052,2.0));const key=new THREE.DirectionalLight(0xffffff,2.5);key.position.set(120,180,100);scene.add(key);const rim=new THREE.DirectionalLight(0x8ed8c7,1.1);rim.position.set(-120,60,-100);scene.add(rim);
-const grid=new THREE.GridHelper(260,26,0x53647c,0x2b3b52);grid.position.y=-10;scene.add(grid);
-const assembly=new THREE.Group();scene.add(assembly);const components=[];
-const mats={shell:new THREE.MeshStandardMaterial({color:0xdce4eb,roughness:.34,metalness:.05}),shellDark:new THREE.MeshStandardMaterial({color:0x9caebe,roughness:.4}),reservoir:new THREE.MeshStandardMaterial({color:0x65b9c9,transparent:true,opacity:.48,roughness:.25}),roller:new THREE.MeshStandardMaterial({color:0x4b5964,roughness:.72}),tooth:new THREE.MeshStandardMaterial({color:0xf0c978,roughness:.38}),wall:new THREE.MeshStandardMaterial({color:0x8ea1b4,roughness:.42,side:THREE.DoubleSide}),seal:new THREE.MeshStandardMaterial({color:0x4c927f,roughness:.6})};
-function register(name,desc,group,base,offset,status){group.name=name;assembly.add(group);components.push({name,desc,group,base:base.clone(),offset:offset.clone(),status});}
-function box(w,h,d,mat,x=0,y=0,z=0,bevel=0){let g=new THREE.BoxGeometry(w,h,d);let m=new THREE.Mesh(g,mat);m.position.set(x,y,z);return m}
-function roundedShell(w,h,d,mat){const g=new THREE.Group();g.add(box(w,h,d,mat,0,0,0));return g}
-function addShell(name,y,mat,desc,offsetY){const g=roundedShell(120,12,68,mat);g.position.y=y;register(name,desc,g,new THREE.Vector3(0,y,0),new THREE.Vector3(0,offsetY,0),'Engineering assumption');}
-addShell('Lower housing',8,mats.shellDark,'Lower clamshell housing. Overall envelope is an engineering placeholder, not a measured dimension.',-30);
-addShell('Upper housing',48,mats.shell,'Upper housing / lid. The patent describes upper and lower housing portions; this block geometry is schematic.',30);
-const reservoir=new THREE.Group();reservoir.add(box(90,8,36,mats.reservoir));reservoir.position.set(0,31,0);register('Reservoir','Reservoir volume shown as a translucent internal envelope. Capacity, shape and dimensions are unknown.',reservoir,new THREE.Vector3(0,31,0),new THREE.Vector3(0,22,0),'Engineering assumption');
-const roller=new THREE.Group();const drum=new THREE.Mesh(new THREE.CylinderGeometry(12,12,112,48,1,false),mats.roller);drum.rotation.z=Math.PI/2;roller.add(drum);for(let x=-48;x<=48;x+=16){const band=new THREE.Mesh(new THREE.TorusGeometry(12.15,.8,8,48),mats.seal);band.rotation.y=Math.PI/2;band.position.x=x;roller.add(band)}roller.position.set(0,17,-2);register('Rotatable roller','Cylindrical roller proxy. A 24 mm diameter is selected from the patent text’s example radius range; not a measured retail value.',roller,new THREE.Vector3(0,17,-2),new THREE.Vector3(0,10,-15),'Patent-derived estimate');
-const wall=new THREE.Group();const R=13.5,r=11.5,len=112,segments=48;for(let s=0;s<8;s++){const a0=-Math.PI/2+s*Math.PI/8+.018,a1=-Math.PI/2+(s+1)*Math.PI/8-.018;const shape=new THREE.Shape();for(let i=0;i<=segments;i++){const a=a0+(a1-a0)*i/segments;const x=R*Math.cos(a),y=R*Math.sin(a);if(i===0)shape.moveTo(x,y);else shape.lineTo(x,y)}for(let i=segments;i>=0;i--){const a=a0+(a1-a0)*i/segments;shape.lineTo(r*Math.cos(a),r*Math.sin(a))}shape.closePath();const geom=new THREE.ExtrudeGeometry(shape,{depth:len,bevelEnabled:false,steps:1,curveSegments:4});const mesh=new THREE.Mesh(geom,mats.wall);mesh.rotation.y=Math.PI/2;mesh.position.set(-len/2,0,0);wall.add(mesh)}wall.position.set(0,22,0);register('Curved slotted wall','180-degree annular wall proxy with seven circumferential openings between eight tooth positions. This is an explicit interpretation, not a dimensioned patent drawing.',wall,new THREE.Vector3(0,22,0),new THREE.Vector3(0,18,0),'Patent-led interpretation');
-const teeth=new THREE.Group();for(let i=0;i<8;i++){const x=(i-3.5)*15;const t=box(5,12,10,mats.tooth,x,2,0);teeth.add(t)}teeth.position.set(0,10,0);register('Eight comb teeth','Eight teeth are shown in the illustrated patent embodiment. Approximate 5 mm width and 10 mm length are described; height and pitch are placeholders.',teeth,new THREE.Vector3(0,10,0),new THREE.Vector3(0,-24,0),'Patent disclosed / derived');
-const endcaps=new THREE.Group();for(const x of [-57,57]){const cap=new THREE.Mesh(new THREE.CylinderGeometry(13,13,2,32),mats.shellDark);cap.rotation.z=Math.PI/2;cap.position.x=x;endcaps.add(cap)}endcaps.position.set(0,17,-2);register('Roller end features','End caps are visual placeholders; spindle, pin and retention geometry have not been verified.',endcaps,new THREE.Vector3(0,17,-2),new THREE.Vector3(0,8,15),'Engineering assumption');
-let selected=null,explosion=0,wire=false,loadedAssembly=null,uploadedUrls=[];
+
 const $=id=>document.getElementById(id);
-const list=$('parts');
-function renderList(){
-  list.innerHTML='';
-  components.forEach((component,i)=>{
-    const b=document.createElement('button');
-    b.className='part';
-    b.innerHTML='<span>'+component.name+'<br><small>'+component.status+'</small></span><span>›</span>';
-    b.setAttribute('aria-pressed','false');
-    b.addEventListener('click',()=>select(i));
-    list.appendChild(b);
-  });
+const canvas=$('viewport');
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#111d2e');
+const camera=new THREE.PerspectiveCamera(38,1,.001,100);
+camera.position.set(.25,.22,.32);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.15;
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;controls.dampingFactor=.07;
+scene.add(new THREE.HemisphereLight(0xe3efff,0x334153,1.8));
+const key=new THREE.DirectionalLight(0xffffff,2.4);key.position.set(1.2,1.8,1.1);scene.add(key);
+const rim=new THREE.DirectionalLight(0x91dfc9,1.1);rim.position.set(-1.4,.7,-1);scene.add(rim);
+const grid=new THREE.GridHelper(.32,32,0x50647c,0x2a3c52);grid.position.y=-.012;scene.add(grid);
+const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
+let assemblyRoot=null,manifest=null,sourceText='',sourceLines=[],parameters=null;
+let components=[],selected=null,jointNode=null,jointInfo=null,jointBaseQuaternion=null,jointAxis=null;
+let playing=false,playFrame=null,lastTick=0,wire=false,isolate=false,exploded=false;
+const originalMaterials=new Map(),basePositions=new Map(),explodeOffsets=new Map();
+
+function showError(message){$('fatalError').textContent=message;$('fatalError').classList.remove('hidden');$('engineStatus').textContent='Assembly unavailable';$('engineStatus').style.borderColor='#8c4a48';$('engineStatus').style.color='#ffb5ac';}
+function resize(){const rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height)return;renderer.setSize(rect.width,rect.height,false);camera.aspect=rect.width/rect.height;camera.updateProjectionMatrix();}
+new ResizeObserver(resize).observe(canvas);window.addEventListener('resize',resize);
+function findByName(root,name){let found=null;root.traverse(o=>{if(!found&&o.name===name)found=o;});return found;}
+function componentForObject(object){let node=object;while(node){const match=components.find(c=>c.object===node);if(match)return match;node=node.parent;}return null;}
+function setMaterialHighlight(){
+ if(!assemblyRoot)return;
+ assemblyRoot.traverse(o=>{
+  if(!o.isMesh)return;
+  if(!originalMaterials.has(o))originalMaterials.set(o,o.material);
+  const original=originalMaterials.get(o);
+  const materials=Array.isArray(original)?original:[original];
+  const isSelected=selected&&componentForObject(o)===selected;
+  const clones=materials.map(m=>{const copy=m.clone();copy.wireframe=wire;if(copy.emissive){copy.emissive.set(isSelected?'#245e4f':'#000000');copy.emissiveIntensity=isSelected?.72:0;}return copy;});
+  o.material=Array.isArray(original)?clones:clones[0];
+ });
 }
-function select(i){
-  if(!components.length)return;
-  selected=i;
-  const component=components[i];
-  $('partName').textContent=component.name;
-  $('partDesc').textContent=component.desc;
-  [...list.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i?'true':'false'));
+function renderComponentList(){
+ const query=$('searchParts').value.trim().toLowerCase();
+ const nav=$('componentList');nav.replaceChildren();
+ components.filter(c=>(c.entry.name+' '+c.entry.provenance).toLowerCase().includes(query)).forEach(c=>{
+  const b=document.createElement('button');b.className='component';b.type='button';b.setAttribute('aria-pressed',c===selected?'true':'false');
+  const title=document.createElement('strong');title.textContent=c.entry.name;
+  const meta=document.createElement('small');meta.textContent=c.entry.provenance;
+  b.append(title,meta);b.addEventListener('click',()=>selectComponent(c));nav.append(b);
+ });
 }
-function setExplosion(v){
-  explosion=v;
-  components.forEach(component=>component.group.position.copy(component.base).addScaledVector(component.offset,v));
-  $('explodeRange').value=Math.round(v*100);
-  $('explodeValue').textContent=Math.round(v*100)+'%';
-  $('explode').textContent=v>0?'Collapse assembly':'Explode assembly';
+function renderCode(){
+ const wrap=$('codeWrap');wrap.replaceChildren();
+ if(!sourceLines.length){wrap.textContent='Source program is unavailable.';return;}
+ const code=document.createElement('div');code.className='code';
+ const ranges=(selected?.entry.source_symbols||[]);
+ const activeRanges=ranges.filter(r=>r.name===activeSymbol);
+ sourceLines.forEach((line,index)=>{
+  const n=index+1,span=document.createElement('span');span.className='line';span.dataset.line=String(n);
+  if(activeRanges.some(r=>n>=r.start_line&&n<=r.end_line))span.classList.add('active');
+  const ln=document.createElement('span');ln.className='ln';ln.textContent=String(n).padStart(3,' ');
+  const txt=document.createElement('span');txt.textContent=line||' ';
+  span.append(ln,txt);code.append(span);
+ });
+ wrap.append(code);
+ if(activeRanges.length){const target=wrap.querySelector('[data-line="'+activeRanges[0].start_line+'"]');if(target)target.scrollIntoView({block:'start'});}
 }
-function fitLoaded(){
-  if(!loadedAssembly)return;
-  const bounds=new THREE.Box3().setFromObject(loadedAssembly);
-  const centre=new THREE.Vector3();bounds.getCenter(centre);
-  const size=new THREE.Vector3();bounds.getSize(size);
-  const span=Math.max(size.x,size.y,size.z,1);
-  controls.target.copy(centre);
-  camera.position.copy(centre).add(new THREE.Vector3(span*1.6,span*1.3,span*1.6));
-  camera.far=span*20;camera.updateProjectionMatrix();controls.update();
+let activeSymbol=null;
+function renderSymbols(){
+ const holder=$('sourceSymbols');holder.replaceChildren();
+ const symbols=selected?.entry.source_symbols||[];
+ symbols.forEach((symbol,index)=>{
+  const b=document.createElement('button');b.className='symbol';b.type='button';b.textContent=symbol.name;
+  b.setAttribute('aria-pressed',(activeSymbol===symbol.name||(!activeSymbol&&index===0))?'true':'false');
+  b.addEventListener('click',()=>{activeSymbol=symbol.name;renderSymbols();renderCode();});
+  holder.append(b);
+ });
+ if(symbols.length&&!activeSymbol)activeSymbol=symbols[0].name;
 }
-async function loadPublishedAssembly(){
-  const loader=new GLTFLoader();
-  try{
-    const response=await fetch('../assets/nyfasi-assembly/manifest.json',{cache:'no-store'});
-    if(!response.ok)throw new Error('Published Sand3D component manifest is not available');
-    const manifest=await response.json();
-    const entries=manifest.components||[];
-    if(entries.length!==7)throw new Error('Expected seven named top-level component groups');
-    const loaded=[];
-    const overallBounds=new THREE.Box3();
-    for(const entry of entries){
-      const gltf=await loader.loadAsync('../assets/nyfasi-assembly/'+entry.file);
-      const bounds=new THREE.Box3().setFromObject(gltf.scene);
-      overallBounds.union(bounds);
-      loaded.push({entry:entry,scene:gltf.scene,bounds:bounds});
-    }
-    if(loadedAssembly)scene.remove(loadedAssembly);
-    loadedAssembly=new THREE.Group();loadedAssembly.name='Sand3D generated assembly';scene.add(loadedAssembly);
-    assembly.visible=false;components.splice(0,components.length);
-    const overallCentre=new THREE.Vector3();overallBounds.getCenter(overallCentre);
-    loaded.forEach((item,index)=>{
-      const group=new THREE.Group();group.name=item.entry.name;group.add(item.scene);
-      loadedAssembly.add(group);
-      const centre=item.bounds.getCenter(new THREE.Vector3());
-      const offset=centre.sub(overallCentre);
-      if(offset.length()<.001)offset.set((index%3)-1,((index%5)-2)*.5,((index%7)-3)*.35);
-      offset.normalize().multiplyScalar(34);
-      components.push({
-        name:item.entry.name,
-        desc:item.entry.description+' Provenance: '+item.entry.provenance+'. Geometry generated by Sand3D from the repository parameter ledger.',
-        group:group,base:new THREE.Vector3(),offset:offset,status:item.entry.provenance
-      });
-    });
-    renderList();setExplosion(0);select(0);fitLoaded();
-    $('mode').textContent='Live Sand3D geometry · '+manifest.engine_version+' · '+components.length+' components';
-    $('partDesc').textContent='Seven separately generated Sand3D component GLBs are loaded automatically from the published site. No manual file upload is required.';
-  }catch(error){
-    console.warn('Automatic Sand3D assembly load unavailable; using schematic fallback.',error);
-    $('mode').textContent='Schematic fallback · generated assembly unavailable';
-  }
+function renderDetails(){
+ if(!selected){$('componentDetails').innerHTML='<strong>Component parameters</strong><div>Select a component to see its provenance and relevant parameter values.</div>';return;}
+ const names=new Set((selected.entry.source_symbols||[]).map(s=>s.name));
+ const parameterKeys=Object.keys(parameters?.parameters||{});
+ const relevant=parameterKeys.filter(k=>{
+  const text=(selected.entry.id+' '+selected.entry.name+' '+[...names].join(' ')).toLowerCase();
+  return text.includes(k.replaceAll('_',' '))||(
+   selected.entry.id==='rotatable-roller'&&/roller|band|knurl|spindle/.test(k)
+  )||(
+   selected.entry.id==='curved-slotted-wall'&&/wall|slot|roller_seat/.test(k)
+  )||(
+   selected.entry.id==='eight-comb-teeth'&&/tooth|slot/.test(k)
+  )||(
+   selected.entry.id.includes('housing')&&/housing|shell|gasket|bearing|snap/.test(k)
+  )||(
+   selected.entry.id==='reservoir'&&k.startsWith('reservoir')
+  );
+ }).slice(0,12);
+ const rows=relevant.map(k=>{const p=parameters.parameters[k];return '<tr><td>'+k+'</td><td>'+p.value+' '+p.unit+'</td></tr>';}).join('');
+ $('componentDetails').innerHTML='<strong>Parameter ledger · '+selected.entry.id+'</strong><div>'+selected.entry.description+'</div><table>'+rows+'</table><div style="margin-top:6px">Source range links are generated from the Python AST. Values retain their ledger provenance; they are not measured product specifications.</div>';
 }
-renderList();
-loadPublishedAssembly();
-$('explode').onclick=()=>setExplosion(explosion>0?0:1);
-$('explodeRange').oninput=e=>setExplosion(+e.target.value/100);
-$('assembled').onclick=()=>setExplosion(0);
-$('exploded').onclick=()=>setExplosion(1);
-$('reset').onclick=()=>{if(loadedAssembly)fitLoaded();else{camera.position.set(185,150,210);controls.target.set(0,26,0);controls.update()}setExplosion(0)};
-$('wire').onclick=()=>{
-  wire=!wire;
-  Object.values(mats).forEach(m=>m.wireframe=wire);
-  if(loadedAssembly)loadedAssembly.traverse(o=>{if(o.isMesh){const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.wireframe=wire)}});
-  $('wire').textContent=wire?'Solid view':'Wireframe';
-};
-$('file').addEventListener('change',async e=>{
-  let files=[...(e.target.files||[])].filter(file=>file.name.toLowerCase().endsWith('.glb'));
-  if(files.length>1)files=files.filter(file=>!file.name.startsWith('nyfasi_'));
-  if(!files.length)return;
-  uploadedUrls.forEach(url=>URL.revokeObjectURL(url));uploadedUrls=[];
-  if(loadedAssembly)scene.remove(loadedAssembly);
-  loadedAssembly=new THREE.Group();scene.add(loadedAssembly);
-  assembly.visible=false;components.splice(0,components.length);
-  const loader=new GLTFLoader();
-  try{
-    const loadedItems=[];
-    const overallBounds=new THREE.Box3();
-    for(const file of files){
-      const url=URL.createObjectURL(file);uploadedUrls.push(url);
-      const gltf=await loader.loadAsync(url);
-      const bounds=new THREE.Box3().setFromObject(gltf.scene);
-      overallBounds.union(bounds);
-      loadedItems.push({file:file,scene:gltf.scene,bounds:bounds});
-    }
-    const overallCentre=new THREE.Vector3();overallBounds.getCenter(overallCentre);
-    loadedItems.forEach((item,index)=>{
-      const name=item.file.name.replace(/\.glb$/i,'');
-      const group=new THREE.Group();group.name=name;group.add(item.scene);
-      let colour=0x9eafbf,opacity=1;
-      if(name.startsWith('housing_')){colour=0xcbd6e1;opacity=.38}
-      else if(name==='reservoir'){colour=0x55b8c9;opacity=.35}
-      else if(name.includes('roller'))colour=0x52616d;
-      else if(name.includes('wall'))colour=0x8299ad;
-      else if(name.includes('tooth'))colour=0xf0c978;
-      else if(name.includes('gasket'))colour=0x4c927f;
-      else if(name.includes('bearing')||name.includes('spindle')||name.includes('end_wall'))colour=0x9eafbf;
-      group.traverse(o=>{
-        if(o.isMesh)o.material=new THREE.MeshStandardMaterial({color:colour,roughness:.48,metalness:.08,transparent:opacity<1,opacity:opacity,depthWrite:opacity===1,side:THREE.DoubleSide,wireframe:wire});
-      });
-      loadedAssembly.add(group);
-      const centre=new THREE.Vector3();item.bounds.getCenter(centre);
-      const offset=centre.sub(overallCentre);
-      if(offset.length()<.001)offset.set((index%3)-1,((index%5)-2)*.5,((index%7)-3)*.35);
-      offset.normalize().multiplyScalar(22);
-      components.push({name:name,desc:'CadFlow B-rep component loaded from the local build artifact. Its geometry is positioned in the shared model datum; explode offsets are for visual inspection only.',group:group,base:new THREE.Vector3(),offset:offset,status:'CadFlow B-rep'});
-    });
-    renderList();setExplosion(0);select(0);fitLoaded();
-    $('mode').textContent='Loaded '+components.length+' CadFlow component GLBs';
-    $('partDesc').textContent='Loaded locally from your extracted ZIP. The viewer does not upload your CAD files.';
-  }catch(err){
-    console.error(err);
-    alert('Could not load one or more GLB files. Extract the CadFlow ZIP and select the individual component GLBs.');
-  }finally{
-    uploadedUrls.forEach(url=>URL.revokeObjectURL(url));uploadedUrls=[];
-  }
+function selectComponent(component){
+ selected=component;activeSymbol=(component.entry.source_symbols||[])[0]?.name||null;
+ components.forEach(c=>{c.object.visible=!isolate||c===selected;});
+ renderComponentList();renderSymbols();renderCode();renderDetails();setMaterialHighlight();
+ $('partTitle').textContent=component.entry.name;
+ $('partDescription').textContent=component.entry.description;
+ $('partEvidence').textContent=component.entry.provenance;
+}
+function fitCamera(){
+ if(!assemblyRoot)return;
+ const bounds=new THREE.Box3().setFromObject(assemblyRoot);
+ const centre=bounds.getCenter(new THREE.Vector3()),size=bounds.getSize(new THREE.Vector3());
+ const span=Math.max(size.x,size.y,size.z,.02);
+ controls.target.copy(centre);
+ const distance=span*1.9;
+ camera.position.copy(centre).add(new THREE.Vector3(distance,distance*.78,distance));
+ camera.near=Math.max(span/1000,.0001);camera.far=span*100;camera.updateProjectionMatrix();controls.update();
+}
+function applyExplosion(enabled){
+ exploded=enabled;
+ components.forEach(c=>{
+  const base=basePositions.get(c);
+  const offset=explodeOffsets.get(c);
+  if(base&&offset)c.object.position.copy(base).addScaledVector(offset,enabled?1:0);
+ });
+ $('explode').textContent=enabled?'Collapse · assembled datum':'Explode · presentation only';
+}
+function toggleIsolation(){
+ isolate=!isolate;
+ components.forEach(c=>{c.object.visible=!isolate||c===selected;});
+ $('isolate').textContent=isolate?'Show all components':'Isolate selected';
+}
+function configureJoint(){
+ let found=null;
+ assemblyRoot.traverse(o=>{const info=o.userData?.s3d_joint;if(info&&info.name==='roller_rotation')found={node:o,info};});
+ if(!found){$('jointName').textContent='No joint record';$('jointDescription').textContent='The GLB contains no roller_rotation s3d_joint extra. No simulated control will be shown.';$('jointStatus').textContent='No s3d_joint metadata';return;}
+ jointNode=found.node;jointInfo=found.info;jointBaseQuaternion=jointNode.quaternion.clone();
+ const axis=jointInfo.axis||[1,0,0];jointAxis=new THREE.Vector3(axis[0],axis[1],axis[2]).normalize();
+ const initial=Number(jointInfo.value||0)*180/Math.PI;
+ $('jointName').textContent=jointInfo.name+' · '+jointInfo.type;
+ $('jointRange').disabled=false;$('playJoint').disabled=false;
+ $('jointRange').value=String(Math.round(initial)%360);$('jointValue').textContent=Math.round(initial)+'°';
+ $('jointDescription').textContent='Axis ['+axis.map(v=>Number(v).toFixed(2)).join(', ')+'] from the Sand3D GLB extras. Continuous joint; the slider controls the exported pivot node.';
+ $('jointStatus').textContent='1 articulated joint · Sand3D GLB extras';
+ setJointAngle(Number($('jointRange').value));
+}
+function setJointAngle(degrees){
+ if(!jointNode||!jointBaseQuaternion||!jointAxis)return;
+ const radians=degrees*Math.PI/180;
+ jointNode.quaternion.copy(jointBaseQuaternion).multiply(new THREE.Quaternion().setFromAxisAngle(jointAxis,radians));
+ $('jointRange').value=String(Math.round((degrees%360+360)%360));
+ $('jointValue').textContent=Math.round((degrees%360+360)%360)+'°';
+}
+function stopPlayback(){playing=false;if(playFrame!==null)cancelAnimationFrame(playFrame);playFrame=null;$('playJoint').textContent='Play';}
+function animateJoint(now){
+ if(!playing)return;
+ if(!lastTick)lastTick=now;
+ const delta=Math.min((now-lastTick)/1000,.1);lastTick=now;
+ const next=(Number($('jointRange').value)+delta*48)%360;setJointAngle(next);
+ playFrame=requestAnimationFrame(animateJoint);
+}
+$('playJoint').addEventListener('click',()=>{
+ if(!jointNode)return;
+ if(playing){stopPlayback();return;}
+ playing=true;lastTick=0;$('playJoint').textContent='Pause';playFrame=requestAnimationFrame(animateJoint);
 });
-function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}new ResizeObserver(resize).observe(canvas);resize();
-function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}animate();select(0);
+$('jointRange').addEventListener('input',e=>{stopPlayback();setJointAngle(Number(e.target.value));});
+$('resetCamera').addEventListener('click',fitCamera);
+$('isolate').addEventListener('click',toggleIsolation);
+$('explode').addEventListener('click',()=>applyExplosion(!exploded));
+$('wireframe').addEventListener('click',()=>{wire=!wire;$('wireframe').textContent=wire?'Solid view':'Wireframe';setMaterialHighlight();});
+$('searchParts').addEventListener('input',renderComponentList);
+let pointerStart=null;
+canvas.addEventListener('pointerdown',e=>{pointerStart={x:e.clientX,y:e.clientY};});
+canvas.addEventListener('pointerup',e=>{
+ if(!pointerStart||Math.hypot(e.clientX-pointerStart.x,e.clientY-pointerStart.y)>5){pointerStart=null;return;}
+ pointerStart=null;
+ const rect=canvas.getBoundingClientRect();pointer.x=((e.clientX-rect.left)/rect.width)*2-1;pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;
+ raycaster.setFromCamera(pointer,camera);
+ const hits=raycaster.intersectObject(assemblyRoot,true);
+ for(const hit of hits){const component=componentForObject(hit.object);if(component){selectComponent(component);break;}}
+});
+async function loadGallery(){
+ try{
+  const base='../assets/nyfasi-assembly/';
+  const manifestResponse=await fetch(base+'manifest.json',{cache:'no-store'});
+  if(!manifestResponse.ok)throw new Error('Generated Sand3D manifest missing ('+manifestResponse.status+'). Run the documentation build workflow.');
+  manifest=await manifestResponse.json();
+  if(manifest.engine!=='Sand3D'||!manifest.assembly_file||!Array.isArray(manifest.components)||manifest.components.length!==7)throw new Error('Unexpected Sand3D manifest: expected one complete assembly and seven named components.');
+  const [gltf,sourceResponse,parameterResponse]=await Promise.all([
+   new GLTFLoader().loadAsync(base+manifest.assembly_file),
+   fetch(base+manifest.source.program_file,{cache:'no-store'}),
+   fetch(base+manifest.source.parameters_file,{cache:'no-store'})
+  ]);
+  if(!sourceResponse.ok||!parameterResponse.ok)throw new Error('The published Sand3D source program or parameter ledger is missing.');
+  sourceText=await sourceResponse.text();sourceLines=sourceText.replace(/\r\n/g,'\n').split('\n');
+  parameters=await parameterResponse.json();
+  assemblyRoot=gltf.scene;scene.add(assemblyRoot);
+  const assemblyBounds=new THREE.Box3().setFromObject(assemblyRoot),assemblyCentre=assemblyBounds.getCenter(new THREE.Vector3());
+  manifest.components.forEach(entry=>{
+   const object=findByName(assemblyRoot,entry.node_name);
+   if(!object)throw new Error('Assembly node not found for '+entry.name+' ('+entry.node_name+').');
+   const component={entry,object};components.push(component);
+   basePositions.set(component,object.position.clone());
+   const bounds=new THREE.Box3().setFromObject(object),centre=bounds.getCenter(new THREE.Vector3());
+   const direction=centre.sub(assemblyCentre);
+   if(direction.length()<.0001)direction.set((components.length%3)-1,.5,(components.length%2)?1:-1);
+   explodeOffsets.set(component,direction.normalize().multiplyScalar(.025));
+  });
+  $('sourceFingerprint').textContent='SHA-256 '+manifest.source.sha256.slice(0,12);
+  $('engineStatus').textContent='Sand3D '+manifest.engine_version+' · 7 parts';
+  $('stageMode').textContent='Full assembly GLB · native hierarchy · metre coordinates';
+  $('viewBadge').textContent='Sand3D · original joint hierarchy';
+  renderComponentList();selectComponent(components.find(c=>c.entry.id==='rotatable-roller')||components[0]);
+  configureJoint();fitCamera();
+ }catch(error){console.error(error);showError('Sand3D gallery could not initialise: '+error.message+' No schematic or guessed-geometry fallback is used.');}
+}
+function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera);}
+resize();animate();loadGallery();
 </script>
-</body></html>
+</body>
+</html>
