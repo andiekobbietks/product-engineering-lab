@@ -85,3 +85,14 @@ A more detailed render is not, by itself, high fidelity. The next fidelity gates
 6. Independent comparison report with deviations and confidence per feature.
 
 Until those inputs exist, the model remains a traceable patent-led engineering research proxy, not original Nyfasi CAD, a verified digital twin or a manufacturing package.
+
+
+## Reproducible exemplar discovery
+
+A metadata-only discovery script scans the five public collections for mechanical terms such as roller, bearing, shaft, housing, gear, seal and fastener. It retains source IDs, item-level licences, attribution and hashes; it does not copy program bodies, USD, meshes or textures into this repository.
+
+- [Catalogue script](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/scripts/catalog_sand3d_examples.py)
+- [Run the catalogue workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/sand3d-catalog.yml)
+- Download the generated sand3d-exemplar-catalog artifact from the workflow run.
+
+A candidate is not automatically reused. Review its exact source licence and attribution first. The catalogue is a research index, not a source of Nyfasi product dimensions.
