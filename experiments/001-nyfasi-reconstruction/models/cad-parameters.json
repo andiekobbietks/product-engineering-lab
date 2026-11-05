@@ -5,12 +5,12 @@
   "model_status": "research_only",
   "parameters": {
     "housing_w": {
-      "value": 120,
+      "value": 126,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "low",
-      "note": "Placeholder envelope widened to contain the reconstructed 112 mm roller/wall assembly; not a measured product dimension."
+      "note": "Placeholder envelope widened to contain the 112 mm roller, projecting spindle pins and 8 mm bearing supports; not a measured product dimension."
     },
     "housing_d": {
       "value": 68,
