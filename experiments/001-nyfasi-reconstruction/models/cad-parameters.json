@@ -179,6 +179,134 @@
       "evidence_ids": [],
       "confidence": "high",
       "note": "Presentation-only exploded-view spacing; not product geometry."
+    },
+    "roller_core_d": {
+      "value": 22.6,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Provisional smooth roller core diameter beneath raised textured bands; inferred layout proxy, not dimensioned by patent."
+    },
+    "roller_band_count": {
+      "value": 7,
+      "unit": "count",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "One raised circumferential band aligned to each of the seven modelled wall slots; count is an engineering interpretation, not a dimensioned patent count."
+    },
+    "roller_band_width": {
+      "value": 2,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder axial width for each textured roller band; not disclosed as a dimension."
+    },
+    "roller_band_raise": {
+      "value": 0.7,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Radial projection of textured band above smooth core; placeholder only."
+    },
+    "roller_endwall_d": {
+      "value": 25,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder diameter for roller end walls; patent shows end walls but supplies no dimensions."
+    },
+    "roller_endwall_t": {
+      "value": 1.5,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder axial thickness for each roller end wall."
+    },
+    "spindle_pin_d": {
+      "value": 4,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder spindle-pin diameter; patent drawings show pins without a dimension."
+    },
+    "spindle_pin_len": {
+      "value": 5,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder spindle-pin projection beyond each end wall."
+    },
+    "bearing_block_w": {
+      "value": 8,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder axial width of each housing bearing support."
+    },
+    "bearing_block_d": {
+      "value": 12,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder depth of each bearing support block."
+    },
+    "bearing_block_h": {
+      "value": 18,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder height of each bearing support block."
+    },
+    "bearing_bore_clearance": {
+      "value": 0.25,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Radial clearance proxy between spindle pin and bearing bore; not a production tolerance."
+    },
+    "snap_tab_w": {
+      "value": 8,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder width of a housing snap-fit tab."
+    },
+    "snap_tab_d": {
+      "value": 3,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder depth of a housing snap-fit tab."
+    },
+    "snap_tab_h": {
+      "value": 5,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder height of a housing snap-fit tab."
+    },
+    "snap_tab_count": {
+      "value": 2,
+      "unit": "count",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Two visible snap-tab proxies, one near each longitudinal end; actual latch count/layout unverified."
     }
   },
   "provenance_legend": {
