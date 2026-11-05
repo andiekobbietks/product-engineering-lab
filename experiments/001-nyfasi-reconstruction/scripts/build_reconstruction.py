@@ -4,6 +4,8 @@ This is deliberately not a claim of original Nyfasi CAD or a verified retail twi
 All dimensions come from the provenance ledger; unverified values remain assumptions.
 """
 from pathlib import Path
+import ast
+import hashlib
 import json
 import sand3d as s3d
 
@@ -380,13 +382,46 @@ def main():
     # isolate and explode real Sand3D geometry rather than a hand-drawn schematic.
     web_dir = output / "web-components"
     web_dir.mkdir(parents=True, exist_ok=True)
+    # Publish the exact modelling program and an AST-derived source map. The
+    # browser viewer therefore highlights real source ranges, not hand-written
+    # snippets that can drift away from the geometry-producing program.
+    source_path = Path(__file__).resolve()
+    source_text = source_path.read_text(encoding="utf-8")
+    source_tree = ast.parse(source_text)
+    source_ranges = {
+        node.name: {"start_line": node.lineno, "end_line": node.end_lineno}
+        for node in ast.walk(source_tree)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    component_symbols = {
+        "lower-housing": ["build_lower_housing", "build_housing_retention_features", "build_housing_gasket", "build_research_assembly"],
+        "upper-housing": ["rounded_tray", "build_upper_housing"],
+        "reservoir": ["build_reservoir"],
+        "rotatable-roller": ["cylinder_on_x", "build_roller_core", "build_textured_band", "build_roller_core_and_bands"],
+        "curved-slotted-wall": ["build_curved_wall"],
+        "eight-comb-teeth": ["build_comb_teeth"],
+        "roller-end-features": ["cylinder_on_x", "build_roller_end_wall", "build_spindle_pin", "build_roller_end_features", "build_elastomeric_spindle_seals"],
+    }
+    (web_dir / "build_reconstruction.py").write_text(source_text, encoding="utf-8")
+    (web_dir / "cad-parameters.json").write_text(
+        PARAMETER_FILE.read_text(encoding="utf-8"), encoding="utf-8"
+    )
     manifest = {
-        "schema_version": "1.0.0",
+        "schema_version": "1.1.0",
         "engine": "Sand3D",
         "engine_version": "1.6.2",
         "units": "mm",
         "model_status": "research_only",
         "assembly_file": "nyfasi_complete_assembly.glb",
+        "source": {
+            "program_file": "build_reconstruction.py",
+            "parameters_file": "cad-parameters.json",
+            "sha256": hashlib.sha256(source_text.encode("utf-8")).hexdigest(),
+            "symbol_index": source_ranges,
+        },
+        "joint_expectations": [
+            {"name": "roller_rotation", "type": "continuous", "axis": "+X", "component_id": "rotatable-roller"}
+        ],
         "components": [],
         "limitations": [
             "Patent-to-retail-SKU mapping is unverified.",
@@ -400,9 +435,15 @@ def main():
         manifest["components"].append({
             "id": component_id,
             "name": name,
+            "node_name": component.name,
             "file": filename,
             "provenance": provenance,
-            "description": description
+            "description": description,
+            "source_symbols": [
+                {"name": symbol, **source_ranges[symbol]}
+                for symbol in component_symbols.get(component_id, [])
+                if symbol in source_ranges
+            ],
         })
     (web_dir / "manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\\n", encoding="utf-8"
