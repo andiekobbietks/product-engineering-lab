@@ -101,6 +101,25 @@
                 },
                 "assumption": {
                   "type": "string"
+                },
+                "provenance": {
+                  "enum": [
+                    "PATENT_DISCLOSED",
+                    "PATENT_DERIVED_ESTIMATE",
+                    "MEASURED",
+                    "IMAGE_ESTIMATED",
+                    "ENGINEERING_ASSUMPTION",
+                    "SUPPLIER_CONFIRMED"
+                  ]
+                },
+                "source_notes": {
+                  "type": "string"
+                },
+                "measurement_method": {
+                  "type": "string"
+                },
+                "uncertainty": {
+                  "type": "string"
                 }
               }
             }
