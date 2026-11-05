@@ -18,7 +18,7 @@ Patent embodiments must not automatically be treated as the exact retail configu
 
 Sand3D is relevant as a text-driven editable 3D generation research project. This experiment asks what additional structure makes generated output useful in product engineering: component identity, evidence-linked dimensions, assembly relationships, editability, constraint checks and provenance.
 
-Compare text-only generation, evidence-conditioned generation, component-by-component generation, assembly reconstruction and independent validation. The repository pins Sand3D 1.6.2 for the initial adapter experiment. The script is authored against the documented API but has not yet been executed in a compatible runtime; API and geometry output remain unverified.
+Compare text-only generation, evidence-conditioned generation, component-by-component generation, assembly reconstruction and independent validation. The repository pins Sand3D 1.6.2 for the initial adapter experiment. The script has passed a GitHub Actions smoke test using the pinned Sand3D 1.6.2 package and generated GLB/OBJ outputs. Visual and dimensional validation against an authorised retail sample remain outstanding; the Colab notebook has not yet been exercised end-to-end.
 
 ## Repository artefacts
 
