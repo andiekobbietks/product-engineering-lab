@@ -451,6 +451,22 @@
       ],
       "confidence": "medium",
       "note": "The patent describes radial projections extending around 1-3 mm, with an approximately 2 mm example and a similar projection diameter. This model uses 2 mm."
+    },
+    "roller_core_d": {
+      "value": 22.6,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Legacy CadFlow-only smooth-core parameter retained for the archived B-rep reconstruction. The active Sand3D builder now uses roller_d as its smooth drum diameter and does not read this field."
+    },
+    "roller_band_width": {
+      "value": 2,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Nominal axial footprint of one textured band. The active Sand3D projection row uses 2 mm projection diameter; the legacy CadFlow path retains this width field."
     }
   },
   "provenance_legend": {
