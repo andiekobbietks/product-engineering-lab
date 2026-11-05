@@ -24,6 +24,8 @@ Sand3D remains an independently maintained third-party project. We will respect 
 
 This case study investigates what can responsibly be reconstructed from public product pages, design case studies and patent publications. It separates documented claims from patent embodiments, visual observations from inferred components, assumptions from measured dimensions, and illustrative geometry from manufacturing-ready CAD.
 
+The research now includes a dedicated [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-china-due-diligence.md). It records the Chinese patent grant and a published report of China-based mould manufacture and initial production, while marking the supplier, factory location, tooling ownership and current production status as unverified.
+
 See [Experiment 001](experiments/001-nyfasi-reconstruction/README.md), the [Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb), the [Sand3D reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py), and the [interactive GLB viewer instructions](docs/experiments/viewer.md), and the [image/patent-figure inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv).
 
 See [requirements-cad.txt](requirements-cad.txt) for the pinned CAD dependency. No original Nyfasi SolidWorks, Fusion 360, STEP or IGES files are claimed to have been located. Patent drawings are not native CAD.
