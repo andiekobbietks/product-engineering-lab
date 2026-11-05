@@ -80,6 +80,16 @@
       "attribution": "В3Г-200АМС-СД-20 30 40-ТР22 by e-looch, https://sketchfab.com/3d-models/002d493678d04d039259f5d49f07c520, CC-BY-4.0; modified: rewritten as a sand3d program",
       "program_sha256": "86f9e17f44c945c1115ab0b0960767991c96e7a1c60ce6dfe02494faef4c469f",
       "relevance": "Cylindrical mechanical housing and radial-feature pattern; not product evidence."
+    },
+    {
+      "dataset": "Sandflow/sand3d-automate",
+      "id": "automate-58c79c763db3a90f77d597db_01cb0e0aacfd9b6477f7a159_e3307809703f4c00a077511b_default",
+      "asset_id": "automate:58c79c763db3a90f77d597db_01cb0e0aacfd9b6477f7a159_e3307809703f4c00a077511b_default",
+      "entry": "gear_reducer",
+      "source_license": "CC0-1.0",
+      "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 58c79c763db3a90f77d597db_01cb0e0aacfd9b6477f7a159_e3307809703f4c00a077511b_default, CC0-1.0; modified: rewritten as a sand3d program",
+      "program_sha256": "7cdbbcda9b222424968a42869101bd32b8d61e5ed39880e9f04162a76dce2163",
+      "relevance": "Multi-part mechanical assembly structure reference; no gear train is inferred for the Nyfasi product."
     }
   ]
 }
