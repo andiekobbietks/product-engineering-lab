@@ -32,13 +32,22 @@
       "status": "POSITIVE_DIAMETRAL_CLEARANCE_IN_THIS_ASSUMED_STACK"
     },
     "spindle_pin_to_elastomer_seal": {
-      "nominal_diametral_clearance": 0.2,
+      "nominal_diametral_interference": 0.2,
       "pin_diameter_tolerance": 0.05,
       "seal_bore_tolerance": 0.1,
-      "formula": "seal bore diameter - pin diameter; elastomer deformation/contact is not modelled",
+      "formula": "pin diameter - seal bore diameter; positive = nominal interference",
       "worst_case_min": 0.05,
       "worst_case_max": 0.35,
-      "status": "GEOMETRIC_CLEARANCE_ONLY_NOT_SEAL_PERFORMANCE"
+      "status": "ELASTOMER_COMPRESSION_NOT_MODELED"
+    },
+    "elastomer_seal_to_bearing_bore": {
+      "nominal_diametral_clearance": 0.1,
+      "bearing_bore_tolerance": 0.05,
+      "seal_outer_diameter_tolerance": 0.1,
+      "formula": "bearing bore diameter - seal outer diameter",
+      "worst_case_min": -0.05,
+      "worst_case_max": 0.25,
+      "status": "POTENTIAL_INTERFERENCE_OR_GAP_REQUIRES_DESIGN_REVIEW"
     }
   },
   "axial_alignment": {
