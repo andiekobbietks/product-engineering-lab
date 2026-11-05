@@ -176,6 +176,26 @@ def build_roller_mechanism():
     return s3d.group("roller_mechanism", *parts)
 
 
+def build_elastomeric_spindle_seals():
+    """Separate annular elastomer proxies; not validated glands or lip seals."""
+    seals = []
+    x_position = P["roller_len"] / 2 + P["roller_endwall_t"] + P["spindle_pin_len"] / 2
+    for side, sign in (("left", -1), ("right", 1)):
+        outer = cylinder_on_x(
+            f"{side}_spindle_seal_outer",
+            P["seal_outer_d"], P["seal_axial_width"],
+            x=sign * x_position, y=P["roller_axis_y"], z=P["roller_axis_z"],
+        )
+        bore = cylinder_on_x(
+            f"{side}_spindle_seal_bore_tool",
+            P["seal_inner_d"], P["seal_axial_width"] + 0.4,
+            x=sign * x_position, y=P["roller_axis_y"], z=P["roller_axis_z"],
+        )
+        seal = s3d.cut(outer, bore)
+        s3d.material(seal, "rubber", color="#30383c", roughness=0.9)
+        seals.append(s3d.group(f"{side}_elastomeric_spindle_seal_proxy", seal))
+    return s3d.group("elastomeric_spindle_seals_research_proxy", *seals)
+
 def build_housing_retention_features():
     supports = []
     support_x = P["roller_len"] / 2 + P["roller_endwall_t"] + P["spindle_pin_len"] / 2
@@ -272,6 +292,7 @@ def build_research_assembly(exploded=True):
     wall_and_comb = build_comb_and_wall()
     retention = build_housing_retention_features()
     gasket = build_housing_gasket()
+    spindle_seals = build_elastomeric_spindle_seals()
 
     # The spindle is represented as a continuous revolute degree of freedom.
     roller_frame = s3d.local(
@@ -289,11 +310,12 @@ def build_research_assembly(exploded=True):
     )
     return s3d.assembly(
         "hair_applicator_complete_roller_mechanism_research_proxy",
-        lower, upper, reservoir, roller, wall_and_comb, retention, gasket,
+        lower, upper, reservoir, roller, wall_and_comb, retention, gasket, spindle_seals,
     )
 
 
 def main():
+    """Build and export the exploded research assembly in supported interchange formats."""
     s3d.empty_scene()
     model = build_research_assembly(exploded=True)
     output = ROOT / "output"
