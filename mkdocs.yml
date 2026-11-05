@@ -18,6 +18,7 @@ nav:
   - Overview: index.md
   - Get started: getting-started.md
   - Research:
+      - Sand3D Nyfasi benchmark: benchmarks/sand3d-nyfasi.md
       - Vision: vision.md
       - Methodology: methodology.md
       - Architecture: architecture.md
