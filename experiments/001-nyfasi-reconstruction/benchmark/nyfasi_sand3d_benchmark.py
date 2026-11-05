@@ -139,16 +139,16 @@ def run_case(name: str, mutations: dict[str, float], expected: dict[str, float],
             files[filename] = {"bytes": artifact.stat().st_size, "sha256": sha256(artifact)}
 
         obj_bounds = parse_obj_bounds(output / "hair_applicator_complete_roller_exploded.obj")
-        band_bounds = obj_bounds.get("roller_knurled_band_01")
+        drum_bounds = obj_bounds.get("roller_smooth_core_and_sealing_lands")
         housing_bounds = obj_bounds.get("lower_housing_shell_proxy_blank")
-        if band_bounds is None or housing_bounds is None:
-            return {"scenario": name, "status": "failed", "reason": "Named roller-band or housing mesh missing from OBJ"}
-        roller_band_diameter = max(band_bounds[1][1] - band_bounds[1][0], band_bounds[2][1] - band_bounds[2][0])
+        if drum_bounds is None or housing_bounds is None:
+            return {"scenario": name, "status": "failed", "reason": "Named smooth roller drum or housing mesh missing from OBJ"}
+        roller_drum_diameter = max(drum_bounds[1][1] - drum_bounds[1][0], drum_bounds[2][1] - drum_bounds[2][0])
         housing_width = housing_bounds[0][1] - housing_bounds[0][0]
         expected_roller_diameter = values["roller_d"] / 1000.0
         expected_housing_width = values["housing_w"] / 1000.0
-        if abs(roller_band_diameter - expected_roller_diameter) > 0.001:
-            return {"scenario": name, "status": "failed", "reason": "Generated roller-band diameter does not match parameter ledger", "observed_m": roller_band_diameter, "expected_m": expected_roller_diameter}
+        if abs(roller_drum_diameter - expected_roller_diameter) > 0.001:
+            return {"scenario": name, "status": "failed", "reason": "Generated smooth roller drum diameter does not match parameter ledger", "observed_m": roller_drum_diameter, "expected_m": expected_roller_diameter}
         if abs(housing_width - expected_housing_width) > 0.001:
             return {"scenario": name, "status": "failed", "reason": "Generated housing width does not match parameter ledger", "observed_m": housing_width, "expected_m": expected_housing_width}
 
@@ -163,7 +163,7 @@ def run_case(name: str, mutations: dict[str, float], expected: dict[str, float],
         return {
             "scenario": name, "status": "passed", "mutations": mutations,
             "constraints_checked": 13, "joint": {"name": "roller_rotation", "type": "continuous", "axis": axis.attrib.get("xyz")},
-            "geometry_measurements_m": {"roller_band_outer_diameter": roller_band_diameter, "housing_envelope_width": housing_width},
+            "geometry_measurements_m": {"roller_smooth_drum_diameter": roller_drum_diameter, "housing_envelope_width": housing_width},
             "exports": files, "builder_stdout": completed.stdout[-1200:],
         }
 
