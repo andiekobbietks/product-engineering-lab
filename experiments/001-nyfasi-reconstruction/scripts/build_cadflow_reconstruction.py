@@ -119,7 +119,7 @@ def build_curved_wall(model: cad.Model, axis_y: float, axis_z: float):
     profile_wire = model.polyline(tuple(outline), closed=True)
     profile_face = model.face(profile_wire)
     wall = model.extrude(profile_face, x=length, y=0, z=0)
-    wall = model.translate(wall, x=-length / 2)
+    wall = model.translate(wall, x=-length / 2, y=0, z=0)
 
     # One axial through-slot in each inter-tooth gap. The patent drawing is
     # schematic; slot width and this exact count-to-pitch mapping are assumptions.
@@ -136,7 +136,7 @@ def build_curved_wall(model: cad.Model, axis_y: float, axis_z: float):
         wall = model.cut(wall, cutter)
 
     # Critical datum: move the local wall profile onto the roller axis.
-    return model.translate(wall, y=axis_y, z=axis_z)
+    return model.translate(wall, x=0, y=axis_y, z=axis_z)
 
 
 def build_roller_core(model: cad.Model, axis_y: float, axis_z: float):
