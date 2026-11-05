@@ -9,6 +9,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 PARAMETER_FILE = ROOT / "models" / "cad-parameters.json"
 TOLERANCE_FILE = ROOT / "models" / "tolerance-stackup.json"
+# The report renders dimensions to three decimal places. Values within half a
+# displayed unit are classified as touching the zero boundary.
+REPORT_ZERO_TOLERANCE_MM = 0.0005
 
 
 def load_inputs() -> tuple[dict[str, float], dict[str, Any]]:
@@ -79,9 +82,19 @@ def calculate_stackups(parameters: dict[str, float], ledger: dict[str, Any]) -> 
     return calculated
 
 
+def _pin_seal_interpretation(
+    low: float,
+    high: float,
+    zero_tolerance: float = REPORT_ZERO_TOLERANCE_MM,
+) -> str:
+    """Classify pin-minus-seal-bore results, treating report-rounded zero as line-to-line."""
+    if zero_tolerance < 0:
+        raise ValueError("zero_tolerance must be non-negative")
+    if abs(low) <= zero_tolerance:
+        low = 0.0
+    if abs(high) <= zero_tolerance:
+        high = 0.0
 
-def _pin_seal_interpretation(low: float, high: float) -> str:
-    """Interpret pin-minus-seal-bore stack values using interference-positive sign convention."""
     if low > 0:
         return "INTERFERENCE"
     if high < 0:
@@ -94,13 +107,14 @@ def _pin_seal_interpretation(low: float, high: float) -> str:
         return "INTERFERENCE_OR_LINE_TO_LINE"
     return "CLEARANCE_OR_LINE_TO_LINE"
 
+
 def main() -> int:
     """Print a reproducible tolerance report and flag any calculated interference."""
     parameters, ledger = load_inputs()
     calculated = calculate_stackups(parameters, ledger)
     print("PRELIMINARY TOLERANCE / INTERACTION REPORT")
     print("Status:", ledger["status"])
-    print("All dimensions are assumptions; this is not a production tolerance analysis.\n")
+    print("All dimensions are assumptions; this is not a production tolerance analysis.\\n")
 
     for name, result in calculated.items():
         if name == "band_to_slot_axial_alignment":
@@ -119,12 +133,12 @@ def main() -> int:
     band_result = calculated["roller_band_to_wall_slot"]
     if band_result["worst_case_min"] < 0:
         print(
-            "\nREVIEW FLAG: calculated band-to-slot stack permits "
+            "\\nREVIEW FLAG: calculated band-to-slot stack permits "
             f"{abs(band_result['worst_case_min']):.3f} mm interference."
         )
         print("Do not interpret nominal alignment as verified running clearance.")
 
-    print("\nRelease gates:")
+    print("\\nRelease gates:")
     for gate in ledger["release_gate"]:
         print("  *", gate)
     return 0
