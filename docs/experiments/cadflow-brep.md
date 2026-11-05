@@ -54,7 +54,7 @@ For the all-components preview, the current build sequentially unions the named 
 
 ## Latest successful build
 
-The [5 November 2026 CadFlow build record](../../experiments/001-nyfasi-reconstruction/builds/2026-11-05-cadflow-brep.md) documents the 29-component build and the uploaded artifact. The [workflow run](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42071621074) completed successfully.
+The [5 November 2026 CadFlow build record](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/builds/2026-11-05-cadflow-brep.md) documents the 29-component build and the uploaded artifact. The [workflow run](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42071621074) completed successfully.
 
 ## Reproduce
 
