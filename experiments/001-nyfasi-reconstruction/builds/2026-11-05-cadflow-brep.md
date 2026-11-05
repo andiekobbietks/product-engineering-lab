@@ -1,6 +1,6 @@
 # CadFlow B-rep build record · 5 November 2026
 
-<badge>Successful CI build</badge>
+**Status:** successful CI build
 
 - Workflow: [CadFlow B-rep reconstruction #42071621074](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42071621074)
 - Source commit: 137434e1c5728823bb295893b66bd7e6d901c27b
