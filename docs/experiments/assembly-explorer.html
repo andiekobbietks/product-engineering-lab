@@ -133,9 +133,9 @@ function renderComponentList(){
  });
 }
 function highlightPython(line){
- const pattern=/(#.*$|"(?:\\\\.|[^"\\\\])*"|'(?:\\\\.|[^'\\\\])*'|\\b(?:def|class|return|for|in|if|else|elif|import|from|as|True|False|None|and|or|not|with|try|except|raise|global|lambda|pass|break|continue|yield|async|await)\\b|\\b\\d+(?:\\.\\d+)?\\b)/g;
+ const pattern=/(#.*$|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|\b(?:def|class|return|for|in|if|else|elif|import|from|as|True|False|None|and|or|not|with|try|except|raise|global|lambda|pass|break|continue|yield|async|await)\b|\b\d+(?:\.\d+)?\b)/g;
  return line.replace(pattern,token=>{
-  const kind=token.startsWith('#')?'comment':token.startsWith('"')||token.startsWith("'")?'string':/^\\d/.test(token)?'number':'keyword';
+  const kind=token.startsWith('#')?'comment':token.startsWith('"')||token.startsWith("'")?'string':/^\d/.test(token)?'number':'keyword';
   return '<span class="tok-'+kind+'">'+escapeHtml(token)+'</span>';
  });
 }
