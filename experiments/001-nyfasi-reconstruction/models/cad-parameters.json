@@ -420,7 +420,7 @@
         "SRC-004"
       ],
       "confidence": "low",
-      "note": "Provisional waist depth estimated from the patent's plan-view figure 2B. The drawing is not dimensioned to scale; replace with calibrated imagery or a physical sample."
+      "note": "Provisional waist depth estimated from the patent's plan-view Figure 2B. The drawing is not dimensioned to scale; replace with calibrated imagery or a physical sample."
     },
     "roller_projection_d": {
       "value": 2,
@@ -449,6 +449,16 @@
       "evidence_ids": [],
       "confidence": "low",
       "note": "Small mesh overlap between each spheroidal projection and the smooth roller core, used to avoid a visible tangent seam in the render. Not a physical design tolerance."
+    },
+    "roller_projection_height": {
+      "value": 2,
+      "unit": "mm",
+      "provenance": "PATENT_DISCLOSED",
+      "evidence_ids": [
+        "SRC-004"
+      ],
+      "confidence": "medium",
+      "note": "The patent describes radial projections extending around 1-3 mm, with an approximately 2 mm example and a similar projection diameter. This model uses 2 mm."
     }
   },
   "provenance_legend": {
