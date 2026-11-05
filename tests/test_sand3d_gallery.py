@@ -20,6 +20,8 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "component.name",
             "roller_rotation",
             "roller_end_features_component_group",
+            "superellipse",
+            "tooth_tip_taper_deg",
             "assembly_sha256",
             "build_reconstruction.py",
             "cad-parameters.json",
