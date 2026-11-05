@@ -184,6 +184,31 @@ def build_roller_end_features():
     return s3d.group("roller_end_features", *parts)
 
 
+def build_elastomeric_spindle_seals():
+    """Build two annular seal proxies around spindle pins; fit remains unvalidated."""
+    seals = []
+    x_position = (
+        P["roller_len"] / 2
+        + P["roller_endwall_t"]
+        + P["spindle_pin_len"] / 2
+    )
+    for side, sign in (("left", -1), ("right", 1)):
+        outer = cylinder_on_x(
+            f"{side}_spindle_seal_outer",
+            P["seal_outer_d"], P["seal_axial_width"],
+            x=sign * x_position, y=P["roller_axis_y"], z=P["roller_axis_z"],
+        )
+        bore = cylinder_on_x(
+            f"{side}_spindle_seal_bore_tool",
+            P["seal_inner_d"], P["seal_axial_width"] + 0.4,
+            x=sign * x_position, y=P["roller_axis_y"], z=P["roller_axis_z"],
+        )
+        seal = s3d.cut(outer, bore)
+        s3d.material(seal, "rubber", color="#30383c", roughness=0.9)
+        seals.append(s3d.group(f"{side}_elastomeric_spindle_seal_proxy", seal))
+    return s3d.group("elastomeric_spindle_seals_research_proxy", *seals)
+
+
 def build_housing_retention_features():
     supports = []
     support_x = P["roller_len"] / 2 + P["roller_endwall_t"] + P["spindle_pin_len"] / 2
@@ -301,7 +326,11 @@ def build_research_assembly(exploded=False):
     )
     reservoir = s3d.at(build_reservoir(), z=P["reservoir_z"])
     roller = build_roller_core_and_bands()
-    roller_ends = build_roller_end_features()
+    roller_ends = s3d.group(
+        "roller_end_features",
+        build_roller_end_features(),
+        build_elastomeric_spindle_seals(),
+    )
     wall = build_curved_wall()
     teeth = build_comb_teeth()
 
@@ -320,7 +349,7 @@ def build_research_assembly(exploded=False):
         ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
          "Eight-tooth illustrated embodiment; approximate width and length are patent-described, while height and pitch remain assumptions."),
         ("roller-end-features", "Roller end features", roller_ends, "Engineering assumption",
-         "Two end walls and spindle pins. Exact retention geometry and dimensions are not verified."),
+         "Two end walls, spindle pins and annular spindle-seal proxies. Seal fit and retention geometry remain unverified assumptions."),
     ]
 
     roller_frame = s3d.local(
