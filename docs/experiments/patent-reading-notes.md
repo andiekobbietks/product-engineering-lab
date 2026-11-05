@@ -44,13 +44,13 @@ The official EPO publication PDF was inspected directly:
 - **Figure 3 (PDF page 12):** roller drum with circumferential textured bands (34), smooth sealing lands (36), end walls (31) and spindle pins (32).
 - **Figures 1–4 (PDF pages 10–12):** exploded assembly, exterior views, roller and longitudinal section.
 
-The current model uses the Figure 6B 180-degree embodiment as a practical construction target. This is a patent-led interpretation, not a measured retail value. It models one slot in each of the seven gaps between eight teeth. That slot count is an engineering interpretation of “interposed between” and is not stated as a dimensioned count in the drawing.
+The current model uses the Figure 6B 180-degree embodiment as a practical construction target. The housing outline follows the waisted planform illustrated in Figure 2B; its waist depth is an image-estimated assumption because the drawing is not dimensioned to scale. The roller's textured bands are represented by arrays of 2 mm spheroidal projections, with the projection count per band derived from the assumed roller diameter and approximate equal spacing. This is a patent-led interpretation, not a measured retail value. It models one slot in each of the seven gaps between eight teeth. That slot count is an engineering interpretation of “interposed between” and is not stated as a dimensioned count in the drawing.
 
 See [curved-wall geometry reconstruction](curved-wall-geometry.md) for the parameter ledger, coordinate convention and limitations.
 
 ## What this changes in the reconstruction
 
-The model now represents a 180-degree annular wall segment with a concave roller seat and seven axial-band cuts that appear as circumferential arcs in cross-section. The roller axis and tooth row share a longitudinal axis. The eight teeth now use an elliptical (superellipse n=2) cross-section and a tapered Sand3D extrusion. The 6-degree taper is explicitly an engineering assumption: the patent describes tapered, blade-shaped teeth but does not dimension the tip angle or full section profile. Tooth width and approximate length follow the disclosed embodiment; the exact retail profile still requires calibration.
+The model now represents a 180-degree annular wall segment with a concave roller seat and seven axial-band cuts that appear as circumferential arcs in cross-section. The roller axis and tooth row share a longitudinal axis. The eight teeth now use an elliptical (superellipse n=2) cross-section and a tapered Sand3D extrusion. The housing planform now uses the waisted outline shown in Figure 2B, with the waist dimension marked as image-estimated. The roller's generic knurl has been replaced by discrete spheroidal projections arranged in circumferential bands, following Figures 1 and 3 and paragraphs [0017]-[0020], [0033]. The 6-degree taper is explicitly an engineering assumption: the patent describes tapered, blade-shaped teeth but does not dimension the tip angle or full section profile. Tooth width and approximate length follow the disclosed embodiment; the exact retail profile still requires calibration.
 
 ## Interpretation limits
 
