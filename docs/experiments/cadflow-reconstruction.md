@@ -23,7 +23,7 @@ Upstream examples demonstrate B-rep modelling, inspection, STEP export, GLB prev
 
 The script scripts/build_cadflow_reconstruction.py reads the shared models/cad-parameters.json ledger and generates separately named components: housing shells, reservoir envelope, roller core and raised bands, end walls, spindle pins, bearing supports with bores, curved slotted wall, eight comb teeth and snap-tab proxies.
 
-Each component is validated before export. STEP is the editable CAD exchange artefact; STL and GLB are derivative mesh/preview formats. The build manifest records component bounds, volume, topology and validation reports. The build also emits a flattened aggregate STEP/GLB for quick viewing. The separately exported component STEP files and manifest retain the component IDs; the aggregate is not a constraint-solved assembly.
+Each component is validated before export. STEP is the editable CAD exchange artefact; STL and GLB are derivative mesh/preview formats. The build manifest records component bounds, volume, topology and validation reports. The build also emits a flattened aggregate STEP/GLB and a presentation-only exploded GLB. The exploded preview applies visual offsets to separate the parts; those offsets are not engineering clearances. The separately exported component STEP files and manifest retain the component IDs; neither aggregate is a constraint-solved assembly.
 
 Generated files are CI artefacts, not committed binary CAD. Download the nyfasi-cadflow-brep workflow artifact.
 
