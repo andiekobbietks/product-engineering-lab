@@ -47,6 +47,12 @@ jobs:
           python experiments/001-nyfasi-reconstruction/benchmark/nyfasi_sand3d_benchmark.py --output docs/benchmarks/data/latest.json
       - name: Build documentation
         run: mkdocs build --strict
+      - name: Install headless browser for gallery verification
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Verify interactive Sand3D gallery in Chromium
+        run: python tests/test_gallery_browser.py --site site
       - name: Upload Pages artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
