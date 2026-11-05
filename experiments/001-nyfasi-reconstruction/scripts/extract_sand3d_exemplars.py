@@ -70,7 +70,20 @@ def main():
                 continue
 
             program = row.get("program")
-            if not isinstance(program, str) or not program.strip():
+            if isinstance(program, str):
+                program_text = program
+            elif isinstance(program, dict):
+                program_text = str(
+                    program.get("source")
+                    or program.get("code")
+                    or program.get("program")
+                    or json.dumps(program, ensure_ascii=False)
+                )
+            elif program is not None:
+                program_text = json.dumps(program, ensure_ascii=False)
+            else:
+                continue
+            if not program_text.strip():
                 continue
 
             matches[entry] = {
@@ -86,7 +99,7 @@ def main():
                 "f_score": row.get("f_score"),
                 "sand3d_version": row.get("sand3d_version"),
                 "program_sha256": row.get("program_sha256"),
-                "program": program,
+                "program": program_text,
             }
             if wanted_entries.issubset(matches.keys()):
                 break
