@@ -24,6 +24,10 @@ The reconstruction script follows Sand3D's current component-first guidance: one
 
 The model preserves component names and separate solids in assembly groups where supported. The seven-band mapping, all component dimensions and retention geometries are assumptions unless explicitly labelled otherwise in the parameter ledger.
 
+## Spindle-seal research proxies
+
+Two separately named annular elastomer seal proxies are included around the spindle pins, conceptually within the bearing supports. Their 4.4 mm OD, 3.8 mm bore and 1 mm axial width are engineering assumptions, not recovered product dimensions. The width is constrained by both the 5 mm spindle projection and 8 mm bearing support. This geometry does not establish a functioning seal or an O-ring gland. See the [roller seal and tolerance study](roller-seal-and-tolerance.md) for the calculated worst-case interfaces and limitations.
+
 ## Parameter ledger
 
 | Parameter | Current value | Classification |
