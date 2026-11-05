@@ -26,7 +26,7 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 - Rights-aware image and patent-figure inventory: `evidence/image-inventory.csv`.
 - Component-level Sand3D script: `scripts/build_reconstruction.py`.
 - Reproduction notebook: `notebooks/nyfasi_reconstruction_colab.ipynb`.
-- Validation protocol: [documentation](../../../docs/experiments/nyfasi-validation.md).
+- Validation protocol: [documentation](../../docs/experiments/nyfasi-validation.md).
 
 ## Reconstruction boundary
 
