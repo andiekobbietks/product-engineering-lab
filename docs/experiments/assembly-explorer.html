@@ -37,7 +37,7 @@ h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--mute
 <div class="viewtag" id="mode">Parametric research preview</div>
 <canvas id="stage" aria-label="Interactive 3D research assembly"></canvas>
 <div class="toolbar">
-<button class="primary" id="explode">Explode assembly</button><button id="reset">Reset view</button><button id="wire">Wireframe</button><label class="filelabel" for="file">Load GLB (part or assembly)</label><input id="file" type="file" accept=".glb,model/gltf-binary">
+<button class="primary" id="explode">Explode assembly</button><button id="reset">Reset view</button><button id="wire">Wireframe</button><label class="filelabel" for="file">Load GLB (part or assembly)</label><input id="file" type="file" accept=".glb,model/gltf-binary" multiple>
 </div></div>
 <div class="metrics">
 <div class="metric"><b>8</b><span>Illustrated teeth</span></div><div class="metric"><b>180°</b><span>Selected wall arc</span></div><div class="metric"><b>24 mm</b><span>Roller diameter proxy</span></div>
@@ -77,16 +77,108 @@ const roller=new THREE.Group();const drum=new THREE.Mesh(new THREE.CylinderGeome
 const wall=new THREE.Group();const R=13.5,r=11.5,len=112,segments=48;for(let s=0;s<8;s++){const a0=-Math.PI/2+s*Math.PI/8+.018,a1=-Math.PI/2+(s+1)*Math.PI/8-.018;const shape=new THREE.Shape();for(let i=0;i<=segments;i++){const a=a0+(a1-a0)*i/segments;const x=R*Math.cos(a),y=R*Math.sin(a);if(i===0)shape.moveTo(x,y);else shape.lineTo(x,y)}for(let i=segments;i>=0;i--){const a=a0+(a1-a0)*i/segments;shape.lineTo(r*Math.cos(a),r*Math.sin(a))}shape.closePath();const geom=new THREE.ExtrudeGeometry(shape,{depth:len,bevelEnabled:false,steps:1,curveSegments:4});const mesh=new THREE.Mesh(geom,mats.wall);mesh.rotation.y=Math.PI/2;mesh.position.set(-len/2,0,0);wall.add(mesh)}wall.position.set(0,22,0);register('Curved slotted wall','180-degree annular wall proxy with seven circumferential openings between eight tooth positions. This is an explicit interpretation, not a dimensioned patent drawing.',wall,new THREE.Vector3(0,22,0),new THREE.Vector3(0,18,0),'Patent-led interpretation');
 const teeth=new THREE.Group();for(let i=0;i<8;i++){const x=(i-3.5)*15;const t=box(5,12,10,mats.tooth,x,2,0);teeth.add(t)}teeth.position.set(0,10,0);register('Eight comb teeth','Eight teeth are shown in the illustrated patent embodiment. Approximate 5 mm width and 10 mm length are described; height and pitch are placeholders.',teeth,new THREE.Vector3(0,10,0),new THREE.Vector3(0,-24,0),'Patent disclosed / derived');
 const endcaps=new THREE.Group();for(const x of [-57,57]){const cap=new THREE.Mesh(new THREE.CylinderGeometry(13,13,2,32),mats.shellDark);cap.rotation.z=Math.PI/2;cap.position.x=x;endcaps.add(cap)}endcaps.position.set(0,17,-2);register('Roller end features','End caps are visual placeholders; spindle, pin and retention geometry have not been verified.',endcaps,new THREE.Vector3(0,17,-2),new THREE.Vector3(0,8,15),'Engineering assumption');
-let selected=null,explosion=0,wire=false,loaded=false,uploadedUrl=null;
+let selected=null,explosion=0,wire=false,loadedAssembly=null,uploadedUrls=[];
 const $=id=>document.getElementById(id);
 const list=$('parts');
-components.forEach((c,i)=>{const b=document.createElement('button');b.className='part';b.innerHTML='<span>'+c.name+'<br><small>'+c.status+'</small></span><span>›</span>';b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>select(i));list.appendChild(b)});
-function select(i){selected=i;const c=components[i];$('partName').textContent=c.name;$('partDesc').textContent=c.desc;[...list.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i?'true':'false'))}
-function setExplosion(v){explosion=v;components.forEach(c=>c.group.position.copy(c.base).addScaledVector(c.offset,v));$('explodeRange').value=Math.round(v*100);$('explodeValue').textContent=Math.round(v*100)+'%';$('explode').textContent=v>0?'Collapse assembly':'Explode assembly'}
-$('explode').onclick=()=>setExplosion(explosion>0?0:1);$('explodeRange').oninput=e=>setExplosion(+e.target.value/100);$('assembled').onclick=()=>setExplosion(0);$('exploded').onclick=()=>setExplosion(1);
-$('reset').onclick=()=>{camera.position.set(185,150,210);controls.target.set(0,26,0);controls.update();setExplosion(0)};
-$('wire').onclick=()=>{wire=!wire;Object.values(mats).forEach(m=>m.wireframe=wire);$('wire').textContent=wire?'Solid view':'Wireframe'};
-$('file').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;const url=URL.createObjectURL(f);if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=url;new GLTFLoader().load(url,g=>{assembly.visible=false;scene.add(g.scene);g.scene.position.set(0,0,0);loaded=true;$('mode').textContent='Loaded Sand3D GLB';$('partName').textContent='Sand3D exported assembly';$('partDesc').textContent='Loaded from your local file. This viewer does not upload the file to a server.'},undefined,err=>{console.error(err);alert('Could not load this GLB file. Check that it is a valid glTF binary.')})});
+function renderList(){
+  list.innerHTML='';
+  components.forEach((component,i)=>{
+    const b=document.createElement('button');
+    b.className='part';
+    b.innerHTML='<span>'+component.name+'<br><small>'+component.status+'</small></span><span>›</span>';
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',()=>select(i));
+    list.appendChild(b);
+  });
+}
+function select(i){
+  if(!components.length)return;
+  selected=i;
+  const component=components[i];
+  $('partName').textContent=component.name;
+  $('partDesc').textContent=component.desc;
+  [...list.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i?'true':'false'));
+}
+function setExplosion(v){
+  explosion=v;
+  components.forEach(component=>component.group.position.copy(component.base).addScaledVector(component.offset,v));
+  $('explodeRange').value=Math.round(v*100);
+  $('explodeValue').textContent=Math.round(v*100)+'%';
+  $('explode').textContent=v>0?'Collapse assembly':'Explode assembly';
+}
+function fitLoaded(){
+  if(!loadedAssembly)return;
+  const bounds=new THREE.Box3().setFromObject(loadedAssembly);
+  const centre=new THREE.Vector3();bounds.getCenter(centre);
+  const size=new THREE.Vector3();bounds.getSize(size);
+  const span=Math.max(size.x,size.y,size.z,1);
+  controls.target.copy(centre);
+  camera.position.copy(centre).add(new THREE.Vector3(span*1.6,span*1.3,span*1.6));
+  camera.far=span*20;camera.updateProjectionMatrix();controls.update();
+}
+renderList();
+$('explode').onclick=()=>setExplosion(explosion>0?0:1);
+$('explodeRange').oninput=e=>setExplosion(+e.target.value/100);
+$('assembled').onclick=()=>setExplosion(0);
+$('exploded').onclick=()=>setExplosion(1);
+$('reset').onclick=()=>{if(loadedAssembly)fitLoaded();else{camera.position.set(185,150,210);controls.target.set(0,26,0);controls.update()}setExplosion(0)};
+$('wire').onclick=()=>{
+  wire=!wire;
+  Object.values(mats).forEach(m=>m.wireframe=wire);
+  if(loadedAssembly)loadedAssembly.traverse(o=>{if(o.isMesh){const ms=Array.isArray(o.material)?o.material:[o.material];ms.forEach(m=>m.wireframe=wire)}});
+  $('wire').textContent=wire?'Solid view':'Wireframe';
+};
+$('file').addEventListener('change',async e=>{
+  let files=[...(e.target.files||[])].filter(file=>file.name.toLowerCase().endsWith('.glb'));
+  if(files.length>1)files=files.filter(file=>!file.name.startsWith('nyfasi_'));
+  if(!files.length)return;
+  uploadedUrls.forEach(url=>URL.revokeObjectURL(url));uploadedUrls=[];
+  if(loadedAssembly)scene.remove(loadedAssembly);
+  loadedAssembly=new THREE.Group();scene.add(loadedAssembly);
+  assembly.visible=false;components.splice(0,components.length);
+  const loader=new GLTFLoader();
+  try{
+    const loadedItems=[];
+    const overallBounds=new THREE.Box3();
+    for(const file of files){
+      const url=URL.createObjectURL(file);uploadedUrls.push(url);
+      const gltf=await loader.loadAsync(url);
+      const bounds=new THREE.Box3().setFromObject(gltf.scene);
+      overallBounds.union(bounds);
+      loadedItems.push({file:file,scene:gltf.scene,bounds:bounds});
+    }
+    const overallCentre=new THREE.Vector3();overallBounds.getCenter(overallCentre);
+    loadedItems.forEach((item,index)=>{
+      const name=item.file.name.replace(/\.glb$/i,'');
+      const group=new THREE.Group();group.name=name;group.add(item.scene);
+      let colour=0x9eafbf,opacity=1;
+      if(name.startsWith('housing_')){colour=0xcbd6e1;opacity=.38}
+      else if(name==='reservoir'){colour=0x55b8c9;opacity=.35}
+      else if(name.includes('roller'))colour=0x52616d;
+      else if(name.includes('wall'))colour=0x8299ad;
+      else if(name.includes('tooth'))colour=0xf0c978;
+      else if(name.includes('gasket'))colour=0x4c927f;
+      else if(name.includes('bearing')||name.includes('spindle')||name.includes('end_wall'))colour=0x9eafbf;
+      group.traverse(o=>{
+        if(o.isMesh)o.material=new THREE.MeshStandardMaterial({color:colour,roughness:.48,metalness:.08,transparent:opacity<1,opacity:opacity,depthWrite:opacity===1,side:THREE.DoubleSide,wireframe:wire});
+      });
+      loadedAssembly.add(group);
+      const centre=new THREE.Vector3();item.bounds.getCenter(centre);
+      const offset=centre.sub(overallCentre);
+      if(offset.length()<.001)offset.set((index%3)-1,((index%5)-2)*.5,((index%7)-3)*.35);
+      offset.normalize().multiplyScalar(22);
+      components.push({name:name,desc:'CadFlow B-rep component loaded from the local build artifact. Its geometry is positioned in the shared model datum; explode offsets are for visual inspection only.',group:group,base:new THREE.Vector3(),offset:offset,status:'CadFlow B-rep'});
+    });
+    renderList();setExplosion(0);select(0);fitLoaded();
+    $('mode').textContent='Loaded '+components.length+' CadFlow component GLBs';
+    $('partDesc').textContent='Loaded locally from your extracted ZIP. The viewer does not upload your CAD files.';
+  }catch(err){
+    console.error(err);
+    alert('Could not load one or more GLB files. Extract the CadFlow ZIP and select the individual component GLBs.');
+  }finally{
+    uploadedUrls.forEach(url=>URL.revokeObjectURL(url));uploadedUrls=[];
+  }
+});
 function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}new ResizeObserver(resize).observe(canvas);resize();
 function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}animate();select(0);
 </script>
