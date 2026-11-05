@@ -1,60 +1,50 @@
-"""Check geometric consistency of the patent-led CAD proxy without Sand3D."""
+"""Internal consistency checks for the complete patent-led CAD proxy."""
 from pathlib import Path
 import json
 
 ROOT = Path(__file__).resolve().parents[1]
-PARAMETER_FILE = ROOT / "models" / "cad-parameters.json"
+P = {k: v["value"] for k, v in json.loads((ROOT / "models" / "cad-parameters.json").read_text())["parameters"].items()}
 
 
 def main():
-    records = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
-    p = {name: item["value"] for name, item in records.items()}
     errors = []
+    roller_r = P["roller_d"] / 2
+    seat_r = roller_r + P["roller_seat_clearance"]
+    outer_r = seat_r + P["wall_thickness"]
+    tooth_span = (P["tooth_count"] - 1) * P["tooth_pitch"] + P["tooth_width"]
+    clear_gap = P["tooth_pitch"] - P["tooth_width"]
+    band_span = (P["roller_band_count"] - 1) * P["tooth_pitch"] + P["roller_band_width"]
+    support_x = P["roller_len"] / 2 + P["spindle_pin_len"] / 2
 
-    roller_radius = p["roller_d"] / 2
-    seat_radius = roller_radius + p["roller_seat_clearance"]
-    outer_radius = seat_radius + p["wall_thickness"]
-    tooth_span = (p["tooth_count"] - 1) * p["tooth_pitch"] + p["tooth_width"]
-    slot_count = p["tooth_count"] - 1
-    clear_gap = p["tooth_pitch"] - p["tooth_width"]
-
-    if p["wall_segment_angle_deg"] != 180:
-        errors.append("Current Sand3D wall construction supports the 180-degree Figure 6B embodiment only.")
-    if p["wall_segment_angle_deg"] <= 90:
-        errors.append("Patent-described wall segment angle must be greater than 90 degrees.")
-    if p["roller_seat_clearance"] < 0:
-        errors.append("Roller seat clearance cannot be negative.")
-    if p["wall_thickness"] <= 0:
-        errors.append("Wall thickness must be positive.")
-    if not (outer_radius > seat_radius > roller_radius):
-        errors.append("Expected outer wall radius > seat radius > roller radius.")
-    if p["wall_len"] < tooth_span:
-        errors.append(
-            f"Wall length {p['wall_len']} mm is shorter than the tooth-row envelope {tooth_span} mm."
-        )
-    if p["roller_len"] < p["wall_len"]:
-        errors.append("Roller length must be at least the curved wall length in this proxy.")
-    if slot_count < 1:
-        errors.append("At least two teeth are required to create an inter-tooth slot.")
-    if p["slot_w"] <= 0 or p["slot_w"] >= clear_gap:
-        errors.append("Slot width must be positive and smaller than the assumed clear tooth gap.")
-    if p["tooth_pitch"] <= p["tooth_width"]:
-        errors.append("Tooth pitch must exceed tooth width to leave a clear gap.")
-
+    checks = [
+        (P["wall_segment_angle_deg"] == 180, "Only the 180-degree Figure 6B wall is implemented."),
+        (outer_r > seat_r > roller_r, "Expected outer wall radius > seat radius > roller radius."),
+        (P["wall_len"] >= tooth_span, "Wall must span the tooth row."),
+        (P["roller_len"] >= P["wall_len"], "Roller must span the wall."),
+        (0 < P["slot_w"] < clear_gap, "Slot width must be positive and below tooth clear gap."),
+        (P["roller_core_d"] < P["roller_d"], "Smooth core must be smaller than textured roller OD."),
+        (P["roller_band_count"] == P["tooth_count"] - 1, "Model expects one textured band per inter-tooth slot."),
+        (0 < P["roller_band_width"] < clear_gap, "Textured band width must fit the assumed clear gap."),
+        (band_span <= P["roller_len"], "Textured band row exceeds roller length."),
+        (P["roller_endwall_d"] > P["roller_d"] and P["roller_endwall_t"] > 0, "End walls must exceed roller OD and have positive thickness."),
+        (P["spindle_pin_d"] > 0 and P["spindle_pin_len"] > 0, "Spindle pins need positive dimensions."),
+        (P["bearing_bore_clearance"] >= 0, "Bearing clearance cannot be negative."),
+        (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] < min(P["bearing_block_d"], P["bearing_block_h"]), "Bearing bore does not fit its support block."),
+        (support_x + P["bearing_block_w"] / 2 <= P["housing_w"] / 2, "Bearing supports exceed housing envelope."),
+        (P["snap_tab_count"] >= 1 and min(P["snap_tab_w"], P["snap_tab_d"], P["snap_tab_h"]) > 0, "Snap-fit proxy dimensions/count must be positive."),
+    ]
+    errors.extend(message for ok, message in checks if not ok)
     if errors:
-        print("Curved-wall geometry validation FAILED:")
+        print("Complete roller geometry validation FAILED:")
         for error in errors:
-            print(f"- {error}")
+            print("- " + error)
         return 1
-
     print(
-        "Curved-wall geometry checks passed: "
-        f"{p['tooth_count']} teeth, {slot_count} inter-tooth arc slots, "
-        f"{p['wall_segment_angle_deg']} degree wall arc, "
-        f"{seat_radius:.2f} mm seat radius, {outer_radius:.2f} mm outer radius, "
-        f"{tooth_span:.2f} mm tooth-row envelope."
+        f"Complete roller checks passed: {P['roller_band_count']} textured bands, "
+        "smooth lands, 2 end walls, 2 spindle pins, 2 bearing supports, "
+        f"{P['snap_tab_count']} snap-fit tabs."
     )
-    print("These are internal consistency checks, not dimensional or manufacturing validation.")
+    print("Checks cover internal consistency only, not product or manufacturing validation.")
     return 0
 
 
