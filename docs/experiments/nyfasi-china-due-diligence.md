@@ -87,7 +87,7 @@ The article reports that:
 
 It does not name the Chinese supplier, factory, city, province, tooling company, injection-moulding partner, production volume, mould owner, contractual terms, shipping route or present-day production status. It does not establish that all subsequent production took place in China.
 
-The reported €150,000–€200,000 mould estimate and €50,000 grant should not be conflated. A separate article from the same publisher, dated 8 October 2025, says a UK government grant helped acquire a manufacturing mould. It does not name the scheme or amount. The two articles may refer to separate awards or overlapping support; this has not been resolved. Neither article is primary funding evidence. See [the 8 October report](https://lejournaldemayotte.yt/2025/10/08/une-invention-mahoraise-presentee-lors-de-levenement-the-colors/).
+The reported €150,000–€200,000 mould estimate and €50,000 grant should not be conflated. A separate article from the same publisher, dated 8 October 2025, says a UK government grant helped acquire a manufacturing mould. It does not name the scheme or amount. The two articles may refer to separate awards or overlapping support; this has not been resolved. Neither article is primary funding evidence. See [the 8 October report](https://lejournaldemayotte.yt/articles/une-invention-mahoraise-presentee-lors-de-levenement-the-colors-a-new-york).
 
 ## 4. Additional institutional and founder sources
 
