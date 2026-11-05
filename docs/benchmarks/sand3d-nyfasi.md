@@ -20,6 +20,12 @@ A multi-part hair-applicator mechanism is our first test case. The benchmark cha
   <div><strong>4</strong><span>Benchmark scenarios in v0.1</span></div>
 </div>
 
+## Explore the mechanism
+
+The interactive preview below provides orbit, component selection, wireframe and exploded-assembly controls. It starts with the schematic assembly; load the generated Sand3D GLB from the benchmark artefact to inspect the regenerated geometry.
+
+<iframe src="../../experiments/assembly-explorer.html" title="Interactive Nyfasi mechanism assembly explorer" loading="lazy" style="width:100%;height:780px;border:0;border-radius:16px;background:#0b1020"></iframe>
+
 ## Live benchmark result
 
 <div id="benchmark-status" class="benchmark-status">Loading the latest CI benchmark report…</div>
