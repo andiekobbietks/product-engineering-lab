@@ -47,7 +47,7 @@ def check_constraints(p: dict) -> list[str]:
     band_span = (p["roller_band_count"] - 1) * p["tooth_pitch"] + p["roller_band_width"]
     support_x = p["roller_len"] / 2 + p["roller_endwall_t"] + p["spindle_pin_len"] / 2
 
-    require(p["roller_core_d"] < p["roller_d"], "roller core must remain below roller outer diameter")
+    require(p["roller_d"] > 2 * p["roller_projection_height"], "smooth drum diameter must exceed radial projection height")
     require(outer_r > seat_r > roller_r, "roller/seat/wall radial ordering must be preserved")
     require(abs(seat_r - roller_r - p["roller_seat_clearance"]) < 1e-9, "declared radial seat clearance must be preserved")
     require(p["wall_len"] >= tooth_span, "curved wall must span the tooth row")
@@ -59,7 +59,8 @@ def check_constraints(p: dict) -> list[str]:
     require(support_x + p["bearing_block_w"] / 2 <= p["housing_w"] / 2, "bearing supports must remain inside housing envelope")
     require(p["housing_wall_t"] > 0 and p["housing_wall_t"] < min(p["lower_shell_h"], p["upper_shell_h"]) / 2, "housing wall thickness must remain feasible")
     require(abs(p["tooth_root_z"] - (p["roller_axis_z"] - outer_r - p["tooth_height"])) < 1e-6, "tooth root datum must remain parametrically linked to roller-seat radius")
-    require(p["roller_knurl_pitch"] > 0, "knurl pitch must remain positive")
+    require(p["roller_projection_count"] >= 8, "circumferential projection count must remain adequate")
+    require(p["roller_projection_d"] > 0 and p["roller_projection_height"] > 0, "roller spheroidal projections must have positive dimensions")
     return errors
 
 
@@ -193,7 +194,7 @@ def main() -> int:
 
     # A deliberately invalid edit must be rejected before invoking Sand3D.
     invalid = dict(baseline)
-    invalid["roller_d"] = baseline["roller_core_d"] - 1
+    invalid["roller_d"] = 2 * baseline["roller_projection_height"] - 1
     invalid_errors = check_constraints(invalid)
     results.append({
         "scenario": "invalid_roller_diameter_below_core",
