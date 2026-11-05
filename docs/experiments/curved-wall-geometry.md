@@ -18,7 +18,7 @@ The reconstruction script follows Sand3D's current component-first guidance: one
 3. A 180-degree concave roller seat and seven through-slots.
 4. Eight elliptical, tapered blade teeth. The 5 mm width and approximately 10 mm length follow the illustrated embodiment; the 6-degree taper remains an assumption.
 5. Two roller end walls and two coaxial spindle pins.
-6. Two bored housing bearing-support blocks and two simplified snap-fit tabs.
+6. Two bored housing bearing-support blocks, two upper-housing spindle-retaining arms with cut-outs, and two simplified snap-fit tabs.
 7. A waisted upper/lower clamshell housing, perimeter gasket and reservoir envelope proxy.
 
 The model preserves component names and separate solids in assembly groups where supported. The eight-tooth embodiment and approximate tooth width/length are patent-described; the 18 projections per band, seven-band mapping, waist depth and most other dimensions remain derived or assumed values as classified in the parameter ledger.
