@@ -21,6 +21,7 @@ The reconstruction script follows Sand3D's current component-first guidance: one
 6. Two simplified housing snap-fit tabs.
 7. The previously modelled 180-degree curved wall, seven arc slots and eight tooth proxies.
 8. Upper/lower housing and reservoir envelope proxies.
+9. Two schematic elastomeric spindle-seal proxies; these are not validated fluid seals.
 
 The model preserves component names and separate solids in assembly groups where supported. The seven-band mapping, all component dimensions and retention geometries are assumptions unless explicitly labelled otherwise in the parameter ledger.
 
@@ -44,6 +45,10 @@ The model preserves component names and separate solids in assembly groups where
 
 All parameters, evidence IDs, confidence levels and notes are stored in [cad-parameters.json](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/cad-parameters.json).
 
+## Seal and tolerance follow-on
+
+The next iteration adds separate spindle-seal proxies and a worst-case interface ledger. The current 2 mm band width and 2 mm slot width have zero nominal width clearance; the illustrative tolerance stack flags up to 0.25 mm interference. See the [roller seal and tolerance study](roller-seal-and-tolerance.md). This is a design-review flag, not a validated operating fit.
+
 ## Build and validation
 
 From the experiment directory:
@@ -59,10 +64,10 @@ The geometry validator checks arithmetic, dimensional relationships and envelope
 ## Next engineering work
 
 - Replace simple annular bands with the exact disclosed texture/projection pattern after careful figure inspection and, ideally, an authorised sample.
-- Add the elastomeric seal as a separate component and define a measurable compression interface.
+- Replace schematic spindle-seal rings with a dimensioned gland/lip design after material and sample evidence is available.
 - Refine bearing supports and spindle retention using an authorised physical sample or supplier drawing.
 - Model snap-fit hooks, lead-ins, undercuts and flexural beams only after dimensions and material data are evidenced.
-- Add contact/clearance inspection and a controlled tolerance stack.
+- Refine contact/clearance inspection using measured data and a controlled tolerance stack.
 - Compare the model against calibrated photographs or a physical sample.
 
 ## Rights boundary
