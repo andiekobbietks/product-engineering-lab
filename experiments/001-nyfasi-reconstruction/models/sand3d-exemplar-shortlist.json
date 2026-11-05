@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0.0",
+  "title": "Curated Sand3D pattern references for Nyfasi reconstruction",
+  "purpose": "Shortlist produced from the metadata-only Sand3D catalogue. References inform modelling patterns only; no source geometry, program bodies or dimensions are copied into the Nyfasi reconstruction.",
+  "dataset_layer_license": "CC-BY-4.0 as stated by Sandflow dataset cards; item-level source licences below remain applicable.",
+  "selection_method": "Keyword match against roller, bearing, shaft, housing, wheel, gear and mechanical assembly terms; manually selected for relevance.",
+  "reuse_gate": [
+    "Inspect the full source record and licence before any code or geometry adaptation.",
+    "Preserve attribution and modification notices for CC-BY assets.",
+    "AutoMate source records are CC0-1.0; Sandflow's generated dataset layer remains CC-BY-4.0.",
+    "Do not treat any exemplar as evidence of Nyfasi dimensions, geometry or manufacturing intent."
+  ],
+  "references": [
+    {
+      "dataset": "Sandflow/sand3d-automate",
+      "id": "automate-cee711aee4ba3086d1b0b892_8f41766712ccd34da2b4b918_c2a71603dfc0d2b985a2794d_default",
+      "asset_id": "automate:cee711aee4ba3086d1b0b892_8f41766712ccd34da2b4b918_c2a71603dfc0d2b985a2794d_default",
+      "entry": "roller_conveyor",
+      "source_license": "CC0-1.0",
+      "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly cee711aee4ba3086d1b0b892_8f41766712ccd34da2b4b918_c2a71603dfc0d2b985a2794d_default, CC0-1.0; modified: rewritten as a sand3d program",
+      "program_sha256": "c7f44229dc1940070bfeda5c03e37d2c8874fd097e0f722e85147d0a8a1c18e3",
+      "relevance": "Roller arrangement and repeated rotating elements; pattern reference only."
+    },
+    {
+      "dataset": "Sandflow/sand3d-automate",
+      "id": "automate-4e1a6b39908e2f7126f47016_fd2d1c7079fa3370eef6bf57_dc98bf0e7eb36a1ecdd4450a_default",
+      "asset_id": "automate:4e1a6b39908e2f7126f47016_fd2d1c7079fa3370eef6bf57_dc98bf0e7eb36a1ecdd4450a_default",
+      "entry": "shaft_and_bearing_block",
+      "source_license": "CC0-1.0",
+      "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 4e1a6b39908e2f7126f47016_fd2d1c7079fa3370eef6bf57_dc98bf0e7eb36a1ecdd4450a_default, CC0-1.0; modified: rewritten as a sand3d program",
+      "program_sha256": "be7be694b74dc7fb33e861180e8b534419d8d5981784cd643cf5eae2954f83cd",
+      "relevance": "Direct analogue for shaft, bore and bearing-support decomposition; no dimensions reused."
+    },
+    {
+      "dataset": "Sandflow/sand3d-automate",
+      "id": "automate-0c3994037e990a794defafe3_20378f30338b42dad0b70ef4_6b26ebeb6e7e42f9b9ebe2fe_default",
+      "asset_id": "automate:0c3994037e990a794defafe3_20378f30338b42dad0b70ef4_6b26ebeb6e7e42f9b9ebe2fe_default",
+      "entry": "split_pillow_block",
+      "source_license": "CC0-1.0",
+      "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 0c3994037e990a794defafe3_20378f30338b42dad0b70ef4_6b26ebeb6e7e42f9b9ebe2fe_default, CC0-1.0; modified: rewritten as a sand3d program",
+      "program_sha256": "9cec247d2f3c00af50e7ff158080de34bb53642f988edb1aebc88cc26825cd60",
+      "relevance": "Split bearing-housing and retention pattern; informs separate bearing-support part structure."
+    },
+    {
+      "dataset": "Sandflow/sand3d-automate",
+      "id": "automate-43e743dc7632c2a82d04b477_3b949137a48331140f656cef_1d7478839c3f3880f24b2a2a_default",
+      "asset_id": "automate:43e743dc7632c2a82d04b477_3b949137a48331140f656cef_1d7478839c3f3880f24b2a2a_default",
+      "entry": "flanged_bearing",
+      "source_license": "CC0-1.0",
+      "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 43e743dc7632c2a82d04b477_3b949137a48331140f656cef_1d7478839c3f3880f24b2a2a_default, CC0-1.0; modified: rewritten as a sand3d program",
+      "program_sha256": "7dbb2d5647fce3957e49887ff4d32c15e59e2fdcc966cf410a53f7762b5736ac",
+      "relevance": "Flanged bearing geometry and mounting features; pattern reference only."
+    },
+    {
+      "dataset": "Sandflow/sand3d-simready",
+      "id": "simready-consumable_bearing_ball_d01",
+      "asset_id": "simready:consumable_bearing_ball_d01",
+      "entry": "bearing",
+      "source_license": "CC-BY-4.0",
+      "attribution": "NVIDIA SimReady assets: consumable_bearing_ball_d01 by NVIDIA, https://huggingface.co/datasets/nvidia/simready-assets/tree/653d91e182011f357cf1644013cc94ddf194d349/consumable_bearing_ball_d01, CC BY 4.0; modified: rewritten as a sand3d program",
+      "program_sha256": "d6d83f7be624dc83827137935a3874206f096f38df9ba0a8a74027b8621eb853",
+      "relevance": "Bearing component feature and material metadata reference; retain CC-BY attribution if adapted."
+    },
+    {
+      "dataset": "Sandflow/sand3d-articraft",
+      "id": "articraft-rec_bicycle_crankset_and_pedal_assembly_0005",
+      "asset_id": "articraft:rec_bicycle_crankset_and_pedal_assembly_0005",
+      "entry": "road_bike_crankset",
+      "source_license": "CC-BY-4.0",
+      "attribution": "Articraft Data, Matt Zhou et al., record rec_bicycle_crankset_and_pedal_assembly_0005, CC BY 4.0; modified: rewritten as a sand3d program",
+      "program_sha256": "4bb13630ce4aacf93ceda18d922ffc64cdc1c4c8822b0bbdd5edef86331e7a0e",
+      "relevance": "Rotating shaft and multi-part assembly hierarchy reference; not a dimensional source."
+    },
+    {
+      "dataset": "Sandflow/sand3d-objaverse",
+      "id": "objaverse-002d493678d04d039259f5d49f07c520",
+      "asset_id": "objaverse:002d493678d04d039259f5d49f07c520",
+      "entry": "finned_motor",
+      "source_license": "CC-BY-4.0",
+      "attribution": "В3Г-200АМС-СД-20 30 40-ТР22 by e-looch, https://sketchfab.com/3d-models/002d493678d04d039259f5d49f07c520, CC-BY-4.0; modified: rewritten as a sand3d program",
+      "program_sha256": "86f9e17f44c945c1115ab0b0960767991c96e7a1c60ce6dfe02494faef4c469f",
+      "relevance": "Cylindrical mechanical housing and radial-feature pattern; not product evidence."
+    }
+  ]
+}
