@@ -1,0 +1,9 @@
+asset_id,source_id,locator,asset_type,view_or_figure,observations,rights_status,local_copy,classification_status,notes
+PAT-001-F1,SRC-004,GB2591502A Figure 1,patent drawing,exploded perspective view,Exploded assembly and component layout,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
+PAT-001-F2A,SRC-004,GB2591502A Figure 2A,patent drawing,side view,Exterior profile,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
+PAT-001-F2B,SRC-004,GB2591502A Figure 2B,patent drawing,top view,Plan view,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
+PAT-001-F2C,SRC-004,GB2591502A Figure 2C,patent drawing,bottom view,Underside detail,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
+PAT-001-F3,SRC-004,GB2591502A Figure 3,patent drawing,roller in isolation,Roller drum/end walls/spindle pins,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
+PAT-001-F4,SRC-004,GB2591502A Figure 4,patent drawing,longitudinal cross-section,Internal reservoir/roller/housing relationship,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
+PAT-001-F5,SRC-004,GB2591502A Figure 5,patent drawing,transverse cross-section,Wall curvature/roller seat/slot relationship,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
+PAT-001-F6,SRC-004,GB2591502A Figure 6,patent drawing,schematic wall profile,Curvature and slot-arc concept,patent_publication_reference,no,classified_from_description,Inspect drawing before geometric interpretation
