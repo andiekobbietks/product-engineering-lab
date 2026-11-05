@@ -1,4 +1,179 @@
 {
+  "schema_version": "1.0.0",
+  "product_id": "GB2591502A-HAIR-APPLICATOR-RESEARCH",
+  "units": "mm",
   "model_status": "research_only",
-  "note": "CAD parameter ledger pending full provenance records."
+  "parameters": {
+    "housing_w": {
+      "value": 110,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Placeholder envelope only; no calibrated retail measurement."
+    },
+    "housing_d": {
+      "value": 68,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Placeholder envelope only; no calibrated retail measurement."
+    },
+    "lower_shell_h": {
+      "value": 14,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Schematic shell height, not a patent or retail measurement."
+    },
+    "upper_shell_h": {
+      "value": 12,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Schematic shell height, not a patent or retail measurement."
+    },
+    "reservoir_w": {
+      "value": 64,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder internal envelope; reservoir dimensions and capacity are unknown."
+    },
+    "reservoir_d": {
+      "value": 36,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder internal envelope; reservoir dimensions and capacity are unknown."
+    },
+    "reservoir_h": {
+      "value": 8,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder internal envelope; reservoir dimensions and capacity are unknown."
+    },
+    "roller_d": {
+      "value": 24,
+      "unit": "mm",
+      "provenance": "PATENT_DERIVED_ESTIMATE",
+      "evidence_ids": [
+        "SRC-007"
+      ],
+      "confidence": "low",
+      "note": "Chosen 12 mm radius is within the patent description's example 10–30 mm radius range; not a measured production dimension."
+    },
+    "roller_len": {
+      "value": 82,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder axial length; no authoritative dimension located."
+    },
+    "tooth_count": {
+      "value": 8,
+      "unit": "count",
+      "provenance": "PATENT_DISCLOSED",
+      "evidence_ids": [
+        "SRC-004",
+        "SRC-007"
+      ],
+      "confidence": "medium",
+      "note": "Eight teeth in the described illustrated patent embodiment; not proof of retail SKU count."
+    },
+    "tooth_width": {
+      "value": 5,
+      "unit": "mm",
+      "provenance": "PATENT_DISCLOSED",
+      "evidence_ids": [
+        "SRC-004",
+        "SRC-007"
+      ],
+      "confidence": "medium",
+      "note": "Approximate 0.5 cm width in the described embodiment; not verified on retail sample."
+    },
+    "tooth_length": {
+      "value": 10,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Schematic length only; do not infer from patent tooth width."
+    },
+    "tooth_height": {
+      "value": 12,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Schematic height only."
+    },
+    "tooth_pitch": {
+      "value": 15,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [
+        "SRC-004",
+        "SRC-007"
+      ],
+      "confidence": "low",
+      "note": "Illustrative 5 mm tooth width plus 10 mm interpreted clear gap. Patent spacing convention must be checked before treating this as a dimensional constraint."
+    },
+    "wall_w": {
+      "value": 104,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder carrier width."
+    },
+    "wall_d": {
+      "value": 8,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder thickness for a flat proxy; patent discloses a curved wall."
+    },
+    "wall_h": {
+      "value": 12,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder wall height."
+    },
+    "slot_w": {
+      "value": 2,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder slot width; patent describes arcuate slots, not this exact dimension."
+    },
+    "exploded_gap": {
+      "value": 18,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "high",
+      "note": "Presentation-only exploded-view spacing; not product geometry."
+    }
+  },
+  "provenance_legend": {
+    "PATENT_DISCLOSED": "Explicitly disclosed in patent text; not automatically a retail measurement.",
+    "PATENT_DERIVED_ESTIMATE": "Calculated or selected within a patent-disclosed range; exact value is not disclosed.",
+    "MEASURED": "Measured from an authorised physical sample with method and uncertainty recorded.",
+    "IMAGE_ESTIMATED": "Estimated from imagery with scale/calibration and confidence recorded.",
+    "ENGINEERING_ASSUMPTION": "Chosen for a schematic model; not asserted as product truth.",
+    "SUPPLIER_CONFIRMED": "Supported by authorised tooling or manufacturing documentation."
+  }
 }
