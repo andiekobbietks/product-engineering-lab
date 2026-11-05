@@ -1,8 +1,10 @@
-# CadFlow B-rep reconstruction
+# CadFlow B-rep reconstruction (historical)
 
-**Status:** active research implementation. The build is not yet certified against an authorised retail sample.
+> **Archived path:** this is a retained record of the earlier OpenCascade experiment. It is not the active Nyfasi modelling or publishing stack. The workflow is manual-only; Sand3D is now the canonical engine. See [ADR-0001](../decisions/adr-0001-sand3d-canonical-engine.md).
 
-## Why CadFlow is in this project
+**Status:** historical research implementation. The build was not certified against an authorised retail sample.
+
+## Why CadFlow was explored
 
 [CadFlow](https://github.com/yhz5613813/CadFlow) is a Python CAD SDK backed by OpenCascade. It exposes exact boundary-representation (B-rep) modelling, booleans, shape inspection, topology validation, STEP/STL exchange, GLB preview and product-level assembly APIs. The upstream repository is MIT-licensed and documents its OpenCascade notice separately.
 
@@ -13,18 +15,18 @@ The upstream demonstrations are useful engineering references:
 - [Reinforced mounting bracket example](https://github.com/yhz5613813/CadFlow/blob/main/examples/cadflow_complex_mounting_bracket.py)
 - [Modern Python frontend guide](https://github.com/yhz5613813/CadFlow/blob/main/docs/guides/modern-frontend.md)
 
-CadFlow is the preferred engine here for separately validated solids and neutral CAD exchange. It does not replace the evidence ledger or supply missing product dimensions.
+CadFlow was explored for separately validated solids and neutral CAD exchange. It did not replace the evidence ledger or supply missing product dimensions. The active project has since chosen Sand3D as its single modelling and assembly authority.
 
 ## Relationship to Sand3D and the Hugging Face datasets
 
-This repository uses two complementary tools:
+The historical implementation used two complementary tools:
 
 - **CadFlow:** OpenCascade B-rep construction, component-level solid validation and STEP/STL export.
 - **Sand3D:** concise procedural geometry programs, named parts, articulation and web-friendly GLB/URDF/USD exports.
 
 The five Hugging Face datasets linked from Sand3D belong to the Sandflow project, not CadFlow. They are useful for learning procedural modelling patterns and assembly decomposition. They are not Nyfasi product evidence and do not contain a verified Nyfasi CAD model. See [Sand3D dataset strategy](sand3d-dataset-strategy.md) for the five datasets and rights controls.
 
-The intended pipeline is:
+The former dual-engine pipeline was:
 
 1. Patent, product imagery and authorised measurements populate the evidence register.
 2. The CAD parameter ledger classifies every dimension as disclosed, derived, image-estimated, measured, supplier-confirmed or assumed.
@@ -35,7 +37,7 @@ The intended pipeline is:
 
 ## Current CadFlow components
 
-The script at experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py now builds the following as separate B-rep components:
+The historical script at experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py built the following as separate B-rep components:
 
 - Lower housing shell and upper housing cap
 - Reservoir enclosure
