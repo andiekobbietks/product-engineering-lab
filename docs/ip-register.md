@@ -21,6 +21,8 @@ A public URL is evidence of publication, not evidence of permission to copy, ada
 | IP-013 | Reconstructed 3D geometry and scripts | Project-created using stated assumptions and cited evidence | Illustrative research output only | Generated / derived | Keep assumptions, source links, author, tool/version and validation record |
 | IP-014 | Customer/partner CAD, photos, samples or specifications | Customer/partner or licensors | Not included without written authorisation | Unverified until intake | Execute data/IP schedule, permitted-use, confidentiality and deletion terms |
 | IP-015 | Future AK Build code, workflows and integrations | AndieKobbieTech or contributors, subject to agreements | Intended commercial layer | Unverified until created | Separate background IP, foreground IP and third-party components in each SOW |
+| IP-016 | CN115003190B / CN202180011338.5 Chinese invention patent and drawings | Translated record displays “Mianna Nature Ltd”; original applicant name and assignment chain unverified | Patent-family reference only; no drawing files copied | Reference only / unverified | Verify original-language CNIPA record, applicant identity, assignments, annual fees and live legal status |
+| IP-017 | WO2021151803A1, EP4096470B1 and US12440014B2 family publications | Patent family records associated with the same invention; exact proprietors/status per territory to verify | Publication links only | Reference only / unverified | Verify official national registers, granted claims, assignments and current status in each territory |
 
 ## Specific patent-source note
 
