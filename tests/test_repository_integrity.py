@@ -1,5 +1,7 @@
 import ast
 import json
+import subprocess
+import sys
 import unittest
 from pathlib import Path
 
@@ -16,6 +18,11 @@ class RepositoryIntegrityTests(unittest.TestCase):
         for component in model["components"]:
             for parameter in component["parameters"]:
                 self.assertTrue(set(parameter["evidence_ids"]).issubset(known_ids))
+
+    def test_cad_parameter_provenance_validator(self):
+        validator = EXP / "scripts" / "validate_provenance.py"
+        result = subprocess.run([sys.executable, str(validator)], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, msg=result.stdout + result.stderr)
 
     def test_product_model_schema_is_valid_json(self):
         schema = json.loads((EXP / "models" / "product-model.schema.json").read_text())
