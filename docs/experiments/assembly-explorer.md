@@ -32,6 +32,10 @@ The viewer includes a procedural preview and a local GLB loader. To inspect the 
 
 This is **not a verified digital twin** of a retail Nyfasi product. A true validated digital twin would require an identified physical unit or authorised source CAD, calibrated measurements, known revision, material and tolerance information, and verification against the physical system. The current work is an evidence-linked digital research prototype.
 
+## Latest component-level iteration
+
+The current Sand3D build now separates the housing halves, reservoir, curved slotted wall, tooth array, knurled roller bands, smooth lands, end walls, spindle pins, bearing supports, snap-fit proxies and perimeter gasket. The roller is represented with a continuous revolute joint. These details improve editability and make the assumptions inspectable; they do not establish measured fidelity. See the [Sand3D dataset and demo strategy](sand3d-dataset-strategy.md).
+
 ## Reproduce the model
 
 - [Colab notebook](https://colab.research.google.com/github/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb)
