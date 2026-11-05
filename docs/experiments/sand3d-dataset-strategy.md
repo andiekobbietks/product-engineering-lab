@@ -16,7 +16,7 @@ Sand3D is a Python modelling language over Blender's `bpy`. Its current publishe
 
 ## Five Sandflow datasets
 
-The Sand3D README describes these as Sand3D programs rebuilt from five source collections and labels the program datasets CC BY 4.0. Confirm the dataset card and the individual source-asset metadata before redistributing or incorporating any particular asset. A dataset-level label is not a substitute for item-level rights review.
+The current Hugging Face dataset cards declare CC-BY-4.0 for the Sandflow dataset layer. Each row also carries source_license, attribution and license_status. The upstream asset licence remains relevant: do not assume the dataset-level label overrides it. For example, sand3d-cad includes Zero-To-CAD and CADFS sources, while Objaverse-derived rows preserve per-object source attribution. Review the exact row before reuse. See the [metadata and reuse policy](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/sand3d-dataset-policy.md).
 
 | Dataset | Source family | Useful role in this project | What it does not establish |
 |---|---|---|---|
