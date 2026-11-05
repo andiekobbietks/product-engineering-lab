@@ -42,6 +42,7 @@ jobs:
           test "$(find experiments/001-nyfasi-reconstruction/output/cadflow -name '*.glb' | wc -l)" -ge 15
           test -s experiments/001-nyfasi-reconstruction/output/cadflow/nyfasi_research_assembly.step
           test -s experiments/001-nyfasi-reconstruction/output/cadflow/nyfasi_research_assembly.glb
+          test -s experiments/001-nyfasi-reconstruction/output/cadflow/nyfasi_exploded_preview.glb
       - name: Upload B-rep and preview artifacts
         uses: actions/upload-artifact@v4
         with:
