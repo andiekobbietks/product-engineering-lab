@@ -103,5 +103,13 @@
     "url": "https://nyfasi.com/pages/about-us",
     "type": "official_brand_founder_source",
     "rights": "Brand-owned content; link and attribute, do not mirror without permission."
+  },
+  {
+    "id": "SRC-013",
+    "title": "Nyfasi Deluxe Detangler official product page and product photography",
+    "url": "https://nyfasi.com/en-us/products/deluxe-detangler",
+    "type": "official_product_description_and_visual_reference",
+    "rights": "Brand-owned product text and imagery; link and attribute, do not mirror or redistribute without permission.",
+    "access_note": "Public product page observed 2026-11-05. Used only as a visual reference for low-confidence image-estimated external proportions and colour blocking; not as dimensioned CAD or a verified engineering drawing."
   }
 ]
