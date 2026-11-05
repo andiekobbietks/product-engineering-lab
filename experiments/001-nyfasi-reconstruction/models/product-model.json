@@ -2,24 +2,162 @@
   "product_id": "NYFASI-DELUXE-DETANGLER-RESEARCH",
   "product_name": "Nyfasi Deluxe Detangler",
   "model_status": "research",
-  "disclaimer": "Independent illustrative research model. Dimensions and internal construction are assumptions unless linked to evidence. Not official Nyfasi CAD or manufacturing geometry.",
+  "disclaimer": "Independent research model based on a patent-disclosed hair applicator architecture. Patent embodiment features are source-supported as disclosures; retail configuration, exact geometry, dimensions and internal details remain unverified. Not official Nyfasi CAD or manufacturing geometry.",
   "units": "mm",
   "components": [
-    {"component_id": "C-HOUSING", "name": "Main housing", "parent_component_id": null, "status": "assumed", "parameters": [
-      {"name": "overall_width", "value": 110, "unit": "mm", "evidence_ids": [], "confidence": "low", "assumption": "Illustrative envelope parameter; replace with calibrated measurement."},
-      {"name": "overall_depth", "value": 68, "unit": "mm", "evidence_ids": [], "confidence": "low", "assumption": "Illustrative envelope parameter; replace with calibrated measurement."}
-    ]},
-    {"component_id": "C-ROLLER", "name": "Roller / treatment element", "parent_component_id": "C-HOUSING", "status": "assumed", "parameters": [
-      {"name": "diameter", "value": 24, "unit": "mm", "evidence_ids": [], "confidence": "none", "assumption": "Placeholder geometry only; material, profile and drive remain unknown."}
-    ]},
-    {"component_id": "C-COMB", "name": "Comb / guide array", "parent_component_id": "C-HOUSING", "status": "assumed", "parameters": [
-      {"name": "tooth_count", "value": 11, "unit": "count", "evidence_ids": [], "confidence": "none", "assumption": "Demonstration count, not a measured product specification."}
-    ]},
-    {"component_id": "C-RESERVOIR", "name": "Reservoir / fluid enclosure", "parent_component_id": "C-HOUSING", "status": "assumed", "parameters": [
-      {"name": "volume", "value": null, "unit": "mL", "evidence_ids": [], "confidence": "none", "assumption": "No volume is asserted."}
-    ]}
+    {
+      "component_id": "C-HOUSING",
+      "name": "Main housing",
+      "parent_component_id": null,
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+        },
+        {
+          "name": "overall_width",
+          "value": 110,
+          "unit": "mm",
+          "evidence_ids": [],
+          "confidence": "low",
+          "assumption": "Illustrative envelope parameter; replace with calibrated measurement."
+        },
+        {
+          "name": "overall_depth",
+          "value": 68,
+          "unit": "mm",
+          "evidence_ids": [],
+          "confidence": "low",
+          "assumption": "Illustrative envelope parameter; replace with calibrated measurement."
+        }
+      ]
+    },
+    {
+      "component_id": "C-ROLLER",
+      "name": "Roller / treatment element",
+      "parent_component_id": "C-HOUSING",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+        },
+        {
+          "name": "diameter",
+          "value": 24,
+          "unit": "mm",
+          "evidence_ids": [],
+          "confidence": "none",
+          "assumption": "Placeholder geometry only; material, profile and drive remain unknown."
+        }
+      ]
+    },
+    {
+      "component_id": "C-COMB",
+      "name": "Comb / guide array",
+      "parent_component_id": "C-HOUSING",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+        },
+        {
+          "name": "tooth_count",
+          "value": 11,
+          "unit": "count",
+          "evidence_ids": [],
+          "confidence": "none",
+          "assumption": "Demonstration count, not a measured product specification."
+        },
+        {
+          "name": "illustrated_tooth_count",
+          "value": 8,
+          "unit": "count",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "medium",
+          "assumption": "GB2591502A description says the illustrated example has eight teeth; not confirmed against a retail sample."
+        },
+        {
+          "name": "illustrated_tooth_width",
+          "value": 5,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "medium",
+          "assumption": "Patent description gives approximately 0.5 cm; treat as an embodiment statement, not a verified retail dimension."
+        },
+        {
+          "name": "illustrated_adjacent_spacing",
+          "value": 10,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "low",
+          "assumption": "Patent description says approximately 1 cm spacing; interpretation of spacing convention and retail mapping require review."
+        }
+      ]
+    },
+    {
+      "component_id": "C-RESERVOIR",
+      "name": "Reservoir / fluid enclosure",
+      "parent_component_id": "C-HOUSING",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+        },
+        {
+          "name": "volume",
+          "value": null,
+          "unit": "mL",
+          "evidence_ids": [],
+          "confidence": "none",
+          "assumption": "No volume is asserted."
+        }
+      ]
+    }
   ],
-  "sources": ["SRC-001", "SRC-002", "SRC-003", "SRC-004", "SRC-005"],
-  "toolchain": {"cad_library": "Sand3D", "version": "pin before execution"},
+  "sources": [
+    "SRC-001",
+    "SRC-002",
+    "SRC-003",
+    "SRC-004",
+    "SRC-005"
+  ],
+  "toolchain": {
+    "cad_library": "Sand3D",
+    "version": "pin before execution"
+  },
   "validation": []
 }
