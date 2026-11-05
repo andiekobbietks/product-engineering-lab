@@ -14,7 +14,7 @@ Explore the patent-led reconstruction as a component-level 3D research model. Dr
 4. CadFlow builds deterministic B-rep components, validates topology and exports STEP, STL and GLB files.
 5. The browser viewer makes the research model inspectable.
 
-The viewer's local GLB loader can inspect a single generated component preview. For the full component pack, download the nyfasi-cadflow-brep artifact from the [CadFlow workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml). For the Sand3D export, use the [Sand3D CAD workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml). Files selected in the viewer remain local to your browser.
+The viewer's local GLB loader can inspect an individual generated component or the aggregate nyfasi_research_assembly.glb. For the full component pack, download the nyfasi-cadflow-brep artifact from the [CadFlow workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml), extract the aggregate GLB, and load it in the viewer. For the Sand3D export, use the [Sand3D CAD workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml). Files selected in the viewer remain local to your browser.
 
 ## Component status
 
