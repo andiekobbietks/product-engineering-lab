@@ -14,6 +14,7 @@ class Sand3DGalleryContractTests(unittest.TestCase):
         for contract in (
             "nyfasi_complete_assembly.glb",
             "source_symbols",
+            "source_object_prefixes",
             "source_ranges",
             "component.name",
             "roller_rotation",
@@ -29,6 +30,7 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "s3d_joint",
             "source_symbols",
             "jointNode.quaternion",
+            "sourceSymbolForObject",
             "build_reconstruction.py",
             "No schematic or guessed-geometry fallback",
         ):
