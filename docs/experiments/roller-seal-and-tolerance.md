@@ -12,14 +12,14 @@ Seven procedural knurled circumferential band proxies align nominally with seven
 
 ## Calculated interface stack-up
 
-The tolerance ledger stores only tolerance inputs. The analysis script reads nominal dimensions from `cad-parameters.json`, calculates the nominal interface values, and derives worst-case limits at runtime. This avoids stale duplicated results when a CAD parameter or tolerance changes. The tests include a sensitivity check that changes a tolerance and verifies the reported range changes.
+The tolerance ledger stores only tolerance inputs. Shared physical-feature tolerances for the spindle-pin diameter and bearing-bore diameter are each defined once under `shared_tolerances`, then reused by every affected interface stack. The analysis script reads nominal dimensions from `cad-parameters.json`, calculates the nominal interface values, and derives worst-case limits at runtime. This avoids stale or contradictory results when a CAD parameter or shared tolerance changes. Regression tests verify shared-tolerance propagation and fixed worst-case bounds for both seal interfaces.
 
 | Interface | Nominal | Calculated worst-case range | Interpretation |
 |---|---:|---:|---|
 | Roller to curved seat (radial clearance) | 0.50 mm | 0.30 to 0.70 mm | Positive in this assumed stack |
 | Band to slot (width clearance) | 0.00 mm | -0.25 to +0.25 mm | Interference possible |
 | Spindle to bearing (diametral clearance) | 0.50 mm | 0.40 to 0.60 mm | Positive geometric clearance |
-| Spindle to seal bore (diametral interference) | 0.20 mm | 0.05 to 0.35 mm | Elastomer deformation not modelled |
+| Spindle to seal bore (diametral interference) | 0.20 mm | 0.05 to 0.35 mm | Positive values mean interference; elastomer deformation not modelled |
 | Seal OD to bearing bore (diametral clearance) | 0.10 mm | -0.05 to +0.25 mm | Possible interference or gap |
 
 Axial band-to-slot centre alignment is calculated as ±0.25 mm from the two assumed position tolerances. These are arithmetic worst-case stacks, not statistical RSS analysis. They omit thermal expansion, elastomer constitutive behaviour, compression set, eccentricity, mould shrinkage, surface finish, shaft runout and wear.
