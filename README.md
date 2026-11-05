@@ -4,7 +4,7 @@
 
 Research · Reconstruction · Validation · Productisation
 
-![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Docs](https://img.shields.io/badge/docs-MkDocs%20Material-526CFE) ![Licence](https://img.shields.io/badge/licence-undecided-lightgrey)
+![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Docs](https://img.shields.io/badge/docs-MkDocs%20Material-526CFE) ![Licence](https://img.shields.io/badge/licence-undecided-lightgrey) [![Integrity checks](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml) [![Sand3D smoke test](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml)
 
 <p align="center"><img src="assets/diagrams/product-engineering-loop.svg" alt="Product engineering loop" width="900"></p>
 
@@ -52,7 +52,7 @@ The lab remains independently useful and provider-neutral.
 
 **Project-wide licence: undecided.** The previous MIT licence file was removed pending the IP review. See [LICENSING.md](LICENSING.md) and the [IP register](docs/ip-register.md).
 
-Early research foundation. Sand3D 1.6.2 is pinned for the first adapter experiment; the script and notebook have not yet been executed in a compatible runtime. A successful render is not engineering validation.
+Early research foundation. Sand3D 1.6.2 is pinned. The component-level script has passed a GitHub Actions smoke test and exported GLB/OBJ artefacts; the model has not been validated against an authorised retail sample. The Colab notebook remains to be exercised end-to-end. A successful render is not engineering validation.
 
 This independent research is not affiliated with or endorsed by Nyfasi, Dr Youmna Mouhamad, PDR or Sandflow AI. Third-party images and text remain with their rights holders. Link to sources and record attribution; do not redistribute without permission. Do not use illustrative geometry for manufacture or commercial replication without qualified engineering review and legal clearance.
 
