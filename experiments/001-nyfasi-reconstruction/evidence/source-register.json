@@ -44,7 +44,7 @@
       "Figure 6 wall profile"
     ],
     "source_caveat": "Google Patents metadata is a discovery aid. Verify proprietor, status, events and family against official patent office records before legal or commercial reliance.",
-    "brand_relationship": "Direct relationship between this patent and the Nyfasi-branded Deluxe Detangler retail SKU is not yet independently verified."
+    "brand_relationship": "High-confidence family-level association: RAEng and Le Journal de Mayotte identify the Nyfasi Deluxe Detangler as Nyfasi's patented product, while this patent family lists Youmna Mouhamad and Myana Naturals Ltd. Neither source explicitly cites this publication number against a specific retail revision; keep exact SKU/revision mapping unverified pending primary confirmation."
   },
   {
     "id": "SRC-005",
@@ -79,14 +79,16 @@
     "title": "Le Journal de Mayotte — China mould and initial production report, 15 October 2025",
     "url": "https://lejournaldemayotte.yt/articles/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme",
     "type": "secondary_media_report",
-    "rights": "Publisher content; link and summarise only. Supplier identity and production facts not independently verified."
+    "rights": "Publisher content; link and summarise only. Supplier identity and production facts not independently verified.",
+    "access_note": "Canonical article URL confirmed by search on 2026-11-05; reports 2024 China mould activity, a €50,000 grant, a €150,000–€200,000 mould estimate and initial production. Secondary reporting; supplier not named."
   },
   {
     "id": "SRC-010",
     "title": "Le Journal de Mayotte — The Colors / mould funding report, 8 October 2025",
-    "url": "https://lejournaldemayotte.yt/2025/10/08/une-invention-mahoraise-presentee-lors-de-levenement-the-colors/",
+    "url": "https://lejournaldemayotte.yt/articles/une-invention-mahoraise-presentee-lors-de-levenement-the-colors-a-new-york",
     "type": "secondary_media_report",
-    "rights": "Publisher content; link and summarise only. Reported UK government mould grant requires primary-source verification."
+    "rights": "Publisher content; link and summarise only. Reported UK government mould grant requires primary-source verification.",
+    "access_note": "Canonical article URL confirmed by search on 2026-11-05; reports the Deluxe Detangler as Nyfasi's patented innovation and references multi-territory protection."
   },
   {
     "id": "SRC-011",
