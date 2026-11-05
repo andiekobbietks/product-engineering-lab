@@ -108,8 +108,8 @@ def main():
     model = build_research_assembly(exploded=True)
     output = Path("output")
     output.mkdir(exist_ok=True)
-    s3d.export(model, str(output / "nyfasi_research_exploded.glb"))
-    s3d.export(model, str(output / "nyfasi_research_exploded.obj"))
+    s3d.export(model, str(output / "gb2591502a_hair_applicator_research_exploded.glb"))
+    s3d.export(model, str(output / "gb2591502a_hair_applicator_research_exploded.obj"))
     print("Wrote illustrative research exports to:", output.resolve())
 
 
