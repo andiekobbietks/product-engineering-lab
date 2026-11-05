@@ -52,5 +52,145 @@
       "commercial-use compatibility review"
     ],
     "note": "The Hugging Face datasets are Sandflow/Sand3D datasets. They are not CadFlow datasets and do not provide verified Nyfasi native CAD."
+  },
+  "selected_program_exemplars": {
+    "workflow_run": "https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42072931451",
+    "artifact_name": "sand3d-exemplar-programs",
+    "artifact_id": 13435584785,
+    "artifact_sha256": "053c576b8ef41a3088136a4a05f27a9f5877244a05e5f7cff85b66f317722b7d",
+    "artifact_expires": "2026-12-05",
+    "count": 13,
+    "records": [
+      {
+        "dataset": "Sandflow/sand3d-automate",
+        "entry": "roller_conveyor",
+        "id": "automate-cee711aee4ba3086d1b0b892_8f41766712ccd34da2b4b918_c2a71603dfc0d2b985a2794d_default",
+        "program_sha256": "c7f44229dc1940070bfeda5c03e37d2c8874fd097e0f722e85147d0a8a1c18e3",
+        "license": "CC-BY-4.0",
+        "source_license": "CC0-1.0",
+        "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly cee711aee4ba3086d1b0b892_8f41766712ccd34da2b4b918_c2a71603dfc0d2b985a2794d_default, CC0-1.0; modified: rewritten as a sand3d program",
+        "application": "roller and shaft component decomposition; continuous spin joint pattern"
+      },
+      {
+        "dataset": "Sandflow/sand3d-automate",
+        "entry": "flanged_bearing",
+        "id": "automate-43e743dc7632c2a82d04b477_3b949137a48331140f656cef_1d7478839c3f3880f24b2a2a_default",
+        "program_sha256": "7dbb2d5647fce3957e49887ff4d32c15e59e2fdcc966cf410a53f7762b5736ac",
+        "license": "CC-BY-4.0",
+        "source_license": "CC0-1.0",
+        "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 43e743dc7632c2a82d04b477_3b949137a48331140f656cef_1d7478839c3f3880f24b2a2a_default, CC0-1.0; modified: rewritten as a sand3d program",
+        "application": "bearing flange and support interface reference; dimensions not reused"
+      },
+      {
+        "dataset": "Sandflow/sand3d-automate",
+        "entry": "shaft_and_bearing_block",
+        "id": "automate-4e1a6b39908e2f7126f47016_fd2d1c7079fa3370eef6bf57_dc98bf0e7eb36a1ecdd4450a_default",
+        "program_sha256": "be7be694b74dc7fb33e861180e8b534419d8d5981784cd643cf5eae2954f83cd",
+        "license": "CC-BY-4.0",
+        "source_license": "CC0-1.0",
+        "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 4e1a6b39908e2f7126f47016_fd2d1c7079fa3370eef6bf57_dc98bf0e7eb36a1ecdd4450a_default, CC0-1.0; modified: rewritten as a sand3d program",
+        "application": "shaft axis and bored support-block decomposition"
+      },
+      {
+        "dataset": "Sandflow/sand3d-automate",
+        "entry": "gear_reducer",
+        "id": "automate-58c79c763db3a90f77d597db_01cb0e0aacfd9b6477f7a159_e3307809703f4c00a077511b_default",
+        "program_sha256": "7cdbbcda9b222424968a42869101bd32b8d61e5ed39880e9f04162a76dce2163",
+        "license": "CC-BY-4.0",
+        "source_license": "CC0-1.0",
+        "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 58c79c763db3a90f77d597db_01cb0e0aacfd9b6477f7a159_e3307809703f4c00a077511b_default, CC0-1.0; modified: rewritten as a sand3d program",
+        "application": "assembly decomposition reference only; no gearing added because product evidence does not show gears"
+      },
+      {
+        "dataset": "Sandflow/sand3d-automate",
+        "entry": "gear_train",
+        "id": "automate-0f89a8b8c41d7111f5a631f4_e724b535d91d079c9ae9423f_7db00fac0bf90a35fdce4f29_default",
+        "program_sha256": "86f63a51c25b1d73d17d7bcc26ed6d52d368d06241c8e61ce1431685203c4d01",
+        "license": "CC-BY-4.0",
+        "source_license": "CC0-1.0",
+        "attribution": "AutoMate (Jones et al., 2021; Dryad doi:10.5061/dryad.2547d7wvw), assembly 0f89a8b8c41d7111f5a631f4_e724b535d91d079c9ae9423f_7db00fac0bf90a35fdce4f29_default, CC0-1.0; modified: rewritten as a sand3d program",
+        "application": "assembly decomposition reference only; no gearing added"
+      },
+      {
+        "dataset": "Sandflow/sand3d-simready",
+        "entry": "bearing",
+        "id": "simready-consumable_bearing_ball_d01",
+        "program_sha256": "d6d83f7be624dc83827137935a3874206f096f38df9ba0a8a74027b8621eb853",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "NVIDIA SimReady assets: consumable_bearing_ball_d01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "stepped annular race and bore profile pattern; no bearing type assumed for Nyfasi"
+      },
+      {
+        "dataset": "Sandflow/sand3d-simready",
+        "entry": "stepped_ring",
+        "id": "simready-consumable_oil_seal_large_e01",
+        "program_sha256": "dd3878899de5f51ee3077fa7f8f0b524d5c5e5072b66a73f4bd81456b7e588d5",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "NVIDIA SimReady assets: consumable_oil_seal_large_e01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "stepped annular seal profile pattern; seal geometry remains unverified"
+      },
+      {
+        "dataset": "Sandflow/sand3d-simready",
+        "entry": "pump",
+        "id": "simready-fuelSystem_fuel_pump_assembly_d01",
+        "program_sha256": "dcbcf453b4eba9377ec21dfda8b3b2088dd2586b3da4ddfe0f80cee247436af9",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "NVIDIA SimReady assets: fuelSystem_fuel_pump_assembly_d01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "fluid-system component separation reference only; no pump mechanism assumed"
+      },
+      {
+        "dataset": "Sandflow/sand3d-simready",
+        "entry": "reservoir",
+        "id": "simready-fireProtection_suppressionCylinder_fixed_a01",
+        "program_sha256": "4a43b42c4c1cd510a325a0532c78b204d5b3d84ee17b00b4a88fe437fb1fb53b",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "NVIDIA SimReady assets: fireProtection_suppressionCylinder_fixed_a01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "reservoir shell, neck, band and support decomposition reference"
+      },
+      {
+        "dataset": "Sandflow/sand3d-simready",
+        "entry": "sprayer",
+        "id": "simready-serviceTool_fluid_pump_b01",
+        "program_sha256": "1e724800bce70f2903ab09f66cf57bab7d40da8b71bdb50d920a89476920a0f4",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "NVIDIA SimReady assets: serviceTool_fluid_pump_b01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "lofted tank foot, shell and collar construction pattern"
+      },
+      {
+        "dataset": "Sandflow/sand3d-articraft",
+        "entry": "single_revolute_hinge",
+        "id": "articraft-rec_single_revolute_hinge_01de33e852e744a8a80ca92868c063cd",
+        "program_sha256": "50c37eb0a4377ef69e5961e13cc648392608bfcd99195ad4d9b2d155496ed7a0",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "Articraft Data, Matt Zhou et al., record rec_single_revolute_hinge_01de33e852e744a8a80ca92868c063cd, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "local frame and revolute joint declaration pattern; current roller joint is continuous"
+      },
+      {
+        "dataset": "Sandflow/sand3d-objaverse",
+        "entry": "housing",
+        "id": "objaverse-002749d6607e4db8888b650a23c445ca",
+        "program_sha256": "4b62baf072d098bed3dc76b3d35a87e21e245ad3c34eb47648676c5888a4d5ba",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "PowerBoard - Game Ready by unenginer_sangam, Sketchfab model 002749d6607e4db8888b650a23c445ca, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "housing decomposition reference; no dimensions or mesh copied"
+      },
+      {
+        "dataset": "Sandflow/sand3d-objaverse",
+        "entry": "cylinder_valve",
+        "id": "objaverse-0244c4f7a9cd4d039259f5d49f07c520",
+        "program_sha256": "26c87b643d0b9c48e1024e5df5b4e0812d53d7d448b87733e3ce7f01a1435588",
+        "license": "CC-BY-4.0",
+        "source_license": "CC-BY-4.0",
+        "attribution": "Water Filter Unit ANIL by aniljaco, Sketchfab model 0244c4f7a9cd4d039259f5d49f07c520, CC BY 4.0; modified: rewritten as a sand3d program",
+        "application": "reservoir shoulder, neck and valve interface pattern"
+      }
+    ]
   }
 }
