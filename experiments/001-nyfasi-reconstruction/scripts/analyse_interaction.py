@@ -39,20 +39,23 @@ def calculate_stackups(parameters: dict[str, float], ledger: dict[str, Any]) -> 
     band_nominal = parameters["slot_w"] - parameters["roller_band_width"]
     band_delta = _tolerance_sum(band, "slot_width_tolerance", "band_width_tolerance")
 
+    shared = ledger["shared_tolerances"]
     bearing = interfaces["spindle_pin_to_bearing_bore"]
     bearing_nominal = 2 * parameters["bearing_bore_clearance"]
-    bearing_delta = _tolerance_sum(bearing, "pin_diameter_tolerance", "bore_diameter_tolerance")
+    bearing_delta = _tolerance_sum(shared, "spindle_pin_diameter", "bearing_bore_diameter")
 
     pin_seal = interfaces["spindle_pin_to_elastomer_seal"]
     pin_seal_nominal = parameters["spindle_pin_d"] - parameters["seal_inner_d"]
-    pin_seal_delta = _tolerance_sum(pin_seal, "pin_diameter_tolerance", "seal_bore_tolerance")
+    pin_seal_delta = _tolerance_sum(shared, "spindle_pin_diameter") + _tolerance_sum(
+        pin_seal, "seal_bore_tolerance"
+    )
 
     seal_bore = interfaces["elastomer_seal_to_bearing_bore"]
     bearing_bore_diameter = parameters["spindle_pin_d"] + 2 * parameters["bearing_bore_clearance"]
     seal_bore_nominal = bearing_bore_diameter - parameters["seal_outer_d"]
     seal_bore_delta = _tolerance_sum(
-        seal_bore, "bearing_bore_tolerance", "seal_outer_diameter_tolerance"
-    )
+        shared, "bearing_bore_diameter"
+    ) + _tolerance_sum(seal_bore, "seal_outer_diameter_tolerance")
 
     results = {
         "roller_to_curved_seat": (seat_nominal, seat_delta),
@@ -93,7 +96,11 @@ def main() -> int:
             )
             continue
         low, high = result["worst_case_min"], result["worst_case_max"]
-        flag = "INTERFERENCE_POSSIBLE" if low < 0 else "POSITIVE_IN_THIS_ASSUMED_STACK"
+        if name == "spindle_pin_to_elastomer_seal":
+            flag = "INTERFERENCE" if result["nominal"] > 0 else "CLEARANCE" if result["nominal"] < 0 else "LINE_TO_LINE"
+            flag += "_RANGE_CROSSES_ZERO" if low < 0 < high else "_POSSIBLE" if low <= 0 <= high else ""
+        else:
+            flag = "INTERFERENCE_POSSIBLE" if low < 0 else "POSITIVE_IN_THIS_ASSUMED_STACK"
         print(f"- {name}: nominal {result['nominal']:.3f} mm; {low:.3f} to {high:.3f} mm [{flag}]")
 
     band_result = calculated["roller_band_to_wall_slot"]
