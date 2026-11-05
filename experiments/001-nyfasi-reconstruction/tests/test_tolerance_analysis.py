@@ -7,7 +7,7 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).resolve().parents[1] / "scripts"
 sys.path.insert(0, str(SCRIPT_DIR))
-from analyse_interaction import calculate_stackups  # noqa: E402
+from analyse_interaction import calculate_stackups, _pin_seal_interpretation  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -70,6 +70,14 @@ class ToleranceCalculationTests(unittest.TestCase):
                 updated[name]["worst_case_max"],
                 baseline[name]["worst_case_max"],
             )
+
+    def test_pin_seal_sign_convention_reports_interference_and_clearance(self):
+        self.assertEqual(_pin_seal_interpretation(0.05, 0.35), "INTERFERENCE")
+        self.assertEqual(_pin_seal_interpretation(-0.35, -0.05), "CLEARANCE")
+        self.assertEqual(
+            _pin_seal_interpretation(-0.05, 0.05),
+            "INTERFERENCE_AND_CLEARANCE_POSSIBLE",
+        )
 
     def test_negative_tolerance_is_rejected(self):
         ledger = copy.deepcopy(self.ledger)
