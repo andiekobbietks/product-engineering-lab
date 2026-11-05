@@ -2,8 +2,8 @@
 
 **Status:** successful CI build
 
-- Workflow: [CadFlow B-rep reconstruction #42071621074](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42071621074)
-- Source commit: 137434e1c5728823bb295893b66bd7e6d901c27b
+- Workflow: [CadFlow B-rep reconstruction #42071636295](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42071636295)
+- Source commit: d2cd7acee6ecf5b7fe4c289692832b80b4e8f362
 - Engine: CadFlow 0.2.0
 - CadFlow source: 43fbac0515a560229d700e07281cc5c08c3f9765
 - Geometry kernel: OpenCascade 7.9.3.1
@@ -28,10 +28,10 @@
 ## Output
 
 - Artifact: nyfasi-cadflow-brep
-- Artifact ID: 13436657199
+- Artifact ID: 13436351903
 - Files uploaded: 90
-- Archive size: 2,017,275 bytes
-- SHA-256: a13334ccd160d7fe8d6af34e0912386f7a8bf40ad91e38e0b0dfb1217e1740e4
+- Archive size: 2,017,314 bytes
+- SHA-256: da2c0eef73c5950ff0d8713f0325c04d8bd026775f5913c578557ee178793228
 - Retention expiry: 5 December 2026
 
 The build generated 29 separately validated component outputs, with individual STEP, STL and GLB files. It also generated nyfasi_research_assembly.step and nyfasi_research_assembly.glb as a flattened aggregate preview/export.
