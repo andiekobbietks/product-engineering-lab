@@ -26,6 +26,7 @@ nav:
       - Patent reading notes: experiments/patent-reading-notes.md
       - CAD parameter provenance: experiments/cad-parameter-provenance.md
       - Curved-wall geometry: experiments/curved-wall-geometry.md
+      - Sand3D datasets and demos: experiments/sand3d-dataset-strategy.md
       - China IP & manufacturing diligence: experiments/nyfasi-china-due-diligence.md
       - Validation protocol: experiments/nyfasi-validation.md
       - Image inventory: experiments/image-inventory.md
