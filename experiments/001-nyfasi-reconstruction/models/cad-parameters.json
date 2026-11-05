@@ -333,12 +333,12 @@
       "note": "Presentation/assembly placement for the reservoir proxy; not a product datum."
     },
     "tooth_root_z": {
-      "value": -33.5,
+      "value": -21.5,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Illustrative placement for the tooth extrusion relative to the roller axis and seat envelope; requires figure/sample calibration."
+      "note": "Root datum at the outer surface of the curved slotted wall. Teeth are flipped 180 degrees so the tapered tips extend radially away from the roller; value is derived from roller axis, seat clearance, wall thickness and smooth drum diameter."
     },
     "tooth_corner_r": {
       "value": 0.6,
