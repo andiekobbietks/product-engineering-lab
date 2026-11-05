@@ -1,47 +1,36 @@
-# Interactive assembly explorer
+# Sand3D assembly gallery
 
-Explore the patent-led reconstruction as a component-level 3D research model. Drag to orbit, scroll to zoom, select components to inspect their evidence classification, and adjust exploded spacing.
+The gallery loads the **complete Sand3D assembly GLB**, not seven separately positioned mesh exports. It uses the native GLB node hierarchy and the `s3d_joint` extras written by Sand3D.
 
-<iframe src="assembly-explorer.html" title="Interactive 3D assembly explorer" width="100%" height="760" style="border:1px solid #34445c;border-radius:12px" loading="lazy"></iframe>
+[Open the Sand3D assembly gallery](assembly-explorer.html){ .md-button .md-button--primary }
 
-[Open the viewer in a full browser tab](assembly-explorer.html){ .md-button .md-button--primary }
+## Gallery capabilities
 
-## Evidence-to-geometry workflow
+- **Original assembly coordinates:** the full assembly is loaded as one GLB, preserving the hierarchy created by the Sand3D program.
+- **Component tree:** select any of the seven named assembly groups or click its geometry in the viewport.
+- **Program-linked inspection:** the exact `build_reconstruction.py` used for the build is published with an AST-generated source map. Selecting a component highlights the real functions that create it.
+- **Joint playback and control:** the viewer discovers the `roller_rotation` joint from Sand3D's `s3d_joint` GLB extras. The slider and Play/Pause control transform that exported joint node. If the joint record is absent, the controls remain unavailable rather than simulating motion.
+- **Isolation, wireframe and camera reset:** inspect one group or the whole assembly.
+- **Exploded presentation:** the explode control applies clearly labelled display-only offsets. It is not a mechanical movement, assembly clearance or engineering datum.
+- **Parameter context:** relevant values are read from the same versioned CAD parameter ledger used by the model build.
 
-1. Public patent descriptions and drawings are interpreted as component concepts.
-2. A versioned parameter ledger separates disclosed, derived, measured and assumed values.
-3. Sand3D provides editable programmatic modelling patterns and mesh previews.
-4. CadFlow builds deterministic B-rep components, validates topology and exports STEP, STL and GLB files.
-5. The browser viewer makes the research model inspectable.
+The viewer does not silently fall back to schematic geometry. If the generated manifest, assembly, source program or parameter ledger is missing, it reports an explicit error.
 
-The viewer's local GLB loader supports either one GLB or multiple component GLBs. For a full colour-coded inspection, extract the CadFlow ZIP and multi-select the individual component GLBs (the viewer ignores the aggregate preview files when multiple files are selected). You can also load nyfasi_exploded_preview.glb on its own. Its offsets are presentation-only, not engineering clearances. For the full component pack, download the nyfasi-cadflow-brep artifact from the [CadFlow workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml), extract the aggregate GLB, and load it in the viewer. For the Sand3D export, use the [Sand3D CAD workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml). Files selected in the viewer remain local to your browser.
+## Canonical Sand3D pipeline
 
-## Component status
+`build_reconstruction.py` is the authoritative model program. It builds the assembly, writes the complete GLB, and exports secondary component GLBs for downstream inspection and other consumers. The web gallery uses the complete assembly GLB as its geometry and articulation source of truth. The component GLBs are not independently repositioned to recreate an assembly.
 
-| Feature | Status |
-|---|---|
-| Eight teeth in illustrated embodiment | Patent disclosed |
-| Approximate tooth width | Patent disclosed |
-| Roller radius range | Patent disclosed; selected diameter is derived |
-| 180-degree curved wall | Patent illustrated embodiment |
-| Seven slots between eight teeth | Geometric interpretation |
-| Roller bands, end walls, pins and bearing supports | Partly inferred / assumed |
-| Housing and reservoir envelope | Engineering assumptions |
-| Fit, tolerances, sealing and performance | Not validated |
+The build also publishes:
 
-This is **not a verified digital twin** of a retail Nyfasi product. A true validated digital twin requires an identified physical unit or authorised source CAD, calibrated measurements, known revision, material and tolerance information, and verification against the physical system. The current work is an evidence-linked digital research prototype.
+- `manifest.json`: component identities, node names, evidence descriptions, source symbols, engine version and joint expectations.
+- `build_reconstruction.py`: the exact program used to create the geometry.
+- `cad-parameters.json`: the versioned parameter ledger.
+- `nyfasi_complete_assembly.glb`: the complete articulated assembly.
 
-## Reproduce the models
+Sand3D also produces URDF and USDA for mechanism and scene interchange, plus OBJ for mesh inspection. These exports are generated from the same program and are not separate modelling authorities.
 
-- [CadFlow B-rep build and outputs](cadflow-reconstruction.md)
-- [Sand3D reconstruction script](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py)
-- [CAD parameter ledger](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/cad-parameters.json)
-- [Sand3D dataset licence and reuse policy](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/sand3d-dataset-policy.md)
-- [Curved-wall geometry explanation](curved-wall-geometry.md)
-- [Colab notebook](https://colab.research.google.com/github/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb)
+## Evidence and engineering boundary
 
-## Documentation and IP boundary
+This remains an evidence-led research proxy, not a verified digital twin of a retail Nyfasi unit. Patent-to-retail-SKU mapping is not confirmed. Many dimensions, materials, retention details, seal geometry and all tolerance values remain assumptions. The gallery proves that the program, assembly hierarchy, exported joint metadata and source map can be inspected together. It does not prove physical fit, sealing performance, fatigue life, manufacturability or regulatory suitability.
 
-This public research page describes evidence classifications and reproducibility. The repository itself is public, so anything committed here should be treated as public. Third-party CAD and dataset assets are not copied into the repository without a row-level rights review.
-
-The viewer is a research instrument, not engineering approval, manufacturing instruction, a freedom-to-operate opinion or permission to reproduce a protected design. See [licensing](../licensing.md), the [IP register](../ip-register.md) and the [commercial proposal structure](../commercial-proposal.md).
+See the [Sand3D architecture decision](../decisions/adr-0001-sand3d-canonical-engine.md), [gallery decision](../decisions/adr-0002-sand3d-source-linked-gallery.md), [CAD parameter provenance](cad-parameter-provenance.md), [roller seal and tolerance study](roller-seal-and-tolerance.md) and [validation protocol](nyfasi-validation.md).
