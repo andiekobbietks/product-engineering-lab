@@ -1,6 +1,18 @@
 name: Sand3D reconstruction smoke test
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "experiments/001-nyfasi-reconstruction/scripts/**"
+      - "requirements-cad.txt"
+      - ".github/workflows/cad-smoke.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "experiments/001-nyfasi-reconstruction/scripts/**"
+      - "requirements-cad.txt"
+      - ".github/workflows/cad-smoke.yml"
   workflow_dispatch:
 
 permissions:
@@ -21,7 +33,7 @@ jobs:
       - name: Upload GLB and OBJ outputs
         uses: actions/upload-artifact@v4
         with:
-          name: nyfasi-research-reconstruction
+          name: gb2591502a-hair-applicator-research-proxy
           path: output/*
           if-no-files-found: error
           retention-days: 14
