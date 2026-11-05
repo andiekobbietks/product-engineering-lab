@@ -291,24 +291,10 @@ def build_housing_retention_features():
 
 
 def build_comb_and_wall():
+    """Compatibility helper; use the canonical tapered tooth builder."""
     wall = build_curved_wall()
-    teeth = []
-    for index in range(P["tooth_count"]):
-        x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
-        tooth = s3d.extrude(
-            f"blade_tooth_{index + 1:02d}",
-            s3d.rect(P["tooth_width"], P["tooth_length"], r=P["tooth_corner_r"]),
-            P["tooth_height"],
-        )
-        tooth = s3d.at(
-            tooth,
-            x=x,
-            y=P["roller_axis_y"],
-            z=P["tooth_root_z"],
-        )
-        s3d.material(tooth, "plastic", color="#e2e4e7")
-        teeth.append(tooth)
-    return s3d.group("curved_wall_and_blade_teeth", wall, *teeth)
+    teeth = build_comb_teeth()
+    return s3d.group("curved_wall_and_blade_teeth", wall, teeth)
 
 
 def build_housing_gasket():
@@ -340,8 +326,9 @@ def build_comb_teeth():
         x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
         tooth = s3d.extrude(
             f"blade_tooth_{index + 1:02d}",
-            s3d.rect(P["tooth_width"], P["tooth_length"], r=P["tooth_corner_r"]),
+            s3d.superellipse(P["tooth_width"], P["tooth_length"], n=2),
             P["tooth_height"],
+            taper=P["tooth_tip_taper_deg"],
         )
         tooth = s3d.at(tooth, x=x, y=P["roller_axis_y"], z=P["tooth_root_z"])
         s3d.material(tooth, "plastic", color="#e2e4e7")
