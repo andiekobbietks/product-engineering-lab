@@ -1,6 +1,6 @@
 # Interactive 3D assembly viewer
 
-1. Run the [Colab notebook](../../experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb) in a compatible Python runtime.
+1. Run the [Colab notebook](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb) in a compatible Python runtime.
 2. Download the generated file named nyfasi_research_exploded.glb from the notebook output.
 3. Open the [local GLB viewer](glb-viewer.html) and select the file.
 
