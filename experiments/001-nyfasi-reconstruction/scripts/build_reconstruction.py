@@ -76,6 +76,23 @@ def build_roller_mechanism():
     return s3d.group("roller_mechanism", core, *bands, *end_walls, *pins)
 
 
+
+def build_elastomeric_seals():
+    """Schematic shaft seals; dimensions are placeholders, not product evidence."""
+    seals = []
+    y, z = P["housing_d"] / 2, -P["lower_shell_h"] / 2
+    x = P["roller_len"] / 2 + P["roller_endwall_t"] / 2
+    for side, sign in (("left", -1), ("right", 1)):
+        seal = annular_band(
+            f"{side}_elastomeric_spindle_seal",
+            P["seal_outer_d"], P["seal_inner_d"],
+            P["seal_axial_width"], sign * x, y, z,
+        )
+        s3d.material(seal, "rubber", color="#30383c")
+        seals.append(seal)
+    return s3d.group("elastomeric_spindle_seals_research_proxy", *seals)
+
+
 def build_housing_retention_features():
     y, z = P["housing_d"] / 2, -P["lower_shell_h"] / 2
     x_support = P["roller_len"] / 2 + P["spindle_pin_len"] / 2
