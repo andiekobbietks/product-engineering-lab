@@ -89,7 +89,7 @@ scene.add(new THREE.HemisphereLight(0xe3efff,0x3e4b5b,2.2));
 const key=new THREE.DirectionalLight(0xffffff,2.4);key.position.set(1.2,1.8,1.1);scene.add(key);
 const fill=new THREE.DirectionalLight(0xe6f0ff,1.8);fill.position.set(1.2,-1.8,1.1);scene.add(fill);
 const rim=new THREE.DirectionalLight(0x91dfc9,1.1);rim.position.set(-1.4,.7,-1);scene.add(rim);
-const grid=new THREE.GridHelper(.32,32,0x50647c,0x2a3c52);grid.material.opacity=.12;grid.material.transparent=true;grid.position.y=.021;scene.add(grid);
+const grid=new THREE.GridHelper(.32,32,0x50647c,0x2a3c52);grid.material.forEach(material=>{material.opacity=.12;material.transparent=true;});grid.position.y=.021;scene.add(grid);
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();
 let assemblyRoot=null,manifest=null,sourceText='',sourceLines=[],parameters=null;
 let components=[],selected=null,jointNode=null,jointInfo=null,jointBaseQuaternion=null,jointAxis=null;
