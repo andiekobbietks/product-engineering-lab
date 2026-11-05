@@ -467,6 +467,26 @@
       "evidence_ids": [],
       "confidence": "low",
       "note": "Nominal axial footprint of one textured band. The active Sand3D projection row uses 2 mm projection diameter; the legacy CadFlow path retains this width field."
+    },
+    "retaining_arm_w": {
+      "value": 6,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [
+        "SRC-004"
+      ],
+      "confidence": "low",
+      "note": "Provisional X thickness for the two upper-housing retaining arms described in patent paragraph [0031]. The patent does not dimension the arms."
+    },
+    "retaining_arm_d": {
+      "value": 8,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [
+        "SRC-004"
+      ],
+      "confidence": "low",
+      "note": "Provisional Y depth for the upper-housing retaining arms; the patent describes spindle cut-outs but does not dimension the arm section."
     }
   },
   "provenance_legend": {
