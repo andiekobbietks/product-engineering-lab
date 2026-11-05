@@ -7,7 +7,7 @@ What product architecture can be reconstructed from public product pages, design
 ## Sources to inspect
 
 - [Nyfasi official website](https://nyfasi.com/)
-- [PDR design case study](https://www.pdr-consultancy.com/work/deluxe-detangler)
+- [PDR Deluxe Detangler case study](https://www.pdr-consultancy.com/work/deluxe-detangler)
 - [iF Design entry](https://ifdesign.com/en/winner-ranking/project/deluxe-detangler/345596)
 - [UK patent GB2591502A](https://patents.google.com/patent/GB2591502A/en)
 - [US design patent USD1031151S1](https://patents.google.com/patent/USD1031151S1/en)
@@ -20,16 +20,20 @@ The China patent-family record and secondary reports of mould manufacture/initia
 
 ## Sand3D research connection
 
-Sand3D is relevant as a text-driven editable 3D generation research project. This experiment asks what additional structure makes generated output useful in product engineering: component identity, evidence-linked dimensions, assembly relationships, editability, constraint checks and provenance.
+Sand3D is used as a text-driven editable 3D generation experiment. This study asks what additional structure makes generated output useful in product engineering: component identity, evidence-linked dimensions, assembly relationships, editability, constraint checks and provenance.
 
-Compare text-only generation, evidence-conditioned generation, component-by-component generation, assembly reconstruction and independent validation. The repository pins Sand3D 1.6.2 for the initial adapter experiment. The script has passed a GitHub Actions smoke test using the pinned Sand3D 1.6.2 package and generated GLB/OBJ outputs. Visual and dimensional validation against an authorised retail sample remain outstanding; the Colab notebook has not yet been exercised end-to-end.
+The current iteration replaces the earlier flat slotted carrier with a 180-degree cylindrical wall segment, concave roller seat and seven circumferential arc-slot cuts positioned between the eight illustrated teeth. The geometric interpretation and its limits are documented in [curved-wall geometry](../../docs/experiments/curved-wall-geometry.md). It remains a patent-led proxy, not original Nyfasi CAD or a verified retail reconstruction.
+
+Compare text-only generation, evidence-conditioned generation, component-by-component generation, assembly reconstruction and independent validation. The repository pins Sand3D 1.6.2 for the initial adapter experiment.
 
 ## Repository artefacts
 
 - Product data model and JSON Schema: `models/product-model.json` and `models/product-model.schema.json`.
 - Single-source CAD parameter ledger with provenance: `models/cad-parameters.json`.
 - Provenance validator (no Sand3D dependency): `scripts/validate_provenance.py`.
+- Curved-wall geometry validator (no Sand3D dependency): `scripts/validate_geometry.py`.
 - Parameter provenance documentation: [CAD provenance and reconstruction boundary](../../docs/experiments/cad-parameter-provenance.md).
+- Curved wall, roller seat and slot interpretation: [geometry reconstruction note](../../docs/experiments/curved-wall-geometry.md).
 - Rights-aware image inventory: `evidence/image-inventory.csv`.
 - Patent figure locators: `evidence/patent-figure-register.csv`.
 - Patent reading notes: [GB2591502A](../../docs/experiments/patent-reading-notes.md).
@@ -37,9 +41,7 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 - Reproduction notebook: `notebooks/nyfasi_reconstruction_colab.ipynb`.
 - Validation protocol: [documentation](../../docs/experiments/nyfasi-validation.md).
 
-The current product model deliberately records the patent-to-Nyfasi mapping as unverified. The first geometry proxy is named after GB2591502A, because the disclosed architecture has not yet been proven to match the Nyfasi-branded retail SKU.
-
-- Build record and output hashes: `builds/2026-11-05.md`.
+The current product model deliberately records the patent-to-Nyfasi mapping as unverified. The geometry proxy is named after the patent family because the disclosed architecture has not been proven to match a specific Nyfasi-branded retail revision.
 
 ## Reconstruction boundary
 
