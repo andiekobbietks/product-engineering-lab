@@ -8,7 +8,7 @@ The seal placeholders use a 3.8 mm bore around a 4 mm spindle pin, a 4.4 mm outs
 
 ## Roller-to-slot interaction
 
-Seven procedural knurled circumferential band proxies align nominally with seven wall slots. Both are currently 2 mm wide, so nominal width clearance is zero. The tolerance ledger assigns illustrative slot-width and band-width variations of ±0.15 mm and ±0.10 mm respectively. The calculated worst-case stack is therefore -0.25 to +0.25 mm: interference is possible. This is a design-review flag, not an acceptable production fit or evidence of free rotation.
+Seven circumferential projection bands align nominally with seven wall slots. Each band is represented by 18 discrete spheroidal domes around the smooth drum; the nominal axial footprint is 2 mm, matching the current 2 mm slot width, so nominal width clearance is zero. The tolerance ledger assigns illustrative slot-width and band-width variations of ±0.15 mm and ±0.10 mm respectively. The calculated worst-case stack is therefore -0.25 to +0.25 mm: interference is possible. This is a design-review flag, not an acceptable production fit or evidence of free rotation.
 
 ## Calculated interface stack-up
 
@@ -42,7 +42,7 @@ The build exports GLB, OBJ, URDF and USDA research representations. The interact
 ## Engineering next steps
 
 1. Obtain an authorised sample or drawings and establish datums.
-2. Measure roller OD/runout, slot width, band profile, axial pitch and shaft diameter with measurement uncertainty.
+2. Measure smooth drum OD/runout, projection diameter/height/count/pitch, slot width, axial band pitch and spindle diameter with measurement uncertainty.
 3. Redesign band/slot clearance from measured data, then inspect the full rotational envelope.
 4. Specify elastomer chemistry, hardness, compression, gland dimensions and fluid compatibility.
 5. Validate with spin torque, leakage, wear, temperature and contamination tests.
