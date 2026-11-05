@@ -87,9 +87,13 @@ The article reports that:
 
 It does not name the Chinese supplier, factory, city, province, tooling company, injection-moulding partner, production volume, mould owner, contractual terms, shipping route or present-day production status. It does not establish that all subsequent production took place in China.
 
-The reported €150,000–€200,000 mould estimate and €50,000 grant should not be conflated. The article does not, by itself, reconcile the funding gap or prove that the grant covered the full tooling cost.
+The reported €150,000–€200,000 mould estimate and €50,000 grant should not be conflated. A separate article from the same publisher, dated 8 October 2025, says a UK government grant helped acquire a manufacturing mould. It does not name the scheme or amount. The two articles may refer to separate awards or overlapping support; this has not been resolved. Neither article is primary funding evidence. See [the 8 October report](https://lejournaldemayotte.yt/2025/10/08/une-invention-mahoraise-presentee-lors-de-levenement-the-colors/).
 
-## 4. Patent family and territorial strategy
+## 4. Additional institutional and founder sources
+
+The [Royal Academy of Engineering Enterprise Hub case study](https://enterprisehub.raeng.org.uk/about-us/enterprise-hub-10th-anniversary/hub-10-case-study-dr-youmna-mouhamad) independently identifies Dr Youmna Mouhamad as Nyfasi founder and describes the product's treatment-application and detangling proposition. Nyfasi's [official founder story](https://nyfasi.com/pages/about-us) describes the original inspiration. These sources strengthen founder/product context but do not independently verify the Chinese manufacturer, mould supplier or current production site.
+
+## 5. Patent family and territorial strategy
 
 The public patent family records related filings in several jurisdictions:
 
@@ -107,7 +111,7 @@ A separate US design patent, [USD1031151S1](https://patents.google.com/patent/US
 
 A family listing is not proof that every listed jurisdiction currently has a live, enforceable right. Verify each national register independently. Do not describe the PCT publication as global protection.
 
-## 5. Manufacturing and supply-chain diligence register
+## 6. Manufacturing and supply-chain diligence register
 
 | Question | Current finding | Evidence required to close |
 |---|---|---|
@@ -136,7 +140,7 @@ A family listing is not proof that every listed jurisdiction currently has a liv
 
 Do not contact or identify a supplier based solely on a guessed match from generic Chinese manufacturer listings.
 
-## 6. CAD and product-engineering implications
+## 7. CAD and product-engineering implications
 
 The Chinese patent provides a basis for an **illustrative, evidence-linked reconstruction**, not a manufacturing-ready model.
 
@@ -174,7 +178,7 @@ Do not use patent example dimensions as though they were verified production dim
 
 The existing Sand3D experiment should continue to treat Sand3D as an independent third-party project. Use documented adapters, pin the tested version, preserve notices and record API/runtime compatibility. A generated mesh is not validated engineering CAD.
 
-## 7. Commercial and strategic observations
+## 8. Commercial and strategic observations
 
 The reported China tooling step is strategically significant because it suggests the venture moved beyond prototype design into capital-intensive industrialisation. The mould is a potentially critical asset: ownership, access, maintenance, portability and supplier exclusivity could materially affect manufacturing resilience and bargaining power.
 
@@ -190,7 +194,7 @@ Potential diligence themes:
 - packaging, refillability, cleaning and product lifecycle;
 - distribution evidence versus stated target markets.
 
-## 8. Research sources
+## 9. Research sources
 
 1. [CN115003190B — Chinese patent grant](https://patents.google.com/patent/CN115003190B/en)
 2. [CN115003190A — Chinese application publication](https://patents.google.com/patent/CN115003190A/en)
@@ -205,7 +209,7 @@ Potential diligence themes:
 11. [Nyfasi — official website](https://nyfasi.com/)
 12. [CNIPA — patent search/service portal](https://cponline.cnipa.gov.cn/)
 
-## 9. Next actions
+## 10. Next actions
 
 - [ ] Capture the official CNIPA bibliographic and legal-event record.
 - [ ] Confirm the original Chinese applicant name and assignment chain to Myana Naturals Limited.
