@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0.0",
+  "project": "Nyfasi patent-architecture reconstruction",
+  "purpose": "Reference procedural-program patterns and assembly decomposition only. No dataset record is treated as evidence of Nyfasi-specific geometry.",
+  "collection_url": "https://huggingface.co/collections/Sandflow/sand3d-6aec268fbdcd3bc174236168",
+  "explorer_url": "https://huggingface.co/spaces/Sandflow/sand3d-explorer",
+  "records": [
+    {
+      "id": "Sandflow/sand3d-cad",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-cad",
+      "use": "Mechanical CAD program patterns: bores, profiles, shells, fillets, and feature decomposition.",
+      "reuse_status": "reference_only",
+      "license_claim": "Sandflow README identifies generated Sand3D programs as CC BY 4.0; verify dataset card and source-asset terms before redistribution."
+    },
+    {
+      "id": "Sandflow/sand3d-automate",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-automate",
+      "use": "Assembly decomposition and mechanical part relationships.",
+      "reuse_status": "reference_only",
+      "license_claim": "Sandflow README identifies generated Sand3D programs as CC BY 4.0; verify dataset card and source-asset terms before redistribution."
+    },
+    {
+      "id": "Sandflow/sand3d-articraft",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-articraft",
+      "use": "Articulated-object and joint patterns.",
+      "reuse_status": "reference_only",
+      "license_claim": "Sandflow README identifies generated Sand3D programs as CC BY 4.0; verify dataset card and source-asset terms before redistribution."
+    },
+    {
+      "id": "Sandflow/sand3d-objaverse",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-objaverse",
+      "use": "General object/program references; useful for shape decomposition, not product dimensions.",
+      "reuse_status": "reference_only",
+      "license_claim": "Dataset and source asset licences must be reviewed per item; Objaverse is a source collection, not blanket permission."
+    },
+    {
+      "id": "Sandflow/sand3d-simready",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-simready",
+      "use": "Material, simulation and USD packaging patterns.",
+      "reuse_status": "reference_only",
+      "license_claim": "Sandflow README identifies generated Sand3D programs as CC BY 4.0; verify dataset card and source-asset terms before redistribution."
+    }
+  ],
+  "policy": {
+    "downloaded_assets_committed": false,
+    "direct_product_evidence": false,
+    "required_before_reuse": [
+      "dataset card review",
+      "source asset identifier and creator",
+      "item-level licence and attribution",
+      "modification record",
+      "commercial-use compatibility review"
+    ],
+    "note": "The Hugging Face datasets are Sandflow/Sand3D datasets. They are not CadFlow datasets and do not provide verified Nyfasi native CAD."
+  }
+}
