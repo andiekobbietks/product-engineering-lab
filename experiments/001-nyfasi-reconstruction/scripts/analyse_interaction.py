@@ -79,6 +79,21 @@ def calculate_stackups(parameters: dict[str, float], ledger: dict[str, Any]) -> 
     return calculated
 
 
+
+def _pin_seal_interpretation(low: float, high: float) -> str:
+    """Interpret pin-minus-seal-bore stack values using interference-positive sign convention."""
+    if low > 0:
+        return "INTERFERENCE"
+    if high < 0:
+        return "CLEARANCE"
+    if low == 0 and high == 0:
+        return "LINE_TO_LINE"
+    if low < 0 < high:
+        return "INTERFERENCE_AND_CLEARANCE_POSSIBLE"
+    if low == 0:
+        return "INTERFERENCE_OR_LINE_TO_LINE"
+    return "CLEARANCE_OR_LINE_TO_LINE"
+
 def main() -> int:
     """Print a reproducible tolerance report and flag any calculated interference."""
     parameters, ledger = load_inputs()
@@ -96,8 +111,7 @@ def main() -> int:
             continue
         low, high = result["worst_case_min"], result["worst_case_max"]
         if name == "spindle_pin_to_elastomer_seal":
-            flag = "INTERFERENCE" if result["nominal"] > 0 else "CLEARANCE" if result["nominal"] < 0 else "LINE_TO_LINE"
-            flag += "_RANGE_CROSSES_ZERO" if low < 0 < high else "_POSSIBLE" if low <= 0 <= high else ""
+            flag = _pin_seal_interpretation(low, high)
         else:
             flag = "INTERFERENCE_POSSIBLE" if low < 0 else "POSITIVE_IN_THIS_ASSUMED_STACK"
         print(f"- {name}: nominal {result['nominal']:.3f} mm; {low:.3f} to {high:.3f} mm [{flag}]")
