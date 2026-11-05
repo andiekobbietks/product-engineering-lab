@@ -10,6 +10,7 @@ theme:
     - content.code.copy
 nav:
   - Overview: index.md
+  - Get started: getting-started.md
   - Research:
       - Vision: vision.md
       - Methodology: methodology.md
