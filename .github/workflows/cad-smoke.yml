@@ -1,0 +1,27 @@
+name: Sand3D reconstruction smoke test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-model:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Install pinned CAD dependency
+        run: python -m pip install --upgrade pip -r requirements-cad.txt
+      - name: Build illustrative research assembly
+        run: python experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py
+      - name: Upload GLB and OBJ outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: nyfasi-research-reconstruction
+          path: output/*
+          if-no-files-found: error
+          retention-days: 14
