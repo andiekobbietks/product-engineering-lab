@@ -17,7 +17,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: pip
+      - name: Validate evidence provenance
+        run: python experiments/001-nyfasi-reconstruction/scripts/validate_provenance.py
+      - name: Validate CAD parameter geometry constraints
+        run: python experiments/001-nyfasi-reconstruction/scripts/validate_geometry.py
       - name: Install native build prerequisites
         run: |
           sudo apt-get update
@@ -36,6 +39,8 @@ jobs:
           test -s experiments/001-nyfasi-reconstruction/output/cadflow/cadflow-build-manifest.json
           test "$(find experiments/001-nyfasi-reconstruction/output/cadflow -name '*.step' | wc -l)" -ge 15
           test "$(find experiments/001-nyfasi-reconstruction/output/cadflow -name '*.glb' | wc -l)" -ge 15
+          test -s experiments/001-nyfasi-reconstruction/output/cadflow/nyfasi_research_assembly.step
+          test -s experiments/001-nyfasi-reconstruction/output/cadflow/nyfasi_research_assembly.glb
       - name: Upload B-rep and preview artifacts
         uses: actions/upload-artifact@v4
         with:
