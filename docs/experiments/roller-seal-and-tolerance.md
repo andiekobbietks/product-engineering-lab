@@ -8,7 +8,7 @@ The seal placeholders use a 3.8 mm bore around a 4 mm spindle pin, a 4.4 mm outs
 
 ## Roller-to-slot interaction
 
-Seven circumferential projection bands align nominally with seven wall slots. Each band is represented by 18 discrete spheroidal domes around the smooth drum; the nominal axial footprint is 2 mm, matching the current 2 mm slot width, so nominal width clearance is zero. The tolerance ledger assigns illustrative slot-width and band-width variations of ±0.15 mm and ±0.10 mm respectively. The calculated worst-case stack is therefore -0.25 to +0.25 mm: interference is possible. This is a design-review flag, not an acceptable production fit or evidence of free rotation.
+Seven circumferential projection bands align nominally with seven wall slots. Each band is represented by 18 discrete spheroidal domes around the smooth drum; the nominal axial footprint is 2 mm, matching the current 2 mm slot width, so nominal width clearance is zero. The provisional 1.3 mm wall thickness places the 2 mm-high projection tips approximately flush with the wall's outer envelope after the 0.5 mm seat clearance and 0.15 mm mesh overlap are accounted for. This fit is an engineering assumption, not a patent dimension. The tolerance ledger assigns illustrative slot-width and band-width variations of ±0.15 mm and ±0.10 mm respectively. The calculated worst-case stack is therefore -0.25 to +0.25 mm: interference is possible. This is a design-review flag, not an acceptable production fit or evidence of free rotation.
 
 ## Calculated interface stack-up
 
