@@ -279,7 +279,7 @@ async function loadGallery(){
   manifest=await manifestResponse.json();
   if(manifest.engine!=='Sand3D'||!manifest.assembly_file||!Array.isArray(manifest.components)||manifest.components.length!==7)throw new Error('Unexpected Sand3D manifest: expected one complete assembly and seven named components.');
   const [gltf,sourceResponse,parameterResponse]=await Promise.all([
-   new GLTFLoader().loadAsync(base+manifest.assembly_file),
+   new GLTFLoader().loadAsync(base+manifest.assembly_file+'?v='+encodeURIComponent(manifest.assembly_sha256||manifest.source.sha256)),
    fetch(base+manifest.source.program_file,{cache:'no-store'}),
    fetch(base+manifest.source.parameters_file,{cache:'no-store'})
   ]);
@@ -290,7 +290,7 @@ async function loadGallery(){
   const assemblyBounds=new THREE.Box3().setFromObject(assemblyRoot),assemblyCentre=assemblyBounds.getCenter(new THREE.Vector3());
   manifest.components.forEach(entry=>{
    const object=findByName(assemblyRoot,entry.node_name);
-   if(!object)throw new Error('Assembly node not found for '+entry.name+' ('+entry.node_name+').');
+   if(!object){const available=[];assemblyRoot.traverse(node=>{if(node.name)available.push(node.name);});throw new Error('Assembly node not found for '+entry.name+' ('+entry.node_name+'). Available matching nodes: '+available.filter(name=>name.toLowerCase().includes(entry.id.split('-')[0])||name.toLowerCase().includes('roller')).slice(0,16).join(', '));}
    const component={entry,object};components.push(component);
    basePositions.set(component,object.position.clone());
    const bounds=new THREE.Box3().setFromObject(object),centre=bounds.getCenter(new THREE.Vector3());
