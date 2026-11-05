@@ -23,7 +23,8 @@ flowchart TD
 | Product Engineering Lab | Research, experiments, benchmarks and reference implementations | Develops reusable engineering capabilities; not the AK Build application builder |
 | OKF | Durable, portable knowledge and relationships | Knowledge layer that applications and workflows can consume |
 | AgentSON | Typed execution and coordination events | Event/provenance layer for traceability and audit |
-| Sand3D adapter | Isolated integration with editable 3D generation | One optional engineering tool, not a required AK Build dependency |
+| Sand3D adapter | Programmatic, editable 3D generation and example-data patterns | Optional geometry authoring and reference-pattern source |
+| CadFlow adapter | Deterministic OpenCascade B-rep construction, measurement and export | Optional exact-geometry and validation engine; not a required AK Build dependency |
 
 ## Why this separation matters
 
@@ -43,9 +44,11 @@ Potential reusable interfaces include:
 
 The Lab publishes research findings and reference implementations. AK Build may consume stable interfaces or separately licensed modules. Proprietary product implementation details, customer-specific integrations, private prompts, operational playbooks and unreleased commercial capabilities do not need to be published in this repository.
 
-## Sand3D integration boundary
+## Geometry adapter boundary
 
-Sand3D is a reference project for editable 3D generation. Integrations should be isolated behind an adapter that records prompts, model/repository version, parameters, generated files and validation results. Do not assume undocumented APIs or make Sand3D a mandatory runtime dependency.
+Sand3D and CadFlow solve different problems. Sand3D provides an LLM-friendly 3D-as-code language and a large set of programmatic examples. CadFlow is a Python CAD SDK over OpenCascade for deterministic B-rep construction, topology inspection, measurement and STEP/STL/GLB export. The Lab keeps them behind separate adapters: Sand3D is useful for authoring patterns and visual assets; CadFlow is the geometry-grounded CAD path. Neither supplies missing product measurements.
+
+Every adapter records its exact version or source commit, input parameters, evidence links, generated files and validation output. Third-party dataset rows must retain row-level source licences and attribution. Do not assume undocumented APIs or make either engine a mandatory AK Build dependency.
 
 Principles: stable identifiers, explicit schema versions, open interchange formats, CAD/model adapters, human review, customer-owned data and reproducible runs.
 
