@@ -30,6 +30,12 @@ class RepositoryIntegrityTests(unittest.TestCase):
         script = (EXP / "scripts" / "build_reconstruction.py").read_text()
         ast.parse(script)
 
+    def test_patent_figure_register_is_populated_without_mirroring_images(self):
+        register = (EXP / "evidence" / "patent-figure-register.csv").read_text()
+        for figure in ("Figure 1", "Figure 2A", "Figure 2B", "Figure 2C", "Figure 3", "Figure 4", "Figure 5", "Figure 6"):
+            self.assertIn(figure, register)
+        self.assertNotIn("yes,", register)
+
     def test_no_manufacturing_release_claim(self):
         model = json.loads((EXP / "models" / "product-model.json").read_text())
         self.assertEqual(model["model_status"], "research")
