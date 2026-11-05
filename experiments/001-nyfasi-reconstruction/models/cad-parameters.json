@@ -357,7 +357,7 @@
       "note": "Presentation/assembly placement for the reservoir proxy; not a product datum."
     },
     "tooth_root_z": {
-      "value": -25.5,
+      "value": -33.5,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
