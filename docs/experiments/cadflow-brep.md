@@ -54,6 +54,8 @@ The compound is **not** a kinematic constraint solution. The assembly structure 
 
 ## Reproduce
 
+- [Open the CadFlow Google Colab notebook](https://colab.research.google.com/github/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/notebooks/nyfasi_cadflow_reconstruction_colab.ipynb)
+
 The pinned CI workflow uses Python 3.12, OpenCascade 7.9.3.1 and a pinned CadFlow source commit:
 
 - [CadFlow B-rep workflow](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml)
