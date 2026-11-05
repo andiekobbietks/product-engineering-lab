@@ -28,6 +28,7 @@ nav:
       - Curved-wall geometry: experiments/curved-wall-geometry.md
       - CadFlow B-rep reconstruction: experiments/cadflow-reconstruction.md
       - Sand3D datasets and demos: experiments/sand3d-dataset-strategy.md
+      - CadFlow B-rep reconstruction: experiments/cadflow-brep.md
       - China IP & manufacturing diligence: experiments/nyfasi-china-due-diligence.md
       - Validation protocol: experiments/nyfasi-validation.md
       - Image inventory: experiments/image-inventory.md
