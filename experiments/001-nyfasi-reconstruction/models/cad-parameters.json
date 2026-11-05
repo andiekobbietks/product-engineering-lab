@@ -102,14 +102,16 @@
       "note": "Approximate 0.5 cm width in the described embodiment; not verified on retail sample."
     },
     "tooth_length": {
-      "value": 10,
+      "value": 28,
       "unit": "mm",
-      "provenance": "PATENT_DERIVED_ESTIMATE",
+      "provenance": "IMAGE_ESTIMATED",
       "evidence_ids": [
-        "SRC-004"
+        "SRC-002",
+        "SRC-003",
+        "SRC-013"
       ],
-      "confidence": "medium",
-      "note": "Approximate 10 mm derived from the patent statement that blade length is around twice its approximate 5 mm width; not a separately dimensioned or measured retail value."
+      "confidence": "low",
+      "note": "Visual estimate from official Nyfasi/PDR product photographs, using the current assumed body envelope as a scale reference. Perspective, image cropping and the unmeasured retail sample prevent this being treated as a measured dimension; replace with calibrated sample metrology or authorised CAD."
     },
     "tooth_pitch": {
       "value": 15,
