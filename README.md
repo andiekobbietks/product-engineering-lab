@@ -28,7 +28,9 @@ The research now includes a dedicated [China IP and manufacturing due-diligence 
 
 See [Experiment 001](experiments/001-nyfasi-reconstruction/README.md), the [Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb), the [Sand3D reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py), and the [interactive GLB viewer instructions](docs/experiments/viewer.md), and the [image/patent-figure inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv).
 
-See [requirements-cad.txt](requirements-cad.txt) for the pinned CAD dependency. No original Nyfasi SolidWorks, Fusion 360, STEP or IGES files are claimed to have been located. Patent drawings are not native CAD.
+See [requirements-cad.txt](requirements-cad.txt) for the pinned CAD dependency. - [Latest Sand3D build record and output hashes](experiments/001-nyfasi-reconstruction/builds/2026-11-05.md)
+
+No original Nyfasi SolidWorks, Fusion 360, STEP or IGES files are claimed to have been located. Patent drawings are not native CAD.
 
 ## Engineering loop
 
