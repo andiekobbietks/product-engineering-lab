@@ -79,7 +79,7 @@ def build_lower_housing(model: cad.Model):
 
 
 def build_upper_housing(model: cad.Model):
-    return hollow_box(
+    shell = hollow_box(
         model,
         P["housing_w"],
         P["housing_d"],
@@ -88,17 +88,25 @@ def build_upper_housing(model: cad.Model):
         P["housing_wall_t"],
         open_top=False,
     )
+    # Seat the upper cap on the lower shell's top datum.
+    return model.translate(
+        shell,
+        z=P["lower_shell_h"] / 2 + P["upper_shell_h"] / 2,
+    )
 
 
 def build_reservoir(model: cad.Model):
-    return hollow_box(
-        model,
-        P["reservoir_w"],
-        P["reservoir_d"],
-        P["reservoir_h"],
-        1.5,
-        1.0,
-        open_top=True,
+    return model.translate(
+        hollow_box(
+            model,
+            P["reservoir_w"],
+            P["reservoir_d"],
+            P["reservoir_h"],
+            1.5,
+            1.0,
+            open_top=True,
+        ),
+        z=P["reservoir_z"],
     )
 
 
@@ -369,6 +377,8 @@ def build():
             "The patent-to-retail-SKU/revision mapping remains unverified.",
             "Most dimensions and all tolerances/material properties remain assumptions.",
             "The roller bands are smooth annular B-rep rings; texture microgeometry is not dimensioned by the patent.",
+            "Housing and reservoir corner-radius ledger values are not yet applied as fillets in this build.",
+
             "The seven-slot/seven-band mapping is an engineering interpretation.",
             "No contact, tolerance-stack, seal-compression, fatigue or performance analysis was performed.",
             "Not a manufacturing release or verified digital twin.",
