@@ -20,6 +20,10 @@ The machine-readable model records `identity_mapping_status: unverified`; the cu
 
 For wider commercial context, see the [China IP and manufacturing dossier](nyfasi-china-due-diligence.md) and the [CAD parameter provenance guide](cad-parameter-provenance.md). These distinguish the public patent record from secondary reporting about mould production and keep supplier and tooling details unverified unless independently evidenced.
 
+## Interactive assembly
+
+Explore the [interactive assembly explorer](assembly-explorer.md), including component selection, exploded spacing and local loading of the Sand3D GLB output. This is a patent-led research prototype, not a verified digital twin.
+
 ## Research outputs
 
 - Evidence-linked product data model.
