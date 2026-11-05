@@ -1,37 +1,20 @@
 """
-Illustrative Sand3D proxy for the GB2591502A hair-applicator architecture.
+Illustrative Sand3D proxy for the GB2591502A / CN115003190B hair-applicator
+patent-family architecture.
 
-This is not official Nyfasi CAD, a verified retail reconstruction, or
-manufacturing geometry. The patent supports the existence of component types
-and some embodiment details; all unverified dimensions and shapes below are
-explicit placeholders. The slotted wall is represented by a flat proxy, not
-the disclosed curved wall profile.
+Not official Nyfasi CAD, a verified retail reconstruction, or manufacturing
+geometry. Numeric parameters are loaded from models/cad-parameters.json, where
+each value has provenance, evidence IDs, confidence and an explanatory note.
+The curved wall is still represented by a flat proxy.
 """
 from pathlib import Path
+import json
 import sand3d as s3d
 
-# Millimetres. Values marked as proxies are not manufacturing specifications.
-PARAMS = {
-    "housing_w": 110.0,       # placeholder envelope
-    "housing_d": 68.0,        # placeholder envelope
-    "lower_shell_h": 14.0,    # placeholder
-    "upper_shell_h": 12.0,    # placeholder
-    "reservoir_w": 64.0,      # placeholder
-    "reservoir_d": 36.0,      # placeholder
-    "reservoir_h": 8.0,       # placeholder
-    "roller_d": 24.0,         # placeholder, not measured
-    "roller_len": 82.0,       # placeholder, not measured
-    "tooth_count": 8,         # eight teeth described in the patent embodiment
-    "tooth_width": 5.0,       # approx. 5 mm described for the embodiment
-    "tooth_length": 10.0,     # approx. twice the stated width; schematic
-    "tooth_height": 12.0,     # placeholder
-    "tooth_pitch": 15.0,      # derived illustrative spacing; verify convention
-    "wall_w": 104.0,          # placeholder
-    "wall_d": 8.0,            # placeholder; flat proxy for curved wall
-    "wall_h": 12.0,           # placeholder
-    "slot_w": 2.0,            # placeholder, not patent-derived
-    "exploded_gap": 18.0,
-}
+HERE = Path(__file__).resolve().parent
+PARAMETER_FILE = HERE.parent / "models" / "cad-parameters.json"
+PARAMETER_RECORDS = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
+PARAMS = {name: record["value"] for name, record in PARAMETER_RECORDS.items()}
 
 
 def build_research_assembly(exploded=True):
@@ -53,8 +36,9 @@ def build_research_assembly(exploded=True):
     )
     s3d.material(reservoir, "glass", color="#8bbac8", opacity=0.45)
 
-    # Patent describes a roller seated against a curved wall. This cylindrical
-    # proxy is pulled forward from the housing for an exploded presentation.
+    # Patent family describes a roller seated against a curved wall. This
+    # cylinder is a schematic proxy; diameter is selected inside a disclosed
+    # radius range, not a measured retail dimension.
     roller = s3d.at(
         s3d.cylinder("roller_drum_proxy", p["roller_d"], p["roller_len"]),
         x=0,
@@ -64,8 +48,8 @@ def build_research_assembly(exploded=True):
     )
     s3d.material(roller, "rubber", color="#626a70")
 
-    # A flat slotted carrier stands in for the patent's curved wall. Seven
-    # slots are cut between eight blade-like teeth; curvature is not modelled.
+    # Flat wall proxy only. The patent describes a curved wall and arcuate
+    # through-slots; this script does not claim to reproduce that geometry.
     wall = s3d.box("flat_slotted_wall_proxy", p["wall_w"], p["wall_d"], p["wall_h"])
     slot_tools = []
     for i in range(p["tooth_count"] - 1):
@@ -78,7 +62,11 @@ def build_research_assembly(exploded=True):
             )
         )
     s3d.cut(wall, *slot_tools)
-    wall = s3d.at(wall, y=p["housing_d"] / 2 + p["wall_d"] / 2 + gap, z=p["lower_shell_h"] + p["wall_h"] + gap)
+    wall = s3d.at(
+        wall,
+        y=p["housing_d"] / 2 + p["wall_d"] / 2 + gap,
+        z=p["lower_shell_h"] + p["wall_h"] + gap,
+    )
     s3d.material(wall, "plastic", color="#d7d9dc")
 
     teeth = []
@@ -106,10 +94,10 @@ def build_research_assembly(exploded=True):
 
 def main():
     model = build_research_assembly(exploded=True)
-    output = Path("output")
+    output = HERE / "output"
     output.mkdir(exist_ok=True)
-    s3d.export(model, str(output / "gb2591502a_hair_applicator_research_exploded.glb"))
-    s3d.export(model, str(output / "gb2591502a_hair_applicator_research_exploded.obj"))
+    s3d.export(model, str(output / "hair_applicator_research_exploded.glb"))
+    s3d.export(model, str(output / "hair_applicator_research_exploded.obj"))
     print("Wrote illustrative research exports to:", output.resolve())
 
 
