@@ -1,0 +1,44 @@
+[
+  {
+    "id": "SRC-001",
+    "title": "Nyfasi official website",
+    "url": "https://nyfasi.com/",
+    "type": "official_brand_and_product_source",
+    "rights": "Third-party content; link and attribute, do not mirror without permission."
+  },
+  {
+    "id": "SRC-002",
+    "title": "PDR Deluxe Detangler case study",
+    "url": "https://www.pdr-consultancy.com/work/deluxe-detangler",
+    "type": "design_case_study",
+    "rights": "PDR/client imagery and text remain rights-holder property."
+  },
+  {
+    "id": "SRC-003",
+    "title": "iF Design Deluxe Detangler",
+    "url": "https://ifdesign.com/en/winner-ranking/project/deluxe-detangler/345596",
+    "type": "design_award_record",
+    "rights": "Verify image permissions before reuse."
+  },
+  {
+    "id": "SRC-004",
+    "title": "GB2591502A",
+    "url": "https://patents.google.com/patent/GB2591502A/en",
+    "type": "patent_publication",
+    "rights": "Verify status and ownership in official registers."
+  },
+  {
+    "id": "SRC-005",
+    "title": "USD1031151S1",
+    "url": "https://patents.google.com/patent/USD1031151S1/en",
+    "type": "design_patent_publication",
+    "rights": "Patent drawings are not native CAD."
+  },
+  {
+    "id": "SRC-006",
+    "title": "Sand3D repository",
+    "url": "https://github.com/Sandflow-ai/sand3d",
+    "type": "third_party_software_reference",
+    "rights": "Follow Sand3D's own licence and notices; do not assume its licence."
+  }
+]
