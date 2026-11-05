@@ -22,6 +22,7 @@ nav:
       - China IP & manufacturing diligence: experiments/nyfasi-china-due-diligence.md
       - Validation protocol: experiments/nyfasi-validation.md
       - Image inventory: experiments/image-inventory.md
+      - Interactive assembly explorer: experiments/assembly-explorer.md
       - Interactive 3D viewer: experiments/viewer.md
   - Commercial:
       - IP register: ip-register.md
