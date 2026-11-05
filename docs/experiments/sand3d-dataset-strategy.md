@@ -32,7 +32,7 @@ The current Hugging Face dataset cards declare CC-BY-4.0 for the Sandflow datase
 
 ## Dataset provenance register
 
-The machine-readable [dataset register](../../experiments/001-nyfasi-reconstruction/evidence/sand3d-huggingface-dataset-register.json) records the five source IDs, intended use and reuse restrictions. No source mesh or model has been copied into the repository. The generated Sand3D programs may be labelled CC BY 4.0 by the upstream project, but Hugging Face notes that dataset-card licence metadata is a declaration and users should review the actual card and underlying source rights before use. See [Hugging Face dataset-card guidance](https://huggingface.co/docs/hub/en/datasets-cards) and [licence guidance](https://huggingface.co/docs/hub/main/repositories-licenses).
+The machine-readable [dataset register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/sand3d-huggingface-dataset-register.json) records the five source IDs, intended use and reuse restrictions. No source mesh or model has been copied into the repository. The generated Sand3D programs may be labelled CC BY 4.0 by the upstream project, but Hugging Face notes that dataset-card licence metadata is a declaration and users should review the actual card and underlying source rights before use. See [Hugging Face dataset-card guidance](https://huggingface.co/docs/hub/en/datasets-cards) and [licence guidance](https://huggingface.co/docs/hub/main/repositories-licenses).
 
 ## How the datasets are used
 
