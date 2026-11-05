@@ -19,6 +19,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 EXPERIMENT = HERE.parent
 PARAMETER_FILE = EXPERIMENT / "models" / "cad-parameters.json"
+AGENT_TASK_FILE = HERE / "agent-tasks" / "roller-diameter-plus-2mm.json"
 BUILDER = EXPERIMENT / "scripts" / "build_reconstruction.py"
 OUTPUT_NAMES = (
     "hair_applicator_complete_roller_exploded.glb",
@@ -141,12 +142,10 @@ def main() -> int:
         print("Baseline constraint failure:", *baseline_errors, sep="\n- ")
         return 1
 
+    agent_task = json.loads(AGENT_TASK_FILE.read_text(encoding="utf-8"))
     scenarios = [
         ("baseline", {}, {}),
-        ("roller_diameter_plus_2mm", {
-            "roller_d": baseline["roller_d"] + 2.0,
-            "tooth_root_z": baseline["tooth_root_z"] - 1.0,
-        }, {"roller_d": baseline["roller_d"] + 2.0, "tooth_root_z": baseline["tooth_root_z"] - 1.0}),
+        (agent_task["task_id"], agent_task["parameter_updates"], agent_task["expected_values"]),
         ("housing_width_plus_10mm", {
             "housing_w": baseline["housing_w"] + 10.0,
         }, {"housing_w": baseline["housing_w"] + 10.0}),
@@ -192,6 +191,14 @@ def main() -> int:
         "scenarios_passed": passed,
         "scenarios_total": len(results),
         "scope": "Procedural regeneration, declared parametric relationships, selected constraints, exports and URDF joint semantics.",
+        "agent_proposal": {
+            "task_id": agent_task["task_id"],
+            "model": agent_task["agent_model"],
+            "origin": agent_task["proposal_origin"],
+            "request": agent_task["request"],
+            "rationale": agent_task["rationale"],
+            "evaluation_level": "single AI-authored proposal fixture; not a blind or comparative model evaluation",
+        },
         "not_claimed": [
             "Nyfasi retail dimensional fidelity",
             "manufacturing readiness or tolerances",
