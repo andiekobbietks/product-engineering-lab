@@ -36,7 +36,7 @@ The machine-readable [dataset register](https://github.com/andiekobbietks/produc
 
 ## Dataset scan and selected program exemplars
 
-The metadata scan completed successfully on 5 November 2026. It sampled 80 licensed matches per collection (400 records across the five collections) and retained source IDs, source licences, attribution and program hashes. A second rights-screened extraction selected **13 actual Sand3D program examples** from four collections. The program source is in a temporary CI artifact rather than copied into this repository.
+The metadata scan completed successfully on 5 November 2026. See the [dataset scan build record](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/builds/2026-11-05-sand3d-exemplar-scan.md) for artifact IDs, hashes and retention details. It sampled 80 licensed matches per collection (400 records across the five collections) and retained source IDs, source licences, attribution and program hashes. A second rights-screened extraction selected **13 actual Sand3D program examples** from four collections. The program source is in a temporary CI artifact rather than copied into this repository.
 
 - [Metadata catalogue workflow run](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42072237892) · artifact ID 13436667245
 - [Selected program extraction workflow run](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42072931451) · [download the 13-program artifact](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42072931451/artifacts/13435584785)
