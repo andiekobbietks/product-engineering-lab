@@ -1,5 +1,6 @@
 site_name: Product Engineering Lab
 site_description: From product evidence to engineering intelligence.
+site_url: https://andiekobbietks.github.io/product-engineering-lab/
 repo_url: https://github.com/andiekobbietks/product-engineering-lab
 repo_name: andiekobbietks/product-engineering-lab
 theme:
@@ -7,7 +8,12 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.instant
+    - navigation.top
+    - navigation.footer
+    - toc.follow
     - content.code.copy
+    - content.code.annotate
 nav:
   - Overview: index.md
   - Get started: getting-started.md
