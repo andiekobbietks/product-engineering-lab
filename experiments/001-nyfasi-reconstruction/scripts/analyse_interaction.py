@@ -40,7 +40,6 @@ def calculate_stackups(parameters: dict[str, float], ledger: dict[str, Any]) -> 
     band_delta = _tolerance_sum(band, "slot_width_tolerance", "band_width_tolerance")
 
     shared = ledger["shared_tolerances"]
-    bearing = interfaces["spindle_pin_to_bearing_bore"]
     bearing_nominal = 2 * parameters["bearing_bore_clearance"]
     bearing_delta = _tolerance_sum(shared, "spindle_pin_diameter", "bearing_bore_diameter")
 
