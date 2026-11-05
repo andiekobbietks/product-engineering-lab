@@ -61,4 +61,4 @@ The earlier generic “comb + roller + reservoir” idea is now better grounded 
 - The Google Patents status display is not an official legal-status opinion.
 - The patent text is not a native CAD model or production drawing package.
 - Patent publication does not establish permission to reproduce protected images or commercialise a reconstruction.
-- The present Sand3D model remains a schematic proxy until built, rendered and checked against authorised reference material or a physical sample.
+- The present Sand3D model has been built and exported in CI as a schematic proxy. It has not been checked against authorised reference material or a physical sample.
