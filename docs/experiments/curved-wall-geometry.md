@@ -11,10 +11,11 @@ The patent figures are schematic. They do not provide dimensions, tolerances, ma
 
 ## Components now represented in Sand3D
 
-The reconstruction script follows Sand3D's current component-first guidance: one named function per distinct part, dimensions sourced from the provenance ledger, parts placed in a parent frame, and assembly articulation represented explicitly. The roller is now a separate assembly with a continuous X-axis rotation joint. Procedural knurling is used to render the circumferential bands, while the exposed roller core represents the smooth intervening lands. A separate perimeter gasket proxy and rounded housing-shell proxies have also been added. See the [Sand3D demos, API and Hugging Face dataset strategy](sand3d-dataset-strategy.md).
+The reconstruction script follows Sand3D's current component-first guidance: one named function per distinct part, dimensions sourced from the provenance ledger, parts placed in a parent frame, and assembly articulation represented explicitly. The roller is now a separate assembly with a continuous X-axis rotation joint. The roller is modelled as a smooth 24 mm drum with seven circumferential bands of discrete spheroidal dome projections, rather than generic knurling. The bands retain smooth sealing lands between them and align with the seven wall slots. The eight teeth now use elliptical cross-sections and tapered extrusions; the 6-degree taper is an engineering assumption. The clamshell housing uses the waisted planform illustrated in patent Figure 2B, with a 54 mm waist depth marked as image-estimated. A separate perimeter gasket proxy and rounded/waisted housing-shell proxies have also been added. See the [Sand3D demos, API and Hugging Face dataset strategy](sand3d-dataset-strategy.md).
 
-1. Smooth roller core and intervening sealing lands.
-2. Seven raised circumferential bands, aligned with the seven modelled wall slots.
+1. Smooth 24 mm roller drum and intervening sealing lands.
+2. Seven circumferential projection bands, each with 18 spheroidal dome proxies, aligned with the seven modelled wall slots.
+3. Eight elliptical, tapered blade teeth. The 5 mm width and approximately 10 mm length follow the illustrated embodiment; the 6-degree taper remains an assumption.
 3. Two roller end walls.
 4. Two coaxial spindle pins.
 5. Two bored housing bearing-support blocks.
@@ -22,7 +23,7 @@ The reconstruction script follows Sand3D's current component-first guidance: one
 7. The previously modelled 180-degree curved wall, seven arc slots and eight tooth proxies.
 8. Upper/lower housing and reservoir envelope proxies.
 
-The model preserves component names and separate solids in assembly groups where supported. The seven-band mapping, all component dimensions and retention geometries are assumptions unless explicitly labelled otherwise in the parameter ledger.
+The model preserves component names and separate solids in assembly groups where supported. The eight-tooth embodiment and approximate tooth width/length are patent-described; the 18 projections per band, seven-band mapping, waist depth and most other dimensions remain derived or assumed values as classified in the parameter ledger.
 
 ## Spindle-seal research proxies
 
@@ -32,11 +33,14 @@ Two separately named annular elastomer seal proxies are included around the spin
 
 | Parameter | Current value | Classification |
 |---|---:|---|
-| Roller outer diameter | 24 mm | Patent-derived estimate |
-| Smooth core diameter | 22.6 mm | Engineering assumption |
-| Textured bands | 7 | Engineering interpretation |
-| Band width | 2 mm | Engineering assumption |
-| Band radial projection | 0.7 mm | Engineering assumption |
+| Smooth roller drum diameter | 24 mm | Patent-derived estimate |
+| Textured projection bands | 7 | Engineering interpretation |
+| Projections per band | 18 | Engineering assumption derived from circumference and spacing |
+| Projection base diameter / height | 2 mm / 2 mm | Patent-described example |
+| Projection overlap into drum | 0.15 mm | Rendering/geometry assumption |
+| Band axial footprint | 2 mm | Engineering assumption |
+| Housing waist depth | 54 mm | Image-estimated from Figure 2B; low confidence |
+| Tooth taper | 6 degrees | Engineering assumption; not dimensioned by patent |
 | End-wall diameter | 25 mm | Engineering assumption |
 | End-wall thickness | 1.5 mm | Engineering assumption |
 | Spindle-pin diameter | 4 mm | Engineering assumption |
@@ -62,8 +66,8 @@ The geometry validator checks arithmetic, dimensional relationships and envelope
 
 ## Next engineering work
 
-- Replace simple annular bands with the exact disclosed texture/projection pattern after careful figure inspection and, ideally, an authorised sample.
-- Add the elastomeric seal as a separate component and define a measurable compression interface.
+- Calibrate projection count, pitch, cap shape and band alignment against an authorised sample or dimensioned drawing.
+- Refine the elastomeric seal geometry and define a measurable compression interface.
 - Refine bearing supports and spindle retention using an authorised physical sample or supplier drawing.
 - Model snap-fit hooks, lead-ins, undercuts and flexural beams only after dimensions and material data are evidenced.
 - Add contact/clearance inspection and a controlled tolerance stack.
