@@ -112,7 +112,7 @@ class ToleranceCalculationTests(unittest.TestCase):
             "INTERFERENCE_OR_LINE_TO_LINE",
         )
         self.assertEqual(
-            _pin_seal_interpretation(-1.7e-16, -0.35),
+            _pin_seal_interpretation(-0.35, -1.7e-16),
             "CLEARANCE_OR_LINE_TO_LINE",
         )
 
