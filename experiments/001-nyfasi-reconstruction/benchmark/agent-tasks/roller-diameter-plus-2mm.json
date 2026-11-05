@@ -10,7 +10,7 @@
   },
   "expected_values": {
     "roller_d": 26,
-    "tooth_root_z": -34.5
+    "tooth_root_z": -22.5
   },
   "rationale": [
     "The 2 mm increase in smooth drum diameter increases the drum radius by 1 mm.",
