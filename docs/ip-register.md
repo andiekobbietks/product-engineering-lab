@@ -24,7 +24,7 @@ A public URL is evidence of publication, not evidence of permission to copy, ada
 
 ## Specific patent-source note
 
-Google Patents lists GB2591502A as “Hair applicator”, names Mouhamad Youmna as inventor and Myana Naturals Ltd as assignee, and displays an “Expired - Fee Related” status. The same page warns that its legal-status and assignee data may be inaccurate and are not legal conclusions. This register therefore treats those fields as discovery metadata only; confirm them against the official UK IPO register before relying on ownership, enforceability, expiry or commercial rights. The patent drawing locators are recorded separately in the figure register.
+Google Patents lists GB2591502A as “Hair applicator”, names Mouhamad Youmna as inventor and Myana Naturals Ltd as assignee, and displays an “Expired - Fee Related” status. The same page warns that its legal-status and assignee data may be inaccurate and are not legal conclusions. This register therefore treats those fields as discovery metadata only; confirm them against the official UK IPO register before relying on ownership, enforceability, expiry or commercial rights. The direct relationship between this patent and the Nyfasi-branded Deluxe Detangler retail SKU also remains unverified; do not infer it from the inventor/assignee metadata alone. The patent drawing locators are recorded separately in the figure register.
 
 ## Patent and design caution
 
