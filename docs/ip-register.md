@@ -22,6 +22,10 @@ A public URL is evidence of publication, not evidence of permission to copy, ada
 | IP-014 | Customer/partner CAD, photos, samples or specifications | Customer/partner or licensors | Not included without written authorisation | Unverified until intake | Execute data/IP schedule, permitted-use, confidentiality and deletion terms |
 | IP-015 | Future AK Build code, workflows and integrations | AndieKobbieTech or contributors, subject to agreements | Intended commercial layer | Unverified until created | Separate background IP, foreground IP and third-party components in each SOW |
 
+## Specific patent-source note
+
+Google Patents lists GB2591502A as “Hair applicator”, names Mouhamad Youmna as inventor and Myana Naturals Ltd as assignee, and displays an “Expired - Fee Related” status. The same page warns that its legal-status and assignee data may be inaccurate and are not legal conclusions. This register therefore treats those fields as discovery metadata only; confirm them against the official UK IPO register before relying on ownership, enforceability, expiry or commercial rights. The patent drawing locators are recorded separately in the figure register.
+
 ## Patent and design caution
 
 Patent drawings illustrate embodiments and claim context; they do not establish that a pictured embodiment is the exact retail product, nor do they provide manufacturing tolerances or a complete bill of materials. A reconstruction from public evidence is not a freedom-to-operate opinion. Do not manufacture, sell, import or market a reconstruction without qualified engineering review and legal clearance in relevant territories.
