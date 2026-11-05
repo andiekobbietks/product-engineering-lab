@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "status": "discovery_manifest_not_downloaded",
+  "purpose": "Reference-pattern discovery only; no source geometry or program files copied into this repository.",
+  "collections": [
+    {
+      "repo_id": "Sandflow/sand3d-cad",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-cad",
+      "license": "CC-BY-4.0 dataset layer; per-row source_license also applies",
+      "context": "Mechanical CAD patterns; Zero-To-CAD and CADFS; about 24,495 train/validation rows."
+    },
+    {
+      "repo_id": "Sandflow/sand3d-objaverse",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-objaverse",
+      "license": "CC-BY-4.0 dataset layer; per-row source_license also applies",
+      "context": "Broad product/object modelling patterns; 64.6k train rows shown in viewer."
+    },
+    {
+      "repo_id": "Sandflow/sand3d-articraft",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-articraft",
+      "license": "CC-BY-4.0 dataset layer; per-row source_license also applies",
+      "context": "Articulated object and component hierarchy patterns."
+    },
+    {
+      "repo_id": "Sandflow/sand3d-simready",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-simready",
+      "license": "CC-BY-4.0 dataset layer; per-row source_license also applies",
+      "context": "Simulation-oriented assets and metadata."
+    },
+    {
+      "repo_id": "Sandflow/sand3d-automate",
+      "url": "https://huggingface.co/datasets/Sandflow/sand3d-automate",
+      "license": "CC-BY-4.0 dataset layer; per-row source_license also applies",
+      "context": "Articulated mechanical object examples; source licence recorded per row."
+    }
+  ],
+  "reuse_rules": [
+    "Do not bulk-copy third-party programs, USD, meshes, renders or textures into this repository.",
+    "Check each row's source_license, attribution and license_status before adaptation or redistribution.",
+    "Use dataset objects as modelling-pattern references, never as evidence of Nyfasi geometry or dimensions.",
+    "Retain source IDs and program/asset hashes for any future derivative."
+  ]
+}
