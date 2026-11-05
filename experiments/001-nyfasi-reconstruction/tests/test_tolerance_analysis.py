@@ -40,10 +40,36 @@ class ToleranceCalculationTests(unittest.TestCase):
         result = calculate_stackups(self.parameters, self.ledger)["band_to_slot_axial_alignment"]
         self.assertAlmostEqual(result["worst_case_absolute_offset"], 0.25)
 
-    def test_seal_interfaces_use_current_cad_dimensions(self):
+    def test_seal_interfaces_use_current_cad_dimensions_and_worst_case_bounds(self):
         results = calculate_stackups(self.parameters, self.ledger)
-        self.assertAlmostEqual(results["spindle_pin_to_elastomer_seal"]["nominal"], 0.20)
-        self.assertAlmostEqual(results["elastomer_seal_to_bearing_bore"]["nominal"], 0.10)
+        pin_seal = results["spindle_pin_to_elastomer_seal"]
+        seal_bearing = results["elastomer_seal_to_bearing_bore"]
+        self.assertAlmostEqual(pin_seal["nominal"], 0.20)
+        self.assertAlmostEqual(pin_seal["worst_case_min"], 0.05)
+        self.assertAlmostEqual(pin_seal["worst_case_max"], 0.35)
+        self.assertAlmostEqual(seal_bearing["nominal"], 0.10)
+        self.assertAlmostEqual(seal_bearing["worst_case_min"], -0.05)
+        self.assertAlmostEqual(seal_bearing["worst_case_max"], 0.25)
+
+    def test_shared_physical_feature_tolerances_update_every_related_stack(self):
+        ledger = copy.deepcopy(self.ledger)
+        baseline = calculate_stackups(self.parameters, ledger)
+        ledger["shared_tolerances"]["spindle_pin_diameter"] = 0.10
+        ledger["shared_tolerances"]["bearing_bore_diameter"] = 0.10
+        updated = calculate_stackups(self.parameters, ledger)
+        for name in (
+            "spindle_pin_to_bearing_bore",
+            "spindle_pin_to_elastomer_seal",
+            "elastomer_seal_to_bearing_bore",
+        ):
+            self.assertGreater(
+                baseline[name]["worst_case_max"] - baseline[name]["nominal"],
+                0.0,
+            )
+            self.assertGreater(
+                updated[name]["worst_case_max"],
+                baseline[name]["worst_case_max"],
+            )
 
     def test_negative_tolerance_is_rejected(self):
         ledger = copy.deepcopy(self.ledger)
