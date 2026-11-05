@@ -360,7 +360,7 @@ def build():
         "component_count": 0,
         "components": {},
         "assembly": {
-            "status": "flattened_component_compound",
+            "status": "flattened_native_multi_solid_shape",
             "constraint_solution": "not_performed",
             "note": "Components share a common datum frame; the compound is for review/export, not a constraint-solved kinematic assembly.",
         },
@@ -380,48 +380,34 @@ def build():
         for component_id, shape in components.items():
             manifest["components"][component_id] = export_component(component_id, shape)
 
-        # Preserve part identities in CadFlow's product structure, then make a
-        # flattened compound solely for a convenient all-components STEP/GLB view.
-        assembly = cad.make_assembly_rassembly(
-            assembly_id="nyfasi_patent_architecture_research_proxy",
-            name="Hair applicator patent-architecture research proxy",
-        )
-        for component_id, shape in components.items():
-            part = cad.make_part_rpart(
-                part_id=component_id,
-                body=shape,
-                name=component_id.replace("_", " ").title(),
-            )
-            assembly = cad.add_component_rassembly(
-                assembly=assembly,
-                item=part,
-                component_id=component_id,
-                placement=cad.identity_placement_rplacement(),
-                name=component_id.replace("_", " ").title(),
-            )
+        # CadFlow's new Model/Shape frontend and legacy Part/Assembly facade
+        # are separate API surfaces. Keep each component as its own validated
+        # Shape and create an aggregate native Shape for convenient preview/export.
+        component_shapes = list(components.values())
+        aggregate = component_shapes[0]
+        for next_shape in component_shapes[1:]:
+            aggregate = model.union(aggregate, next_shape)
 
-        compound = cad.make_compound_from_assembly_rcompound(assembly=assembly)
-        compound_report = compound.validate()
-        if not compound_report.ok:
+        aggregate_report = aggregate.validate()
+        if not aggregate_report.ok:
             raise RuntimeError(
-                "CadFlow compound validation failed: "
-                + json.dumps(compound_report.to_dict(), sort_keys=True)
+                "CadFlow aggregate validation failed: "
+                + json.dumps(aggregate_report.to_dict(), sort_keys=True)
             )
-        cad.export_step(
-            shapes=compound,
-            filename=str(OUT / "nyfasi_research_assembly.step"),
-        )
-        compound.export_preview_glb(str(OUT / "nyfasi_research_assembly.glb"))
+        aggregate.export_step(str(OUT / "nyfasi_research_assembly.step"))
+        aggregate.export_preview_glb(str(OUT / "nyfasi_research_assembly.glb"))
 
         manifest["component_count"] = len(components)
         manifest["assembly"]["component_ids"] = list(components)
+        manifest["assembly"]["status"] = "flattened_native_multi_solid_shape"
         manifest["assembly"]["compound"] = {
-            "volume_mm3": compound.volume,
-            "bbox_mm": list(compound.bbox),
-            "topology": compound.topology,
-            "validation": compound_report.to_dict(),
+            "volume_mm3": aggregate.volume,
+            "bbox_mm": list(aggregate.bbox),
+            "topology": aggregate.topology,
+            "validation": aggregate_report.to_dict(),
             "step": "nyfasi_research_assembly.step",
             "glb": "nyfasi_research_assembly.glb",
+            "note": "Aggregate preview/export only; named component STEP files remain the component-level source artefacts.",
         }
 
     (OUT / "cadflow-build-manifest.json").write_text(
