@@ -4,7 +4,7 @@ This is an **independent research case study**. It is not commissioned by, affil
 
 The experiment explores how public product evidence can be converted into an auditable product model without confusing published claims, visual observations and engineering assumptions.
 
-See the [experiment record](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/README.md), [source register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/source-register.json) and [uncertainty register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/uncertainty-register.json).
+See the [image inventory](image-inventory.md), the [experiment record](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/README.md), [source register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/source-register.json) and [uncertainty register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/uncertainty-register.json).
 
 ## Research outputs
 
