@@ -111,14 +111,6 @@
       "confidence": "medium",
       "note": "Approximate 10 mm derived from the patent statement that blade length is around twice its approximate 5 mm width; not a separately dimensioned or measured retail value."
     },
-    "tooth_height": {
-      "value": 12,
-      "unit": "mm",
-      "provenance": "ENGINEERING_ASSUMPTION",
-      "evidence_ids": [],
-      "confidence": "none",
-      "note": "Schematic radial projection length used for the research model."
-    },
     "tooth_pitch": {
       "value": 15,
       "unit": "mm",
@@ -396,14 +388,6 @@
       "confidence": "none",
       "note": "Placeholder axial width of schematic spindle seal; must remain within the spindle projection and bearing support width."
     },
-    "tooth_tip_taper_deg": {
-      "value": 6,
-      "unit": "degree",
-      "provenance": "ENGINEERING_ASSUMPTION",
-      "evidence_ids": [],
-      "confidence": "low",
-      "note": "Provisional 6-degree taper on the blade walls to approximate the patent-described tapered teeth. The patent does not dimension the taper angle; calibrate against a retail sample or authorised drawing."
-    },
     "housing_waist_depth": {
       "value": 54,
       "unit": "mm",
@@ -487,6 +471,24 @@
       ],
       "confidence": "low",
       "note": "Provisional Y depth for the upper-housing retaining arms; the patent describes spindle cut-outs but does not dimension the arm section."
+    },
+    "tooth_tip_width": {
+      "value": 1.5,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [
+        "SRC-004"
+      ],
+      "confidence": "low",
+      "note": "Provisional narrow blade-tip width to express the patent-described tapered tooth planform. The patent does not dimension the tip width."
+    },
+    "tooth_thickness": {
+      "value": 1.5,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Provisional thin blade thickness for the rendered comb tooth. The patent does not provide a section thickness."
     }
   },
   "provenance_legend": {
