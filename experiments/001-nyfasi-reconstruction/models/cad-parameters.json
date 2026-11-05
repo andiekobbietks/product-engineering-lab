@@ -330,7 +330,7 @@
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Root datum at the outer surface of the curved slotted wall. Teeth are flipped 180 degrees so the tapered tips extend radially away from the roller; value is derived from roller axis, seat clearance and 1.3 mm wall thickness."
+      "note": "Root datum at the outer surface of the curved slotted wall. Active Sand3D blades extend radially outwards from this datum along negative Z; the value is derived from roller axis, seat clearance and wall thickness."
     },
     "tooth_corner_r": {
       "value": 0.6,
@@ -489,6 +489,14 @@
       "evidence_ids": [],
       "confidence": "low",
       "note": "Provisional thin blade thickness for the rendered comb tooth. The patent does not provide a section thickness."
+    },
+    "tooth_height": {
+      "value": 12,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Legacy CadFlow-only blade envelope retained for the archived B-rep builder. The active Sand3D gallery uses tooth_length for radial blade length and tooth_thickness for the thin extrusion."
     }
   },
   "provenance_legend": {
