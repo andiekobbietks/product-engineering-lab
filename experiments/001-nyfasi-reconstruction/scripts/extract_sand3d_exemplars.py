@@ -91,9 +91,8 @@ def main():
 
             matches[matched_key] = {
                 "id": row.get("id"),
-                "family": row.get("family"),
-                "entry": entry,
                 "family": family,
+                "entry": entry,
                 "matched_key": matched_key,
                 "license": row.get("license"),
                 "source_license": source_license,
