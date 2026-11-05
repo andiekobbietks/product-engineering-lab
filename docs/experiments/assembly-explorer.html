@@ -108,7 +108,7 @@ function setMaterialHighlight(){
   const original=originalMaterials.get(o);
   const materials=Array.isArray(original)?original:[original];
   const isSelected=selected&&componentForObject(o)===selected;
-  const clones=materials.map(m=>{const copy=m.clone();copy.wireframe=wire;if(copy.emissive){copy.emissive.set(isSelected?'#245e4f':'#000000');copy.emissiveIntensity=isSelected?.72:0;}return copy;});
+  const clones=materials.map(m=>{const copy=m.clone();copy.wireframe=wire;if(copy.emissive){copy.emissive.set(isSelected?'#245e4f':'#000000');copy.emissiveIntensity=isSelected ? 0.72 : 0;}return copy;});
   o.material=Array.isArray(original)?clones:clones[0];
  });
 }
@@ -150,6 +150,7 @@ function renderSymbols(){
  });
  if(symbols.length&&!activeSymbol)activeSymbol=symbols[0].name;
 }
+function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 function renderDetails(){
  if(!selected){$('componentDetails').innerHTML='<strong>Component parameters</strong><div>Select a component to see its provenance and relevant parameter values.</div>';return;}
  const names=new Set((selected.entry.source_symbols||[]).map(s=>s.name));
@@ -168,8 +169,8 @@ function renderDetails(){
    selected.entry.id==='reservoir'&&k.startsWith('reservoir')
   );
  }).slice(0,12);
- const rows=relevant.map(k=>{const p=parameters.parameters[k];return '<tr><td>'+k+'</td><td>'+p.value+' '+p.unit+'</td></tr>';}).join('');
- $('componentDetails').innerHTML='<strong>Parameter ledger · '+selected.entry.id+'</strong><div>'+selected.entry.description+'</div><table>'+rows+'</table><div style="margin-top:6px">Source range links are generated from the Python AST. Values retain their ledger provenance; they are not measured product specifications.</div>';
+ const rows=relevant.map(k=>{const p=parameters.parameters[k];return '<tr><td>'+escapeHtml(k)+'</td><td>'+escapeHtml(p.value)+' '+escapeHtml(p.unit)+'</td></tr>';}).join('');
+ $('componentDetails').innerHTML='<strong>Parameter ledger · '+escapeHtml(selected.entry.id)+'</strong><div>'+escapeHtml(selected.entry.description)+'</div><table>'+rows+'</table><div style="margin-top:6px">Source range links are generated from the Python AST. Values retain their ledger provenance; they are not measured product specifications.</div>';
 }
 function selectComponent(component){
  selected=component;activeSymbol=(component.entry.source_symbols||[])[0]?.name||null;
