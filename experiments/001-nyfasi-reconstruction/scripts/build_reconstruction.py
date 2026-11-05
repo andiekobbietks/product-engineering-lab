@@ -517,7 +517,7 @@ def main():
             ],
         })
     (web_dir / "manifest.json").write_text(
-        json.dumps(manifest, indent=2) + "\\n", encoding="utf-8"
+        json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )
     print("Sand3D source fingerprint:", s3d.fingerprint())
     print("Built complete seven-group Sand3D assembly and component GLBs:", output.resolve())
