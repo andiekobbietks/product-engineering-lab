@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Interactive patent-led research visualisation of a hair-treatment applicator assembly.">
+<title>Assembly Explorer · Product Engineering Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--line:#293750;--text:#edf3fb;--muted:#9aabc1;--accent:#8ed8c7;--warn:#f2c879}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:22px clamp(18px,4vw,54px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap}
+.brand{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}.title{font-size:clamp(23px,3vw,34px);font-weight:650;letter-spacing:-.035em;margin:5px 0}.sub{color:var(--muted);max-width:760px}
+main{max-width:1440px;margin:auto;padding:22px clamp(12px,2vw,28px) 48px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:16px}
+.viewer{background:radial-gradient(ellipse at 50% 40%,#263752 0%,#131d31 54%,#0e1627 100%);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-height:610px;position:relative}
+#stage{height:610px;width:100%;display:block}.viewtag{position:absolute;top:16px;left:16px;padding:6px 10px;border:1px solid #52647d;border-radius:99px;background:#0b1323c9;color:#dce8f5;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.toolbar{position:absolute;bottom:14px;left:14px;right:14px;display:flex;gap:8px;flex-wrap:wrap}
+button,.filelabel{background:#1b2940;border:1px solid #3a4d68;color:var(--text);padding:9px 12px;border-radius:9px;font:inherit;cursor:pointer}
+button:hover,.filelabel:hover{border-color:var(--accent)}button.primary{background:var(--accent);color:#09201d;border-color:var(--accent);font-weight:700}
+aside{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:16px}
+h2{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.rangehead{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:12px}input[type=range]{width:100%;accent-color:var(--accent)}
+.parts{display:grid;gap:6px}.part{width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;background:var(--panel2);border:1px solid transparent;border-radius:9px}.part[aria-pressed=true]{border-color:var(--accent);background:#1c3440}.part small{color:var(--muted);font-size:11px}
+.info{background:var(--panel2);border:1px solid var(--line);border-radius:11px;padding:12px}.info strong{display:block;font-size:14px;margin-bottom:5px}.info p{margin:0;color:var(--muted);font-size:12px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}.metric{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px}.metric b{display:block;font-size:20px}.metric span{font-size:11px;color:var(--muted)}
+.notice{margin-top:16px;border:1px solid #6d5630;background:#302719;border-radius:12px;padding:13px 15px;color:#f4dba9;font-size:12px}
+.footer{color:var(--muted);font-size:12px;margin-top:18px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}a{color:var(--accent)}
+#file{display:none}.hidden{display:none}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.viewer,#stage{min-height:460px;height:58vh}aside{order:2}}
+@media(max-width:520px){.metrics{grid-template-columns:1fr 1fr}.viewer,#stage{height:420px;min-height:420px}}
+</style>
+</head>
+<body>
+<header><div><div class="brand">Product Engineering Lab / Experiment 001</div><div class="title">Assembly Explorer</div><div class="sub">An interactive, component-level research visualisation derived from the published patent architecture and a provenance-aware parameter ledger.</div></div><a href="../nyfasi.md">Research notes ↗</a></header>
+<main>
+<div class="layout">
+<section>
+<div class="viewer">
+<div class="viewtag" id="mode">Parametric research preview</div>
+<canvas id="stage" aria-label="Interactive 3D research assembly"></canvas>
+<div class="toolbar">
+<button class="primary" id="explode">Explode assembly</button><button id="reset">Reset view</button><button id="wire">Wireframe</button><label class="filelabel" for="file">Load Sand3D GLB</label><input id="file" type="file" accept=".glb,model/gltf-binary">
+</div></div>
+<div class="metrics">
+<div class="metric"><b>8</b><span>Illustrated teeth</span></div><div class="metric"><b>180°</b><span>Selected wall arc</span></div><div class="metric"><b>24 mm</b><span>Roller diameter proxy</span></div>
+</div>
+<div class="notice"><strong>Research status:</strong> this is not a verified digital twin of a retail Nyfasi product. It is an editable visual interpretation of selected patent features. Dimensions, tolerances, materials, retail revision and mechanical performance have not been validated against a physical sample or original CAD.</div>
+<div class="footer"><span>Rotate: drag · Zoom: scroll/pinch · Select a component in the right panel</span><span>Three.js · runs client-side · no product data is uploaded</span></div>
+</section>
+<aside>
+<section><h2>Assembly controls</h2><div class="rangehead"><label for="explodeRange">Exploded spacing</label><output id="explodeValue">0%</output></div><input id="explodeRange" type="range" min="0" max="100" value="0"><div style="display:flex;gap:8px;margin-top:8px"><button id="assembled" style="flex:1">Assembled</button><button id="exploded" style="flex:1">Exploded</button></div></section>
+<section><h2>Components</h2><div class="parts" id="parts"></div></section>
+<section><h2>Component record</h2><div class="info" aria-live="polite"><strong id="partName">Assembly overview</strong><p id="partDesc">Select a component to inspect its role and evidence status. The visual geometry is schematic and not dimensionally authoritative.</p></div></section>
+<section><h2>Evidence classes</h2><div class="info"><strong>Patent disclosed</strong><p>Features expressly described or illustrated in the patent embodiment. This does not prove the exact retail configuration.</p></div><div class="info"><strong>Derived / assumed</strong><p>Dimensions and geometric interpretations selected to make an editable research model. These must be replaced by measured or authorised data.</p></div></section>
+</aside>
+</div>
+</main>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+import {OrbitControls} from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+import {GLTFLoader} from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/loaders/GLTFLoader.js';
+const canvas=document.querySelector('#stage'), scene=new THREE.Scene();scene.background=new THREE.Color('#111b2d');
+const camera=new THREE.PerspectiveCamera(38,1,.1,2000);camera.position.set(185,150,210);
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,26,0);
+scene.add(new THREE.HemisphereLight(0xdceaff,0x344052,2.0));const key=new THREE.DirectionalLight(0xffffff,2.5);key.position.set(120,180,100);scene.add(key);const rim=new THREE.DirectionalLight(0x8ed8c7,1.1);rim.position.set(-120,60,-100);scene.add(rim);
+const grid=new THREE.GridHelper(260,26,0x53647c,0x2b3b52);grid.position.y=-10;scene.add(grid);
+const assembly=new THREE.Group();scene.add(assembly);const components=[];
+const mats={shell:new THREE.MeshStandardMaterial({color:0xdce4eb,roughness:.34,metalness:.05}),shellDark:new THREE.MeshStandardMaterial({color:0x9caebe,roughness:.4}),reservoir:new THREE.MeshStandardMaterial({color:0x65b9c9,transparent:true,opacity:.48,roughness:.25}),roller:new THREE.MeshStandardMaterial({color:0x4b5964,roughness:.72}),tooth:new THREE.MeshStandardMaterial({color:0xf0c978,roughness:.38}),wall:new THREE.MeshStandardMaterial({color:0x8ea1b4,roughness:.42,side:THREE.DoubleSide}),seal:new THREE.MeshStandardMaterial({color:0x4c927f,roughness:.6})};
+function register(name,desc,group,base,offset,status){group.name=name;assembly.add(group);components.push({name,desc,group,base:base.clone(),offset:offset.clone(),status});}
+function box(w,h,d,mat,x=0,y=0,z=0,bevel=0){let g=new THREE.BoxGeometry(w,h,d);let m=new THREE.Mesh(g,mat);m.position.set(x,y,z);return m}
+function roundedShell(w,h,d,mat){const g=new THREE.Group();g.add(box(w,h,d,mat,0,0,0));return g}
+function addShell(name,y,mat,desc,offsetY){const g=roundedShell(120,12,68,mat);g.position.y=y;register(name,desc,g,new THREE.Vector3(0,y,0),new THREE.Vector3(0,offsetY,0),'Engineering assumption');}
+addShell('Lower housing','8',mats.shellDark,'Lower clamshell housing. Overall envelope is an engineering placeholder, not a measured dimension.',-30);
+addShell('Upper housing',64,mats.shell,'Upper housing / lid. The patent describes upper and lower housing portions; this block geometry is schematic.',30);
+const reservoir=new THREE.Group();reservoir.add(box(90,8,36,mats.reservoir));reservoir.position.set(0,31,0);register('Reservoir','Reservoir volume shown as a translucent internal envelope. Capacity, shape and dimensions are unknown.',reservoir,new THREE.Vector3(0,31,0),new THREE.Vector3(0,22,0),'Engineering assumption');
+const roller=new THREE.Group();const drum=new THREE.Mesh(new THREE.CylinderGeometry(12,12,112,48,1,false),mats.roller);drum.rotation.z=Math.PI/2;roller.add(drum);for(let x=-48;x<=48;x+=16){const band=new THREE.Mesh(new THREE.TorusGeometry(12.15,.8,8,48),mats.seal);band.rotation.y=Math.PI/2;band.position.x=x;roller.add(band)}roller.position.set(0,17,-2);register('Rotatable roller','Cylindrical roller proxy. A 24 mm diameter is selected from the patent text’s example radius range; not a measured retail value.',roller,new THREE.Vector3(0,17,-2),new THREE.Vector3(0,10,-15),'Patent-derived estimate');
+const wall=new THREE.Group();const R=13.5,r=11.5,len=112,segments=48;for(let s=0;s<8;s++){const a0=-Math.PI/2+s*Math.PI/8+.018,a1=-Math.PI/2+(s+1)*Math.PI/8-.018;const shape=new THREE.Shape();for(let i=0;i<=segments;i++){const a=a0+(a1-a0)*i/segments;const x=R*Math.cos(a),y=R*Math.sin(a);if(i===0)shape.moveTo(x,y);else shape.lineTo(x,y)}for(let i=segments;i>=0;i--){const a=a0+(a1-a0)*i/segments;shape.lineTo(r*Math.cos(a),r*Math.sin(a))}shape.closePath();const geom=new THREE.ExtrudeGeometry(shape,{depth:len,bevelEnabled:false,steps:1,curveSegments:4});const mesh=new THREE.Mesh(geom,mats.wall);mesh.rotation.y=Math.PI/2;mesh.position.set(-len/2,0,0);wall.add(mesh)}wall.position.set(0,22,0);register('Curved slotted wall','180-degree annular wall proxy with seven circumferential openings between eight tooth positions. This is an explicit interpretation, not a dimensioned patent drawing.',wall,new THREE.Vector3(0,22,0),new THREE.Vector3(0,18,0),'Patent-led interpretation');
+const teeth=new THREE.Group();for(let i=0;i<8;i++){const x=(i-3.5)*15;const t=box(5,12,10,mats.tooth,x,2,0);teeth.add(t)}teeth.position.set(0,10,0);register('Eight comb teeth','Eight teeth are shown in the illustrated patent embodiment. Approximate 5 mm width and 10 mm length are described; height and pitch are placeholders.',teeth,new THREE.Vector3(0,10,0),new THREE.Vector3(0,-24,0),'Patent disclosed / derived');
+const endcaps=new THREE.Group();for(const x of [-57,57]){const cap=new THREE.Mesh(new THREE.CylinderGeometry(13,13,2,32),mats.shellDark);cap.rotation.z=Math.PI/2;cap.position.x=x;endcaps.add(cap)}endcaps.position.set(0,17,-2);register('Roller end features','End caps are visual placeholders; spindle, pin and retention geometry have not been verified.',endcaps,new THREE.Vector3(0,17,-2),new THREE.Vector3(0,8,15),'Engineering assumption');
+let selected=null,explosion=0,wire=false,loaded=false,uploadedUrl=null;
+const $=id=>document.getElementById(id);
+const list=$('parts');
+components.forEach((c,i)=>{const b=document.createElement('button');b.className='part';b.innerHTML='<span>'+c.name+'<br><small>'+c.status+'</small></span><span>›</span>';b.setAttribute('aria-pressed','false');b.addEventListener('click',()=>select(i));list.appendChild(b)});
+function select(i){selected=i;const c=components[i];$('partName').textContent=c.name;$('partDesc').textContent=c.desc;[...list.children].forEach((b,j)=>b.setAttribute('aria-pressed',j===i?'true':'false'))}
+function setExplosion(v){explosion=v;components.forEach(c=>c.group.position.copy(c.base).addScaledVector(c.offset,v));$('explodeRange').value=Math.round(v*100);$('explodeValue').textContent=Math.round(v*100)+'%';$('explode').textContent=v>0?'Collapse assembly':'Explode assembly'}
+$('explode').onclick=()=>setExplosion(explosion>0?0:1);$('explodeRange').oninput=e=>setExplosion(+e.target.value/100);$('assembled').onclick=()=>setExplosion(0);$('exploded').onclick=()=>setExplosion(1);
+$('reset').onclick=()=>{camera.position.set(185,150,210);controls.target.set(0,26,0);controls.update();setExplosion(0)};
+$('wire').onclick=()=>{wire=!wire;Object.values(mats).forEach(m=>m.wireframe=wire);$('wire').textContent=wire?'Solid view':'Wireframe'};
+$('file').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;const url=URL.createObjectURL(f);if(uploadedUrl)URL.revokeObjectURL(uploadedUrl);uploadedUrl=url;new GLTFLoader().load(url,g=>{assembly.visible=false;scene.add(g.scene);g.scene.position.set(0,0,0);loaded=true;$('mode').textContent='Loaded Sand3D GLB';$('partName').textContent='Sand3D exported assembly';$('partDesc').textContent='Loaded from your local file. This viewer does not upload the file to a server.'},undefined,err=>{console.error(err);alert('Could not load this GLB file. Check that it is a valid glTF binary.')})});
+function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}new ResizeObserver(resize).observe(canvas);resize();
+function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}animate();select(0);
+</script>
+</body></html>
