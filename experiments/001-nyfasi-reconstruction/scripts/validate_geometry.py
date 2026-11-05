@@ -39,6 +39,7 @@ def main():
         (band_span <= P["roller_len"], "Textured band row exceeds roller length."),
         (P["roller_endwall_d"] > P["roller_d"] and P["roller_endwall_t"] > 0, "End walls must exceed roller OD and have positive thickness."),
         (P["spindle_pin_d"] > 0 and P["spindle_pin_len"] > 0, "Spindle pins need positive dimensions."),
+        (P["retaining_arm_w"] > 0 and P["retaining_arm_d"] > P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"], "Upper retaining arms must have positive dimensions and enough depth for the spindle cut-out."),
         (P["bearing_bore_clearance"] >= 0, "Bearing clearance cannot be negative."),
         (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] < min(P["bearing_block_d"], P["bearing_block_h"]), "Bearing bore does not fit its support block."),
         (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] >= P["seal_outer_d"] > P["spindle_pin_d"] > P["seal_inner_d"] > 0, "Seal proxy must fit the bearing bore and retain nominal spindle interference."), 
