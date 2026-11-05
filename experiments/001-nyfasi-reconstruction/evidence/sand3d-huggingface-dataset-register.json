@@ -118,7 +118,7 @@
         "program_sha256": "d6d83f7be624dc83827137935a3874206f096f38df9ba0a8a74027b8621eb853",
         "license": "CC-BY-4.0",
         "source_license": "CC-BY-4.0",
-        "attribution": "NVIDIA SimReady assets: consumable_bearing_ball_d01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "attribution": "NVIDIA SimReady assets: \"consumable_bearing_ball_d01\" by NVIDIA, https://huggingface.co/datasets/nvidia/simready-assets/tree/653d91e182011f357cf1644013cc94ddf194d349/consumable_bearing_ball_d01, CC BY 4.0; modified: rewritten as a sand3d program",
         "application": "stepped annular race and bore profile pattern; no bearing type assumed for Nyfasi"
       },
       {
@@ -128,7 +128,7 @@
         "program_sha256": "dd3878899de5f51ee3077fa7f8f0b524d5c5e5072b66a73f4bd81456b7e588d5",
         "license": "CC-BY-4.0",
         "source_license": "CC-BY-4.0",
-        "attribution": "NVIDIA SimReady assets: consumable_oil_seal_large_e01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "attribution": "NVIDIA SimReady assets: \"consumable_oil_seal_large_e01\" by NVIDIA, https://huggingface.co/datasets/nvidia/simready-assets/tree/653d91e182011f357cf1644013cc94ddf194d349/consumable_oil_seal_large_e01, CC BY 4.0; modified: rewritten as a sand3d program",
         "application": "stepped annular seal profile pattern; seal geometry remains unverified"
       },
       {
@@ -138,7 +138,7 @@
         "program_sha256": "dcbcf453b4eba9377ec21dfda8b3b2088dd2586b3da4ddfe0f80cee247436af9",
         "license": "CC-BY-4.0",
         "source_license": "CC-BY-4.0",
-        "attribution": "NVIDIA SimReady assets: fuelSystem_fuel_pump_assembly_d01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "attribution": "NVIDIA SimReady assets: \"fuelSystem_fuel_pump_assembly_d01\" by NVIDIA, https://huggingface.co/datasets/nvidia/simready-assets/tree/653d91e182011f357cf1644013cc94ddf194d349/fuelSystem_fuel_pump_assembly_d01, CC BY 4.0; modified: rewritten as a sand3d program",
         "application": "fluid-system component separation reference only; no pump mechanism assumed"
       },
       {
@@ -148,7 +148,7 @@
         "program_sha256": "4a43b42c4c1cd510a325a0532c78b204d5b3d84ee17b00b4a88fe437fb1fb53b",
         "license": "CC-BY-4.0",
         "source_license": "CC-BY-4.0",
-        "attribution": "NVIDIA SimReady assets: fireProtection_suppressionCylinder_fixed_a01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "attribution": "NVIDIA SimReady assets: \"fireProtection_suppressionCylinder_fixed_a01\" by NVIDIA, https://huggingface.co/datasets/nvidia/simready-assets/tree/653d91e182011f357cf1644013cc94ddf194d349/fireProtection_suppressionCylinder_fixed_a01, CC BY 4.0; modified: rewritten as a sand3d program",
         "application": "reservoir shell, neck, band and support decomposition reference"
       },
       {
@@ -158,7 +158,7 @@
         "program_sha256": "1e724800bce70f2903ab09f66cf57bab7d40da8b71bdb50d920a89476920a0f4",
         "license": "CC-BY-4.0",
         "source_license": "CC-BY-4.0",
-        "attribution": "NVIDIA SimReady assets: serviceTool_fluid_pump_b01 by NVIDIA, CC BY 4.0; modified: rewritten as a sand3d program",
+        "attribution": "NVIDIA SimReady assets: \"serviceTool_fluid_pump_b01\" by NVIDIA, https://huggingface.co/datasets/nvidia/simready-assets/tree/653d91e182011f357cf1644013cc94ddf194d349/serviceTool_fluid_pump_b01, CC BY 4.0; modified: rewritten as a sand3d program",
         "application": "lofted tank foot, shell and collar construction pattern"
       },
       {
@@ -178,17 +178,17 @@
         "program_sha256": "4b62baf072d098bed3dc76b3d35a87e21e245ad3c34eb47648676c5888a4d5ba",
         "license": "CC-BY-4.0",
         "source_license": "CC-BY-4.0",
-        "attribution": "PowerBoard - Game Ready by unenginer_sangam, Sketchfab model 002749d6607e4db8888b650a23c445ca, CC BY 4.0; modified: rewritten as a sand3d program",
+        "attribution": "\"PowerBoard - Game Ready\" by unenginer_sangam, https://sketchfab.com/3d-models/002749d6607e4db8888b650a23c445ca, CC-BY-4.0; modified: rewritten as a sand3d program",
         "application": "housing decomposition reference; no dimensions or mesh copied"
       },
       {
         "dataset": "Sandflow/sand3d-objaverse",
         "entry": "cylinder_valve",
-        "id": "objaverse-0244c4f7a9cd4d039259f5d49f07c520",
+        "id": "objaverse-0244c4f7a9cd4d398866388114eaf9fc",
         "program_sha256": "26c87b643d0b9c48e1024e5df5b4e0812d53d7d448b87733e3ce7f01a1435588",
         "license": "CC-BY-4.0",
         "source_license": "CC-BY-4.0",
-        "attribution": "Water Filter Unit ANIL by aniljaco, Sketchfab model 0244c4f7a9cd4d039259f5d49f07c520, CC BY 4.0; modified: rewritten as a sand3d program",
+        "attribution": "\"Water Filter Unit ANIL\" by aniljaco, https://sketchfab.com/3d-models/0244c4f7a9cd4d398866388114eaf9fc, CC-BY-4.0; modified: rewritten as a sand3d program",
         "application": "reservoir shoulder, neck and valve interface pattern"
       }
     ]
