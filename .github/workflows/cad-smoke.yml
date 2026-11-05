@@ -33,7 +33,7 @@ jobs:
       - name: Upload GLB and OBJ outputs
         uses: actions/upload-artifact@v4
         with:
-          name: gb2591502a-hair-applicator-research-proxy
-          path: output/*
+          name: nyfasi-hair-applicator-research-proxy
+          path: experiments/001-nyfasi-reconstruction/output/*
           if-no-files-found: error
           retention-days: 14
