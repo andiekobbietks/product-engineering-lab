@@ -2,6 +2,10 @@
 
 **Purpose:** document how the Sandflow Sand3D program datasets inform this research without treating generic training examples as Nyfasi product evidence.
 
+## How this fits with CadFlow
+
+This project also uses [CadFlow](https://github.com/yhz5613813/CadFlow), an OpenCascade-backed Python B-rep SDK. CadFlow is the preferred route for exact solid topology, per-component validation and STEP/STL exchange. Sand3D and its Hugging Face program datasets are complementary: they provide readable procedural modelling patterns, assembly decomposition and articulation examples. The Hugging Face datasets are Sandflow/Sand3D datasets, not CadFlow datasets, and they do not contain verified Nyfasi CAD. See the [CadFlow B-rep reconstruction page](cadflow-brep.md).
+
 ## Toolchain verified
 
 - [Sand3D repository](https://github.com/Sandflow-ai/sand3d)
