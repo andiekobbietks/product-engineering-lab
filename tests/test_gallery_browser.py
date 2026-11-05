@@ -52,6 +52,7 @@ def main():
                 "() => document.querySelectorAll('#componentList button').length === 7",
                 timeout=15000,
             )
+            page.screenshot(path="/tmp/nyfasi-gallery-browser.png", full_page=True)
             page.locator("#componentList button").nth(6).click()
             selected_name = page.locator("#partTitle").inner_text()
             if selected_name != "Roller end features":
