@@ -12,7 +12,6 @@
       "slot_width_tolerance": 0.15,
       "band_width_tolerance": 0.1
     },
-    "spindle_pin_to_bearing_bore": {},
     "spindle_pin_to_elastomer_seal": {
       "seal_bore_tolerance": 0.1
     },
