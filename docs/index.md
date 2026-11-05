@@ -12,6 +12,6 @@ An applied research environment for turning product evidence into traceable engi
 
 ## Current implementation
 
-The repository contains an initial product model, JSON Schema, uncertainty register, Sand3D reconstruction script and Colab notebook. The model is an illustrative proxy with placeholder dimensions. It has not yet been rendered or validated against a measured product sample.
+The repository contains an initial product model, JSON Schema, uncertainty register, Sand3D reconstruction script and Colab notebook. The model is an illustrative proxy with placeholder dimensions. The pinned Sand3D smoke test has generated GLB/OBJ exports; they have not been validated against a measured product sample.
 
 The project-wide licence remains undecided. See the licensing note before reusing any material.
