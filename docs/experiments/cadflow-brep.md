@@ -48,9 +48,9 @@ The script at experiments/001-nyfasi-reconstruction/scripts/build_cadflow_recons
 - Two housing snap-tab proxies
 - Perimeter gasket proxy
 
-The curved wall is positioned using the same roller-axis datum as the roller. Each component is validated as a positive-volume single solid, then exported as STEP, STL and GLB. A CadFlow product assembly is assembled from the parts and flattened to a compound for a convenient all-components STEP/GLB preview.
+The curved wall is positioned using the same roller-axis datum as the roller. Each named component is checked for positive volume and topology, then exported as STEP, STL and GLB. Most components are single solids; the seven through-slots intentionally divide the curved wall into eight separate arc solids, matching the eight-tooth proxy layout.
 
-The compound is **not** a kinematic constraint solution. The assembly structure preserves component identity and common-frame placement only.
+For the all-components preview, the current build sequentially unions the named solids into a flattened aggregate B-rep Shape and exports it as STEP/GLB. This is a visual/export convenience, not a constraint-solved product assembly. The individual component files and manifest remain the component-level evidence trail; the aggregate may fuse contacting or intersecting parts and should not be used to infer assembly joints or serviceability.
 
 ## Reproduce
 
@@ -62,7 +62,7 @@ The pinned CI workflow uses Python 3.12, OpenCascade 7.9.3.1 and a pinned CadFlo
 - [CadFlow reconstruction script](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py)
 - [Shared CAD parameter ledger](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/cad-parameters.json)
 
-A successful workflow produces an artifact named nyfasi-cadflow-brep. It contains individual component STEP/STL/GLB files, an all-components assembly STEP/GLB and cadflow-build-manifest.json with volumes, areas, bounding boxes, topology and validation reports.
+A successful workflow produces an artifact named nyfasi-cadflow-brep. It contains individual component STEP/STL/GLB files, a flattened aggregate STEP/GLB and cadflow-build-manifest.json with volumes, areas, bounding boxes, topology and validation reports.
 
 ## Current fidelity boundary
 
