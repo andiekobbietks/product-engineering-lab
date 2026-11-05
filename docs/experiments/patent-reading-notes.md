@@ -50,7 +50,7 @@ See [curved-wall geometry reconstruction](curved-wall-geometry.md) for the param
 
 ## What this changes in the reconstruction
 
-The model now represents a 180-degree annular wall segment with a concave roller seat and seven axial-band cuts that appear as circumferential arcs in cross-section. The roller axis and tooth row share a longitudinal axis. The teeth remain simplified rectangular blades; taper and elliptical cross-section are not yet modelled.
+The model now represents a 180-degree annular wall segment with a concave roller seat and seven axial-band cuts that appear as circumferential arcs in cross-section. The roller axis and tooth row share a longitudinal axis. The eight teeth now use an elliptical (superellipse n=2) cross-section and a tapered Sand3D extrusion. The 6-degree taper is explicitly an engineering assumption: the patent describes tapered, blade-shaped teeth but does not dimension the tip angle or full section profile. Tooth width and approximate length follow the disclosed embodiment; the exact retail profile still requires calibration.
 
 ## Interpretation limits
 
