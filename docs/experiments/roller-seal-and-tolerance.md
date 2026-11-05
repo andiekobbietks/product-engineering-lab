@@ -4,7 +4,7 @@
 
 This iteration adds two separately named elastomeric spindle-seal proxies to the component-first Sand3D assembly and introduces a preliminary interface analysis for the roller, curved seat, wall slots, spindle bearings and seal bores.
 
-The seal geometry is deliberately simple: annular elastomer proxies around the spindle region. It is **not** a validated liquid seal, lip seal, O-ring gland or recovered Nyfasi component. No material grade, compression, gland geometry, surface finish, swelling allowance or leak performance is known.
+The seal geometry is deliberately simple: annular elastomer proxies located conceptually within the spindle-bearing bore. The current placeholder dimensions use a 3.8 mm seal bore around a 4 mm spindle pin and a 4.4 mm seal OD inside a nominal 4.5 mm bearing bore. This implies 0.2 mm nominal diametral interference at the shaft and 0.1 mm nominal diametral clearance at the housing bore; actual elastomer compression and retention are not modelled. It is **not** a validated liquid seal, lip seal, O-ring gland or recovered Nyfasi component. No material grade, compression, gland geometry, surface finish, swelling allowance or leak performance is known.
 
 ## Roller-to-slot interaction
 
@@ -19,9 +19,10 @@ The tolerance ledger assigns illustrative values of ±0.15 mm to slot width and 
 | Roller to curved seat (radial) | 0.50 mm | 0.30 to 0.70 mm | Positive in this assumed stack |
 | Band to slot (width) | 0.00 mm | -0.25 to +0.25 mm | Potential interference; redesign/measure |
 | Spindle to bearing (diametral) | 0.50 mm | 0.40 to 0.60 mm | Positive geometric clearance |
-| Spindle to seal bore (diametral) | 0.20 mm | 0.05 to 0.35 mm | Geometry only; no sealing inference |
+| Spindle to seal bore (diametral interference) | 0.20 mm | 0.05 to 0.35 mm | Elastomer deformation not modelled |
+| Seal OD to bearing bore (diametral) | 0.10 mm | -0.05 to +0.25 mm | Possible squeeze or gap; review required |
 
-These are conservative arithmetic worst-case stacks, not statistical RSS analysis. They omit thermal expansion, material compliance, eccentricity, mould shrinkage, surface finish, shaft runout and wear.
+These are conservative arithmetic worst-case stacks, not statistical RSS analysis. They omit thermal expansion, elastomer constitutive behaviour, compression set, eccentricity, mould shrinkage, surface finish, shaft runout and wear.
 
 ## Reproduce
 
