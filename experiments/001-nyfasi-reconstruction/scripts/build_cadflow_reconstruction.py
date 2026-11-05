@@ -421,6 +421,52 @@ def build():
         aggregate.export_step(str(OUT / "nyfasi_research_assembly.step"))
         aggregate.export_preview_glb(str(OUT / "nyfasi_research_assembly.glb"))
 
+        # A second, deliberately exploded GLB keeps the internal components
+        # visible in a browser viewer. Individual STEP/GLB files remain at
+        # their assembled datum positions and are the authoritative parts.
+        exploded_shapes = []
+        for component_id, shape in components.items():
+            if component_id == "housing_lower":
+                dx, dy, dz = 0, 0, -22
+            elif component_id == "housing_upper":
+                dx, dy, dz = 0, 0, 22
+            elif component_id == "reservoir":
+                dx, dy, dz = 0, -24, 0
+            elif component_id == "roller_core_and_smooth_lands":
+                dx, dy, dz = 0, 20, 0
+            elif component_id == "curved_slotted_wall":
+                dx, dy, dz = 0, 30, 0
+            elif component_id == "housing_perimeter_gasket":
+                dx, dy, dz = 0, 0, 16
+            elif component_id.startswith("roller_textured_band_"):
+                centre_x = (shape.bbox[0] + shape.bbox[3]) / 2
+                dx, dy, dz = (14 if centre_x >= 0 else -14), 0, 0
+            elif component_id.startswith("roller_end_wall_"):
+                dx, dy, dz = (-18 if "left" in component_id else 18), 0, 0
+            elif component_id.startswith("spindle_pin_"):
+                dx, dy, dz = (-22 if "left" in component_id else 22), 0, 0
+            elif component_id.startswith("bearing_support_"):
+                dx, dy, dz = (-28 if "left" in component_id else 28), 0, 0
+            elif component_id.startswith("comb_tooth_"):
+                centre_x = (shape.bbox[0] + shape.bbox[3]) / 2
+                dx, dy, dz = (8 if centre_x >= 0 else -8), 0, -22
+            elif component_id.startswith("housing_snap_tab_"):
+                dx, dy, dz = 0, 0, 22
+            else:
+                dx, dy, dz = 0, 0, 0
+            exploded_shapes.append(model.translate(shape, x=dx, y=dy, z=dz))
+
+        exploded_preview = exploded_shapes[0]
+        for next_shape in exploded_shapes[1:]:
+            exploded_preview = model.union(exploded_preview, next_shape)
+        exploded_report = exploded_preview.validate()
+        if not exploded_report.ok:
+            raise RuntimeError(
+                "CadFlow exploded preview validation failed: "
+                + json.dumps(exploded_report.to_dict(), sort_keys=True)
+            )
+        exploded_preview.export_preview_glb(str(OUT / "nyfasi_exploded_preview.glb"))
+
         manifest["component_count"] = len(components)
         manifest["assembly"]["component_ids"] = list(components)
         manifest["assembly"]["status"] = "flattened_native_multi_solid_shape"
@@ -432,6 +478,12 @@ def build():
             "step": "nyfasi_research_assembly.step",
             "glb": "nyfasi_research_assembly.glb",
             "note": "Aggregate preview/export only; named component STEP files remain the component-level source artefacts.",
+        }
+        manifest["assembly"]["exploded_preview"] = {
+            "glb": "nyfasi_exploded_preview.glb",
+            "topology": exploded_preview.topology,
+            "validation": exploded_report.to_dict(),
+            "note": "Presentation-only exploded view; component offsets are visualisation transforms, not assembly clearances.",
         }
 
     (OUT / "cadflow-build-manifest.json").write_text(
@@ -445,5 +497,5 @@ if __name__ == "__main__":
     result = build()
     print(
         f"CadFlow built {result['component_count']} separately validated components "
-        "plus a flattened assembly compound"
+        "plus assembled and exploded review previews"
     )
