@@ -81,13 +81,15 @@ def build_housing_retention_features():
     x_support = P["roller_len"] / 2 + P["spindle_pin_len"] / 2
     supports = []
     for side, sign in (("left", -1), ("right", 1)):
-        block = s3d.box(f"{side}_spindle_bearing_support_stock",
-                        P["bearing_block_w"], P["bearing_block_d"], P["bearing_block_h"])
+        block = s3d.at(
+            s3d.box(f"{side}_spindle_bearing_support_stock",
+                    P["bearing_block_w"], P["bearing_block_d"], P["bearing_block_h"]),
+            x=sign * x_support, y=y, z=z,
+        )
         bore = cylinder_x(f"{side}_spindle_bearing_bore_tool",
                           P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"],
                           P["bearing_block_w"] + 1, sign * x_support, y, z)
         support = s3d.cut(block, bore)
-        support = s3d.at(support, x=sign * x_support, y=y, z=z)
         s3d.material(support, "plastic", color="#343b42")
         supports.append(support)
     tabs = []
