@@ -38,6 +38,7 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 - Patent figure locators: `evidence/patent-figure-register.csv`.
 - Patent reading notes: [GB2591502A](../../docs/experiments/patent-reading-notes.md).
 - Component-level Sand3D script: `scripts/build_reconstruction.py`.
+- Curved-wall CI build record and artifact digest: [build record](builds/2026-11-05-curved-wall.md).
 - Reproduction notebook: `notebooks/nyfasi_reconstruction_colab.ipynb`.
 - Validation protocol: [documentation](../../docs/experiments/nyfasi-validation.md).
 
