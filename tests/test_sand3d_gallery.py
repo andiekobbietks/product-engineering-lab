@@ -15,6 +15,7 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "nyfasi_complete_assembly.glb",
             "source_symbols",
             "source_object_prefixes",
+            "validate_articulated_glb",
             "source_ranges",
             "component.name",
             "roller_rotation",
@@ -31,6 +32,7 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "source_symbols",
             "jointNode.quaternion",
             "sourceSymbolForObject",
+            "highlightPython",
             "build_reconstruction.py",
             "No schematic or guessed-geometry fallback",
         ):
