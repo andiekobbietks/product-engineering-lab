@@ -1,4 +1,4 @@
-name: Build documentation
+name: Build documentation and check repository integrity
 
 on:
   push:
@@ -11,14 +11,16 @@ permissions:
   contents: read
 
 jobs:
-  docs:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Run repository integrity tests
+        run: python -m unittest discover -s tests -v
       - name: Install documentation dependencies
-        run: python -m pip install --upgrade pip mkdocs-material
+        run: python -m pip install --upgrade pip -r requirements-docs.txt
       - name: Build documentation
         run: mkdocs build --strict
