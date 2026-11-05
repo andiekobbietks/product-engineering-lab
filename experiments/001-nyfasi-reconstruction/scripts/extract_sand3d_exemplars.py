@@ -8,6 +8,8 @@ from __future__ import annotations
 import argparse
 import gc
 import json
+import os
+import sys
 from pathlib import Path
 from datasets import Image, load_dataset
 
@@ -138,6 +140,11 @@ def main():
     if missing:
         print("Unmatched requested exemplars:", ", ".join(missing))
     gc.collect()
+    # The current Hugging Face datasets/pyarrow streaming stack can abort in
+    # a background-thread finalizer after the JSON has been fully written.
+    # This short-lived CI process has no remaining work or buffered file data.
+    sys.stdout.flush()
+    os._exit(0)
 
 
 if __name__ == "__main__":
