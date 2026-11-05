@@ -52,6 +52,10 @@ The curved wall is positioned using the same roller-axis datum as the roller. Ea
 
 For the all-components preview, the current build sequentially unions the named solids into a flattened aggregate B-rep Shape and exports it as STEP/GLB. This is a visual/export convenience, not a constraint-solved product assembly. The individual component files and manifest remain the component-level evidence trail; the aggregate may fuse contacting or intersecting parts and should not be used to infer assembly joints or serviceability.
 
+## Latest successful build
+
+The [5 November 2026 CadFlow build record](../../experiments/001-nyfasi-reconstruction/builds/2026-11-05-cadflow-brep.md) documents the 29-component build and the uploaded artifact. The [workflow run](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42071621074) completed successfully.
+
 ## Reproduce
 
 - [Open the CadFlow Google Colab notebook](https://colab.research.google.com/github/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/notebooks/nyfasi_cadflow_reconstruction_colab.ipynb)
