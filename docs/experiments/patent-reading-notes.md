@@ -16,7 +16,7 @@
 
 ## Relationship to the Nyfasi brand and retail product
 
-The patent metadata identifies Mouhamad Youmna and Myana Naturals Ltd. That metadata alone does **not** prove that this patent is the exact intellectual-property basis for the Nyfasi-branded Deluxe Detangler, or that the described embodiment matches a particular retail SKU. Treat it as a relevant inventor/assignee research lead until the corporate, brand and product relationship is independently evidenced.
+The patent metadata identifies Mouhamad Youmna and Myana Naturals Ltd. The Royal Academy of Engineering identifies Dr Youmna Mouhamad as Nyfasi's founder and CEO and describes the Deluxe Detangler as Nyfasi's patented technology; *Le Journal de Mayotte* also calls the Deluxe Detangler Nyfasi's patented innovation. Combined with the inventor/assignee and family metadata, this is strong cross-source evidence that the family relates to Nyfasi's product. However, neither institutional nor media source explicitly maps publication number GB2591502A to a specific retail SKU or revision. The exact publication-to-retail-revision mapping therefore remains unverified pending primary confirmation.
 
 ## Disclosed architecture
 
