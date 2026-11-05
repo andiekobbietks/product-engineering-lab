@@ -22,6 +22,7 @@ nav:
       - Vision: vision.md
       - Methodology: methodology.md
       - Architecture: architecture.md
+      - Architecture decisions: decisions/index.md
       - Roadmap: roadmap.md
       - Nyfasi case study: experiments/nyfasi.md
       - Patent reading notes: experiments/patent-reading-notes.md
