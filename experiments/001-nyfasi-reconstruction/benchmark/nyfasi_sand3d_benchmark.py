@@ -57,7 +57,7 @@ def check_constraints(p: dict) -> list[str]:
     require(p["spindle_pin_d"] + 2 * p["bearing_bore_clearance"] < min(p["bearing_block_d"], p["bearing_block_h"]), "spindle and bearing bore must fit support")
     require(support_x + p["bearing_block_w"] / 2 <= p["housing_w"] / 2, "bearing supports must remain inside housing envelope")
     require(p["housing_wall_t"] > 0 and p["housing_wall_t"] < min(p["lower_shell_h"], p["upper_shell_h"]) / 2, "housing wall thickness must remain feasible")
-    require(p["tooth_root_z"] <= p["roller_axis_z"] - outer_r, "tooth root must remain outside roller-seat envelope")
+    require(abs(p["tooth_root_z"] - (p["roller_axis_z"] - outer_r - p["tooth_height"])) < 1e-6, "tooth root datum must remain parametrically linked to roller-seat radius")
     require(p["roller_knurl_pitch"] > 0, "knurl pitch must remain positive")
     return errors
 
@@ -173,7 +173,7 @@ def main() -> int:
     for item in results:
         if item["scenario"] == "baseline" or item["status"] != "passed" or "exports" not in item:
             continue
-        changed = any(
+        changed = all(
             item["exports"][filename]["sha256"] != baseline_hashes.get(filename, {}).get("sha256")
             for filename in ("hair_applicator_complete_roller_exploded.glb", "hair_applicator_complete_roller_exploded.obj")
         )
