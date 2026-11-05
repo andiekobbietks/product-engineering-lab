@@ -43,6 +43,7 @@ The [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-c
 - [CadFlow B-rep reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py)
 - [CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md)
 - [Sand3D demos, API and Hugging Face dataset strategy](docs/experiments/sand3d-dataset-strategy.md)
+- [CadFlow B-rep reconstruction and STEP exports](docs/experiments/cadflow-brep.md)
 - [Interactive assembly explorer](docs/experiments/assembly-explorer.md)
 - [Interactive GLB viewer instructions](docs/experiments/viewer.md)
 - [Image inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv)
@@ -54,7 +55,7 @@ The [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-c
 
 [Open the documentation site](https://andiekobbietks.github.io/product-engineering-lab/) when GitHub Pages deployment is enabled. The [interactive assembly explorer](https://andiekobbietks.github.io/product-engineering-lab/experiments/assembly-explorer/) provides component inspection and local GLB loading.
 
-The parameter ledger is the single source of truth for numeric CAD inputs. Each value is classified as patent-disclosed, patent-derived, measured, image-estimated, supplier-confirmed or an engineering assumption. The current Sand3D iteration uses a 180-degree curved wall proxy with seven interpreted arcuate slots, a concave roller seat, eight tooth proxies, separate knurled roller bands, smooth lands, end walls, spindle pins, bearing supports, housing retention and a gasket proxy. The added details are parametric research geometry; most remain assumptions and are not validated against a retail sample. The geometry remains patent-led and unvalidated against a physical retail sample.
+The parameter ledger is the single source of truth for numeric CAD inputs. Each value is classified as patent-disclosed, patent-derived, measured, image-estimated, supplier-confirmed or an engineering assumption. The current reconstruction uses two complementary engines: Sand3D for procedural geometry and articulated previews, and CadFlow/OpenCascade for separately validated B-rep components and STEP/STL exchange. The model includes a 180-degree curved wall proxy with seven interpreted arcuate slots, a concave roller seat, eight tooth proxies, raised annular roller bands, smooth lands, end walls, spindle pins, bearing supports, housing retention and a gasket proxy. The added details are parametric research geometry; most remain assumptions and are not validated against a retail sample. The geometry remains patent-led and unvalidated against a physical retail sample.
 
 No original Nyfasi SolidWorks, Fusion 360, STEP or IGES files are claimed to have been located. Patent drawings are not native CAD.
 
