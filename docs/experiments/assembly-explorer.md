@@ -8,7 +8,7 @@ The gallery loads the **complete Sand3D assembly GLB**, not seven separately pos
 
 - **Original assembly coordinates:** the full assembly is loaded as one GLB, preserving the hierarchy created by the Sand3D program.
 - **Component tree:** select any of the seven named assembly groups or click its geometry in the viewport.
-- **Program-linked inspection:** the exact `build_reconstruction.py` used for the build is published with an AST-generated source map. Selecting a component highlights the real functions that create it.
+- **Program-linked inspection:** the exact `build_reconstruction.py` used for the build is published with an AST-generated source map. Selecting a component highlights its generating functions; clicking a nested band, seal, tooth or housing feature selects the corresponding source function. Python syntax is highlighted in the source pane.
 - **Joint playback and control:** the viewer discovers the `roller_rotation` joint from Sand3D's `s3d_joint` GLB extras. The slider and Play/Pause control transform that exported joint node. If the joint record is absent, the controls remain unavailable rather than simulating motion.
 - **Isolation, wireframe and camera reset:** inspect one group or the whole assembly.
 - **Exploded presentation:** the explode control applies clearly labelled display-only offsets. It is not a mechanical movement, assembly clearance or engineering datum.
