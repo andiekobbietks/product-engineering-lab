@@ -20,7 +20,8 @@ The gallery will provide:
 - a 3D viewport with orbit, zoom and camera reset;
 - a seven-group component tree and geometry picking;
 - source-code display beside the model;
-- component-to-function highlighting using source ranges generated from Python's AST during the build;
+- component-to-function highlighting using source ranges generated from Python's AST during the build, including clicked subparts mapped to their generating functions;
+- Python syntax highlighting in the source pane;
 - a parameter context read from the same CAD parameter ledger;
 - discovery and operation of the exported `s3d_joint` metadata for the roller's continuous rotation;
 - component isolation and wireframe inspection;
