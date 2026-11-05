@@ -32,7 +32,7 @@ A multi-part hair-applicator mechanism is our first test case. The benchmark cha
   const results = document.getElementById("benchmark-results");
   const scope = document.getElementById("benchmark-scope");
   try {
-    const response = await fetch("data/latest.json", { cache: "no-store" });
+    const response = await fetch("../data/latest.json", { cache: "no-store" });
     if (!response.ok) throw new Error("No published benchmark report yet");
     const report = await response.json();
     status.innerHTML = '<span class="status-dot ' + (report.status === "passed" ? "good" : "bad") + '"></span><strong>' + report.status.toUpperCase() + '</strong><span>' + report.scenarios_passed + ' / ' + report.scenarios_total + ' scenarios passed</span><span>Sand3D ' + report.engine_version + ' · benchmark ' + report.benchmark_version + '</span>';
