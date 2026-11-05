@@ -165,16 +165,23 @@ def build_spindle_pin(side, sign):
     return s3d.group(f"roller_{side}_spindle_pin_component", pin)
 
 
-def build_roller_mechanism():
+def build_roller_core_and_bands():
+    """Rotating roller body: smooth core with separately modelled raised bands."""
     parts = [build_roller_core()]
     band_count = P["roller_band_count"]
     for index in range(band_count):
         axial = (index - (band_count - 1) / 2) * P["tooth_pitch"]
         parts.append(build_textured_band(index + 1, axial))
+    return s3d.group("rotatable_roller_body", *parts)
+
+
+def build_roller_end_features():
+    """Separate end walls and spindle pins at both ends of the roller."""
+    parts = []
     for side, sign in (("left", -1), ("right", 1)):
         parts.append(build_roller_end_wall(side, sign))
         parts.append(build_spindle_pin(side, sign))
-    return s3d.group("roller_mechanism", *parts)
+    return s3d.group("roller_end_features", *parts)
 
 
 def build_housing_retention_features():
@@ -282,34 +289,38 @@ def build_comb_teeth():
 def build_research_assembly(exploded=False):
     """Build the complete seven-group assembly in a shared datum frame."""
     global COMPONENTS
-    lower = build_lower_housing()
+    lower_shell = build_lower_housing()
+    housing_supports_and_tabs = build_housing_retention_features()
+    housing_gasket = build_housing_gasket()
+    lower = s3d.group(
+        "lower_housing_complete", lower_shell, housing_supports_and_tabs, housing_gasket
+    )
     upper = s3d.at(
         build_upper_housing(),
         z=(P["lower_shell_h"] + P["upper_shell_h"]) / 2,
     )
     reservoir = s3d.at(build_reservoir(), z=P["reservoir_z"])
-    roller = build_roller_mechanism()
+    roller = build_roller_core_and_bands()
+    roller_ends = build_roller_end_features()
     wall = build_curved_wall()
     teeth = build_comb_teeth()
-    retention = build_housing_retention_features()
-    gasket = build_housing_gasket()
 
-    # Keep the named engineering groups separate for web rendering and inspection.
+    # Seven top-level groups correspond to the public component register.
     COMPONENTS = [
         ("lower-housing", "Lower housing", lower, "Engineering assumption",
-         "Lower clamshell shell; envelope and wall geometry are provisional."),
+         "Lower shell, housing bearing supports, snap-fit tabs and perimeter seal. Envelope and retention dimensions are provisional."),
         ("upper-housing", "Upper housing", upper, "Engineering assumption",
          "Upper clamshell shell; envelope and closure geometry are provisional."),
         ("reservoir", "Reservoir", reservoir, "Engineering assumption",
          "Translucent internal reservoir proxy; capacity and detailed geometry are unknown."),
         ("rotatable-roller", "Rotatable roller", roller, "Patent-derived estimate",
-         "Smooth core, raised knurled circumferential bands, end walls and spindle pins. Most dimensions and texture are assumptions."),
+         "Smooth core and raised knurled circumferential bands. Roller diameter is a patent-derived estimate; core, band width and texture are assumptions."),
         ("curved-slotted-wall", "Curved slotted wall", wall, "Patent-led interpretation",
          "180-degree concave seat with seven interpreted axial through-slots."),
         ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
          "Eight-tooth illustrated embodiment; approximate width and length are patent-described, while height and pitch remain assumptions."),
-        ("roller-end-features", "Roller end features", retention, "Engineering assumption",
-         "Bearing supports, bores and housing snap-fit retention proxies; exact construction is unverified."),
+        ("roller-end-features", "Roller end features", roller_ends, "Engineering assumption",
+         "Two end walls and spindle pins. Exact retention geometry and dimensions are not verified."),
     ]
 
     roller_frame = s3d.local(
@@ -320,7 +331,7 @@ def build_research_assembly(exploded=False):
     )
     return s3d.assembly(
         "nyfasi_complete_research_assembly",
-        lower, upper, reservoir, roller, wall, teeth, retention, gasket,
+        lower, upper, reservoir, roller, wall, teeth, roller_ends,
     )
 
 
