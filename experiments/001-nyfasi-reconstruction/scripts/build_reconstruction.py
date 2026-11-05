@@ -18,6 +18,18 @@ RECORDS = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
 P = {name: record["value"] for name, record in RECORDS.items()}
 COMPONENTS = []
 
+# Stable public node identifiers; do not derive viewer identity from
+# Sand3D's mutable or auto-disambiguated component.name property.
+COMPONENT_NODE_NAMES = {
+    "lower-housing": "lower_housing_complete",
+    "upper-housing": "upper_housing_complete",
+    "reservoir": "reservoir_volume_proxy",
+    "rotatable-roller": "rotatable_roller_body",
+    "curved-slotted-wall": "semi_cylindrical_slotted_wall",
+    "eight-comb-teeth": "eight_comb_teeth",
+    "roller-end-features": "nyfasi_component_roller_end_features",
+}
+
 
 def validate_articulated_glb(path, expected_component_nodes, expected_joint):
     """Fail the build if the complete GLB loses named groups or Sand3D joint extras."""
@@ -479,7 +491,7 @@ def build_research_assembly(exploded=False):
     # Keep the component root name unique. The previous root reused the name of
     # its nested geometry group, causing Sand3D to suffix one name with .001.
     roller_ends = s3d.group(
-        "roller_end_features_component_group",
+        COMPONENT_NODE_NAMES["roller-end-features"],
         build_roller_end_features(),
         build_elastomeric_spindle_seals(),
     )
@@ -526,7 +538,8 @@ def main():
     assembly_sha256 = hashlib.sha256(assembly_path.read_bytes()).hexdigest()
     validate_articulated_glb(
         assembly_path,
-        [component.name for _, _, component, _, _ in COMPONENTS],
+        [COMPONENT_NODE_NAMES[component_id]
+         for component_id, _, _, _, _ in COMPONENTS],
         "roller_rotation",
     )
     # Keep the benchmark and older local workflows compatible with the established export name.
@@ -617,7 +630,7 @@ def main():
         manifest["components"].append({
             "id": component_id,
             "name": name,
-            "node_name": component.name,
+            "node_name": COMPONENT_NODE_NAMES[component_id],
             "file": filename,
             "provenance": provenance,
             "description": description,
