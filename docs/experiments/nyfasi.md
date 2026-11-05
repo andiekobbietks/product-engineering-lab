@@ -1,3 +1,5 @@
+The latest successful build is recorded in the [build manifest](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/builds/2026-11-05.md), including GLB/OBJ hashes and limitations.
+
 # Experiment 001 — Nyfasi Deluxe Detangler
 
 This is an **independent research case study**. It is not commissioned by, affiliated with or endorsed by Nyfasi, Dr Youmna Mouhamad, PDR or iF Design.
