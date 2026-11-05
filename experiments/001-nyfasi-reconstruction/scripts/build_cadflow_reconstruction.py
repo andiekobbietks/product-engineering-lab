@@ -331,9 +331,11 @@ def export_component(component_id: str, shape):
         )
     if shape.volume <= 0:
         raise RuntimeError(f"Non-positive B-rep volume for {component_id}")
-    if shape.topology["solids"] != 1:
+    expected_solids = P["tooth_count"] if component_id == "curved_slotted_wall" else 1
+    if shape.topology["solids"] != expected_solids:
         raise RuntimeError(
-            f"Expected one solid for {component_id}, got {shape.topology['solids']}"
+            f"Expected {expected_solids} solid(s) for {component_id}, "
+            f"got {shape.topology['solids']}"
         )
 
     stem = OUT / component_id
