@@ -52,6 +52,17 @@ def main():
                 "() => document.querySelectorAll('#componentList button').length === 7",
                 timeout=15000,
             )
+            page.locator("#componentList button").nth(6).click()
+            selected_name = page.locator("#partTitle").inner_text()
+            if selected_name != "Roller end features":
+                raise AssertionError(f"Component selection did not update the inspector: {selected_name}")
+            page.locator("#jointRange").evaluate(
+                "(el) => { el.value = '45'; el.dispatchEvent(new Event('input', {bubbles: true})); }"
+            )
+            joint_value = page.locator("#jointValue").inner_text()
+            if joint_value != "45°":
+                raise AssertionError(f"Joint slider did not update articulation value: {joint_value}")
+
             state = page.evaluate("""() => ({
                 status: document.querySelector('#engineStatus')?.textContent,
                 components: document.querySelectorAll('#componentList button').length,
