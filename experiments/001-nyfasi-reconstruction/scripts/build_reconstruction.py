@@ -12,6 +12,7 @@ ROOT = HERE.parent
 PARAMETER_FILE = ROOT / "models" / "cad-parameters.json"
 RECORDS = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
 P = {name: record["value"] for name, record in RECORDS.items()}
+COMPONENTS = []
 
 
 def cylinder_on_x(name, diameter, length, x=0, y=0, z=0):
@@ -262,48 +263,110 @@ def build_housing_gasket():
     return s3d.group("housing_interface_gasket_proxy", gasket)
 
 
-def build_research_assembly(exploded=True):
-    """Assembly head: one call per distinct component, placed in the housing frame."""
-    gap = P["exploded_gap"] if exploded else 0
+def build_comb_teeth():
+    """Eight separately named teeth, retained as a component group for export."""
+    teeth = []
+    for index in range(P["tooth_count"]):
+        x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
+        tooth = s3d.extrude(
+            f"blade_tooth_{index + 1:02d}",
+            s3d.rect(P["tooth_width"], P["tooth_length"], r=P["tooth_corner_r"]),
+            P["tooth_height"],
+        )
+        tooth = s3d.at(tooth, x=x, y=P["roller_axis_y"], z=P["tooth_root_z"])
+        s3d.material(tooth, "plastic", color="#e2e4e7")
+        teeth.append(tooth)
+    return s3d.group("eight_comb_teeth", *teeth)
+
+
+def build_research_assembly(exploded=False):
+    """Build the complete seven-group assembly in a shared datum frame."""
+    global COMPONENTS
     lower = build_lower_housing()
-    upper = s3d.at(build_upper_housing(), z=(P["lower_shell_h"] + P["upper_shell_h"]) / 2 + gap)
+    upper = s3d.at(
+        build_upper_housing(),
+        z=(P["lower_shell_h"] + P["upper_shell_h"]) / 2,
+    )
     reservoir = s3d.at(build_reservoir(), z=P["reservoir_z"])
     roller = build_roller_mechanism()
-    wall_and_comb = build_comb_and_wall()
+    wall = build_curved_wall()
+    teeth = build_comb_teeth()
     retention = build_housing_retention_features()
     gasket = build_housing_gasket()
 
-    # The spindle is represented as a continuous revolute degree of freedom.
+    # Keep the named engineering groups separate for web rendering and inspection.
+    COMPONENTS = [
+        ("lower-housing", "Lower housing", lower, "Engineering assumption",
+         "Lower clamshell shell; envelope and wall geometry are provisional."),
+        ("upper-housing", "Upper housing", upper, "Engineering assumption",
+         "Upper clamshell shell; envelope and closure geometry are provisional."),
+        ("reservoir", "Reservoir", reservoir, "Engineering assumption",
+         "Translucent internal reservoir proxy; capacity and detailed geometry are unknown."),
+        ("rotatable-roller", "Rotatable roller", roller, "Patent-derived estimate",
+         "Smooth core, raised knurled circumferential bands, end walls and spindle pins. Most dimensions and texture are assumptions."),
+        ("curved-slotted-wall", "Curved slotted wall", wall, "Patent-led interpretation",
+         "180-degree concave seat with seven interpreted axial through-slots."),
+        ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
+         "Eight-tooth illustrated embodiment; approximate width and length are patent-described, while height and pitch remain assumptions."),
+        ("roller-end-features", "Roller end features", retention, "Engineering assumption",
+         "Bearing supports, bores and housing snap-fit retention proxies; exact construction is unverified."),
+    ]
+
     roller_frame = s3d.local(
-        lower,
-        x=0,
-        y=P["roller_axis_y"],
-        z=P["roller_axis_z"],
+        lower, x=0, y=P["roller_axis_y"], z=P["roller_axis_z"]
     )
     s3d.joint(
-        "roller_rotation",
-        roller,
-        roller_frame,
-        kind="continuous",
-        axis="+X",
+        "roller_rotation", roller, roller_frame, kind="continuous", axis="+X"
     )
     return s3d.assembly(
-        "hair_applicator_complete_roller_mechanism_research_proxy",
-        lower, upper, reservoir, roller, wall_and_comb, retention, gasket,
+        "nyfasi_complete_research_assembly",
+        lower, upper, reservoir, roller, wall, teeth, retention, gasket,
     )
 
 
 def main():
     s3d.empty_scene()
-    model = build_research_assembly(exploded=True)
+    model = build_research_assembly(exploded=False)
     output = ROOT / "output"
     output.mkdir(exist_ok=True)
-    s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.glb"))
+    s3d.export(model, str(output / "nyfasi_complete_assembly.glb"))
     s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.obj"))
     s3d.export(model, str(output / "hair_applicator_complete_roller.urdf"))
     s3d.export(model, str(output / "hair_applicator_complete_roller.usda"))
+
+    # Publish each top-level component as its own GLB so the viewer can select,
+    # isolate and explode real Sand3D geometry rather than a hand-drawn schematic.
+    web_dir = output / "web-components"
+    web_dir.mkdir(parents=True, exist_ok=True)
+    manifest = {
+        "schema_version": "1.0.0",
+        "engine": "Sand3D",
+        "engine_version": "1.6.2",
+        "units": "mm",
+        "model_status": "research_only",
+        "assembly_file": "nyfasi_complete_assembly.glb",
+        "components": [],
+        "limitations": [
+            "Patent-to-retail-SKU mapping is unverified.",
+            "Most dimensions and all fit/tolerance values remain assumptions.",
+            "The model is not a manufacturing release or validated physical digital twin."
+        ]
+    }
+    for component_id, name, component, provenance, description in COMPONENTS:
+        filename = component_id + ".glb"
+        s3d.export(component, str(web_dir / filename))
+        manifest["components"].append({
+            "id": component_id,
+            "name": name,
+            "file": filename,
+            "provenance": provenance,
+            "description": description
+        })
+    (web_dir / "manifest.json").write_text(
+        json.dumps(manifest, indent=2) + "\\n", encoding="utf-8"
+    )
     print("Sand3D source fingerprint:", s3d.fingerprint())
-    print("Wrote GLB, OBJ, URDF and USDA research exports to:", output.resolve())
+    print("Built complete seven-group Sand3D assembly and component GLBs:", output.resolve())
 
 
 if __name__ == "__main__":
