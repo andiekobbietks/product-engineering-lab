@@ -19,6 +19,8 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "source_ranges",
             "component.name",
             "roller_rotation",
+            "roller_end_features_component_group",
+            "assembly_sha256",
             "build_reconstruction.py",
             "cad-parameters.json",
         ):
@@ -32,6 +34,8 @@ class Sand3DGalleryContractTests(unittest.TestCase):
         viewer = (DOCS / "experiments" / "assembly-explorer.html").read_text(encoding="utf-8")
         for contract in (
             "manifest.assembly_file",
+            "manifest.assembly_sha256",
+            "encodeURIComponent(manifest.assembly_sha256",
             "s3d_joint",
             "source_symbols",
             "jointNode.quaternion",
