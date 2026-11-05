@@ -330,6 +330,8 @@ def main():
     output = ROOT / "output"
     output.mkdir(exist_ok=True)
     s3d.export(model, str(output / "nyfasi_complete_assembly.glb"))
+    # Keep the benchmark and older local workflows compatible with the established export name.
+    s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.glb"))
     s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.obj"))
     s3d.export(model, str(output / "hair_applicator_complete_roller.urdf"))
     s3d.export(model, str(output / "hair_applicator_complete_roller.usda"))
