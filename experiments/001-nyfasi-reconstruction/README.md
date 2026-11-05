@@ -23,7 +23,9 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 ## Repository artefacts
 
 - Product data model and JSON Schema: `models/product-model.json` and `models/product-model.schema.json`.
-- Rights-aware image and patent-figure inventory: `evidence/image-inventory.csv`.
+- Rights-aware image inventory: `evidence/image-inventory.csv`.
+- Patent figure locators: `evidence/patent-figure-register.csv`.
+- Patent reading notes: [GB2591502A](../../docs/experiments/patent-reading-notes.md).
 - Component-level Sand3D script: `scripts/build_reconstruction.py`.
 - Reproduction notebook: `notebooks/nyfasi_reconstruction_colab.ipynb`.
 - Validation protocol: [documentation](../../docs/experiments/nyfasi-validation.md).
