@@ -22,7 +22,7 @@ Sand3D remains an independently maintained third-party project. We will respect 
 
 ## Experiment 001: Nyfasi Deluxe Detangler
 
-This independent case study investigates what can responsibly be reconstructed from public product evidence and patent publications. The GB2591502A patent is a relevant inventor/assignee lead, but its direct relationship to the Nyfasi-branded retail SKU remains unverified. It separates documented claims from patent embodiments, visual observations from inferred components, assumptions from measured dimensions, and illustrative geometry from manufacturing-ready CAD.
+This independent case study investigates what can responsibly be reconstructed from public product evidence and patent publications. Cross-source evidence strongly supports that the GB2591502A family relates to Nyfasi's patented Deluxe Detangler, although the exact publication-to-retail-SKU/revision mapping remains unverified. It separates documented claims from patent embodiments, visual observations from inferred components, assumptions from measured dimensions, and illustrative geometry from manufacturing-ready CAD.
 
 The research now includes a dedicated [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-china-due-diligence.md). It records the Chinese patent grant and a published report of China-based mould manufacture and initial production, while marking the supplier, factory location, tooling ownership and current production status as unverified.
 
