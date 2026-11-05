@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
-from datasets import load_dataset
+from datasets import Image, load_dataset
 
 DATASETS=("sand3d-cad","sand3d-objaverse","sand3d-articraft","sand3d-simready","sand3d-automate")
 TERMS=("roller","bearing","shaft","housing","wheel","gear","seal","bracket","hinge","spring","pump","motor","cylinder","valve","mechanical","tool","fastener")
@@ -22,6 +22,11 @@ def main():
     for name in DATASETS:
         repo=f"Sandflow/{name}"
         stream=load_dataset(repo,split="train",streaming=True)
+        # Keep media as metadata references. We only need text/metadata fields;
+        # decoding source images would require Pillow and waste bandwidth.
+        for column, feature in stream.features.items():
+            if isinstance(feature, Image):
+                stream=stream.cast_column(column,Image(decode=False))
         records=[]
         scanned=0
         for row in stream:
