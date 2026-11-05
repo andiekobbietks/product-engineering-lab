@@ -35,7 +35,7 @@ Seven narrow slot cuts are placed at the centres of the seven clear gaps between
 | Inter-tooth slots | 7 | Engineering interpretation | One opening in each gap between adjacent teeth |
 | Slot axial width | 2 mm | Engineering assumption | No patent dimension located |
 
-All numeric values and evidence IDs are maintained in [cad-parameters.json](../../experiments/001-nyfasi-reconstruction/models/cad-parameters.json). Do not add independent hard-coded dimensions to the Sand3D script.
+All numeric values and evidence IDs are maintained in [cad-parameters.json](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/cad-parameters.json). Do not add independent hard-coded dimensions to the Sand3D script.
 
 ## Build and checks
 
