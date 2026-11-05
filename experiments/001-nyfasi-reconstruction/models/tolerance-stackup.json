@@ -2,7 +2,7 @@
   "schema_version": "2.0.0",
   "status": "PRELIMINARY_ENGINEERING_ASSUMPTIONS",
   "units": "mm",
-  "note": "This ledger stores assumed tolerance inputs only. Nominal clearances and worst-case limits are calculated from cad-parameters.json at runtime; derived results are deliberately not duplicated here.",
+  "note": "This ledger stores assumed tolerance inputs only. Shared physical-feature tolerances are defined once under shared_tolerances. Nominal clearances and worst-case limits are calculated from cad-parameters.json at runtime; derived results are deliberately not duplicated here.",
   "interfaces": {
     "roller_to_curved_seat": {
       "roller_radius_tolerance": 0.1,
@@ -12,16 +12,10 @@
       "slot_width_tolerance": 0.15,
       "band_width_tolerance": 0.1
     },
-    "spindle_pin_to_bearing_bore": {
-      "pin_diameter_tolerance": 0.05,
-      "bore_diameter_tolerance": 0.05
-    },
     "spindle_pin_to_elastomer_seal": {
-      "pin_diameter_tolerance": 0.05,
       "seal_bore_tolerance": 0.1
     },
     "elastomer_seal_to_bearing_bore": {
-      "bearing_bore_tolerance": 0.05,
       "seal_outer_diameter_tolerance": 0.1
     }
   },
@@ -35,5 +29,9 @@
     "Check band/slot minimum clearance over the full roller rotation and axial tolerance stack.",
     "Model elastomer compression, durometer, swelling, wear and fluid compatibility before claiming sealing.",
     "Run physical spin, leak, wear and contamination tests."
-  ]
+  ],
+  "shared_tolerances": {
+    "spindle_pin_diameter": 0.05,
+    "bearing_bore_diameter": 0.05
+  }
 }
