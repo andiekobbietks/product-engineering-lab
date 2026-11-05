@@ -131,12 +131,12 @@
       "note": "Provisional 15 mm centre pitch interpreted as 5 mm tooth width plus 10 mm clear gap. Patent wording on adjacent-tooth spacing is ambiguous; do not treat this as a fixed constraint."
     },
     "wall_thickness": {
-      "value": 2,
+      "value": 1.3,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Placeholder shell thickness needed to make a solid curved carrier; patent drawing does not dimension it."
+      "note": "Provisional curved-wall thickness selected so the patent-described 2 mm roller projections reach approximately flush with the wall's outer envelope through the slots, given the 0.5 mm seat clearance and 0.15 mm projection overlap. This is a functional fit assumption, not a patent dimension."
     },
     "roller_seat_clearance": {
       "value": 0.5,
@@ -333,12 +333,12 @@
       "note": "Presentation/assembly placement for the reservoir proxy; not a product datum."
     },
     "tooth_root_z": {
-      "value": -21.5,
+      "value": -20.8,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Root datum at the outer surface of the curved slotted wall. Teeth are flipped 180 degrees so the tapered tips extend radially away from the roller; value is derived from roller axis, seat clearance, wall thickness and smooth drum diameter."
+      "note": "Root datum at the outer surface of the curved slotted wall. Teeth are flipped 180 degrees so the tapered tips extend radially away from the roller; value is derived from roller axis, seat clearance and 1.3 mm wall thickness."
     },
     "tooth_corner_r": {
       "value": 0.6,
