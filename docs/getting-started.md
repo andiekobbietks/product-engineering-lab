@@ -74,3 +74,15 @@ Record the Git commit, Python version, Sand3D version, parameter-ledger hash and
 ## Public research boundary
 
 This repository contains public research material and reference implementations. It is not the location for confidential customer information, private supplier documents, unreleased AK Build code or third-party CAD without redistribution permission.
+
+## Publish the documentation with GitHub Pages
+
+The repository now builds the MkDocs site on every push and pull request. To publish it:
+
+1. In GitHub, open **Settings → Pages** for this repository.
+2. Under **Build and deployment**, choose **GitHub Actions** as the source and save.
+3. Open **Actions → Build documentation and optionally deploy GitHub Pages**.
+4. Choose **Run workflow**, select the `main` branch and set `deploy_pages` to `true`.
+5. After a successful deployment, the site is available at `https://andiekobbietks.github.io/product-engineering-lab/`.
+
+The deployment is deliberately opt-in until Pages is enabled. The documentation build and integrity checks still run automatically on pushes and pull requests.
