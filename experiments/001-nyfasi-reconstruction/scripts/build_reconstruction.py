@@ -94,7 +94,7 @@ def build_research_assembly(exploded=True):
 
 def main():
     model = build_research_assembly(exploded=True)
-    output = HERE / "output"
+    output = HERE.parent / "output"
     output.mkdir(exist_ok=True)
     s3d.export(model, str(output / "hair_applicator_research_exploded.glb"))
     s3d.export(model, str(output / "hair_applicator_research_exploded.obj"))
