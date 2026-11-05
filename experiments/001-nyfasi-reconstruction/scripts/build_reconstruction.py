@@ -150,7 +150,7 @@ def rounded_tray(name, width, depth, height, wall, corner):
     )
     cavity = s3d.at(cavity, z=-height / 2 + wall)
     shell = s3d.cut(blank, cavity)
-    s3d.material(shell, "plastic", color="#34383d")
+    s3d.material(shell, "plastic", color="#e7a58c", roughness=0.58)
     return s3d.group(name, shell)
 
 
@@ -189,7 +189,7 @@ def build_upper_retaining_arms():
             z=arm_bottom,
         )
         arm = s3d.cut(arm, pin_cutout)
-        s3d.material(arm, "plastic", color="#555b62")
+        s3d.material(arm, "plastic", color="#6b3154", roughness=0.56)
         arms.append(arm)
     return s3d.group("upper_retaining_arms", *arms)
 
@@ -201,7 +201,7 @@ def build_upper_housing():
         P["housing_wall_t"], P["housing_corner_r"],
     )
     cap = s3d.at(cap, rx=180)  # invert the open face so the cap opens toward the lower shell
-    s3d.material(cap, "plastic", color="#555b62")
+    s3d.material(cap, "plastic", color="#572448", roughness=0.52)
     return s3d.group("upper_housing_complete", cap, build_upper_retaining_arms())
 
 
@@ -212,7 +212,7 @@ def build_reservoir():
         P["reservoir_h"],
     )
     tank = s3d.at(tank, z=-P["reservoir_h"] / 2)
-    s3d.material(tank, "glass", color="#8bbac8", opacity=0.38)
+    s3d.material(tank, "plastic", color="#f4c6b0", opacity=0.30, roughness=0.42)
     return s3d.group("reservoir_volume_proxy", tank)
 
 
@@ -249,7 +249,7 @@ def build_curved_wall():
         z=P["roller_axis_z"],
         ry=90,
     )
-    s3d.material(wall, "plastic", color="#d7d9dc")
+    s3d.material(wall, "plastic", color="#e7a58c", roughness=0.60)
     return s3d.group("semi_cylindrical_slotted_wall", wall)
 
 
@@ -259,7 +259,7 @@ def build_roller_core():
         P["roller_d"], P["roller_len"],
         y=P["roller_axis_y"], z=P["roller_axis_z"],
     )
-    s3d.material(core, "rubber", color="#59636b")
+    s3d.material(core, "rubber", color="#bd6e59", roughness=0.78)
     return core
 
 
@@ -284,7 +284,7 @@ def build_textured_band(index, axial_position):
             z=P["roller_axis_z"] + surface_radius * math.sin(angle),
             rx=math.degrees(angle) - 90,
         )
-        s3d.material(projection, "rubber", color="#a9b0b5", roughness=0.82)
+        s3d.material(projection, "rubber", color="#e5a087", roughness=0.76)
         projections.append(projection)
     return s3d.group(f"textured_annular_band_{index:02d}", *projections)
 
@@ -296,7 +296,7 @@ def build_roller_end_wall(side, sign):
         x=sign * (P["roller_len"] / 2 + P["roller_endwall_t"] / 2),
         y=P["roller_axis_y"], z=P["roller_axis_z"],
     )
-    s3d.material(disc, "plastic", color="#3d454b")
+    s3d.material(disc, "plastic", color="#6b3154", roughness=0.58)
     return s3d.group(f"roller_{side}_end_wall_component", disc)
 
 
@@ -382,7 +382,7 @@ def build_housing_retention_features():
             z=P["roller_axis_z"],
         )
         support = s3d.cut(block, bore)
-        s3d.material(support, "plastic", color="#343b42")
+        s3d.material(support, "plastic", color="#b97865", roughness=0.65)
         supports.append(s3d.group(f"{side}_bearing_support", support))
 
     tabs = []
@@ -397,7 +397,7 @@ def build_housing_retention_features():
             x=x,
             z=P["lower_shell_h"] / 2 + P["snap_tab_h"] / 2,
         )
-        s3d.material(tab, "plastic", color="#e3a44b")
+        s3d.material(tab, "plastic", color="#572448", roughness=0.58)
         tabs.append(tab)
     return s3d.group("housing_bearings_and_snap_fit_proxies", *supports, *tabs)
 
@@ -468,7 +468,7 @@ def build_comb_teeth():
             z=P["tooth_root_z"],
             rx=-90,
         )
-        s3d.material(tooth, "plastic", color="#e2e4e7")
+        s3d.material(tooth, "plastic", color="#efb49a", roughness=0.54)
         teeth.append(tooth)
     return s3d.group("eight_comb_teeth", *teeth)
 
