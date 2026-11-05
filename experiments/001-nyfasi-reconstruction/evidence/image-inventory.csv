@@ -1,0 +1,6 @@
+asset_id,source_id,locator,asset_type,view_or_figure,observations,rights_status,local_copy,classification_status,notes
+IMG-001,SRC-001,Nyfasi product pages,product photography,front/three-quarter views,Pending visual inspection,third_party_permission_unverified,no,pending,Record exact page URL and retrieval date before annotation
+IMG-002,SRC-002,PDR Deluxe Detangler case study,design presentation imagery,product/industrial design views,Pending visual inspection,third_party_permission_unverified,no,pending,Do not mirror source images without permission
+IMG-003,SRC-003,iF Design Deluxe Detangler entry,award entry imagery,product views,Pending visual inspection,third_party_permission_unverified,no,pending,Check entrant and platform image reuse terms
+PAT-001,SRC-004,GB2591502A figure set,patent drawing,figure locators pending extraction,Pending figure-by-figure review,patent_publication_reference,no,pending,Patent publication does not equal native CAD or unrestricted commercial use
+PAT-002,SRC-005,USD1031151S1 figure set,design patent drawing,figure locators pending extraction,Pending figure-by-figure review,patent_publication_reference,no,pending,Verify official register status and owner
