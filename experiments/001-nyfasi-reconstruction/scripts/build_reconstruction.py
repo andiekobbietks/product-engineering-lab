@@ -60,30 +60,30 @@ def cylinder_on_x(name, diameter, length, x=0, y=0, z=0):
     return s3d.at(solid, x=x - length / 2, y=y, z=z, ry=90)
 
 
-def housing_outline_points(width, depth, waist_depth):
+def housing_outline_points(width, depth, waist_depth, end_radius):
     """Patent-led waisted planform: full-width ends and a narrower centre."""
     return [
-        (-width * 0.5 + 8, -depth / 2),
+        (-width * 0.5 + end_radius, -depth / 2),
         (-width * 0.30, -depth / 2),
         (-width * 0.18, -waist_depth / 2),
         (width * 0.18, -waist_depth / 2),
         (width * 0.30, -depth / 2),
-        (width / 2 - 8, -depth / 2),
-        (width / 2, -depth / 2 + 8),
-        (width / 2, depth / 2 - 8),
-        (width / 2 - 8, depth / 2),
+        (width / 2 - end_radius, -depth / 2),
+        (width / 2, -depth / 2 + end_radius),
+        (width / 2, depth / 2 - end_radius),
+        (width / 2 - end_radius, depth / 2),
         (width * 0.30, depth / 2),
         (width * 0.18, waist_depth / 2),
         (-width * 0.18, waist_depth / 2),
         (-width * 0.30, depth / 2),
         (-width / 2 + 8, depth / 2),
-        (-width / 2, depth / 2 - 8),
-        (-width / 2, -depth / 2 + 8),
+        (-width / 2, depth / 2 - end_radius),
+        (-width / 2, -depth / 2 + end_radius),
     ]
 
 
 def housing_outline_profile(width, depth, waist_depth, corner):
-    return s3d.poly(housing_outline_points(width, depth, waist_depth), fillet=corner)
+    return s3d.poly(housing_outline_points(width, depth, waist_depth, corner), fillet=corner)
 
 
 def rounded_tray(name, width, depth, height, wall, corner):
@@ -190,26 +190,22 @@ def build_textured_band(index, axial_position):
     """A circumferential array of patent-described spheroidal roller projections."""
     projections = []
     projection_d = P["roller_projection_d"]
-    centre_radius = (
-        P["roller_core_d"] / 2
-        + projection_d / 2
-        - P["roller_projection_overlap"]
-    )
+    surface_radius = P["roller_core_d"] / 2 - P["roller_projection_overlap"]
     for projection_index in range(P["roller_projection_count"]):
         angle = 2 * math.pi * projection_index / P["roller_projection_count"]
-        y = P["roller_axis_y"] + centre_radius * math.cos(angle)
-        z = P["roller_axis_z"] + centre_radius * math.sin(angle)
-        projection = s3d.sphere(
+        projection = s3d.dome(
             f"roller_projection_{index:02d}_{projection_index + 1:02d}",
             projection_d,
+            P["roller_projection_height"],
         )
-        # Sand3D spheres rest on local Z=0, so offset by half their diameter
-        # to place each sphere centre on the roller's circumferential radius.
+        # The dome base sits on the smooth drum; rotate its local +Z axis
+        # onto the radial direction so the spheroidal cap projects outwards.
         projection = s3d.at(
             projection,
             x=axial_position,
-            y=y,
-            z=z - projection_d / 2,
+            y=P["roller_axis_y"] + surface_radius * math.cos(angle),
+            z=P["roller_axis_z"] + surface_radius * math.sin(angle),
+            rx=math.degrees(angle) - 90,
         )
         s3d.material(projection, "rubber", color="#a9b0b5", roughness=0.82)
         projections.append(projection)
@@ -341,7 +337,7 @@ def build_housing_gasket():
     w = P["housing_w"] - 2 * P["gasket_inset"]
     d = P["housing_d"] - 2 * P["gasket_inset"]
     waist = P["housing_waist_depth"] - 2 * P["gasket_inset"]
-    path = housing_outline_points(w, d, waist)
+    path = housing_outline_points(w, d, waist, P["housing_corner_r"])
     gasket = s3d.wire(
         "upper_lower_housing_perimeter_gasket",
         path=path,
@@ -405,7 +401,7 @@ def build_research_assembly(exploded=False):
         ("reservoir", "Reservoir", reservoir, "Engineering assumption",
          "Translucent internal reservoir proxy; capacity and detailed geometry are unknown."),
         ("rotatable-roller", "Rotatable roller", roller, "Patent-derived estimate",
-         "Smooth core and raised knurled circumferential bands. Roller diameter is a patent-derived estimate; core, band width and texture are assumptions."),
+         "Smooth core with circumferential bands of discrete spheroidal projections. Roller diameter is a patent-derived estimate; projection count and spacing are derived assumptions."),
         ("curved-slotted-wall", "Curved slotted wall", wall, "Patent-led interpretation",
          "180-degree concave seat with seven interpreted axial through-slots."),
         ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
