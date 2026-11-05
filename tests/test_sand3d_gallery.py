@@ -22,6 +22,9 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "roller_end_features_component_group",
             "superellipse",
             "tooth_tip_taper_deg",
+            "housing_outline_profile",
+            "roller_projection_count",
+            "s3d.sphere",
             "assembly_sha256",
             "build_reconstruction.py",
             "cad-parameters.json",
@@ -48,6 +51,7 @@ class Sand3DGalleryContractTests(unittest.TestCase):
         ):
             self.assertIn(contract, viewer)
         self.assertNotIn("new THREE.CylinderGeometry(12,12,112", viewer)
+        self.assertNotIn("s3d.knurl", (EXP / "scripts" / "build_reconstruction.py").read_text(encoding="utf-8"))
 
     def test_architecture_decisions_are_present_and_linked(self):
         index = (DOCS / "decisions" / "index.md").read_text(encoding="utf-8")
