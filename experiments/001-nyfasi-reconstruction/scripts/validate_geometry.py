@@ -32,6 +32,8 @@ def main():
         (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] < min(P["bearing_block_d"], P["bearing_block_h"]), "Bearing bore does not fit its support block."),
         (support_x + P["bearing_block_w"] / 2 <= P["housing_w"] / 2, "Bearing supports exceed housing envelope."),
         (P["snap_tab_count"] >= 1 and min(P["snap_tab_w"], P["snap_tab_d"], P["snap_tab_h"]) > 0, "Snap-fit proxy dimensions/count must be positive."),
+        (P["seal_outer_d"] > P["seal_inner_d"] > P["spindle_pin_d"], "Seal proxy diameter relationship must be valid."),
+        (P["seal_axial_width"] > 0, "Seal proxy axial width must be positive."),
     ]
     errors.extend(message for ok, message in checks if not ok)
     if errors:
