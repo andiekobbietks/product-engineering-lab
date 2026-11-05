@@ -29,9 +29,9 @@ nav:
       - CAD parameter provenance: experiments/cad-parameter-provenance.md
       - Curved-wall geometry: experiments/curved-wall-geometry.md
       - Roller seal and tolerance study: experiments/roller-seal-and-tolerance.md
-      - CadFlow B-rep reconstruction: experiments/cadflow-reconstruction.md
+      - CadFlow reconstruction (historical): experiments/cadflow-reconstruction.md
       - Sand3D datasets and demos: experiments/sand3d-dataset-strategy.md
-      - CadFlow B-rep reconstruction: experiments/cadflow-brep.md
+      - CadFlow B-rep details (historical): experiments/cadflow-brep.md
       - China IP & manufacturing diligence: experiments/nyfasi-china-due-diligence.md
       - Validation protocol: experiments/nyfasi-validation.md
       - Image inventory: experiments/image-inventory.md
