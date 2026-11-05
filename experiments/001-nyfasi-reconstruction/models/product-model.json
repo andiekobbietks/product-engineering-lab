@@ -65,10 +65,13 @@
           "name": "diameter",
           "value": 24,
           "unit": "mm",
-          "evidence_ids": [],
-          "confidence": "none",
-          "assumption": "Placeholder geometry only; material, profile and drive remain unknown.",
-          "provenance": "ENGINEERING_ASSUMPTION"
+          "evidence_ids": [
+            "SRC-004",
+            "SRC-007"
+          ],
+          "confidence": "low",
+          "assumption": "Selected 24 mm diameter (12 mm radius) within the patent description's approximate 10–30 mm radius range; this is a derived proxy value, not an exact disclosed or measured retail dimension.",
+          "provenance": "PATENT_DERIVED_ESTIMATE"
         }
       ]
     },
@@ -100,18 +103,6 @@
           ],
           "confidence": "medium",
           "assumption": "The patent describes an illustrated eight-tooth embodiment. This is a patent-embodiment parameter, not a verified retail SKU count.",
-          "provenance": "PATENT_DISCLOSED"
-        },
-        {
-          "name": "illustrated_tooth_count",
-          "value": 8,
-          "unit": "count",
-          "evidence_ids": [
-            "SRC-004",
-            "SRC-007"
-          ],
-          "confidence": "medium",
-          "assumption": "GB2591502A description says the illustrated example has eight teeth; not confirmed against a retail sample.",
           "provenance": "PATENT_DISCLOSED"
         },
         {
@@ -281,11 +272,14 @@
     "SRC-009",
     "SRC-010",
     "SRC-011",
-    "SRC-012"
+    "SRC-012",
+    "SRC-006"
   ],
   "toolchain": {
     "cad_library": "Sand3D",
-    "version": "pin before execution"
+    "version": "1.6.2",
+    "python": "3.13",
+    "parameter_ledger": "models/cad-parameters.json"
   },
   "validation": [],
   "identity_mapping_status": "unverified"
