@@ -4,7 +4,7 @@
 
 Research · Reconstruction · Validation · Productisation
 
-![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Licence](https://img.shields.io/badge/licence-undecided-lightgrey) [![Integrity checks](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml) [![Sand3D smoke test](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml) [![CadFlow B-rep](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml)
+![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Licence](https://img.shields.io/badge/licence-undecided-lightgrey) [![Integrity checks](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml) [![Sand3D smoke test](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml) [![Legacy CadFlow replay (manual)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml)
 
 <p align="center"><img src="assets/diagrams/product-engineering-loop.svg" alt="Product engineering loop" width="900"></p>
 
@@ -41,12 +41,12 @@ The [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-c
 - [Patent reading notes](docs/experiments/patent-reading-notes.md)
 - [China IP and manufacturing due diligence](docs/experiments/nyfasi-china-due-diligence.md)
 - [Sand3D Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb)
-- [CadFlow B-rep Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_cadflow_reconstruction_colab.ipynb)
+- [Historical CadFlow B-rep Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_cadflow_reconstruction_colab.ipynb)
 - [Sand3D reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py)
-- [CadFlow B-rep reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py)
-- [CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md)
+- [Historical CadFlow B-rep reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py)
+- [Historical CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md)
 - [Sand3D demos, API and Hugging Face dataset strategy](docs/experiments/sand3d-dataset-strategy.md)
-- [CadFlow B-rep reconstruction and STEP exports](docs/experiments/cadflow-reconstruction.md)
+- [Historical CadFlow B-rep reconstruction and STEP exports](docs/experiments/cadflow-reconstruction.md)
 - [Interactive assembly explorer](docs/experiments/assembly-explorer.md)
 - [Interactive GLB viewer instructions](docs/experiments/viewer.md)
 - [Image inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv)
