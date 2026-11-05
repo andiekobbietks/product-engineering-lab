@@ -6,6 +6,7 @@ not download or redistribute source meshes/USD assets and is not product evidenc
 from __future__ import annotations
 
 import argparse
+import gc
 import json
 from pathlib import Path
 from datasets import Image, load_dataset
@@ -56,7 +57,9 @@ def main():
         for row in stream:
             scanned += 1
             entry = str(row.get("entry") or "")
-            if entry not in wanted_entries:
+            family = str(row.get("family") or "")
+            matched_key = entry if entry in wanted_entries else family if family in wanted_entries else None
+            if matched_key is None:
                 if scanned >= args.max_scan:
                     break
                 continue
@@ -86,10 +89,10 @@ def main():
             if not program_text.strip():
                 continue
 
-            matches[entry] = {
+            matches[matched_key] = {
                 "id": row.get("id"),
                 "family": row.get("family"),
-                "entry": entry,
+                "entry": entry,\n                "family": family,\n                "matched_key": matched_key,
                 "license": row.get("license"),
                 "source_license": source_license,
                 "license_status": row.get("license_status"),
@@ -106,6 +109,8 @@ def main():
             if scanned >= args.max_scan:
                 break
 
+        del stream
+        gc.collect()
         result["datasets"].append({
             "repo_id": repo_id,
             "rows_scanned": scanned,
@@ -131,6 +136,7 @@ def main():
     )
     if missing:
         print("Unmatched requested exemplars:", ", ".join(missing))
+    gc.collect()
 
 
 if __name__ == "__main__":
