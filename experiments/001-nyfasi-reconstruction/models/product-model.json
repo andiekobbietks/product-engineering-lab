@@ -1,6 +1,6 @@
 {
-  "product_id": "NYFASI-DELUXE-DETANGLER-RESEARCH",
-  "product_name": "Nyfasi Deluxe Detangler",
+  "product_id": "GB2591502A-HAIR-APPLICATOR-RESEARCH",
+  "product_name": "GB2591502A hair applicator (candidate architecture for Nyfasi research)",
   "model_status": "research",
   "disclaimer": "Independent research model. GB2591502A names inventor Mouhamad Youmna and assignee Myana Naturals Ltd, but its direct relationship to the Nyfasi-branded Deluxe Detangler retail SKU has not yet been independently verified. Patent embodiment features are source-supported as disclosures only; retail configuration, exact geometry, dimensions and internal details remain unverified. Not official Nyfasi CAD or manufacturing geometry.",
   "units": "mm",
@@ -249,5 +249,6 @@
     "cad_library": "Sand3D",
     "version": "pin before execution"
   },
-  "validation": []
+  "validation": [],
+  "identity_mapping_status": "unverified"
 }
