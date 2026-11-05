@@ -26,7 +26,7 @@ This independent case study investigates what can responsibly be reconstructed f
 
 The research now includes a dedicated [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-china-due-diligence.md). It records the Chinese patent grant and a published report of China-based mould manufacture and initial production, while marking the supplier, factory location, tooling ownership and current production status as unverified.
 
-See [Experiment 001](experiments/001-nyfasi-reconstruction/README.md), the [Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb), the [Sand3D reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py), and the [interactive GLB viewer instructions](docs/experiments/viewer.md), and the [image/patent-figure inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv).
+See [Experiment 001](experiments/001-nyfasi-reconstruction/README.md), its [CAD parameter provenance guide](docs/experiments/cad-parameter-provenance.md), the [Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb), the [Sand3D reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py), and the [interactive GLB viewer instructions](docs/experiments/viewer.md), and the [image/patent-figure inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv).
 
 See [requirements-cad.txt](requirements-cad.txt) for the pinned CAD dependency. - [Latest Sand3D build record and output hashes](experiments/001-nyfasi-reconstruction/builds/2026-11-05.md)
 
