@@ -43,7 +43,7 @@ jobs:
           path: site
 
   deploy:
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy_pages
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.deploy_pages)
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
