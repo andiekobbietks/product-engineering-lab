@@ -10,6 +10,8 @@ See the [image inventory](image-inventory.md), the [experiment record](https://g
 
 The published GB2591502A disclosure describes a body enclosing a reservoir, a rotatable roller, a row of teeth, a curved wall with arc-shaped slots, and upper/lower housing portions. Its drawing description lists an exploded perspective, exterior views, roller detail and two cross-sections. The patent metadata names Mouhamad Youmna and Myana Naturals Ltd, but the direct relationship to the Nyfasi-branded Deluxe Detangler retail SKU remains unverified. These are patent-embodiment disclosures, not proof of the exact retail configuration. See the [patent reading notes](patent-reading-notes.md) and [figure-level register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/patent-figure-register.csv).
 
+The machine-readable model records `identity_mapping_status: unverified`; the current Sand3D proxy is named after GB2591502A rather than asserting a confirmed Nyfasi product mapping.
+
 ## Research outputs
 
 - Evidence-linked product data model.
