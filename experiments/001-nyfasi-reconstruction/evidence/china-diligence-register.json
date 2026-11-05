@@ -1,0 +1,83 @@
+{
+  "case_id": "EXP-001-NYFASI",
+  "review_date": "2026-11-05",
+  "scope": "China patent and reported tooling/manufacturing activity",
+  "records": [
+    {
+      "id": "CN-01",
+      "claim": "CN115003190B is a granted Chinese invention patent in the Nyfasi hairbrush/applicator patent family.",
+      "source_url": "https://patents.google.com/patent/CN115003190B/en",
+      "evidence_type": "patent_publication_record",
+      "confidence": "high_for_publication_and_grant_event",
+      "limitations": [
+        "Google Patents is not the official CNIPA legal-status register.",
+        "Current fee status, lapse/restoration and assignments require CNIPA verification."
+      ]
+    },
+    {
+      "id": "CN-02",
+      "claim": "The translated Chinese patent record names Youmna Mouhamad as inventor and displays the applicant/assignee as Mianna Nature Ltd.",
+      "source_url": "https://patents.google.com/patent/CN115003190B/en",
+      "evidence_type": "translated_patent_metadata",
+      "confidence": "medium",
+      "limitations": [
+        "Confirm the original Chinese applicant name and transliteration in CNIPA.",
+        "Confirm the chain of title to MYANA NATURALS LIMITED from official assignment records."
+      ]
+    },
+    {
+      "id": "MFG-01",
+      "claim": "A 15 October 2025 profile reports that Youmna Mouhamad travelled to China in 2024 to initiate industrial mould manufacture and initial production.",
+      "source_url": "https://lejournaldemayotte.yt/2025/10/15/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme/",
+      "evidence_type": "secondary_media_report",
+      "confidence": "reported_not_independently_corroborated",
+      "limitations": [
+        "No factory, supplier, city or province is identified.",
+        "No purchase order, tooling agreement, invoice, shipping document or primary company confirmation has been inspected.",
+        "The report does not establish current production location or ongoing supplier relationship."
+      ]
+    },
+    {
+      "id": "FIN-01",
+      "claim": "The same article reports an industrial mould estimate of EUR 150000-200000 and a EUR 50000 grant from the Agence Nationale pour la Recherche et le Développement.",
+      "source_url": "https://lejournaldemayotte.yt/2025/10/15/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme/",
+      "evidence_type": "secondary_media_report",
+      "confidence": "reported_not_independently_corroborated",
+      "limitations": [
+        "The article does not reconcile the difference between the reported mould estimate and grant amount.",
+        "Grant award documentation and expenditure schedule have not been independently inspected."
+      ]
+    },
+    {
+      "id": "COM-01",
+      "claim": "The article reports sales in eleven countries at the time of publication.",
+      "source_url": "https://lejournaldemayotte.yt/2025/10/15/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme/",
+      "evidence_type": "secondary_media_report",
+      "confidence": "reported_not_independently_corroborated",
+      "limitations": [
+        "No country-level sales, distributor, retail or shipment evidence has been inspected."
+      ]
+    }
+  ],
+  "unverified_questions": [
+    "Chinese manufacturer legal name and registered address",
+    "Factory city and province",
+    "Toolmaker and injection-moulding supplier identity",
+    "Physical mould owner and right to retrieve or transfer tooling",
+    "Tooling design and CAD file ownership",
+    "Manufacturing agreement, exclusivity and subcontracting terms",
+    "Resin grade, colourants, material declarations and quality controls",
+    "First-article inspection, dimensional reports and production acceptance",
+    "Batch quantities, shipments and present manufacturing location",
+    "CNIPA current patent legal events and applicant/assignee chain of title"
+  ],
+  "cad_parameter_provenance": {
+    "PATENT_DISCLOSED": "Explicitly stated in patent text; not automatically a retail measurement.",
+    "MEASURED": "Measured from an authorised physical sample with method and uncertainty recorded.",
+    "IMAGE_ESTIMATED": "Estimated from published imagery; record calibration and confidence.",
+    "ENGINEERING_ASSUMPTION": "Chosen to make a model solvable; not asserted as product truth.",
+    "SUPPLIER_CONFIRMED": "Supported by authorised tooling or manufacturing documentation."
+  },
+  "official_register": "https://cponline.cnipa.gov.cn/",
+  "boundary": "Desk research only. Not legal advice, a supplier audit, manufacturing specification, patent validity opinion or freedom-to-operate assessment."
+}
