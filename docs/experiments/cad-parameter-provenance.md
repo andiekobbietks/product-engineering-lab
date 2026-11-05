@@ -4,7 +4,7 @@
 
 ## Single source of truth
 
-The Sand3D script loads numeric parameters from [cad-parameters.json](../../experiments/001-nyfasi-reconstruction/models/cad-parameters.json). Do not independently edit a second hard-coded parameter dictionary. Each parameter stores value, unit, provenance, evidence IDs, confidence and an explanatory note.
+The Sand3D script loads numeric parameters from [cad-parameters.json](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/cad-parameters.json). Do not independently edit a second hard-coded parameter dictionary. Each parameter stores value, unit, provenance, evidence IDs, confidence and an explanatory note.
 
 Run the provenance check from the experiment directory:
 
