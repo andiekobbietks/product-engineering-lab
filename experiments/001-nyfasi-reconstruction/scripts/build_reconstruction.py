@@ -49,7 +49,7 @@ def build_research_assembly(exploded=True):
 
     reservoir = s3d.at(
         s3d.box("reservoir_volume_proxy", p["reservoir_w"], p["reservoir_d"], p["reservoir_h"]),
-        z=p["lower_shell_h"] + (gap / 2) + 2,
+        z=p["lower_shell_h"] + (gap / 2) - (p["reservoir_h"] / 2),
     )
     s3d.material(reservoir, "glass", color="#8bbac8", opacity=0.45)
 
@@ -58,9 +58,9 @@ def build_research_assembly(exploded=True):
     roller = s3d.at(
         s3d.cylinder("roller_drum_proxy", p["roller_d"], p["roller_len"]),
         x=0,
-        y=p["housing_d"] / 2 + p["roller_d"] / 2 + gap,
+        y=p["housing_d"] / 2 + p["roller_d"] / 2 + gap + p["roller_len"],
         z=p["lower_shell_h"] / 2,
-        rx=90,
+        rx=-90,
     )
     s3d.material(roller, "rubber", color="#626a70")
 
@@ -78,7 +78,7 @@ def build_research_assembly(exploded=True):
             )
         )
     s3d.cut(wall, *slot_tools)
-    wall = s3d.at(wall, z=p["lower_shell_h"] + p["wall_h"] + gap)
+    wall = s3d.at(wall, y=p["housing_d"] / 2 + p["wall_d"] / 2 + gap, z=p["lower_shell_h"] + p["wall_h"] + gap)
     s3d.material(wall, "plastic", color="#d7d9dc")
 
     teeth = []
@@ -87,7 +87,7 @@ def build_research_assembly(exploded=True):
         tooth = s3d.at(
             s3d.box(f"blade_tooth_{i + 1:02d}", p["tooth_width"], p["tooth_length"], p["tooth_height"]),
             x=x,
-            y=p["housing_d"] / 2 + p["tooth_length"] / 2 + gap,
+            y=p["housing_d"] / 2 + p["wall_d"] + p["tooth_length"] / 2 + gap,
             z=p["lower_shell_h"] + p["wall_h"] + gap,
         )
         teeth.append(tooth)
