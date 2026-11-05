@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/product-model.schema.json",
+  "title": "Evidence-linked product model",
+  "type": "object",
+  "required": ["product_id", "product_name", "model_status", "components", "sources"],
+  "properties": {
+    "product_id": {"type": "string"},
+    "product_name": {"type": "string"},
+    "model_status": {"enum": ["research", "prototype", "validated", "manufacturing_release"]},
+    "disclaimer": {"type": "string"},
+    "units": {"enum": ["mm", "cm", "m"]},
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["component_id", "name", "status", "parameters"],
+        "properties": {
+          "component_id": {"type": "string"},
+          "name": {"type": "string"},
+          "parent_component_id": {"type": ["string", "null"]},
+          "status": {"enum": ["supported", "partially_supported", "assumed", "unknown"]},
+          "parameters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "value", "unit", "evidence_ids", "confidence"],
+              "properties": {
+                "name": {"type": "string"},
+                "value": {},
+                "unit": {"type": "string"},
+                "evidence_ids": {"type": "array", "items": {"type": "string"}},
+                "confidence": {"enum": ["high", "medium", "low", "none"]},
+                "assumption": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "sources": {"type": "array", "items": {"type": "string"}},
+    "toolchain": {"type": "object"},
+    "validation": {"type": "array", "items": {"type": "object"}}
+  }
+}
