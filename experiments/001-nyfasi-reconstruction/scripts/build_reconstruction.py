@@ -7,6 +7,7 @@ from pathlib import Path
 import ast
 import hashlib
 import json
+import struct
 import sand3d as s3d
 
 HERE = Path(__file__).resolve().parent
@@ -15,6 +16,41 @@ PARAMETER_FILE = ROOT / "models" / "cad-parameters.json"
 RECORDS = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
 P = {name: record["value"] for name, record in RECORDS.items()}
 COMPONENTS = []
+
+
+def validate_articulated_glb(path, expected_component_nodes, expected_joint):
+    """Fail the build if the complete GLB loses named groups or Sand3D joint extras."""
+    payload = Path(path).read_bytes()
+    if len(payload) < 20 or payload[:4] != b"glTF":
+        raise ValueError(f"Invalid GLB header: {path}")
+    version, total_length = struct.unpack_from("<II", payload, 4)
+    if version != 2 or total_length != len(payload):
+        raise ValueError(f"Unexpected GLB version or length: {path}")
+    json_length, json_type = struct.unpack_from("<II", payload, 12)
+    if json_type != 0x4E4F534A:
+        raise ValueError("GLB first chunk is not JSON")
+    document = json.loads(payload[20:20 + json_length].decode("utf-8").rstrip(" \\0"))
+    nodes = document.get("nodes", [])
+    node_names = {node.get("name") for node in nodes if node.get("name")}
+    missing = sorted(set(expected_component_nodes) - node_names)
+    if missing:
+        raise ValueError(f"Sand3D GLB is missing named component nodes: {missing}")
+    joint_records = [
+        node.get("extras", {}).get("s3d_joint")
+        for node in nodes
+        if isinstance(node.get("extras"), dict)
+    ]
+    matching = [joint for joint in joint_records if isinstance(joint, dict) and joint.get("name") == expected_joint]
+    if not matching:
+        raise ValueError(f"Sand3D GLB is missing s3d_joint metadata for {expected_joint!r}")
+    if matching[0].get("type") != "continuous":
+        raise ValueError(f"Expected {expected_joint!r} to be a continuous joint")
+    print(
+        "Validated articulated Sand3D GLB:",
+        len(nodes), "nodes;",
+        len(expected_component_nodes), "named component roots;",
+        expected_joint, "joint metadata present",
+    )
 
 
 def cylinder_on_x(name, diameter, length, x=0, y=0, z=0):
@@ -371,7 +407,13 @@ def main():
     model = build_research_assembly(exploded=False)
     output = ROOT / "output"
     output.mkdir(exist_ok=True)
-    s3d.export(model, str(output / "nyfasi_complete_assembly.glb"))
+    assembly_path = output / "nyfasi_complete_assembly.glb"
+    s3d.export(model, str(assembly_path))
+    validate_articulated_glb(
+        assembly_path,
+        [component.name for _, _, component, _, _ in COMPONENTS],
+        "roller_rotation",
+    )
     # Keep the benchmark and older local workflows compatible with the established export name.
     s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.glb"))
     s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.obj"))
