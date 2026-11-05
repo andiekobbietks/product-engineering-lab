@@ -24,7 +24,7 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "tooth_tip_taper_deg",
             "housing_outline_profile",
             "upper_retaining_arms",
-            "upper_retaining_arm_left",
+            'f"upper_retaining_arm_{side}"',
             "upper_housing_complete",
             "retaining_arms",
             "roller_projection_count",
