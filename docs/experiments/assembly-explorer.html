@@ -100,6 +100,16 @@ function resize(){const rect=canvas.getBoundingClientRect();if(!rect.width||!rec
 new ResizeObserver(resize).observe(canvas);window.addEventListener('resize',resize);
 function findByName(root,name){let found=null;root.traverse(o=>{if(!found&&o.name===name)found=o;});return found;}
 function componentForObject(object){let node=object;while(node){const match=components.find(c=>c.object===node);if(match)return match;node=node.parent;}return null;}
+function sourceSymbolForObject(object,component){
+ let node=object;
+ while(node){
+  const mapping=(component.entry.source_object_prefixes||[]).find(item=>node.name&&node.name.startsWith(item.prefix));
+  if(mapping)return mapping.symbol;
+  if(node===component.object)break;
+  node=node.parent;
+ }
+ return null;
+}
 function setMaterialHighlight(){
  if(!assemblyRoot)return;
  assemblyRoot.traverse(o=>{
@@ -172,8 +182,8 @@ function renderDetails(){
  const rows=relevant.map(k=>{const p=parameters.parameters[k];return '<tr><td>'+escapeHtml(k)+'</td><td>'+escapeHtml(p.value)+' '+escapeHtml(p.unit)+'</td></tr>';}).join('');
  $('componentDetails').innerHTML='<strong>Parameter ledger · '+escapeHtml(selected.entry.id)+'</strong><div>'+escapeHtml(selected.entry.description)+'</div><table>'+rows+'</table><div style="margin-top:6px">Source range links are generated from the Python AST. Values retain their ledger provenance; they are not measured product specifications.</div>';
 }
-function selectComponent(component){
- selected=component;activeSymbol=(component.entry.source_symbols||[])[0]?.name||null;
+function selectComponent(component,preferredSymbol=null){
+ selected=component;activeSymbol=(component.entry.source_symbols||[]).some(s=>s.name===preferredSymbol)?preferredSymbol:((component.entry.source_symbols||[])[0]?.name||null);
  components.forEach(c=>{c.object.visible=!isolate||c===selected;});
  renderComponentList();renderSymbols();renderCode();renderDetails();setMaterialHighlight();
  $('partTitle').textContent=component.entry.name;
@@ -252,7 +262,7 @@ canvas.addEventListener('pointerup',e=>{
  const rect=canvas.getBoundingClientRect();pointer.x=((e.clientX-rect.left)/rect.width)*2-1;pointer.y=-((e.clientY-rect.top)/rect.height)*2+1;
  raycaster.setFromCamera(pointer,camera);
  const hits=raycaster.intersectObject(assemblyRoot,true);
- for(const hit of hits){const component=componentForObject(hit.object);if(component){selectComponent(component);break;}}
+ for(const hit of hits){const component=componentForObject(hit.object);if(component){selectComponent(component,sourceSymbolForObject(hit.object,component));break;}}
 });
 async function loadGallery(){
  try{
