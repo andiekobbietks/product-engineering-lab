@@ -40,7 +40,7 @@ def main():
         (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] < min(P["bearing_block_d"], P["bearing_block_h"]), "Bearing bore does not fit its support block."),
         (support_x + P["bearing_block_w"] / 2 <= P["housing_w"] / 2, "Bearing supports exceed housing envelope."),
         (P["snap_tab_count"] >= 1 and min(P["snap_tab_w"], P["snap_tab_d"], P["snap_tab_h"]) > 0, "Snap-fit proxy dimensions/count must be positive."),
-        (P["bearing_block_d"] >= P["seal_outer_d"] > P["spindle_pin_d"] > P["seal_inner_d"] > 0, "Seal proxy must fit the bearing bore and have controlled spindle interference."),
+        (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] >= P["seal_outer_d"] > P["spindle_pin_d"] > P["seal_inner_d"] > 0, "Seal proxy must fit the bearing bore and have controlled spindle interference."),
         (P["seal_axial_width"] > 0, "Seal proxy axial width must be positive."),
         (abs(P["tooth_root_z"] - (P["roller_axis_z"] - outer_r - P["tooth_height"])) < 1e-6, "Tooth root datum must remain tied to the roller seat envelope."),
     ]
