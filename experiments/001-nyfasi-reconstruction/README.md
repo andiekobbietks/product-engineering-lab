@@ -38,6 +38,11 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 - Patent figure locators: `evidence/patent-figure-register.csv`.
 - Patent reading notes: [GB2591502A](../../docs/experiments/patent-reading-notes.md).
 - Component-level Sand3D script: `scripts/build_reconstruction.py`.
+- CadFlow B-rep builder: `scripts/build_cadflow_reconstruction.py`.
+- CadFlow Colab reproduction: `notebooks/nyfasi_cadflow_reconstruction_colab.ipynb`.
+- CadFlow B-rep and STEP export guide: [documentation](../../docs/experiments/cadflow-reconstruction.md).
+- Sand3D dataset licence and reuse policy: `models/sand3d-dataset-policy.md`.
+- Metadata-only Sand3D exemplar discovery: `scripts/catalog_sand3d_examples.py`.
 - Curved-wall CI build record and artifact digest: [build record](builds/2026-11-05-curved-wall.md).
 - Reproduction notebook: `notebooks/nyfasi_reconstruction_colab.ipynb`.
 - Validation protocol: [documentation](../../docs/experiments/nyfasi-validation.md).
