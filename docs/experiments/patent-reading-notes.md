@@ -14,6 +14,10 @@
 - Grant event shown: 13 April 2022
 - Google Patents page currently labels the status “Expired - Fee Related”. Google explicitly cautions that legal status and assignee data may be inaccurate and are not legal conclusions. Verify status, proprietor, events and family in the official UK IPO register before relying on them.
 
+## Relationship to the Nyfasi brand and retail product
+
+The patent metadata identifies Mouhamad Youmna and Myana Naturals Ltd. That metadata alone does **not** prove that this patent is the exact intellectual-property basis for the Nyfasi-branded Deluxe Detangler, or that the described embodiment matches a particular retail SKU. Treat it as a relevant inventor/assignee research lead until the corporate, brand and product relationship is independently evidenced.
+
 ## Disclosed architecture
 
 The abstract and description disclose a hair comb/applicator comprising:
@@ -49,7 +53,7 @@ The figure locator list is now entered into the image inventory. No patent image
 
 ## What this changes in the reconstruction
 
-The earlier generic “comb + roller + reservoir” idea is now better grounded as a patent-disclosed architecture. The next model iteration should represent separate upper/lower housing portions, reservoir volume, roller and spindle, curved wall/slot interface, and a row of blade-like teeth. Exact retail dimensions, material specifications, tolerances, sealing performance and current patent rights remain unresolved.
+The earlier generic “comb + roller + reservoir” idea is now better grounded as a patent-disclosed hair-applicator architecture. Its direct mapping to the Nyfasi-branded retail product remains unverified. The next model iteration should represent separate upper/lower housing portions, reservoir volume, roller and spindle, curved wall/slot interface, and a row of blade-like teeth. Exact retail dimensions, material specifications, tolerances, sealing performance and current patent rights remain unresolved.
 
 ## Interpretation limits
 
