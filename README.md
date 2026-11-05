@@ -4,7 +4,7 @@
 
 Research · Reconstruction · Validation · Productisation
 
-![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Licence](https://img.shields.io/badge/licence-undecided-lightgrey) [![Integrity checks](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml) [![Sand3D smoke test](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml) [![CadFlow B-rep](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml)
+![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Licence](https://img.shields.io/badge/licence-undecided-lightgrey) [![Integrity checks](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/docs.yml) [![Sand3D smoke test](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cad-smoke.yml) [![Legacy CadFlow replay (manual)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml/badge.svg)](https://github.com/andiekobbietks/product-engineering-lab/actions/workflows/cadflow-cad.yml)
 
 <p align="center"><img src="assets/diagrams/product-engineering-loop.svg" alt="Product engineering loop" width="900"></p>
 
@@ -18,9 +18,11 @@ This is not simply a text-to-3D showcase. It explores the engineering layer arou
 
 Sand3D remains an independently maintained third-party project. We respect its own licence, notices and API boundaries and integrate through documented adapters rather than assuming ownership of its internals.
 
-## Dual CAD toolchain
+## Canonical Sand3D engineering stack
 
-The lab now separates two complementary layers: [Sand3D](https://sandflow.ai/sand3d/) for editable 3D-as-code patterns and its five [Hugging Face collections](https://huggingface.co/collections/Sandflow/sand3d), and [CadFlow](https://github.com/yhz5613813/CadFlow) for deterministic OpenCascade B-rep construction, topology inspection and STEP export. The [CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md) documents the separate component build. Dataset reuse is governed by row-level source licences and attribution; no generic dataset object is treated as Nyfasi product evidence.
+The Nyfasi reconstruction now uses [Sand3D](https://github.com/Sandflow-ai/sand3d) as its single canonical modelling and assembly engine. The Python program, parameter ledger, assembly hierarchy, joint metadata, GLB/URDF/USDA/OBJ/STL exports, benchmark and source-linked browser gallery form one reproducible path. The gallery follows the core interaction model of Sandflow's [official articulated gallery](https://sand3d.sandflow.ai/gallery.html): inspect the model beside its real source, select a part to trace its construction, and operate exported joints.
+
+CadFlow work is retained as historical research and comparison material, but is no longer part of the active Nyfasi build or publication path. Sand3D does not currently replace CadFlow's OpenCascade B-rep and STEP capability; choosing one canonical stack is an explicit trade-off in favour of coherent program-to-assembly provenance and native articulated exports, not a claim that Sand3D provides STEP or manufacturing-grade B-rep validation. See the [architecture decision records](docs/decisions/index.md) for the rationale and migration boundary.
 
 ## Experiment 001: Nyfasi Deluxe Detangler
 
@@ -39,12 +41,12 @@ The [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-c
 - [Patent reading notes](docs/experiments/patent-reading-notes.md)
 - [China IP and manufacturing due diligence](docs/experiments/nyfasi-china-due-diligence.md)
 - [Sand3D Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb)
-- [CadFlow B-rep Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_cadflow_reconstruction_colab.ipynb)
+- [Historical CadFlow B-rep Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_cadflow_reconstruction_colab.ipynb)
 - [Sand3D reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py)
-- [CadFlow B-rep reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py)
-- [CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md)
+- [Historical CadFlow B-rep reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py)
+- [Historical CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md)
 - [Sand3D demos, API and Hugging Face dataset strategy](docs/experiments/sand3d-dataset-strategy.md)
-- [CadFlow B-rep reconstruction and STEP exports](docs/experiments/cadflow-reconstruction.md)
+- [Historical CadFlow B-rep reconstruction and STEP exports](docs/experiments/cadflow-reconstruction.md)
 - [Interactive assembly explorer](docs/experiments/assembly-explorer.md)
 - [Interactive GLB viewer instructions](docs/experiments/viewer.md)
 - [Image inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv)

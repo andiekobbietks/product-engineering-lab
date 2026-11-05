@@ -1,13 +1,15 @@
-# CadFlow B-rep reconstruction
+# CadFlow B-rep reconstruction (historical)
 
-This experiment adds a deterministic CAD layer alongside the existing Sand3D programmatic 3D workflow.
+> **Historical implementation:** this CadFlow path is retained for provenance and comparison. It is no longer part of the active Nyfasi build, benchmark or publication pipeline. Its GitHub Actions workflow is manual-only. The canonical Nyfasi model and gallery now use Sand3D; see [ADR-0001](../decisions/adr-0001-sand3d-canonical-engine.md).
 
-## Why two tools?
+This document records the earlier deterministic CAD experiment. It is not the current modelling architecture.
+
+## Why CadFlow was explored
 
 - **Sand3D** is an LLM-friendly 3D-as-code language and dataset ecosystem. Its examples demonstrate named parts, editable parameters, materials and object hierarchies.
 - **CadFlow** is a Python CAD SDK over OpenCascade. It builds and measures deterministic boundary-representation geometry, validates topology, and exports STEP, STL and GLB previews. It is not a text-to-3D model.
 
-CadFlow is the geometry-grounded construction and inspection layer. Sand3D remains a useful reference for readable part programs and presentation. Neither tool supplies missing Nyfasi product measurements.
+At the time, CadFlow was explored for geometry-grounded construction and inspection while Sand3D supplied readable part programs and articulated previews. That dual-engine approach has since been superseded for the active Nyfasi case study. Neither tool supplies missing Nyfasi product measurements.
 
 ## Reproducible source
 

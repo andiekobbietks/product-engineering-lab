@@ -4,7 +4,10 @@ This is deliberately not a claim of original Nyfasi CAD or a verified retail twi
 All dimensions come from the provenance ledger; unverified values remain assumptions.
 """
 from pathlib import Path
+import ast
+import hashlib
 import json
+import struct
 import sand3d as s3d
 
 HERE = Path(__file__).resolve().parent
@@ -13,6 +16,41 @@ PARAMETER_FILE = ROOT / "models" / "cad-parameters.json"
 RECORDS = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
 P = {name: record["value"] for name, record in RECORDS.items()}
 COMPONENTS = []
+
+
+def validate_articulated_glb(path, expected_component_nodes, expected_joint):
+    """Fail the build if the complete GLB loses named groups or Sand3D joint extras."""
+    payload = Path(path).read_bytes()
+    if len(payload) < 20 or payload[:4] != b"glTF":
+        raise ValueError(f"Invalid GLB header: {path}")
+    version, total_length = struct.unpack_from("<II", payload, 4)
+    if version != 2 or total_length != len(payload):
+        raise ValueError(f"Unexpected GLB version or length: {path}")
+    json_length, json_type = struct.unpack_from("<II", payload, 12)
+    if json_type != 0x4E4F534A:
+        raise ValueError("GLB first chunk is not JSON")
+    document = json.loads(payload[20:20 + json_length].decode("utf-8").rstrip(" \\0"))
+    nodes = document.get("nodes", [])
+    node_names = {node.get("name") for node in nodes if node.get("name")}
+    missing = sorted(set(expected_component_nodes) - node_names)
+    if missing:
+        raise ValueError(f"Sand3D GLB is missing named component nodes: {missing}")
+    joint_records = [
+        node.get("extras", {}).get("s3d_joint")
+        for node in nodes
+        if isinstance(node.get("extras"), dict)
+    ]
+    matching = [joint for joint in joint_records if isinstance(joint, dict) and joint.get("name") == expected_joint]
+    if not matching:
+        raise ValueError(f"Sand3D GLB is missing s3d_joint metadata for {expected_joint!r}")
+    if matching[0].get("type") != "continuous":
+        raise ValueError(f"Expected {expected_joint!r} to be a continuous joint")
+    print(
+        "Validated articulated Sand3D GLB:",
+        len(nodes), "nodes;",
+        len(expected_component_nodes), "named component roots;",
+        expected_joint, "joint metadata present",
+    )
 
 
 def cylinder_on_x(name, diameter, length, x=0, y=0, z=0):
@@ -184,6 +222,31 @@ def build_roller_end_features():
     return s3d.group("roller_end_features", *parts)
 
 
+def build_elastomeric_spindle_seals():
+    """Build two annular seal proxies around spindle pins; fit remains unvalidated."""
+    seals = []
+    x_position = (
+        P["roller_len"] / 2
+        + P["roller_endwall_t"]
+        + P["spindle_pin_len"] / 2
+    )
+    for side, sign in (("left", -1), ("right", 1)):
+        outer = cylinder_on_x(
+            f"{side}_spindle_seal_outer",
+            P["seal_outer_d"], P["seal_axial_width"],
+            x=sign * x_position, y=P["roller_axis_y"], z=P["roller_axis_z"],
+        )
+        bore = cylinder_on_x(
+            f"{side}_spindle_seal_bore_tool",
+            P["seal_inner_d"], P["seal_axial_width"] + 0.4,
+            x=sign * x_position, y=P["roller_axis_y"], z=P["roller_axis_z"],
+        )
+        seal = s3d.cut(outer, bore)
+        s3d.material(seal, "rubber", color="#30383c", roughness=0.9)
+        seals.append(s3d.group(f"{side}_elastomeric_spindle_seal_proxy", seal))
+    return s3d.group("elastomeric_spindle_seals_research_proxy", *seals)
+
+
 def build_housing_retention_features():
     supports = []
     support_x = P["roller_len"] / 2 + P["roller_endwall_t"] + P["spindle_pin_len"] / 2
@@ -301,7 +364,11 @@ def build_research_assembly(exploded=False):
     )
     reservoir = s3d.at(build_reservoir(), z=P["reservoir_z"])
     roller = build_roller_core_and_bands()
-    roller_ends = build_roller_end_features()
+    roller_ends = s3d.group(
+        "roller_end_features",
+        build_roller_end_features(),
+        build_elastomeric_spindle_seals(),
+    )
     wall = build_curved_wall()
     teeth = build_comb_teeth()
 
@@ -320,7 +387,7 @@ def build_research_assembly(exploded=False):
         ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
          "Eight-tooth illustrated embodiment; approximate width and length are patent-described, while height and pitch remain assumptions."),
         ("roller-end-features", "Roller end features", roller_ends, "Engineering assumption",
-         "Two end walls and spindle pins. Exact retention geometry and dimensions are not verified."),
+         "Two end walls, spindle pins and annular spindle-seal proxies. Seal fit and retention geometry remain unverified assumptions."),
     ]
 
     roller_frame = s3d.local(
@@ -340,7 +407,13 @@ def main():
     model = build_research_assembly(exploded=False)
     output = ROOT / "output"
     output.mkdir(exist_ok=True)
-    s3d.export(model, str(output / "nyfasi_complete_assembly.glb"))
+    assembly_path = output / "nyfasi_complete_assembly.glb"
+    s3d.export(model, str(assembly_path))
+    validate_articulated_glb(
+        assembly_path,
+        [component.name for _, _, component, _, _ in COMPONENTS],
+        "roller_rotation",
+    )
     # Keep the benchmark and older local workflows compatible with the established export name.
     s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.glb"))
     s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.obj"))
@@ -351,13 +424,70 @@ def main():
     # isolate and explode real Sand3D geometry rather than a hand-drawn schematic.
     web_dir = output / "web-components"
     web_dir.mkdir(parents=True, exist_ok=True)
+    # Publish the exact modelling program and an AST-derived source map. The
+    # browser viewer therefore highlights real source ranges, not hand-written
+    # snippets that can drift away from the geometry-producing program.
+    source_path = Path(__file__).resolve()
+    source_text = source_path.read_text(encoding="utf-8")
+    source_tree = ast.parse(source_text)
+    source_ranges = {
+        node.name: {"start_line": node.lineno, "end_line": node.end_lineno}
+        for node in ast.walk(source_tree)
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+    }
+    component_symbols = {
+        "lower-housing": ["build_lower_housing", "build_housing_retention_features", "build_housing_gasket", "build_research_assembly"],
+        "upper-housing": ["rounded_tray", "build_upper_housing"],
+        "reservoir": ["build_reservoir"],
+        "rotatable-roller": ["cylinder_on_x", "build_roller_core", "build_textured_band", "build_roller_core_and_bands"],
+        "curved-slotted-wall": ["build_curved_wall"],
+        "eight-comb-teeth": ["build_comb_teeth"],
+        "roller-end-features": ["cylinder_on_x", "build_roller_end_wall", "build_spindle_pin", "build_roller_end_features", "build_elastomeric_spindle_seals"],
+    }
+    source_object_prefixes = {
+        "lower-housing": [
+            ("lower_housing_shell_proxy", "build_lower_housing"),
+            ("housing_bearings_and_snap_fit_proxies", "build_housing_retention_features"),
+            ("housing_interface_gasket_proxy", "build_housing_gasket"),
+        ],
+        "upper-housing": [("upper_housing_shell_proxy", "build_upper_housing")],
+        "reservoir": [("reservoir_volume_proxy", "build_reservoir")],
+        "rotatable-roller": [
+            ("roller_smooth_core_and_sealing_lands", "build_roller_core"),
+            ("textured_annular_band_", "build_textured_band"),
+        ],
+        "curved-slotted-wall": [("semi_cylindrical_slotted_wall", "build_curved_wall")],
+        "eight-comb-teeth": [("blade_tooth_", "build_comb_teeth")],
+        "roller-end-features": [
+            ("roller_left_end_wall_component", "build_roller_end_wall"),
+            ("roller_right_end_wall_component", "build_roller_end_wall"),
+            ("roller_left_spindle_pin_component", "build_spindle_pin"),
+            ("roller_right_spindle_pin_component", "build_spindle_pin"),
+            ("elastomeric_spindle_seals_research_proxy", "build_elastomeric_spindle_seals"),
+            ("left_elastomeric_spindle_seal_proxy", "build_elastomeric_spindle_seals"),
+            ("right_elastomeric_spindle_seal_proxy", "build_elastomeric_spindle_seals"),
+        ],
+    }
+    (web_dir / "build_reconstruction.py").write_text(source_text, encoding="utf-8")
+    (web_dir / "cad-parameters.json").write_text(
+        PARAMETER_FILE.read_text(encoding="utf-8"), encoding="utf-8"
+    )
     manifest = {
-        "schema_version": "1.0.0",
+        "schema_version": "1.1.0",
         "engine": "Sand3D",
         "engine_version": "1.6.2",
         "units": "mm",
         "model_status": "research_only",
         "assembly_file": "nyfasi_complete_assembly.glb",
+        "source": {
+            "program_file": "build_reconstruction.py",
+            "parameters_file": "cad-parameters.json",
+            "sha256": hashlib.sha256(source_text.encode("utf-8")).hexdigest(),
+            "symbol_index": source_ranges,
+        },
+        "joint_expectations": [
+            {"name": "roller_rotation", "type": "continuous", "axis": "+X", "component_id": "rotatable-roller"}
+        ],
         "components": [],
         "limitations": [
             "Patent-to-retail-SKU mapping is unverified.",
@@ -371,9 +501,20 @@ def main():
         manifest["components"].append({
             "id": component_id,
             "name": name,
+            "node_name": component.name,
             "file": filename,
             "provenance": provenance,
-            "description": description
+            "description": description,
+            "source_symbols": [
+                {"name": symbol, **source_ranges[symbol]}
+                for symbol in component_symbols.get(component_id, [])
+                if symbol in source_ranges
+            ],
+            "source_object_prefixes": [
+                {"prefix": prefix, "symbol": symbol}
+                for prefix, symbol in source_object_prefixes.get(component_id, [])
+                if symbol in source_ranges
+            ],
         })
     (web_dir / "manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\\n", encoding="utf-8"

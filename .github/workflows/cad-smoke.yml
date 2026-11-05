@@ -6,6 +6,7 @@ on:
     paths:
       - "experiments/001-nyfasi-reconstruction/scripts/**"
       - "experiments/001-nyfasi-reconstruction/models/cad-parameters.json"
+      - "experiments/001-nyfasi-reconstruction/models/tolerance-stackup.json"
       - "requirements-cad.txt"
       - ".github/workflows/cad-smoke.yml"
   pull_request:
@@ -13,6 +14,7 @@ on:
     paths:
       - "experiments/001-nyfasi-reconstruction/scripts/**"
       - "experiments/001-nyfasi-reconstruction/models/cad-parameters.json"
+      - "experiments/001-nyfasi-reconstruction/models/tolerance-stackup.json"
       - "requirements-cad.txt"
       - ".github/workflows/cad-smoke.yml"
   workflow_dispatch:
@@ -32,6 +34,10 @@ jobs:
         run: python experiments/001-nyfasi-reconstruction/scripts/validate_provenance.py
       - name: Validate curved-wall geometry constraints
         run: python experiments/001-nyfasi-reconstruction/scripts/validate_geometry.py
+      - name: Test calculated interface tolerance stack-ups
+        run: python -m unittest discover -s experiments/001-nyfasi-reconstruction/tests -v
+      - name: Analyse roller-to-slot and seal interfaces
+        run: python experiments/001-nyfasi-reconstruction/scripts/analyse_interaction.py
       - name: Install pinned CAD dependency
         run: python -m pip install --upgrade pip -r requirements-cad.txt
       - name: Build curved-wall research assembly

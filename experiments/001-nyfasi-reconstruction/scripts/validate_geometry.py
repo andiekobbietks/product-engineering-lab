@@ -7,6 +7,7 @@ P = {k: v["value"] for k, v in json.loads((ROOT / "models" / "cad-parameters.jso
 
 
 def main():
+    """Check dimensional and geometric consistency of the research proxy."""
     errors = []
     roller_r = P["roller_d"] / 2
     seat_r = roller_r + P["roller_seat_clearance"]
@@ -38,6 +39,8 @@ def main():
         (P["spindle_pin_d"] > 0 and P["spindle_pin_len"] > 0, "Spindle pins need positive dimensions."),
         (P["bearing_bore_clearance"] >= 0, "Bearing clearance cannot be negative."),
         (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] < min(P["bearing_block_d"], P["bearing_block_h"]), "Bearing bore does not fit its support block."),
+        (P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"] >= P["seal_outer_d"] > P["spindle_pin_d"] > P["seal_inner_d"] > 0, "Seal proxy must fit the bearing bore and retain nominal spindle interference."), 
+        (0 < P["seal_axial_width"] <= min(P["spindle_pin_len"], P["bearing_block_w"]), "Seal width must be positive and fit within both spindle projection and bearing support width."),
         (support_x + P["bearing_block_w"] / 2 <= P["housing_w"] / 2, "Bearing supports exceed housing envelope."),
         (P["snap_tab_count"] >= 1 and min(P["snap_tab_w"], P["snap_tab_d"], P["snap_tab_h"]) > 0, "Snap-fit proxy dimensions/count must be positive."),
         (abs(P["tooth_root_z"] - (P["roller_axis_z"] - outer_r - P["tooth_height"])) < 1e-6, "Tooth root datum must remain tied to the roller seat envelope."),

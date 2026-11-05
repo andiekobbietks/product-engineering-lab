@@ -22,13 +22,14 @@ For wider commercial context, see the [China IP and manufacturing dossier](nyfas
 
 ## Interactive assembly
 
-Explore the [interactive assembly explorer](assembly-explorer.md), including component selection, exploded spacing and local loading of the Sand3D GLB output. This is a patent-led research prototype, not a verified digital twin.
+Explore the [Sand3D assembly gallery](assembly-explorer.md): select or click a component, inspect the exact Python functions that generate it, view its parameter provenance and operate the roller's exported Sand3D joint. The gallery reads the complete articulated assembly GLB and does not reconstruct geometry from separately positioned meshes. This is a patent-led research prototype, not a verified digital twin.
 
 ## Research outputs
 
 - Evidence-linked product data model.
 - Component-level illustrative Sand3D reconstruction.
-- Exploded assembly and exportable geometry.
+- Complete articulated Sand3D assembly with GLB, URDF, USDA, OBJ and STL exports.
+- Source-linked browser gallery and reproducible benchmark.
 - Image/measurement comparison protocol.
 - Explicit assumptions and unresolved dimensions.
 
