@@ -8,6 +8,10 @@ The experiment explores how public product evidence can be converted into an aud
 
 See the [image inventory](image-inventory.md), the [experiment record](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/README.md), [source register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/source-register.json) and [uncertainty register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/models/uncertainty-register.json).
 
+![Conceptual exploded architecture](../assets/patent-architecture-concept.svg)
+
+*Original explanatory diagram based on patent descriptions; not to scale and not official product CAD.*
+
 ## Patent evidence now mapped
 
 The published GB2591502A disclosure describes a body enclosing a reservoir, a rotatable roller, a row of teeth, a curved wall with arc-shaped slots, and upper/lower housing portions. Its drawing description lists an exploded perspective, exterior views, roller detail and two cross-sections. The patent metadata names Mouhamad Youmna and Myana Naturals Ltd. RAEng and Le Journal de Mayotte independently describe the Deluxe Detangler as Nyfasi's patented product, strongly supporting a family-level association. The exact publication-to-retail-SKU/revision mapping remains unverified. These are patent-embodiment disclosures, not proof of the exact retail configuration. See the [patent reading notes](patent-reading-notes.md) and [figure-level register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/patent-figure-register.csv).
