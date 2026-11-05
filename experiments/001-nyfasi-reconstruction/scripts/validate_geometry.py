@@ -46,7 +46,7 @@ def main():
         (0 < P["seal_axial_width"] <= min(P["spindle_pin_len"], P["bearing_block_w"]), "Seal width must be positive and fit within both spindle projection and bearing support width."),
         (support_x + P["bearing_block_w"] / 2 <= P["housing_w"] / 2, "Bearing supports exceed housing envelope."),
         (P["snap_tab_count"] >= 1 and min(P["snap_tab_w"], P["snap_tab_d"], P["snap_tab_h"]) > 0, "Snap-fit proxy dimensions/count must be positive."),
-        (abs(P["tooth_root_z"] - (P["roller_axis_z"] - outer_r - P["tooth_height"])) < 1e-6, "Tooth root datum must remain tied to the roller seat envelope."),
+        (abs(P["tooth_root_z"] - (P["roller_axis_z"] - outer_r)) < 1e-6, "Tooth root datum must remain tied to the roller seat envelope."),
     ]
     errors.extend(message for ok, message in checks if not ok)
     if errors:
