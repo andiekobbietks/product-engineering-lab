@@ -27,6 +27,7 @@ nav:
       - Patent reading notes: experiments/patent-reading-notes.md
       - CAD parameter provenance: experiments/cad-parameter-provenance.md
       - Curved-wall geometry: experiments/curved-wall-geometry.md
+      - Roller seal and tolerance study: experiments/roller-seal-and-tolerance.md
       - CadFlow B-rep reconstruction: experiments/cadflow-reconstruction.md
       - Sand3D datasets and demos: experiments/sand3d-dataset-strategy.md
       - CadFlow B-rep reconstruction: experiments/cadflow-brep.md
