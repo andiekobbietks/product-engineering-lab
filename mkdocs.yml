@@ -17,6 +17,7 @@ nav:
       - Roadmap: roadmap.md
       - Nyfasi case study: experiments/nyfasi.md
       - Validation protocol: experiments/nyfasi-validation.md
+      - Image inventory: experiments/image-inventory.md
       - Interactive 3D viewer: experiments/viewer.md
   - Commercial:
       - IP register: ip-register.md
