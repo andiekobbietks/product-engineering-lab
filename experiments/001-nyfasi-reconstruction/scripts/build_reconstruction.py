@@ -364,8 +364,10 @@ def build_research_assembly(exploded=False):
     )
     reservoir = s3d.at(build_reservoir(), z=P["reservoir_z"])
     roller = build_roller_core_and_bands()
+    # Keep the component root name unique. The previous root reused the name of
+    # its nested geometry group, causing Sand3D to suffix one name with .001.
     roller_ends = s3d.group(
-        "roller_end_features",
+        "roller_end_features_component_group",
         build_roller_end_features(),
         build_elastomeric_spindle_seals(),
     )
@@ -409,6 +411,7 @@ def main():
     output.mkdir(exist_ok=True)
     assembly_path = output / "nyfasi_complete_assembly.glb"
     s3d.export(model, str(assembly_path))
+    assembly_sha256 = hashlib.sha256(assembly_path.read_bytes()).hexdigest()
     validate_articulated_glb(
         assembly_path,
         [component.name for _, _, component, _, _ in COMPONENTS],
@@ -479,6 +482,7 @@ def main():
         "units": "mm",
         "model_status": "research_only",
         "assembly_file": "nyfasi_complete_assembly.glb",
+        "assembly_sha256": assembly_sha256,
         "source": {
             "program_file": "build_reconstruction.py",
             "parameters_file": "cad-parameters.json",
