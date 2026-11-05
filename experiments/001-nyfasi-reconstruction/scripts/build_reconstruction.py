@@ -36,6 +36,18 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
     missing = sorted(set(expected_component_nodes) - node_names)
     if missing:
         raise ValueError(f"Sand3D GLB is missing named component nodes: {missing}")
+    tooth_nodes = [name for name in node_names if name.startswith("blade_tooth_")]
+    projection_nodes = [name for name in node_names if name.startswith("roller_projection_")]
+    expected_projection_count = P["roller_band_count"] * P["roller_projection_count"]
+    if len(tooth_nodes) != P["tooth_count"]:
+        raise ValueError(
+            f"Expected {P['tooth_count']} comb teeth in GLB, found {len(tooth_nodes)}"
+        )
+    if len(projection_nodes) != expected_projection_count:
+        raise ValueError(
+            f"Expected {expected_projection_count} spheroidal roller projections in GLB, "
+            f"found {len(projection_nodes)}"
+        )
     joint_records = [
         node.get("extras", {}).get("s3d_joint")
         for node in nodes
@@ -50,6 +62,8 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
         "Validated articulated Sand3D GLB:",
         len(nodes), "nodes;",
         len(expected_component_nodes), "named component roots;",
+        len(tooth_nodes), "comb teeth;",
+        len(projection_nodes), "roller projections;",
         expected_joint, "joint metadata present",
     )
 
