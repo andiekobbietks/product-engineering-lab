@@ -59,5 +59,47 @@
     "url": "https://github.com/Sandflow-ai/sand3d",
     "type": "third_party_software_reference",
     "rights": "Follow Sand3D's own licence and notices; do not assume its licence."
+  },
+  {
+    "id": "SRC-007",
+    "title": "CN115003190B — Chinese invention patent grant",
+    "url": "https://patents.google.com/patent/CN115003190B/en",
+    "type": "chinese_patent_grant_record",
+    "rights": "Translated publication metadata and grant event are discovery evidence; verify applicant, assignments and current legal events in CNIPA."
+  },
+  {
+    "id": "SRC-008",
+    "title": "CNIPA patent search and publication portal",
+    "url": "https://cponline.cnipa.gov.cn/",
+    "type": "official_chinese_patent_register",
+    "rights": "Official register route. No live register extract has yet been captured in this project."
+  },
+  {
+    "id": "SRC-009",
+    "title": "Le Journal de Mayotte — China mould and initial production report, 15 October 2025",
+    "url": "https://lejournaldemayotte.yt/articles/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme",
+    "type": "secondary_media_report",
+    "rights": "Publisher content; link and summarise only. Supplier identity and production facts not independently verified."
+  },
+  {
+    "id": "SRC-010",
+    "title": "Le Journal de Mayotte — The Colors / mould funding report, 8 October 2025",
+    "url": "https://lejournaldemayotte.yt/2025/10/08/une-invention-mahoraise-presentee-lors-de-levenement-the-colors/",
+    "type": "secondary_media_report",
+    "rights": "Publisher content; link and summarise only. Reported UK government mould grant requires primary-source verification."
+  },
+  {
+    "id": "SRC-011",
+    "title": "Royal Academy of Engineering — Dr Youmna Mouhamad Enterprise Hub case study",
+    "url": "https://enterprisehub.raeng.org.uk/about-us/enterprise-hub-10th-anniversary/hub-10-case-study-dr-youmna-mouhamad",
+    "type": "institutional_founder_case_study",
+    "rights": "Link and attribute; use as independent institutional context, not a factory audit."
+  },
+  {
+    "id": "SRC-012",
+    "title": "Nyfasi — About us / founder story",
+    "url": "https://nyfasi.com/pages/about-us",
+    "type": "official_brand_founder_source",
+    "rights": "Brand-owned content; link and attribute, do not mirror without permission."
   }
 ]
