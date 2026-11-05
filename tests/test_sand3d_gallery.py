@@ -21,10 +21,12 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "roller_rotation",
             "build_reconstruction.py",
             "cad-parameters.json",
-        )
-        self.assertIn('json.dumps(manifest, indent=2) + "\\\\n"', script)
-        self.assertNotIn('json.dumps(manifest, indent=2) + "\\\\\\\\n"', script):
+        ):
             self.assertIn(contract, script)
+        # The Python source must contain one escaped newline in its string literal,
+        # so the generated JSON ends with a real line-feed, not the two characters \ and n.
+        self.assertIn(StringManifestWriter, script)
+        self.assertNotIn(StringDoubleEscapedManifestWriter, script)
 
     def test_gallery_uses_complete_assembly_and_native_joint_extras(self):
         viewer = (DOCS / "experiments" / "assembly-explorer.html").read_text(encoding="utf-8")
@@ -48,6 +50,11 @@ class Sand3DGalleryContractTests(unittest.TestCase):
         self.assertIn("ADR-0001", index)
         self.assertIn("Sand3D", adr1)
         self.assertIn("s3d_joint", adr2)
+
+
+# Exact source-text contracts for the JSON writer.
+StringManifestWriter = r'json.dumps(manifest, indent=2) + "\n"'
+StringDoubleEscapedManifestWriter = r'json.dumps(manifest, indent=2) + "\\n"'
 
 
 if __name__ == "__main__":
