@@ -1,0 +1,58 @@
+[
+  {
+    "id": "UNK-001",
+    "subject": "Housing dimensions",
+    "impact": "high",
+    "status": "open",
+    "validation": "Calibrated orthographic photographs or physical measurement."
+  },
+  {
+    "id": "UNK-002",
+    "subject": "Reservoir volume/internal geometry",
+    "impact": "medium",
+    "status": "open",
+    "validation": "Physical measurement or authoritative drawing."
+  },
+  {
+    "id": "UNK-003",
+    "subject": "Roller material and drive mechanism",
+    "impact": "high",
+    "status": "open",
+    "validation": "Manufacturer specification or physical inspection."
+  },
+  {
+    "id": "UNK-004",
+    "subject": "Seal geometry and compression",
+    "impact": "high",
+    "status": "open",
+    "validation": "Sectioned sample or authoritative drawing."
+  },
+  {
+    "id": "UNK-005",
+    "subject": "Comb tooth dimensions",
+    "impact": "medium",
+    "status": "open",
+    "validation": "Calibrated macro photography or physical measurement."
+  },
+  {
+    "id": "UNK-006",
+    "subject": "Assembly joints and service sequence",
+    "impact": "high",
+    "status": "open",
+    "validation": "Physical teardown and inspection."
+  },
+  {
+    "id": "UNK-007",
+    "subject": "Production tolerances and materials",
+    "impact": "critical",
+    "status": "open",
+    "validation": "Production drawings, supplier data and metrology."
+  },
+  {
+    "id": "UNK-008",
+    "subject": "Patent-to-retail mapping",
+    "impact": "high",
+    "status": "open",
+    "validation": "Compare dated retail samples, patent figures and official specifications."
+  }
+]
