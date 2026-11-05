@@ -63,6 +63,26 @@ def check_constraints(p: dict) -> list[str]:
     return errors
 
 
+def parse_obj_bounds(path: Path) -> dict[str, list[list[float]]]:
+    objects = {}
+    current = None
+    vertices = []
+    def flush():
+        if current and vertices:
+            objects[current] = [[min(point[i] for point in vertices), max(point[i] for point in vertices)] for i in range(3)]
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        if line.startswith("o "):
+            flush()
+            current = line[2:].strip()
+            vertices = []
+        elif line.startswith("v "):
+            values = line.split()
+            if len(values) >= 4:
+                vertices.append(tuple(float(value) for value in values[1:4]))
+    flush()
+    return objects
+
+
 def sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:
@@ -117,6 +137,20 @@ def run_case(name: str, mutations: dict[str, float], expected: dict[str, float],
                 return {"scenario": name, "status": "failed", "reason": f"Missing or empty export: {filename}"}
             files[filename] = {"bytes": artifact.stat().st_size, "sha256": sha256(artifact)}
 
+        obj_bounds = parse_obj_bounds(output / "hair_applicator_complete_roller_exploded.obj")
+        band_bounds = obj_bounds.get("roller_knurled_band_01")
+        housing_bounds = obj_bounds.get("lower_housing_shell_proxy_blank")
+        if band_bounds is None or housing_bounds is None:
+            return {"scenario": name, "status": "failed", "reason": "Named roller-band or housing mesh missing from OBJ"}
+        roller_band_diameter = max(band_bounds[1][1] - band_bounds[1][0], band_bounds[2][1] - band_bounds[2][0])
+        housing_width = housing_bounds[0][1] - housing_bounds[0][0]
+        expected_roller_diameter = values["roller_d"] / 1000.0
+        expected_housing_width = values["housing_w"] / 1000.0
+        if abs(roller_band_diameter - expected_roller_diameter) > 0.001:
+            return {"scenario": name, "status": "failed", "reason": "Generated roller-band diameter does not match parameter ledger", "observed_m": roller_band_diameter, "expected_m": expected_roller_diameter}
+        if abs(housing_width - expected_housing_width) > 0.001:
+            return {"scenario": name, "status": "failed", "reason": "Generated housing width does not match parameter ledger", "observed_m": housing_width, "expected_m": expected_housing_width}
+
         urdf = ET.parse(output / "hair_applicator_complete_roller.urdf").getroot()
         joint = next((node for node in urdf.findall("joint") if node.attrib.get("name") == "roller_rotation"), None)
         if joint is None or joint.attrib.get("type") != "continuous":
@@ -128,6 +162,7 @@ def run_case(name: str, mutations: dict[str, float], expected: dict[str, float],
         return {
             "scenario": name, "status": "passed", "mutations": mutations,
             "constraints_checked": 13, "joint": {"name": "roller_rotation", "type": "continuous", "axis": axis.attrib.get("xyz")},
+            "geometry_measurements_m": {"roller_band_outer_diameter": roller_band_diameter, "housing_envelope_width": housing_width},
             "exports": files, "builder_stdout": completed.stdout[-1200:],
         }
 
