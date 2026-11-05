@@ -91,6 +91,8 @@ def build_upper_housing(model: cad.Model):
     # Seat the upper cap on the lower shell's top datum.
     return model.translate(
         shell,
+        x=0,
+        y=0,
         z=P["lower_shell_h"] / 2 + P["upper_shell_h"] / 2,
     )
 
@@ -106,6 +108,8 @@ def build_reservoir(model: cad.Model):
             1.0,
             open_top=True,
         ),
+        x=0,
+        y=0,
         z=P["reservoir_z"],
     )
 
