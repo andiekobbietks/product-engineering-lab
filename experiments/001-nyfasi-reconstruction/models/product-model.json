@@ -7,7 +7,7 @@
   "components": [
     {
       "component_id": "C-HOUSING",
-      "name": "Main housing",
+      "name": "Body / housing assembly",
       "parent_component_id": null,
       "status": "partially_supported",
       "parameters": [
@@ -144,6 +144,96 @@
           "evidence_ids": [],
           "confidence": "none",
           "assumption": "No volume is asserted."
+        }
+      ]
+    },
+    {
+      "component_id": "C-UPPER-SHELL",
+      "name": "Upper housing portion",
+      "parent_component_id": "C-HOUSING",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+        }
+      ]
+    },
+    {
+      "component_id": "C-LOWER-SHELL",
+      "name": "Lower housing portion",
+      "parent_component_id": "C-HOUSING",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+        }
+      ]
+    },
+    {
+      "component_id": "C-SLOTTED-WALL",
+      "name": "Curved wall and arc-slot interface",
+      "parent_component_id": "C-LOWER-SHELL",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+        }
+      ]
+    },
+    {
+      "component_id": "C-SPINDLE",
+      "name": "Roller end pins / spindle supports",
+      "parent_component_id": "C-ROLLER",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+        }
+      ]
+    },
+    {
+      "component_id": "C-SEAL",
+      "name": "Housing interface seal",
+      "parent_component_id": "C-HOUSING",
+      "status": "partially_supported",
+      "parameters": [
+        {
+          "name": "architecture_presence",
+          "value": "disclosed_in_patent_embodiment",
+          "unit": "classification",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "high",
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
         }
       ]
     }
