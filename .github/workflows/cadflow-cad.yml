@@ -1,11 +1,6 @@
-name: CadFlow B-rep reconstruction
+name: Historical CadFlow B-rep replay (manual only)
 on:
   workflow_dispatch:
-  push:
-    paths:
-      - "experiments/001-nyfasi-reconstruction/models/cad-parameters.json"
-      - "experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py"
-      - ".github/workflows/cadflow-cad.yml"
 permissions:
   contents: read
 jobs:
