@@ -4,7 +4,7 @@
 
 Research · Reconstruction · Validation · Productisation
 
-![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Docs](https://img.shields.io/badge/docs-MkDocs%20Material-526CFE)
+![Status](https://img.shields.io/badge/status-research%20prototype-orange) ![Docs](https://img.shields.io/badge/docs-MkDocs%20Material-526CFE) ![Licence](https://img.shields.io/badge/licence-undecided-lightgrey)
 
 <p align="center"><img src="assets/diagrams/product-engineering-loop.svg" alt="Product engineering loop" width="900"></p>
 
@@ -47,6 +47,8 @@ No original Nyfasi SolidWorks, Fusion 360, STEP or IGES files are claimed to hav
 The lab remains independently useful and provider-neutral.
 
 ## Status and rights
+
+**Project-wide licence: undecided.** The previous MIT licence file was removed pending the IP review. See [LICENSING.md](LICENSING.md) and the [IP register](docs/ip-register.md).
 
 Early research foundation. Sand3D API compatibility and end-to-end geometry generation are not yet verified here. A successful render is not engineering validation.
 
