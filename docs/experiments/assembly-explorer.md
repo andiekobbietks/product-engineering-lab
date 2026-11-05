@@ -2,9 +2,9 @@
 
 Explore the current patent-led reconstruction as a component-level 3D research model. Drag to orbit, scroll to zoom, select components to inspect their evidence classification, and adjust the exploded spacing.
 
-<iframe src="../assembly-explorer.html" title="Interactive 3D assembly explorer" width="100%" height="760" style="border:1px solid #34445c;border-radius:12px" loading="lazy"></iframe>
+<iframe src="assembly-explorer.html" title="Interactive 3D assembly explorer" width="100%" height="760" style="border:1px solid #34445c;border-radius:12px" loading="lazy"></iframe>
 
-[Open the viewer in a full browser tab](../assembly-explorer.html){ .md-button .md-button--primary }
+[Open the viewer in a full browser tab](assembly-explorer.html){ .md-button .md-button--primary }
 
 ## What this demonstrates
 
