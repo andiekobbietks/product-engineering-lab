@@ -21,7 +21,9 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "roller_rotation",
             "build_reconstruction.py",
             "cad-parameters.json",
-        ):
+        )
+        self.assertIn('json.dumps(manifest, indent=2) + "\\\\n"', script)
+        self.assertNotIn('json.dumps(manifest, indent=2) + "\\\\\\\\n"', script):
             self.assertIn(contract, script)
 
     def test_gallery_uses_complete_assembly_and_native_joint_extras(self):
