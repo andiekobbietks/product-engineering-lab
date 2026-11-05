@@ -17,4 +17,4 @@ For each image or patent figure, record one or more of:
 
 Do not download, embed or commit source imagery unless a suitable permission or licence is recorded. Record canonical source URL, figure/page locator, access date, creator/rights holder, permitted display/adaptation/distribution, attribution, and a content hash for authorised local copies.
 
-The current CSV rows are **inventory leads**, not completed visual classifications. Exact figure locators, image observations and rights clearances remain outstanding.
+The current CSV rows are **inventory leads**, not completed visual classifications. A separate [GB2591502A figure-level register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/patent-figure-register.csv) now maps Figures 1, 2A–2C and 3–6 from the patent's drawing description. Those classifications are based on the textual drawing descriptions; each drawing still needs direct visual inspection before geometry is inferred. Exact figure locators, image observations and rights clearances remain outstanding.
