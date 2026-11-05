@@ -17,9 +17,9 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "source_object_prefixes",
             "validate_articulated_glb",
             "source_ranges",
-            "component.name",
+            "COMPONENT_NODE_NAMES",
+            "nyfasi_component_roller_end_features",
             "roller_rotation",
-            "roller_end_features_component_group",
             "tooth_profile_points",
             "tooth_tip_width",
             "tooth_thickness",
@@ -66,6 +66,8 @@ class Sand3DGalleryContractTests(unittest.TestCase):
         builder = (EXP / "scripts" / "build_reconstruction.py").read_text(encoding="utf-8")
         self.assertNotIn("s3d.knurl", builder)
         self.assertNotIn("roller_core_d", builder)
+        self.assertIn('"node_name": COMPONENT_NODE_NAMES[component_id]', builder)
+        self.assertNotIn('"node_name": component.name', builder)
 
     def test_architecture_decisions_are_present_and_linked(self):
         index = (DOCS / "decisions" / "index.md").read_text(encoding="utf-8")
