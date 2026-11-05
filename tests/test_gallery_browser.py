@@ -5,10 +5,11 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-from playwright.sync_api import sync_playwright
 
 
 def main():
+    from playwright.sync_api import sync_playwright
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--site", type=Path, default=Path("site"))
     site = parser.parse_args().site.resolve()
