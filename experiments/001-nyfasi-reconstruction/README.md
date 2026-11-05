@@ -30,6 +30,8 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 - Reproduction notebook: `notebooks/nyfasi_reconstruction_colab.ipynb`.
 - Validation protocol: [documentation](../../docs/experiments/nyfasi-validation.md).
 
+The current product model deliberately records the patent-to-Nyfasi mapping as unverified. The first geometry proxy is named after GB2591502A, because the disclosed architecture has not yet been proven to match the Nyfasi-branded retail SKU.
+
 ## Reconstruction boundary
 
 Illustrative research reconstruction only. Not official Nyfasi CAD, not a verified manufacturing model and not exact dimensions. No original SolidWorks, Fusion 360, STEP or IGES files are claimed to have been located.
