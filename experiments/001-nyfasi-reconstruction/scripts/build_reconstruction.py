@@ -49,6 +49,7 @@ def build_upper_housing():
         P["housing_w"], P["housing_d"], P["upper_shell_h"],
         P["housing_wall_t"], P["housing_corner_r"],
     )
+    cap = s3d.at(cap, rx=180)  # invert the open face so the cap opens toward the lower shell
     s3d.material(cap, "plastic", color="#555b62")
     return cap
 
