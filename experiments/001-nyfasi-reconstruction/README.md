@@ -14,6 +14,10 @@ What product architecture can be reconstructed from public product pages, design
 
 Patent embodiments must not automatically be treated as the exact retail configuration. Verify patent status and ownership in official registers.
 
+## China IP and manufacturing evidence
+
+The China patent-family record and secondary reports of mould manufacture/initial production are documented in the [China diligence dossier](../../../docs/experiments/nyfasi-china-due-diligence.md) and machine-readable [China evidence register](evidence/china-diligence-register.json). The 8 and 15 October 2025 reports differ in how they describe grant support; the funding relationship remains unresolved.
+
 ## Sand3D research connection
 
 Sand3D is relevant as a text-driven editable 3D generation research project. This experiment asks what additional structure makes generated output useful in product engineering: component identity, evidence-linked dimensions, assembly relationships, editability, constraint checks and provenance.
@@ -23,6 +27,9 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 ## Repository artefacts
 
 - Product data model and JSON Schema: `models/product-model.json` and `models/product-model.schema.json`.
+- Single-source CAD parameter ledger with provenance: `models/cad-parameters.json`.
+- Provenance validator (no Sand3D dependency): `scripts/validate_provenance.py`.
+- Parameter provenance documentation: [CAD provenance and reconstruction boundary](../../../docs/experiments/cad-parameter-provenance.md).
 - Rights-aware image inventory: `evidence/image-inventory.csv`.
 - Patent figure locators: `evidence/patent-figure-register.csv`.
 - Patent reading notes: [GB2591502A](../../docs/experiments/patent-reading-notes.md).
