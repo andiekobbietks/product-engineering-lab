@@ -69,7 +69,7 @@
         "SRC-007"
       ],
       "confidence": "low",
-      "note": "Chosen 12 mm radius is within the patent description's example 10–30 mm radius range; not a measured production dimension."
+      "note": "Assumed smooth drum diameter selected within the patent's example 10-30 mm radius range. It is a derived research value, not a measured retail dimension; discrete spheroidal projections extend beyond this drum surface."
     },
     "roller_len": {
       "value": 112,
@@ -179,14 +179,6 @@
       "evidence_ids": [],
       "confidence": "high",
       "note": "Presentation-only exploded-view spacing; not product geometry."
-    },
-    "roller_core_d": {
-      "value": 22.6,
-      "unit": "mm",
-      "provenance": "ENGINEERING_ASSUMPTION",
-      "evidence_ids": [],
-      "confidence": "low",
-      "note": "Provisional smooth roller core diameter beneath raised textured bands; inferred layout proxy, not dimensioned by patent."
     },
     "roller_band_count": {
       "value": 7,
