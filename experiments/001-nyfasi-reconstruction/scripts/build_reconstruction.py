@@ -7,6 +7,7 @@ from pathlib import Path
 import ast
 import hashlib
 import json
+import math
 import struct
 import sand3d as s3d
 
@@ -59,13 +60,47 @@ def cylinder_on_x(name, diameter, length, x=0, y=0, z=0):
     return s3d.at(solid, x=x - length / 2, y=y, z=z, ry=90)
 
 
+def housing_outline_points(width, depth, waist_depth):
+    """Patent-led waisted planform: full-width ends and a narrower centre."""
+    return [
+        (-width * 0.5 + 8, -depth / 2),
+        (-width * 0.30, -depth / 2),
+        (-width * 0.18, -waist_depth / 2),
+        (width * 0.18, -waist_depth / 2),
+        (width * 0.30, -depth / 2),
+        (width / 2 - 8, -depth / 2),
+        (width / 2, -depth / 2 + 8),
+        (width / 2, depth / 2 - 8),
+        (width / 2 - 8, depth / 2),
+        (width * 0.30, depth / 2),
+        (width * 0.18, waist_depth / 2),
+        (-width * 0.18, waist_depth / 2),
+        (-width * 0.30, depth / 2),
+        (-width / 2 + 8, depth / 2),
+        (-width / 2, depth / 2 - 8),
+        (-width / 2, -depth / 2 + 8),
+    ]
+
+
+def housing_outline_profile(width, depth, waist_depth, corner):
+    return s3d.poly(housing_outline_points(width, depth, waist_depth), fillet=corner)
+
+
 def rounded_tray(name, width, depth, height, wall, corner):
-    """Open-top, rounded rectangular housing half, built at its own origin."""
-    blank = s3d.extrude(name + "_blank", s3d.rect(width, depth, r=corner), height)
+    """Open-top, waisted clamshell housing half, built at its own origin."""
+    waist_depth = P["housing_waist_depth"]
+    blank_profile = housing_outline_profile(width, depth, waist_depth, corner)
+    blank = s3d.extrude(name + "_blank", blank_profile, height)
     blank = s3d.at(blank, z=-height / 2)
+    cavity_profile = housing_outline_profile(
+        width - 2 * wall,
+        depth - 2 * wall,
+        waist_depth - 2 * wall,
+        max(0.5, corner - wall),
+    )
     cavity = s3d.extrude(
         name + "_cavity_tool",
-        s3d.rect(width - 2 * wall, depth - 2 * wall, r=max(0.5, corner - wall)),
+        cavity_profile,
         height - wall,
     )
     cavity = s3d.at(cavity, z=-height / 2 + wall)
@@ -152,29 +187,33 @@ def build_roller_core():
 
 
 def build_textured_band(index, axial_position):
-    """A knurled annular band; the exposed core remains the smooth sealing land."""
-    outer = s3d.knurl(
-        f"roller_knurled_band_{index:02d}",
-        d=P["roller_d"],
-        h=P["roller_band_width"],
-        pitch=P["roller_knurl_pitch"],
-        straight=False,
+    """A circumferential array of patent-described spheroidal roller projections."""
+    projections = []
+    projection_d = P["roller_projection_d"]
+    centre_radius = (
+        P["roller_core_d"] / 2
+        + projection_d / 2
+        - P["roller_projection_overlap"]
     )
-    bore = s3d.cylinder(
-        f"roller_band_bore_tool_{index:02d}",
-        d=P["roller_core_d"] - 0.2,
-        h=P["roller_band_width"] + 0.6,
-    )
-    band = s3d.cut(outer, bore)
-    band = s3d.at(
-        band,
-        x=axial_position - P["roller_band_width"] / 2,
-        y=P["roller_axis_y"],
-        z=P["roller_axis_z"],
-        ry=90,
-    )
-    s3d.material(band, "rubber", color="#a9b0b5", roughness=0.82)
-    return s3d.group(f"textured_annular_band_{index:02d}", band)
+    for projection_index in range(P["roller_projection_count"]):
+        angle = 2 * math.pi * projection_index / P["roller_projection_count"]
+        y = P["roller_axis_y"] + centre_radius * math.cos(angle)
+        z = P["roller_axis_z"] + centre_radius * math.sin(angle)
+        projection = s3d.sphere(
+            f"roller_projection_{index:02d}_{projection_index + 1:02d}",
+            projection_d,
+        )
+        # Sand3D spheres rest on local Z=0, so offset by half their diameter
+        # to place each sphere centre on the roller's circumferential radius.
+        projection = s3d.at(
+            projection,
+            x=axial_position,
+            y=y,
+            z=z - projection_d / 2,
+        )
+        s3d.material(projection, "rubber", color="#a9b0b5", roughness=0.82)
+        projections.append(projection)
+    return s3d.group(f"textured_annular_band_{index:02d}", *projections)
 
 
 def build_roller_end_wall(side, sign):
@@ -301,12 +340,8 @@ def build_housing_gasket():
     """Separate perimeter seal proxy; section and compression remain assumptions."""
     w = P["housing_w"] - 2 * P["gasket_inset"]
     d = P["housing_d"] - 2 * P["gasket_inset"]
-    path = [
-        (-w / 2, -d / 2, 0),
-        (w / 2, -d / 2, 0),
-        (w / 2, d / 2, 0),
-        (-w / 2, d / 2, 0),
-    ]
+    waist = P["housing_waist_depth"] - 2 * P["gasket_inset"]
+    path = housing_outline_points(w, d, waist)
     gasket = s3d.wire(
         "upper_lower_housing_perimeter_gasket",
         path=path,
@@ -426,8 +461,8 @@ def main():
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
     }
     component_symbols = {
-        "lower-housing": ["build_lower_housing", "build_housing_retention_features", "build_housing_gasket", "build_research_assembly"],
-        "upper-housing": ["rounded_tray", "build_upper_housing"],
+        "lower-housing": ["housing_outline_points", "housing_outline_profile", "rounded_tray", "build_lower_housing", "build_housing_retention_features", "build_housing_gasket", "build_research_assembly"],
+        "upper-housing": ["housing_outline_points", "housing_outline_profile", "rounded_tray", "build_upper_housing"],
         "reservoir": ["build_reservoir"],
         "rotatable-roller": ["cylinder_on_x", "build_roller_core", "build_textured_band", "build_roller_core_and_bands"],
         "curved-slotted-wall": ["build_curved_wall"],
