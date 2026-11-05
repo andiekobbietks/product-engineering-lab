@@ -69,10 +69,17 @@ def main():
                 raise AssertionError(f"Gallery reported a fatal error: {state['fatal']}")
             if errors:
                 raise AssertionError("Browser runtime errors: " + " | ".join(errors))
-            print("Sand3D browser gallery smoke test passed:", state)
-    finally:
-        if browser:
+            gl_context = page.evaluate("""() => {
+                const canvas = document.querySelector('#viewport');
+                const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+                return gl ? gl.getParameter(gl.VERSION) : null;
+            }""")
+            if not gl_context:
+                raise AssertionError("3D canvas has no working WebGL context")
+            print("Sand3D browser gallery smoke test passed:", state, "WebGL:", gl_context)
             browser.close()
+            browser = None
+    finally:
         server.shutdown()
         server.server_close()
 
