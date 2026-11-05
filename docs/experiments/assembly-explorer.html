@@ -204,7 +204,7 @@ function fitCamera(){
  const span=Math.max(size.x,size.y,size.z,.02);
  controls.target.copy(centre);
  const distance=span*1.9;
- camera.position.copy(centre).add(new THREE.Vector3(distance,distance*.78,distance));
+ camera.position.copy(centre).add(new THREE.Vector3(distance,-distance*.62,distance*.85));
  camera.near=Math.max(span/1000,.0001);camera.far=span*100;camera.updateProjectionMatrix();controls.update();
 }
 function applyExplosion(enabled){
