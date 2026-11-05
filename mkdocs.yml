@@ -10,10 +10,17 @@ theme:
     - content.code.copy
 nav:
   - Overview: index.md
-  - Vision: vision.md
-  - Methodology: methodology.md
-  - Architecture: architecture.md
-  - Roadmap: roadmap.md
+  - Research:
+      - Vision: vision.md
+      - Methodology: methodology.md
+      - Architecture: architecture.md
+      - Roadmap: roadmap.md
+      - Nyfasi case study: experiments/nyfasi.md
+      - Validation protocol: experiments/nyfasi-validation.md
+  - Commercial:
+      - IP register: ip-register.md
+      - Commercial proposal: commercial-proposal.md
+      - Licensing status: ../LICENSING.md
 markdown_extensions:
   - admonition
   - attr_list
