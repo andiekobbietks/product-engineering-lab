@@ -279,7 +279,21 @@
     "cad_library": "Sand3D",
     "version": "1.6.2",
     "python": "3.13",
-    "parameter_ledger": "models/cad-parameters.json"
+    "parameter_ledger": "models/cad-parameters.json",
+    "procedural_engine": {
+      "name": "Sand3D",
+      "version": "1.6.2",
+      "python": "3.13",
+      "role": "procedural geometry and articulated preview"
+    },
+    "brep_engine": {
+      "name": "CadFlow",
+      "version": "0.2.0",
+      "source_commit": "43fbac0515a560229d700e07281cc5c08c3f9765",
+      "python": "3.12",
+      "geometry_kernel": "OpenCascade 7.9.3.1",
+      "role": "separately validated B-rep solids and STEP/STL export"
+    }
   },
   "validation": [],
   "identity_mapping_status": "unverified"
