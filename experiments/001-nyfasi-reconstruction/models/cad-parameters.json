@@ -405,20 +405,20 @@
       "note": "Placeholder gasket cross-section diameter; compression, material and sealing performance unknown."
     },
     "seal_outer_d": {
-      "value": 8,
+      "value": 4.4,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Placeholder elastomeric spindle-seal outside diameter; schematic only."
+      "note": "Placeholder elastomeric seal OD sized as a conceptual fit inside the 4.5 mm bearing bore; no product fit data."
     },
     "seal_inner_d": {
-      "value": 4.2,
+      "value": 3.8,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Placeholder seal bore around 4 mm spindle pin; no product fit data."
+      "note": "Placeholder elastomeric seal bore with 0.2 mm nominal diametral interference on the 4 mm spindle pin; compression behaviour is not modelled."
     },
     "seal_axial_width": {
       "value": 1,
