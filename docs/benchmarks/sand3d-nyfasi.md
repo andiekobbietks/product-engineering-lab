@@ -66,7 +66,7 @@ A multi-part hair-applicator mechanism is our first test case. The benchmark cha
 | Housing width +10 mm | Increase housing envelope | Bearing supports remain inside the housing |
 | Invalid roller diameter | Set roller OD below the smooth core | Constraint gate rejects the edit before Sand3D runs |
 
-The harness currently executes prescribed edits. It does **not yet benchmark an autonomous AI agent's reasoning quality**. That is the next evaluation track: the agent will receive a natural-language engineering request, propose a parameter/program patch, explain affected constraints and pass or fail against the same independent evaluator.
+The first roller-diameter change is an AI-authored engineering proposal, recorded with its natural-language request, parameter patch, rationale and expected invariants. The benchmark executes that proposal through the real Sand3D program and independent constraint checks. This is a reproducible single-agent fixture, **not yet a blind or comparative evaluation of autonomous model reasoning**. The next evaluation track will let an agent receive unseen change requests, propose patches without access to expected values, explain affected constraints and pass or fail against the same evaluator.
 
 ## How the representations work together
 
