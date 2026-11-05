@@ -1,0 +1,35 @@
+name: Sand3D licensed mechanical exemplar programs
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "experiments/001-nyfasi-reconstruction/scripts/extract_sand3d_exemplars.py"
+      - ".github/workflows/sand3d-exemplars.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  exemplars:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Hugging Face datasets client
+        run: python -m pip install --upgrade pip datasets
+      - name: Extract selected CC BY 4.0 program references
+        run: |
+          python experiments/001-nyfasi-reconstruction/scripts/extract_sand3d_exemplars.py \
+            --max-scan 20000 \
+            --output experiments/001-nyfasi-reconstruction/output/sand3d-exemplar-programs.json
+      - name: Upload attributed program references
+        uses: actions/upload-artifact@v4
+        with:
+          name: sand3d-exemplar-programs
+          path: experiments/001-nyfasi-reconstruction/output/sand3d-exemplar-programs.json
+          if-no-files-found: error
+          retention-days: 30
