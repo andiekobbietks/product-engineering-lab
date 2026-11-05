@@ -114,7 +114,7 @@ def main() -> int:
     calculated = calculate_stackups(parameters, ledger)
     print("PRELIMINARY TOLERANCE / INTERACTION REPORT")
     print("Status:", ledger["status"])
-    print("All dimensions are assumptions; this is not a production tolerance analysis.\\n")
+    print("All dimensions are assumptions; this is not a production tolerance analysis.\n")
 
     for name, result in calculated.items():
         if name == "band_to_slot_axial_alignment":
@@ -133,12 +133,12 @@ def main() -> int:
     band_result = calculated["roller_band_to_wall_slot"]
     if band_result["worst_case_min"] < 0:
         print(
-            "\\nREVIEW FLAG: calculated band-to-slot stack permits "
+            "\nREVIEW FLAG: calculated band-to-slot stack permits "
             f"{abs(band_result['worst_case_min']):.3f} mm interference."
         )
         print("Do not interpret nominal alignment as verified running clearance.")
 
-    print("\\nRelease gates:")
+    print("\nRelease gates:")
     for gate in ledger["release_gate"]:
         print("  *", gate)
     return 0
