@@ -16,7 +16,7 @@ Patent embodiments must not automatically be treated as the exact retail configu
 
 ## China IP and manufacturing evidence
 
-The China patent-family record and secondary reports of mould manufacture/initial production are documented in the [China diligence dossier](../../../docs/experiments/nyfasi-china-due-diligence.md) and machine-readable [China evidence register](evidence/china-diligence-register.json). The 8 and 15 October 2025 reports differ in how they describe grant support; the funding relationship remains unresolved.
+The China patent-family record and secondary reports of mould manufacture/initial production are documented in the [China diligence dossier](../../docs/experiments/nyfasi-china-due-diligence.md) and machine-readable [China evidence register](evidence/china-diligence-register.json). The 8 and 15 October 2025 reports differ in how they describe grant support; the funding relationship remains unresolved.
 
 ## Sand3D research connection
 
@@ -29,7 +29,7 @@ Compare text-only generation, evidence-conditioned generation, component-by-comp
 - Product data model and JSON Schema: `models/product-model.json` and `models/product-model.schema.json`.
 - Single-source CAD parameter ledger with provenance: `models/cad-parameters.json`.
 - Provenance validator (no Sand3D dependency): `scripts/validate_provenance.py`.
-- Parameter provenance documentation: [CAD provenance and reconstruction boundary](../../../docs/experiments/cad-parameter-provenance.md).
+- Parameter provenance documentation: [CAD provenance and reconstruction boundary](../../docs/experiments/cad-parameter-provenance.md).
 - Rights-aware image inventory: `evidence/image-inventory.csv`.
 - Patent figure locators: `evidence/patent-figure-register.csv`.
 - Patent reading notes: [GB2591502A](../../docs/experiments/patent-reading-notes.md).
