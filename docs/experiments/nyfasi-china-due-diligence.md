@@ -73,7 +73,7 @@ Official verification route: [CNIPA patent search/service portal](https://cponli
 
 ## 3. Reported China tooling and production activity
 
-Source: [“De Mayotte au monde : Youmna Mouhamad, ou le parcours d’une entrepreneuse hors norme” — Le Journal de Mayotte, 15 October 2025](https://lejournaldemayotte.yt/2025/10/15/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme/).
+Source: [“De Mayotte au monde : Youmna Mouhamad, ou le parcours d’une entrepreneuse hors norme” — Le Journal de Mayotte, 15 October 2025](https://lejournaldemayotte.yt/articles/de-mayotte-au-monde-youmna-mouhamad-ou-le-parcours-dune-entrepreneuse-hors-norme/).
 
 The article reports that:
 
