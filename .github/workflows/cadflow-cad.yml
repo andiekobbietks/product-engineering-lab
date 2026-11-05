@@ -21,10 +21,11 @@ jobs:
         run: python experiments/001-nyfasi-reconstruction/scripts/validate_provenance.py
       - name: Validate CAD parameter geometry constraints
         run: python experiments/001-nyfasi-reconstruction/scripts/validate_geometry.py
-      - name: Install native build prerequisites
+      - name: Verify preinstalled native build toolchain
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential cmake python3-dev
+          cmake --version
+          c++ --version
+          python -c "import pathlib, sysconfig; p=pathlib.Path(sysconfig.get_config_var('INCLUDEPY'))/'Python.h'; print(p); assert p.is_file()"
       - name: Install matching OpenCascade runtime
         run: |
           python -m pip install --upgrade pip setuptools wheel
