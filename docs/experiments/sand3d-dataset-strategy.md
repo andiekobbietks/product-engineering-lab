@@ -98,6 +98,7 @@ The first automated pass produced **400 metadata references** (80 per collection
 | AutoMate: shaft_and_bearing_block | Shaft, bore and bearing support | CC0-1.0 |
 | AutoMate: split_pillow_block | Split bearing housing and retention | CC0-1.0 |
 | AutoMate: flanged_bearing | Bearing mounting geometry | CC0-1.0 |
+| AutoMate: gear_reducer | Multi-part mechanical assembly structure | CC0-1.0 |
 | SimReady: consumable_bearing_ball_d01 | Bearing component reference | CC-BY-4.0 |
 | Articraft: road_bike_crankset | Rotating multi-part assembly hierarchy | CC-BY-4.0 |
 | Objaverse: finned_motor | Cylindrical housing and radial features | CC-BY-4.0 |
