@@ -1,0 +1,21 @@
+site_name: Product Engineering Lab
+site_description: From product evidence to engineering intelligence.
+repo_url: https://github.com/andiekobbietks/product-engineering-lab
+repo_name: andiekobbietks/product-engineering-lab
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - content.code.copy
+nav:
+  - Overview: index.md
+  - Vision: vision.md
+  - Methodology: methodology.md
+  - Architecture: architecture.md
+  - Roadmap: roadmap.md
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - pymdownx.superfences
