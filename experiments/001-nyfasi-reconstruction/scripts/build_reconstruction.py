@@ -141,7 +141,6 @@ def build_upper_retaining_arms():
     arm_top = P["upper_shell_h"] / 2 - P["housing_wall_t"]
     arm_bottom = P["roller_axis_z"] - upper_offset
     arm_height = arm_top - arm_bottom
-    arm_centre = (arm_top + arm_bottom) / 2
     support_x = P["roller_len"] / 2 + P["roller_endwall_t"] + P["spindle_pin_len"] / 2
     arms = []
     for side, sign in (("left", -1), ("right", 1)):
@@ -152,7 +151,8 @@ def build_upper_retaining_arms():
             P["retaining_arm_d"],
             arm_height,
         )
-        arm = s3d.at(arm, x=x, y=P["roller_axis_y"], z=arm_centre)
+        # Sand3D boxes are positioned from their lower Z face, so place the arm at its bottom datum.
+        arm = s3d.at(arm, x=x, y=P["roller_axis_y"], z=arm_bottom)
         pin_cutout = cylinder_on_x(
             f"upper_retaining_arm_{side}_spindle_cutout",
             P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"],
