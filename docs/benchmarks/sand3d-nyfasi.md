@@ -22,7 +22,7 @@ A multi-part hair-applicator mechanism is our first test case. The benchmark cha
 
 ## Explore the mechanism
 
-The interactive preview below provides orbit, component selection, wireframe and exploded-assembly controls. It starts with the schematic assembly; load the generated Sand3D GLB from the benchmark artefact to inspect the regenerated geometry.
+The interactive preview below automatically loads the seven separately exported Sand3D component GLBs generated during the Pages build. Orbit the complete mechanism, select each named component, switch between assembled and exploded views, and inspect its evidence classification. The hand-drawn schematic remains only as a fallback if the generated geometry cannot be loaded.
 
 <iframe src="../../experiments/assembly-explorer.html" title="Interactive Nyfasi mechanism assembly explorer" loading="lazy" style="width:100%;height:780px;border:0;border-radius:16px;background:#0b1020"></iframe>
 
