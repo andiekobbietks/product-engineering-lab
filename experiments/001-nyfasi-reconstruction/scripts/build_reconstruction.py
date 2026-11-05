@@ -43,6 +43,18 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
         raise ValueError(
             f"Expected {P['tooth_count']} comb teeth in GLB, found {len(tooth_nodes)}"
         )
+    tooth_node_records = [node for node in nodes if str(node.get("name", "")).startswith("blade_tooth_")]
+    for tooth_node in tooth_node_records:
+        rotation = tooth_node.get("rotation", [0, 0, 0, 1])
+        translation = tooth_node.get("translation", [0, 0, 0])
+        if (
+            len(rotation) != 4
+            or abs(abs(rotation[0]) - 1) > 1e-3
+            or any(abs(value) > 1e-3 for value in rotation[1:])
+        ):
+            raise ValueError(f"Comb tooth {tooth_node.get('name')} is not flipped to point away from the wall")
+        if len(translation) < 2 or abs(translation[1] - P["tooth_root_z"]) > 1e-3:
+            raise ValueError(f"Comb tooth {tooth_node.get('name')} is not rooted on the curved wall outer surface")
     if len(projection_nodes) != expected_projection_count:
         raise ValueError(
             f"Expected {expected_projection_count} spheroidal roller projections in GLB, "
