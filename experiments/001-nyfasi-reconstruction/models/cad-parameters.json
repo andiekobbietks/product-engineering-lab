@@ -5,7 +5,7 @@
   "model_status": "research_only",
   "parameters": {
     "housing_w": {
-      "value": 126,
+      "value": 130,
       "unit": "mm",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
