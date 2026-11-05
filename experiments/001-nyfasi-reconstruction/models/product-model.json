@@ -5,7 +5,7 @@
   "disclaimer": "Independent illustrative research model. Dimensions and internal construction are assumptions unless linked to evidence. Not official Nyfasi CAD or manufacturing geometry.",
   "units": "mm",
   "components": [
-    {"component_id": "C-HOUSING", "name": "Main housing", "parent_component_id": null, "status": "partially_supported", "parameters": [
+    {"component_id": "C-HOUSING", "name": "Main housing", "parent_component_id": null, "status": "assumed", "parameters": [
       {"name": "overall_width", "value": 110, "unit": "mm", "evidence_ids": [], "confidence": "low", "assumption": "Illustrative envelope parameter; replace with calibrated measurement."},
       {"name": "overall_depth", "value": 68, "unit": "mm", "evidence_ids": [], "confidence": "low", "assumption": "Illustrative envelope parameter; replace with calibrated measurement."}
     ]},
