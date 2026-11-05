@@ -307,6 +307,102 @@
       "evidence_ids": [],
       "confidence": "none",
       "note": "Two visible snap-tab proxies, one near each longitudinal end; actual latch count/layout unverified."
+    },
+    "housing_wall_t": {
+      "value": 1.8,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder shell wall thickness for the rounded tray and cap; not disclosed or measured."
+    },
+    "housing_corner_r": {
+      "value": 8,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder external corner radius for the housing envelope; not calibrated."
+    },
+    "reservoir_corner_r": {
+      "value": 4,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder reservoir corner radius; not disclosed or measured."
+    },
+    "roller_axis_y": {
+      "value": 34,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Axis location set at half the assumed 68 mm housing depth; a coordinate choice, not a product measurement."
+    },
+    "roller_axis_z": {
+      "value": -7,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "low",
+      "note": "Axis location set at the lower-shell mid-plane in the current coordinate system; not a measured product datum."
+    },
+    "reservoir_z": {
+      "value": 0,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Presentation/assembly placement for the reservoir proxy; not a product datum."
+    },
+    "tooth_root_z": {
+      "value": -25.5,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Illustrative placement for the tooth extrusion relative to the roller axis and seat envelope; requires figure/sample calibration."
+    },
+    "tooth_corner_r": {
+      "value": 0.6,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Small illustrative edge radius on each tooth; not disclosed."
+    },
+    "roller_knurl_pitch": {
+      "value": 1.2,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Sand3D knurl feature pitch used to render a textured band; not evidence of the original roller texture."
+    },
+    "snap_tab_pitch": {
+      "value": 100,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Presentation spacing between two snap-tab proxies; not measured."
+    },
+    "gasket_inset": {
+      "value": 2,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Perimeter gasket path inset from the assumed housing envelope; not measured."
+    },
+    "gasket_section_d": {
+      "value": 1.5,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [],
+      "confidence": "none",
+      "note": "Placeholder gasket cross-section diameter; compression, material and sealing performance unknown."
     }
   },
   "provenance_legend": {
