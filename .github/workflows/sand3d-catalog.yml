@@ -1,0 +1,36 @@
+name: Sand3D dataset exemplar catalogue
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "experiments/001-nyfasi-reconstruction/scripts/catalog_sand3d_examples.py"
+      - ".github/workflows/sand3d-catalog.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  catalogue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Hugging Face datasets client
+        run: python -m pip install --upgrade pip datasets
+      - name: Scan Sand3D collections for relevant licensed references
+        run: |
+          python experiments/001-nyfasi-reconstruction/scripts/catalog_sand3d_examples.py \
+            --max-scan 12000 \
+            --max-results 80 \
+            --output experiments/001-nyfasi-reconstruction/output/sand3d-exemplar-catalog.json
+      - name: Upload metadata-only exemplar catalogue
+        uses: actions/upload-artifact@v4
+        with:
+          name: sand3d-exemplar-catalog
+          path: experiments/001-nyfasi-reconstruction/output/sand3d-exemplar-catalog.json
+          if-no-files-found: error
+          retention-days: 30
