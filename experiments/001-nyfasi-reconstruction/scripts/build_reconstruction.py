@@ -34,7 +34,7 @@ def build_research_assembly(exploded=True):
 
     comb_plate = s3d.at(
         s3d.box("comb_carrier_proxy", p["comb_w"], p["comb_d"], p["comb_t"]),
-        z=p["housing_h"] / 2 + gap,
+        z=p["housing_h"] + gap,
     )
     teeth = []
     usable = p["comb_w"] * 0.78
@@ -44,7 +44,7 @@ def build_research_assembly(exploded=True):
             s3d.cylinder(f"guide_tooth_{i + 1:02d}", p["tooth_d"], p["tooth_h"]),
             x=x,
             y=0,
-            z=p["housing_h"] / 2 + p["comb_t"] + gap + p["tooth_h"] / 2,
+            z=p["housing_h"] + p["comb_t"] + gap,
         )
         teeth.append(tooth)
     comb = s3d.group("comb_guide_proxy", comb_plate, *teeth)
@@ -54,7 +54,7 @@ def build_research_assembly(exploded=True):
         s3d.cylinder("roller_proxy", p["roller_d"], p["roller_len"]),
         x=0,
         y=0,
-        z=-(p["housing_h"] / 2 + p["roller_len"] / 2 + gap),
+        z=-(p["roller_len"] + gap),
     )
     s3d.material(roller, "rubber", color="#555b62")
 
