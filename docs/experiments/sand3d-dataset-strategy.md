@@ -34,6 +34,31 @@ The current Hugging Face dataset cards declare CC-BY-4.0 for the Sandflow datase
 
 The machine-readable [dataset register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/sand3d-huggingface-dataset-register.json) records the five source IDs, intended use and reuse restrictions. No source mesh or model has been copied into the repository. The generated Sand3D programs may be labelled CC BY 4.0 by the upstream project, but Hugging Face notes that dataset-card licence metadata is a declaration and users should review the actual card and underlying source rights before use. See [Hugging Face dataset-card guidance](https://huggingface.co/docs/hub/en/datasets-cards) and [licence guidance](https://huggingface.co/docs/hub/main/repositories-licenses).
 
+## Dataset scan and selected program exemplars
+
+The metadata scan completed successfully on 5 November 2026. It sampled 80 licensed matches per collection (400 records across the five collections) and retained source IDs, source licences, attribution and program hashes. A second rights-screened extraction selected **13 actual Sand3D program examples** from four collections. The program source is in a temporary CI artifact rather than copied into this repository.
+
+- [Metadata catalogue workflow run](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42072237892) · artifact ID 13436667245
+- [Selected program extraction workflow run](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42072931451) · [download the 13-program artifact](https://github.com/andiekobbietks/product-engineering-lab/actions/runs/42072931451/artifacts/13435584785)
+- Machine-readable [dataset and attribution register](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/sand3d-huggingface-dataset-register.json)
+
+| Selected exemplar | Collection | Pattern applied to the research model |
+|---|---|---|
+| roller_conveyor | sand3d-automate | Roller, shaft, bearing decomposition and continuous spin-joint pattern |
+| flanged_bearing | sand3d-automate | Bearing flange and support-interface pattern |
+| shaft_and_bearing_block | sand3d-automate | Shaft axis and bored support-block decomposition |
+| bearing | sand3d-simready | Stepped annular race and bore profile reference |
+| stepped_ring | sand3d-simready | Annular oil-seal profile and groove reference |
+| reservoir, pump, sprayer | sand3d-simready | Reservoir shell, neck, collar, support and fluid-interface patterns |
+| single_revolute_hinge | sand3d-articraft | Local coordinate frame and revolute-joint declaration pattern |
+| housing | sand3d-objaverse | Separate housing/casing decomposition |
+| cylinder_valve | sand3d-objaverse | Reservoir shoulder, neck and valve-interface decomposition |
+| gear_reducer, gear_train | sand3d-automate | Assembly decomposition reference only; no gears were added because the product evidence does not show a gear train |
+
+All 13 extracted Sand3D programs declare CC BY 4.0 and passed the dataset's license_status=ok check. Their underlying source licences are recorded individually: AutoMate examples use CC0-1.0 source records, while the selected SimReady, Articraft and Objaverse records use CC BY 4.0. Full source attribution, record IDs and program SHA-256 values are in the register. The workflow artifact expires on 5 December 2026; download it if you need to retain the exact extracted source programs.
+
+These examples were used as *modelling-pattern references*, not as Nyfasi geometry. The current model borrows the decomposition and modelling approaches: roller/shaft/bearing separation, stepped annular profiles as a seal-design reference, reservoir shell/neck structure, and local-frame articulation. No source mesh, USD asset or product dimension was copied. The bearing type, seal profile, fluid path and exact retention mechanism remain unverified hypotheses until checked against a physical sample or authorised CAD.
+
 ## How the datasets are used
 
 1. **API learning:** use the Sand3D examples and dataset programs to learn idiomatic operations such as `revolve`, `loft`, `shell`, `knurl`, `hole`, `fillet`, `joint`, `group` and `assembly`.
