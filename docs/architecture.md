@@ -26,6 +26,18 @@ flowchart TD
 | Sand3D adapter | Programmatic, editable 3D generation and example-data patterns | Optional geometry authoring and reference-pattern source |
 | CadFlow adapter | Deterministic OpenCascade B-rep construction, measurement and export | Optional exact-geometry and validation engine; not a required AK Build dependency |
 
+## Sand3D is a first-class engineering capability
+
+Sand3D is the primary LLM-native 3D-as-code authoring and semantic assembly layer in Product Engineering Lab, not merely a source of example meshes or a viewer adapter. Its Python programs describe named parts, editable modelling operations, materials, local frames, joints and assembly hierarchy. The same source program can generate GLB, URDF, USDA, OBJ and STL representations.
+
+The Hugging Face collections are an active research corpus. Retrieve actual program bodies for few-shot authoring, component decomposition, operation selection, joint reasoning and benchmark evaluation. The metadata catalogue is an index, not a substitute for using the programs. Preserve row-level source licences, attribution and hashes.
+
+The Nyfasi benchmark runs the real Sand3D source in isolated workspaces after controlled parameter edits. It checks declared geometric relationships, regenerated exports and URDF joint semantics. Its next track will evaluate an AI agent receiving natural-language engineering change requests and proposing constraint-preserving program edits.
+
+CadFlow is complementary: an independent OpenCascade B-rep construction and exact-solid inspection path, driven by the same evidence-linked parameter contract. Sand3D is Blender mesh/scene based, not a B-rep kernel. CadFlow provides STEP exchange and topology checks; it does not replace Sand3D's editable semantic program or automatically preserve its articulation semantics.
+
+The Lab owns the evidence, shared parameter contract, uncertainty, constraints, evaluation and human approval. AK Build may productise this as a specialist workflow: evidence intake → product graph → Sand3D authoring → geometry and articulation checks → CadFlow validation → approval → viewer or engineering report. Ordinary micro-SaaS projects do not need this specialist stack.
+
 ## Why this separation matters
 
 AK Build should remain useful to someone building an ordinary booking SaaS, internal portal, workflow application or AI-enabled service. It must not require product CAD or 3D reconstruction.
