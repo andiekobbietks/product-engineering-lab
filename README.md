@@ -36,6 +36,7 @@ The [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-c
 - [China IP and manufacturing due diligence](docs/experiments/nyfasi-china-due-diligence.md)
 - [Colab notebook](experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb)
 - [Sand3D reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py)
+- [Interactive assembly explorer](docs/experiments/assembly-explorer.md)
 - [Interactive GLB viewer instructions](docs/experiments/viewer.md)
 - [Image inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv)
 - [Patent figure register](experiments/001-nyfasi-reconstruction/evidence/patent-figure-register.csv)
@@ -44,7 +45,9 @@ The [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-c
 
 [![Open the Colab notebook](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/notebooks/nyfasi_reconstruction_colab.ipynb)
 
-The parameter ledger is the single source of truth for numeric CAD inputs. Each value is classified as patent-disclosed, patent-derived, measured, image-estimated, supplier-confirmed or an engineering assumption. The current geometry uses a flat slotted wall proxy rather than the patent's curved wall and arcuate slots.
+[Open the documentation site](https://andiekobbietks.github.io/product-engineering-lab/) when GitHub Pages deployment is enabled. The [interactive assembly explorer](https://andiekobbietks.github.io/product-engineering-lab/experiments/assembly-explorer/) provides component inspection and local GLB loading.
+
+The parameter ledger is the single source of truth for numeric CAD inputs. Each value is classified as patent-disclosed, patent-derived, measured, image-estimated, supplier-confirmed or an engineering assumption. The current Sand3D iteration uses a 180-degree curved wall proxy with seven interpreted arcuate slots, a concave roller seat and eight tooth proxies. The geometry remains patent-led and unvalidated against a physical retail sample.
 
 No original Nyfasi SolidWorks, Fusion 360, STEP or IGES files are claimed to have been located. Patent drawings are not native CAD.
 
