@@ -1,12 +1,12 @@
 # Patent reading notes — GB2591502A
 
 **Source:** [GB2591502A, Hair applicator](https://patents.google.com/patent/GB2591502A/en)  
+**Additional figure copy inspected:** [EP4096470B1, official EPO publication PDF](https://data.epo.org/publication-server/rest/v1.2/publication-dates/2024-08-21/patents/EP4096470NWB1/document.pdf)  
 **Use in this project:** technical disclosure reference only; not a manufacturing specification, product teardown or freedom-to-operate opinion.
 
 ## Bibliographic metadata (Google Patents transcription)
 
 - Publication: GB2591502A
-- Title: Hair applicator
 - Inventor field: Mouhamad Youmna
 - Assignee fields: Myana Naturals Ltd (current/original assignee shown by Google Patents; verify against the official register)
 - Priority / filing date shown: 31 January 2020
@@ -16,7 +16,7 @@
 
 ## Relationship to the Nyfasi brand and retail product
 
-The patent metadata identifies Mouhamad Youmna and Myana Naturals Ltd. The Royal Academy of Engineering identifies Dr Youmna Mouhamad as Nyfasi's founder and CEO and describes the Deluxe Detangler as Nyfasi's patented technology; *Le Journal de Mayotte* also calls the Deluxe Detangler Nyfasi's patented innovation. Combined with the inventor/assignee and family metadata, this is strong cross-source evidence that the family relates to Nyfasi's product. However, neither institutional nor media source explicitly maps publication number GB2591502A to a specific retail SKU or revision. The exact publication-to-retail-revision mapping therefore remains unverified pending primary confirmation.
+The patent metadata identifies Mouhamad Youmna and Myana Naturals Ltd. The Royal Academy of Engineering identifies Dr Youmna Mouhamad as Nyfasi's founder and CEO and describes the Deluxe Detangler as Nyfasi's patented technology; Le Journal de Mayotte also calls the Deluxe Detangler Nyfasi's patented innovation. Combined with the inventor/assignee and family metadata, this is strong cross-source evidence that the family relates to Nyfasi's product. However, neither institutional nor media source explicitly maps publication number GB2591502A to a specific retail SKU or revision. The exact publication-to-retail-revision mapping therefore remains unverified pending primary confirmation.
 
 ## Disclosed architecture
 
@@ -32,37 +32,34 @@ The abstract and description disclose a hair comb/applicator comprising:
 8. Spindle pins at roller ends, retained by corresponding recesses/arms in the housing.
 9. A resilient seal and snap-fit housing interface in described embodiments.
 
-The description says the illustrated embodiment has eight teeth, approximately 5 mm wide, with adjacent spacing of approximately 10 mm. It describes the teeth as blade-shaped and tapered. These are disclosed embodiment details, not proof that every retail unit or later product revision has those exact features.
+The description says the illustrated embodiment has eight teeth, approximately 5 mm wide, with adjacent spacing of approximately 10 mm. It describes the teeth as blade-shaped and tapered. The text further says the tooth length is approximately twice the tooth width. These are disclosed embodiment details, not proof that every retail unit or later product revision has those exact features.
 
-## Drawing locator catalogue
+## Figure-based geometry interpretation
 
-The patent's “Description of the Drawings” identifies:
+The official EPO publication PDF was inspected directly:
 
-| Figure | Stated view / subject | Initial classification | Research use |
-|---|---|---|---|
-| Figure 1 | Exploded perspective view | Assembly / component layout | Identify upper/lower housing, roller and comb assembly relationships |
-| Figure 2A | Side view | Exterior profile | Compare body envelope and tooth arrangement |
-| Figure 2B | Top view | Plan view | Compare overall footprint and tooth row |
-| Figure 2C | Bottom view | Underside detail | Inspect wall, teeth and slot layout |
-| Figure 3 | Roller in isolation | Component detail | Record drum, end walls and spindle pins |
-| Figure 4 | Longitudinal cross-section | Internal mechanism | Inspect reservoir, roller seating and housing retention |
-| Figure 5 | Transverse cross-section | Section / interface | Inspect wall curvature, roller seat and slot relationship |
-| Figure 6 | Schematic wall profile | Functional geometry | Record cylindrical-segment curvature and slot arc concept |
+- **Figure 5 (PDF page 13):** transverse section showing the concave inner seat (64), convex exterior wall (61), roller (30), through-slots (62), and blade teeth (40).
+- **Figure 6A (PDF page 14):** schematic cross-section of a cylindrical wall segment with an obtuse central angle greater than 90 degrees.
+- **Figure 6B (PDF page 14):** semi-cylindrical wall segment with an approximately 180-degree central angle. The description explains that increasing this angle increases the wall/slot arc length and that angles greater than 180 degrees can overhang the roller.
+- **Figure 3 (PDF page 12):** roller drum with circumferential textured bands (34), smooth sealing lands (36), end walls (31) and spindle pins (32).
+- **Figures 1–4 (PDF pages 10–12):** exploded assembly, exterior views, roller and longitudinal section.
 
-The figure locator list is now entered into the image inventory. No patent image has been copied into this repository.
+The current model uses the Figure 6B 180-degree embodiment as a practical construction target. This is a patent-led interpretation, not a measured retail value. It models one slot in each of the seven gaps between eight teeth. That slot count is an engineering interpretation of “interposed between” and is not stated as a dimensioned count in the drawing.
+
+See [curved-wall geometry reconstruction](curved-wall-geometry.md) for the parameter ledger, coordinate convention and limitations.
 
 ## What this changes in the reconstruction
 
-The earlier generic “comb + roller + reservoir” idea is now better grounded as a patent-disclosed hair-applicator architecture. Its direct mapping to the Nyfasi-branded retail product remains unverified. The next model iteration should represent separate upper/lower housing portions, reservoir volume, roller and spindle, curved wall/slot interface, and a row of blade-like teeth. Exact retail dimensions, material specifications, tolerances, sealing performance and current patent rights remain unresolved.
+The model now represents a 180-degree annular wall segment with a concave roller seat and seven axial-band cuts that appear as circumferential arcs in cross-section. The roller axis and tooth row share a longitudinal axis. The teeth remain simplified rectangular blades; taper and elliptical cross-section are not yet modelled.
 
 ## Interpretation limits
 
 - A patent disclosure describes claimed subject matter and embodiments; it is not necessarily the exact product sold under the Nyfasi brand.
 - The Google Patents status display is not an official legal-status opinion.
-- The patent text is not a native CAD model or production drawing package.
+- The patent text and figures are not native CAD or a production drawing package.
 - Patent publication does not establish permission to reproduce protected images or commercialise a reconstruction.
-- The present Sand3D model has been built and exported in CI as a schematic proxy. It has not been checked against authorised reference material or a physical sample.
-
+- The curved wall and slot geometry has not been validated against an authorised physical sample or dimensioned manufacturing drawing.
+- The Sand3D workflow has previously produced structurally readable GLB/OBJ files for the earlier flat proxy. The new curved-wall iteration must pass the same build workflow before its exports can be described as generated.
 
 ## China family member and international record
 
