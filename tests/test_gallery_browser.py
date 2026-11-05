@@ -45,9 +45,20 @@ def main():
                 raise AssertionError("Gallery page did not return HTTP 200")
 
             page.wait_for_function(
-                "() => document.querySelector('#engineStatus')?.textContent.includes('Sand3D')",
+                """() => {
+                    const status = document.querySelector('#engineStatus')?.textContent || '';
+                    const fatal = document.querySelector('#fatalError')?.textContent || '';
+                    return status.includes('7 parts') || fatal.trim().length > 0;
+                }""",
                 timeout=90000,
             )
+            ready_status = page.locator("#engineStatus").inner_text()
+            fatal_message = page.locator("#fatalError").inner_text()
+            if "7 parts" not in ready_status:
+                raise AssertionError(
+                    f"Gallery did not initialise: {ready_status}; fatal={fatal_message}; "
+                    f"page_errors={errors}"
+                )
             page.wait_for_function(
                 "() => document.querySelectorAll('#componentList button').length === 7",
                 timeout=15000,
