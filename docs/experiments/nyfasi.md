@@ -14,6 +14,8 @@ The published GB2591502A disclosure describes a body enclosing a reservoir, a ro
 
 The machine-readable model records `identity_mapping_status: unverified`; the current Sand3D proxy is named after GB2591502A rather than asserting a confirmed Nyfasi product mapping.
 
+For wider commercial context, see the [China IP and manufacturing dossier](nyfasi-china-due-diligence.md) and the [CAD parameter provenance guide](cad-parameter-provenance.md). These distinguish the public patent record from secondary reporting about mould production and keep supplier and tooling details unverified unless independently evidenced.
+
 ## Research outputs
 
 - Evidence-linked product data model.
