@@ -44,7 +44,7 @@ The [China IP and manufacturing due-diligence dossier](docs/experiments/nyfasi-c
 - [CadFlow B-rep reconstruction script](experiments/001-nyfasi-reconstruction/scripts/build_cadflow_reconstruction.py)
 - [CadFlow reconstruction guide](docs/experiments/cadflow-reconstruction.md)
 - [Sand3D demos, API and Hugging Face dataset strategy](docs/experiments/sand3d-dataset-strategy.md)
-- [CadFlow B-rep reconstruction and STEP exports](docs/experiments/cadflow-brep.md)
+- [CadFlow B-rep reconstruction and STEP exports](docs/experiments/cadflow-reconstruction.md)
 - [Interactive assembly explorer](docs/experiments/assembly-explorer.md)
 - [Interactive GLB viewer instructions](docs/experiments/viewer.md)
 - [Image inventory](experiments/001-nyfasi-reconstruction/evidence/image-inventory.csv)
