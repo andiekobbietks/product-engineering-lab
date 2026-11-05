@@ -22,10 +22,26 @@
   },
   {
     "id": "SRC-004",
-    "title": "GB2591502A",
+    "title": "GB2591502A — Hair applicator",
     "url": "https://patents.google.com/patent/GB2591502A/en",
     "type": "patent_publication",
-    "rights": "Verify status and ownership in official registers."
+    "rights": "Patent publication reference. Do not treat publication as native CAD, confirmed current rights status, freedom-to-operate clearance or blanket permission to redistribute drawings.",
+    "inventor_as_listed": "Mouhamad Youmna",
+    "assignee_as_listed": "Myana Naturals Ltd (Google Patents metadata; verify official register)",
+    "priority_date": "2020-01-31",
+    "publication_date": "2021-08-04",
+    "grant_event_as_listed": "2022-04-13",
+    "google_patents_status_display": "Expired - Fee Related (not a legal conclusion; verify official UK IPO register)",
+    "figure_locators": [
+      "Figure 1 exploded perspective",
+      "Figure 2A side",
+      "Figure 2B top",
+      "Figure 2C bottom",
+      "Figure 3 roller",
+      "Figure 4 longitudinal section",
+      "Figure 5 transverse section",
+      "Figure 6 wall profile"
+    ]
   },
   {
     "id": "SRC-005",
