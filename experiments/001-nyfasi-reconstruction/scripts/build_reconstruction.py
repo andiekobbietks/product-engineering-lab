@@ -76,7 +76,7 @@ def housing_outline_points(width, depth, waist_depth, end_radius):
         (width * 0.18, waist_depth / 2),
         (-width * 0.18, waist_depth / 2),
         (-width * 0.30, depth / 2),
-        (-width / 2 + 8, depth / 2),
+        (-width / 2 + end_radius, depth / 2),
         (-width / 2, depth / 2 - end_radius),
         (-width / 2, -depth / 2 + end_radius),
     ]
@@ -179,7 +179,7 @@ def build_curved_wall():
 def build_roller_core():
     core = cylinder_on_x(
         "roller_smooth_core_and_sealing_lands",
-        P["roller_core_d"], P["roller_len"],
+        P["roller_d"], P["roller_len"],
         y=P["roller_axis_y"], z=P["roller_axis_z"],
     )
     s3d.material(core, "rubber", color="#59636b")
@@ -190,7 +190,7 @@ def build_textured_band(index, axial_position):
     """A circumferential array of patent-described spheroidal roller projections."""
     projections = []
     projection_d = P["roller_projection_d"]
-    surface_radius = P["roller_core_d"] / 2 - P["roller_projection_overlap"]
+    surface_radius = P["roller_d"] / 2 - P["roller_projection_overlap"]
     for projection_index in range(P["roller_projection_count"]):
         angle = 2 * math.pi * projection_index / P["roller_projection_count"]
         projection = s3d.dome(
@@ -401,7 +401,7 @@ def build_research_assembly(exploded=False):
         ("reservoir", "Reservoir", reservoir, "Engineering assumption",
          "Translucent internal reservoir proxy; capacity and detailed geometry are unknown."),
         ("rotatable-roller", "Rotatable roller", roller, "Patent-derived estimate",
-         "Smooth core with circumferential bands of discrete spheroidal projections. Roller diameter is a patent-derived estimate; projection count and spacing are derived assumptions."),
+         "Smooth drum with circumferential bands of discrete spheroidal projections. Roller diameter is a patent-derived estimate; projection count and spacing are derived assumptions."),
         ("curved-slotted-wall", "Curved slotted wall", wall, "Patent-led interpretation",
          "180-degree concave seat with seven interpreted axial through-slots."),
         ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
