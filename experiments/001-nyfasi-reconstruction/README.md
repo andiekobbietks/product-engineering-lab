@@ -18,7 +18,15 @@ Patent embodiments must not automatically be treated as the exact retail configu
 
 Sand3D is relevant as a text-driven editable 3D generation research project. This experiment asks what additional structure makes generated output useful in product engineering: component identity, evidence-linked dimensions, assembly relationships, editability, constraint checks and provenance.
 
-Compare text-only generation, evidence-conditioned generation, component-by-component generation, assembly reconstruction and independent validation. Do not claim API compatibility until tested against a pinned revision.
+Compare text-only generation, evidence-conditioned generation, component-by-component generation, assembly reconstruction and independent validation. The repository pins Sand3D 1.6.2 for the initial adapter experiment. The script is authored against the documented API but has not yet been executed in a compatible runtime; API and geometry output remain unverified.
+
+## Repository artefacts
+
+- Product data model and JSON Schema: `models/product-model.json` and `models/product-model.schema.json`.
+- Rights-aware image and patent-figure inventory: `evidence/image-inventory.csv`.
+- Component-level Sand3D script: `scripts/build_reconstruction.py`.
+- Reproduction notebook: `notebooks/nyfasi_reconstruction_colab.ipynb`.
+- Validation protocol: [documentation](../../../docs/experiments/nyfasi-validation.md).
 
 ## Reconstruction boundary
 
