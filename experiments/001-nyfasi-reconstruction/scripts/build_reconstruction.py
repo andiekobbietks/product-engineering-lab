@@ -47,12 +47,15 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
     for tooth_node in tooth_node_records:
         rotation = tooth_node.get("rotation", [0, 0, 0, 1])
         translation = tooth_node.get("translation", [0, 0, 0])
+        half_turn_component = 2 ** -0.5
         if (
             len(rotation) != 4
-            or abs(abs(rotation[0]) - 1) > 1e-3
-            or any(abs(value) > 1e-3 for value in rotation[1:])
+            or abs(abs(rotation[0]) - half_turn_component) > 1e-3
+            or abs(abs(rotation[3]) - half_turn_component) > 1e-3
+            or abs(rotation[1]) > 1e-3
+            or abs(rotation[2]) > 1e-3
         ):
-            raise ValueError(f"Comb tooth {tooth_node.get('name')} is not flipped to point away from the wall")
+            raise ValueError(f"Comb tooth {tooth_node.get('name')} is not oriented radially away from the curved wall")
         if len(translation) < 2 or abs(translation[1] - P["tooth_root_z"]) > 1e-3:
             raise ValueError(f"Comb tooth {tooth_node.get('name')} is not rooted on the curved wall outer surface")
     if len(projection_nodes) != expected_projection_count:
@@ -412,25 +415,46 @@ def build_housing_gasket():
     return s3d.group("housing_interface_gasket_proxy", gasket)
 
 
+def tooth_profile_points(width, length, tip_width):
+    """Planform of a thin tapered blade, root first and narrow tip last."""
+    half_root = width / 2
+    half_tip = tip_width / 2
+    return [
+        (-half_root, 0),
+        (half_root, 0),
+        (half_root * 0.82, length * 0.22),
+        (half_root * 0.55, length * 0.62),
+        (half_tip, length * 0.92),
+        (half_tip, length),
+        (-half_tip, length),
+        (-half_tip, length * 0.92),
+        (-half_root * 0.55, length * 0.62),
+        (-half_root * 0.82, length * 0.22),
+    ]
+
+
 def build_comb_teeth():
-    """Eight separately named teeth, retained as a component group for export."""
+    """Eight thin tapered blades rooted on the outside of the curved wall."""
     teeth = []
     for index in range(P["tooth_count"]):
         x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
+        profile = s3d.poly(
+            tooth_profile_points(P["tooth_width"], P["tooth_length"], P["tooth_tip_width"]),
+            fillet=P["tooth_corner_r"],
+        )
         tooth = s3d.extrude(
             f"blade_tooth_{index + 1:02d}",
-            s3d.superellipse(P["tooth_width"], P["tooth_length"], n=2),
-            P["tooth_height"],
-            taper=P["tooth_tip_taper_deg"],
+            profile,
+            P["tooth_thickness"],
         )
-        # The tooth root sits on the curved wall's outer surface. Flip the
-        # extrusion so the tapered tip extends radially away from the roller.
+        # Profile +Y is rotated onto radial -Z. The thin extrusion is centred
+        # across the local tangential Y datum at the bottom of the 180-degree wall.
         tooth = s3d.at(
             tooth,
             x=x,
-            y=P["roller_axis_y"],
+            y=P["roller_axis_y"] - P["tooth_thickness"] / 2,
             z=P["tooth_root_z"],
-            rx=180,
+            rx=-90,
         )
         s3d.material(tooth, "plastic", color="#e2e4e7")
         teeth.append(tooth)
