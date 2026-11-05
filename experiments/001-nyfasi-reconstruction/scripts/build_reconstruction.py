@@ -1,181 +1,137 @@
-"""
-Parametric Sand3D research reconstruction of the GB2591502A / CN115003190B
-hair-applicator patent-family architecture.
-
-This is not official Nyfasi CAD, a verified retail reconstruction, or
-manufacturing geometry. Numeric parameters are loaded from the provenance
-ledger. The curved wall is represented as a 180-degree cylindrical shell
-segment with circumferential slot cuts between adjacent teeth, based on the
-patent's Figure 5 / Figure 6 disclosure.
-
-Coordinate convention:
-- X: roller axis and tooth-row direction
-- Y: front-to-back body depth
-- Z: vertical; the curved wall and teeth project in negative Z
-- The local cylinder Z axis is rotated onto global X.
-"""
+"""Patent-led complete roller mechanism research proxy; not production CAD."""
 from pathlib import Path
 import json
 import sand3d as s3d
 
 HERE = Path(__file__).resolve().parent
 PARAMETER_FILE = HERE.parent / "models" / "cad-parameters.json"
-PARAMETER_RECORDS = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
-PARAMS = {name: record["value"] for name, record in PARAMETER_RECORDS.items()}
+RECORDS = json.loads(PARAMETER_FILE.read_text(encoding="utf-8"))["parameters"]
+P = {name: record["value"] for name, record in RECORDS.items()}
 
 
-def _parameter(name):
-    return PARAMS[name]
+def cylinder_x(name, diameter, length, x=0, y=0, z=0):
+    return s3d.at(s3d.cylinder(name, diameter, length), x=x, y=y, z=z, ry=90)
+
+
+def annular_band(name, outer_d, inner_d, width, x, y, z):
+    ring = s3d.cut(
+        s3d.cylinder(name + "_outer", outer_d, width),
+        s3d.cylinder(name + "_bore", inner_d, width + 0.4),
+    )
+    return s3d.at(ring, x=x, y=y, z=z, ry=90)
 
 
 def build_curved_wall():
-    """Build a semi-cylindrical seat and cut circumferential slots.
-
-    The stock cylinder's local Z axis is its length. After the completed
-    Boolean operations, the wall is rotated so that its axis is global X.
-    Each slot is a narrow axial band cut through the retained 180-degree arc.
-    """
-    p = PARAMS
-    roller_radius = p["roller_d"] / 2
-    inner_radius = roller_radius + p["roller_seat_clearance"]
-    outer_radius = inner_radius + p["wall_thickness"]
-    wall_length = p["wall_len"]
-    outer_diameter = outer_radius * 2
-    inner_diameter = inner_radius * 2
-    angle = p["wall_segment_angle_deg"]
-
-    if angle != 180:
-        raise ValueError(
-            "This Sand3D clipping construction currently supports the "
-            "180-degree Figure 6B embodiment only."
-        )
-
-    outer = s3d.cylinder("curved_wall_outer_stock", outer_diameter, wall_length)
-    inner = s3d.cylinder("roller_seat_inner_tool", inner_diameter, wall_length + 2)
-
-    # Cylinder local X maps to global -Z after ry=90. Remove local X<0,
-    # retaining the local X>0 half, which becomes the lower/global -Z arc.
-    upper_half_tool = s3d.at(
-        s3d.box(
-            "remove_upper_half_tool",
-            outer_radius + 2,
-            outer_diameter + 2,
-            wall_length + 2,
-        ),
+    radius = P["roller_d"] / 2 + P["roller_seat_clearance"]
+    outer_radius = radius + P["wall_thickness"]
+    length = P["wall_len"]
+    if P["wall_segment_angle_deg"] != 180:
+        raise ValueError("Only the 180-degree Figure 6B embodiment is implemented.")
+    outer = s3d.cylinder("curved_wall_outer_stock", outer_radius * 2, length)
+    inner = s3d.cylinder("roller_seat_inner_tool", radius * 2, length + 2)
+    half_tool = s3d.at(
+        s3d.box("remove_upper_half_tool", outer_radius + 2, outer_radius * 2 + 2, length + 2),
         x=-(outer_radius + 2) / 2,
     )
-
-    # One circumferential opening is placed in each clear gap between teeth.
-    # Each cutter is a thin axial band spanning the full retained arc.
-    slot_tools = []
-    slot_count = p["tooth_count"] - 1
-    for index in range(slot_count):
-        axial_position = (
-            index - (slot_count - 1) / 2
-        ) * p["tooth_pitch"]
-        slot_tools.append(
-            s3d.at(
-                s3d.box(
-                    f"arcuate_slot_tool_{index + 1:02d}",
-                    outer_radius + 2,
-                    outer_diameter + 2,
-                    p["slot_w"],
-                ),
-                x=(outer_radius + 2) / 2,
-                z=axial_position,
-            )
-        )
-
-    wall = s3d.cut(outer, inner, upper_half_tool, *slot_tools)
-    wall = s3d.at(
-        wall,
-        y=p["housing_d"] / 2,
-        z=-p["lower_shell_h"] / 2,
-        ry=90,
-    )
+    slots = []
+    count = P["tooth_count"] - 1
+    for i in range(count):
+        x = (i - (count - 1) / 2) * P["tooth_pitch"]
+        slots.append(s3d.at(
+            s3d.box(f"arcuate_slot_tool_{i+1:02d}", outer_radius + 2, outer_radius * 2 + 2, P["slot_w"]),
+            x=(outer_radius + 2) / 2, z=x,
+        ))
+    wall = s3d.cut(outer, inner, half_tool, *slots)
+    wall = s3d.at(wall, y=P["housing_d"] / 2, z=-P["lower_shell_h"] / 2, ry=90)
     s3d.material(wall, "plastic", color="#d7d9dc")
     return wall
 
 
-def build_research_assembly(exploded=True):
-    p = PARAMS
-    gap = p["exploded_gap"] if exploded else 0.0
-    roller_radius = p["roller_d"] / 2
-    inner_radius = roller_radius + p["roller_seat_clearance"]
-    outer_radius = inner_radius + p["wall_thickness"]
-    roller_y = p["housing_d"] / 2
-    roller_z = -p["lower_shell_h"] / 2
+def build_roller_mechanism():
+    y, z = P["housing_d"] / 2, -P["lower_shell_h"] / 2
+    length = P["roller_len"]
+    core = cylinder_x("roller_smooth_core_and_sealing_lands", P["roller_core_d"], length, y=y, z=z)
+    s3d.material(core, "rubber", color="#59636b")
+    bands = []
+    n = P["roller_band_count"]
+    for i in range(n):
+        x = (i - (n - 1) / 2) * P["tooth_pitch"]
+        band = annular_band(
+            f"roller_textured_circumferential_band_{i+1:02d}",
+            P["roller_d"], P["roller_core_d"] - 0.2,
+            P["roller_band_width"], x, y, z,
+        )
+        s3d.material(band, "rubber", color="#a9b0b5")
+        bands.append(band)
+    end_walls, pins = [], []
+    end_x = length / 2 - P["roller_endwall_t"] / 2
+    pin_x = length / 2 + P["spindle_pin_len"] / 2
+    for side, sign in (("left", -1), ("right", 1)):
+        disc = cylinder_x(f"roller_{side}_end_wall", P["roller_endwall_d"], P["roller_endwall_t"], sign * end_x, y, z)
+        pin = cylinder_x(f"roller_{side}_spindle_pin", P["spindle_pin_d"], P["spindle_pin_len"], sign * pin_x, y, z)
+        s3d.material(disc, "plastic", color="#3d454b")
+        s3d.material(pin, "plastic", color="#c5cbd0")
+        end_walls.append(disc)
+        pins.append(pin)
+    return s3d.group("roller_mechanism", core, *bands, *end_walls, *pins)
 
-    lower = s3d.box(
-        "lower_housing_proxy",
-        p["housing_w"],
-        p["housing_d"],
-        p["lower_shell_h"],
+
+def build_housing_retention_features():
+    y, z = P["housing_d"] / 2, -P["lower_shell_h"] / 2
+    x_support = P["roller_len"] / 2 + P["spindle_pin_len"] / 2
+    supports = []
+    for side, sign in (("left", -1), ("right", 1)):
+        block = s3d.box(f"{side}_spindle_bearing_support_stock",
+                        P["bearing_block_w"], P["bearing_block_d"], P["bearing_block_h"])
+        bore = cylinder_x(f"{side}_spindle_bearing_bore_tool",
+                          P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"],
+                          P["bearing_block_w"] + 1, sign * x_support, y, z)
+        support = s3d.cut(block, bore)
+        support = s3d.at(support, x=sign * x_support, y=y, z=z)
+        s3d.material(support, "plastic", color="#343b42")
+        supports.append(support)
+    tabs = []
+    for i in range(P["snap_tab_count"]):
+        x = (i - (P["snap_tab_count"] - 1) / 2) * (P["housing_w"] - 24)
+        tab = s3d.at(s3d.box(f"housing_snap_fit_tab_{i+1:02d}",
+                             P["snap_tab_w"], P["snap_tab_d"], P["snap_tab_h"]),
+                     x=x, z=P["lower_shell_h"] / 2 + P["snap_tab_h"] / 2)
+        s3d.material(tab, "plastic", color="#e3a44b")
+        tabs.append(tab)
+    return s3d.group("housing_bearings_and_snap_fit_proxies", *supports, *tabs)
+
+
+def build_research_assembly(exploded=True):
+    gap = P["exploded_gap"] if exploded else 0
+    lower = s3d.box("lower_housing_proxy", P["housing_w"], P["housing_d"], P["lower_shell_h"])
+    upper = s3d.at(
+        s3d.box("upper_housing_proxy", P["housing_w"], P["housing_d"], P["upper_shell_h"]),
+        z=(P["lower_shell_h"] + P["upper_shell_h"]) / 2 + gap,
+    )
+    reservoir = s3d.at(
+        s3d.box("reservoir_volume_proxy", P["reservoir_w"], P["reservoir_d"], P["reservoir_h"]),
+        z=P["lower_shell_h"] / 2,
     )
     s3d.material(lower, "plastic", color="#34383d")
-
-    upper = s3d.at(
-        s3d.box(
-            "upper_housing_proxy",
-            p["housing_w"],
-            p["housing_d"],
-            p["upper_shell_h"],
-        ),
-        z=(p["lower_shell_h"] + p["upper_shell_h"]) / 2 + gap,
-    )
     s3d.material(upper, "plastic", color="#555b62")
-
-    reservoir = s3d.at(
-        s3d.box(
-            "reservoir_volume_proxy",
-            p["reservoir_w"],
-            p["reservoir_d"],
-            p["reservoir_h"],
-        ),
-        z=p["lower_shell_h"] / 2,
-    )
     s3d.material(reservoir, "glass", color="#8bbac8", opacity=0.45)
-
-    # Roller axis is aligned with the tooth row (global X).
-    roller = s3d.at(
-        s3d.cylinder("roller_drum_proxy", p["roller_d"], p["roller_len"]),
-        y=roller_y,
-        z=roller_z,
-        ry=90,
-    )
-    s3d.material(roller, "rubber", color="#626a70")
-
     wall = build_curved_wall()
-
-    # Teeth are represented as simple blade-like rectangular proxies.
-    # The patent describes tapered / elliptical alternatives; those details
-    # are intentionally not claimed by this first curved-wall iteration.
     teeth = []
-    for index in range(p["tooth_count"]):
-        x = (index - (p["tooth_count"] - 1) / 2) * p["tooth_pitch"]
+    outer_radius = P["roller_d"] / 2 + P["roller_seat_clearance"] + P["wall_thickness"]
+    for i in range(P["tooth_count"]):
+        x = (i - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
         tooth = s3d.at(
-            s3d.box(
-                f"blade_tooth_{index + 1:02d}",
-                p["tooth_width"],
-                p["tooth_length"],
-                p["tooth_height"],
-            ),
-            x=x,
-            y=roller_y,
-            z=roller_z - outer_radius - p["tooth_height"] / 2,
+            s3d.box(f"blade_tooth_{i+1:02d}", P["tooth_width"], P["tooth_length"], P["tooth_height"]),
+            x=x, y=P["housing_d"] / 2,
+            z=-P["lower_shell_h"] / 2 - outer_radius - P["tooth_height"] / 2,
         )
         teeth.append(tooth)
-
     comb = s3d.group("curved_wall_and_blade_teeth", wall, *teeth)
     s3d.material(comb, "plastic", color="#e2e4e7")
-
     return s3d.assembly(
-        "hair_applicator_patent_architecture_curved_wall_research_proxy",
-        lower,
-        upper,
-        reservoir,
-        roller,
-        comb,
+        "hair_applicator_complete_roller_mechanism_research_proxy",
+        lower, upper, reservoir, build_roller_mechanism(), comb,
+        build_housing_retention_features(),
     )
 
 
@@ -183,9 +139,9 @@ def main():
     model = build_research_assembly(exploded=True)
     output = HERE.parent / "output"
     output.mkdir(exist_ok=True)
-    s3d.export(model, str(output / "hair_applicator_curved_wall_exploded.glb"))
-    s3d.export(model, str(output / "hair_applicator_curved_wall_exploded.obj"))
-    print("Wrote curved-wall research exports to:", output.resolve())
+    s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.glb"))
+    s3d.export(model, str(output / "hair_applicator_complete_roller_exploded.obj"))
+    print("Wrote complete roller-mechanism research exports to:", output.resolve())
 
 
 if __name__ == "__main__":
