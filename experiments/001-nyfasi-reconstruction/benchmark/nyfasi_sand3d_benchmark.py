@@ -59,7 +59,7 @@ def check_constraints(p: dict) -> list[str]:
     require(p["retaining_arm_w"] > 0 and p["retaining_arm_d"] > p["spindle_pin_d"] + 2 * p["bearing_bore_clearance"], "upper retaining arms must fit the spindle cut-out")
     require(support_x + p["bearing_block_w"] / 2 <= p["housing_w"] / 2, "bearing supports must remain inside housing envelope")
     require(p["housing_wall_t"] > 0 and p["housing_wall_t"] < min(p["lower_shell_h"], p["upper_shell_h"]) / 2, "housing wall thickness must remain feasible")
-    require(abs(p["tooth_root_z"] - (p["roller_axis_z"] - outer_r - p["tooth_height"])) < 1e-6, "tooth root datum must remain parametrically linked to roller-seat radius")
+    require(abs(p["tooth_root_z"] - (p["roller_axis_z"] - outer_r)) < 1e-6, "tooth root datum must remain parametrically linked to roller-seat radius")
     require(p["roller_projection_count"] >= 8, "circumferential projection count must remain adequate")
     require(p["roller_projection_d"] > 0 and p["roller_projection_height"] > 0, "roller spheroidal projections must have positive dimensions")
     return errors
