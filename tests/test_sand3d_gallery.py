@@ -32,6 +32,8 @@ class Sand3DGalleryContractTests(unittest.TestCase):
             "roller_projection_count",
             "tooth_node_records",
             "rotation[0]",
+            "half_turn_component",
+            "radially away from the curved wall",
             'P["tooth_root_z"]',
             "roller_projection_height",
             "s3d.dome",
