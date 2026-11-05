@@ -411,7 +411,15 @@ def build_comb_teeth():
             P["tooth_height"],
             taper=P["tooth_tip_taper_deg"],
         )
-        tooth = s3d.at(tooth, x=x, y=P["roller_axis_y"], z=P["tooth_root_z"])
+        # The tooth root sits on the curved wall's outer surface. Flip the
+        # extrusion so the tapered tip extends radially away from the roller.
+        tooth = s3d.at(
+            tooth,
+            x=x,
+            y=P["roller_axis_y"],
+            z=P["tooth_root_z"],
+            rx=180,
+        )
         s3d.material(tooth, "plastic", color="#e2e4e7")
         teeth.append(tooth)
     return s3d.group("eight_comb_teeth", *teeth)
