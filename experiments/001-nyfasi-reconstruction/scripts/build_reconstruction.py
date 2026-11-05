@@ -48,6 +48,9 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
             f"Expected {expected_projection_count} spheroidal roller projections in GLB, "
             f"found {len(projection_nodes)}"
         )
+    retaining_arms = [name for name in node_names if name.startswith("upper_retaining_arm_") and name.rsplit("_", 1)[-1] in {"left", "right"}]
+    if len(retaining_arms) != 2:
+        raise ValueError(f"Expected two upper spindle-retaining arms in GLB, found {len(retaining_arms)}")
     joint_records = [
         node.get("extras", {}).get("s3d_joint")
         for node in nodes
@@ -64,6 +67,7 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
         len(expected_component_nodes), "named component roots;",
         len(tooth_nodes), "comb teeth;",
         len(projection_nodes), "roller projections;",
+        len(retaining_arms), "upper retaining arms;",
         expected_joint, "joint metadata present",
     )
 
@@ -131,6 +135,38 @@ def build_lower_housing():
     )
 
 
+def build_upper_retaining_arms():
+    """Two upper-housing arms with spindle-pin cut-outs, as described in patent paragraph [0031]."""
+    upper_offset = (P["lower_shell_h"] + P["upper_shell_h"]) / 2
+    arm_top = P["upper_shell_h"] / 2 - P["housing_wall_t"]
+    arm_bottom = P["roller_axis_z"] - upper_offset
+    arm_height = arm_top - arm_bottom
+    arm_centre = (arm_top + arm_bottom) / 2
+    support_x = P["roller_len"] / 2 + P["roller_endwall_t"] + P["spindle_pin_len"] / 2
+    arms = []
+    for side, sign in (("left", -1), ("right", 1)):
+        x = sign * support_x
+        arm = s3d.box(
+            f"upper_retaining_arm_{side}",
+            P["retaining_arm_w"],
+            P["retaining_arm_d"],
+            arm_height,
+        )
+        arm = s3d.at(arm, x=x, y=P["roller_axis_y"], z=arm_centre)
+        pin_cutout = cylinder_on_x(
+            f"upper_retaining_arm_{side}_spindle_cutout",
+            P["spindle_pin_d"] + 2 * P["bearing_bore_clearance"],
+            P["retaining_arm_w"] + 1,
+            x=x,
+            y=P["roller_axis_y"],
+            z=arm_bottom,
+        )
+        arm = s3d.cut(arm, pin_cutout)
+        s3d.material(arm, "plastic", color="#555b62")
+        arms.append(arm)
+    return s3d.group("upper_retaining_arms", *arms)
+
+
 def build_upper_housing():
     cap = rounded_tray(
         "upper_housing_shell_proxy",
@@ -139,7 +175,7 @@ def build_upper_housing():
     )
     cap = s3d.at(cap, rx=180)  # invert the open face so the cap opens toward the lower shell
     s3d.material(cap, "plastic", color="#555b62")
-    return cap
+    return s3d.group("upper_housing_complete", cap, build_upper_retaining_arms())
 
 
 def build_reservoir():
@@ -410,8 +446,8 @@ def build_research_assembly(exploded=False):
     COMPONENTS = [
         ("lower-housing", "Lower housing", lower, "Engineering assumption",
          "Lower shell, housing bearing supports, snap-fit tabs and perimeter seal. Envelope and retention dimensions are provisional."),
-        ("upper-housing", "Upper housing", upper, "Engineering assumption",
-         "Upper clamshell shell; envelope and closure geometry are provisional."),
+        ("upper-housing", "Upper housing", upper, "Patent-led interpretation",
+         "Upper clamshell shell with two spindle-retaining arms and pin cut-outs; arm dimensions are provisional."),
         ("reservoir", "Reservoir", reservoir, "Engineering assumption",
          "Translucent internal reservoir proxy; capacity and detailed geometry are unknown."),
         ("rotatable-roller", "Rotatable roller", roller, "Patent-derived estimate",
@@ -472,7 +508,7 @@ def main():
     }
     component_symbols = {
         "lower-housing": ["housing_outline_points", "housing_outline_profile", "rounded_tray", "build_lower_housing", "build_housing_retention_features", "build_housing_gasket", "build_research_assembly"],
-        "upper-housing": ["housing_outline_points", "housing_outline_profile", "rounded_tray", "build_upper_housing"],
+        "upper-housing": ["housing_outline_points", "housing_outline_profile", "rounded_tray", "build_upper_retaining_arms", "build_upper_housing"],
         "reservoir": ["build_reservoir"],
         "rotatable-roller": ["cylinder_on_x", "build_roller_core", "build_textured_band", "build_roller_core_and_bands"],
         "curved-slotted-wall": ["build_curved_wall"],
@@ -485,7 +521,7 @@ def main():
             ("housing_bearings_and_snap_fit_proxies", "build_housing_retention_features"),
             ("housing_interface_gasket_proxy", "build_housing_gasket"),
         ],
-        "upper-housing": [("upper_housing_shell_proxy", "build_upper_housing")],
+        "upper-housing": [("upper_housing_shell_proxy", "build_upper_housing"), ("upper_retaining_arm_", "build_upper_retaining_arms")],
         "reservoir": [("reservoir_volume_proxy", "build_reservoir")],
         "rotatable-roller": [
             ("roller_smooth_core_and_sealing_lands", "build_roller_core"),
