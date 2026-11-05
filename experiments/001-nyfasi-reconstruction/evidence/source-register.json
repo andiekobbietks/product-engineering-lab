@@ -4,7 +4,8 @@
     "title": "Nyfasi official website",
     "url": "https://nyfasi.com/",
     "type": "official_brand_and_product_source",
-    "rights": "Third-party content; link and attribute, do not mirror without permission."
+    "rights": "Third-party content; link and attribute, do not mirror without permission.",
+    "access_note": "On 2026-11-05, the public domain redirected to a password-gated Shopify storefront; do not infer current product-page content from older cached material."
   },
   {
     "id": "SRC-002",
@@ -41,7 +42,8 @@
       "Figure 4 longitudinal section",
       "Figure 5 transverse section",
       "Figure 6 wall profile"
-    ]
+    ],
+    "source_caveat": "Google Patents metadata is a discovery aid. Verify proprietor, status, events and family against official patent office records before legal or commercial reliance."
   },
   {
     "id": "SRC-005",
