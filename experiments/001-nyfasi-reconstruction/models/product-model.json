@@ -16,10 +16,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration.",
+          "provenance": "PATENT_DISCLOSED"
         },
         {
           "name": "overall_width",
@@ -27,7 +29,8 @@
           "unit": "mm",
           "evidence_ids": [],
           "confidence": "low",
-          "assumption": "Illustrative envelope parameter; replace with calibrated measurement."
+          "assumption": "Illustrative envelope parameter; replace with calibrated measurement.",
+          "provenance": "ENGINEERING_ASSUMPTION"
         },
         {
           "name": "overall_depth",
@@ -35,7 +38,8 @@
           "unit": "mm",
           "evidence_ids": [],
           "confidence": "low",
-          "assumption": "Illustrative envelope parameter; replace with calibrated measurement."
+          "assumption": "Illustrative envelope parameter; replace with calibrated measurement.",
+          "provenance": "ENGINEERING_ASSUMPTION"
         }
       ]
     },
@@ -50,10 +54,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration.",
+          "provenance": "PATENT_DISCLOSED"
         },
         {
           "name": "diameter",
@@ -61,7 +67,8 @@
           "unit": "mm",
           "evidence_ids": [],
           "confidence": "none",
-          "assumption": "Placeholder geometry only; material, profile and drive remain unknown."
+          "assumption": "Placeholder geometry only; material, profile and drive remain unknown.",
+          "provenance": "ENGINEERING_ASSUMPTION"
         }
       ]
     },
@@ -76,48 +83,60 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration.",
+          "provenance": "PATENT_DISCLOSED"
         },
         {
           "name": "tooth_count",
-          "value": 11,
+          "value": 8,
           "unit": "count",
-          "evidence_ids": [],
-          "confidence": "none",
-          "assumption": "Demonstration count, not a measured product specification."
+          "evidence_ids": [
+            "SRC-004",
+            "SRC-007"
+          ],
+          "confidence": "medium",
+          "assumption": "The patent describes an illustrated eight-tooth embodiment. This is a patent-embodiment parameter, not a verified retail SKU count.",
+          "provenance": "PATENT_DISCLOSED"
         },
         {
           "name": "illustrated_tooth_count",
           "value": 8,
           "unit": "count",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "medium",
-          "assumption": "GB2591502A description says the illustrated example has eight teeth; not confirmed against a retail sample."
+          "assumption": "GB2591502A description says the illustrated example has eight teeth; not confirmed against a retail sample.",
+          "provenance": "PATENT_DISCLOSED"
         },
         {
           "name": "illustrated_tooth_width",
           "value": 5,
           "unit": "mm",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "medium",
-          "assumption": "Patent description gives approximately 0.5 cm; treat as an embodiment statement, not a verified retail dimension."
+          "assumption": "Patent description gives approximately 0.5 cm; treat as an embodiment statement, not a verified retail dimension.",
+          "provenance": "PATENT_DISCLOSED"
         },
         {
           "name": "illustrated_adjacent_spacing",
           "value": 10,
           "unit": "mm",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "low",
-          "assumption": "Patent description says approximately 1 cm spacing; interpretation of spacing convention and retail mapping require review."
+          "assumption": "Patent description says approximately 1 cm spacing; interpretation of spacing convention and retail mapping require review.",
+          "provenance": "PATENT_DISCLOSED"
         }
       ]
     },
@@ -132,10 +151,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration."
+          "assumption": "The component is described in GB2591502A; this does not prove that every retail revision uses the exact disclosed configuration.",
+          "provenance": "PATENT_DISCLOSED"
         },
         {
           "name": "volume",
@@ -143,7 +164,8 @@
           "unit": "mL",
           "evidence_ids": [],
           "confidence": "none",
-          "assumption": "No volume is asserted."
+          "assumption": "No volume is asserted.",
+          "provenance": "ENGINEERING_ASSUMPTION"
         }
       ]
     },
@@ -158,10 +180,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified.",
+          "provenance": "PATENT_DISCLOSED"
         }
       ]
     },
@@ -176,10 +200,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified.",
+          "provenance": "PATENT_DISCLOSED"
         }
       ]
     },
@@ -194,10 +220,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified.",
+          "provenance": "PATENT_DISCLOSED"
         }
       ]
     },
@@ -212,10 +240,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified.",
+          "provenance": "PATENT_DISCLOSED"
         }
       ]
     },
@@ -230,10 +260,12 @@
           "value": "disclosed_in_patent_embodiment",
           "unit": "classification",
           "evidence_ids": [
-            "SRC-004"
+            "SRC-004",
+            "SRC-007"
           ],
           "confidence": "high",
-          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified."
+          "assumption": "Described in GB2591502A; exact retail configuration and geometry are not verified.",
+          "provenance": "PATENT_DISCLOSED"
         }
       ]
     }
@@ -243,7 +275,13 @@
     "SRC-002",
     "SRC-003",
     "SRC-004",
-    "SRC-005"
+    "SRC-005",
+    "SRC-007",
+    "SRC-008",
+    "SRC-009",
+    "SRC-010",
+    "SRC-011",
+    "SRC-012"
   ],
   "toolchain": {
     "cad_library": "Sand3D",
