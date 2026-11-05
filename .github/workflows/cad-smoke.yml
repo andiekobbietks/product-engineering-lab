@@ -5,12 +5,14 @@ on:
     branches: [main]
     paths:
       - "experiments/001-nyfasi-reconstruction/scripts/**"
+      - "experiments/001-nyfasi-reconstruction/models/cad-parameters.json"
       - "requirements-cad.txt"
       - ".github/workflows/cad-smoke.yml"
   pull_request:
     branches: [main]
     paths:
       - "experiments/001-nyfasi-reconstruction/scripts/**"
+      - "experiments/001-nyfasi-reconstruction/models/cad-parameters.json"
       - "requirements-cad.txt"
       - ".github/workflows/cad-smoke.yml"
   workflow_dispatch:
@@ -26,14 +28,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+      - name: Validate evidence provenance
+        run: python experiments/001-nyfasi-reconstruction/scripts/validate_provenance.py
+      - name: Validate curved-wall geometry constraints
+        run: python experiments/001-nyfasi-reconstruction/scripts/validate_geometry.py
       - name: Install pinned CAD dependency
         run: python -m pip install --upgrade pip -r requirements-cad.txt
-      - name: Build illustrative research assembly
+      - name: Build curved-wall research assembly
         run: python experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py
       - name: Upload GLB and OBJ outputs
         uses: actions/upload-artifact@v4
         with:
-          name: nyfasi-hair-applicator-research-proxy
+          name: nyfasi-curved-wall-research-proxy
           path: experiments/001-nyfasi-reconstruction/output/*
           if-no-files-found: error
           retention-days: 14
