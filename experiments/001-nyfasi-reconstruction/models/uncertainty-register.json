@@ -54,5 +54,33 @@
     "impact": "high",
     "status": "open",
     "validation": "Compare dated retail samples, patent figures and official specifications."
+  },
+  {
+    "id": "UNK-009",
+    "subject": "Curved wall radius and arc-slot geometry",
+    "impact": "high",
+    "status": "open",
+    "validation": "Inspect patent figures and compare against calibrated product views or a physical sample."
+  },
+  {
+    "id": "UNK-010",
+    "subject": "Upper/lower housing snap-fit and seal cross-section",
+    "impact": "high",
+    "status": "open",
+    "validation": "Inspect patent sections and measure an authorised sample; verify material and compression."
+  },
+  {
+    "id": "UNK-011",
+    "subject": "Roller spindle pin dimensions and retention",
+    "impact": "high",
+    "status": "open",
+    "validation": "Inspect Figure 3/4 and measure a physical sample or authoritative CAD."
+  },
+  {
+    "id": "UNK-012",
+    "subject": "Roller texture band and projection geometry",
+    "impact": "high",
+    "status": "open",
+    "validation": "Inspect patent Figure 3 and measure an authorised sample; record surface profile."
   }
 ]
