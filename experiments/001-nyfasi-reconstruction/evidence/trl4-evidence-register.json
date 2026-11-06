@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "technology": "Product Engineering Lab / Sand3D Nyfasi research proxy",
+  "assessment_target": "Evidence-linked parametric engineering workflow",
+  "current_assessment": "TRL 3 provisional",
+  "trl4_status": "NOT_DEMONSTRATED",
+  "protocol": "docs/validation/trl4-laboratory-validation-protocol.md",
+  "source_commit": null,
+  "parameter_ledger_sha256": null,
+  "software_validation": {
+    "clean_rebuilds": {
+      "status": "NOT_RUN",
+      "required_runs": 3,
+      "run_urls": [],
+      "artifact_digests": []
+    },
+    "parametric_sensitivity": {
+      "status": "NOT_RUN",
+      "benchmark_report": null
+    },
+    "invalid_input_rejection": {
+      "status": "NOT_RUN",
+      "evidence": null
+    }
+  },
+  "physical_validation": {
+    "reference_article": {
+      "status": "BLOCKED",
+      "description": null,
+      "provenance": null,
+      "authorisation": null
+    },
+    "measurement_plan_approved": false,
+    "calibrated_instruments": [],
+    "raw_measurement_records": [],
+    "uncertainty_budget": null,
+    "dimensional_correlation": "NOT_STARTED",
+    "interface_clearance_assessment": "NOT_STARTED",
+    "independent_review": "NOT_STARTED"
+  },
+  "deviations": [],
+  "limitations": [
+    "Current geometry is a research proxy, not verified retail CAD.",
+    "Several dimensions are engineering assumptions or image estimates.",
+    "No physical sample metrology or controlled drawing correlation is currently evidenced.",
+    "CI success alone does not establish TRL 4."
+  ],
+  "decision": {
+    "status": "NOT_DEMONSTRATED",
+    "reviewer": null,
+    "review_date": null,
+    "rationale": "Do not change this status until controlled laboratory evidence and independent review are complete."
+  }
+}
