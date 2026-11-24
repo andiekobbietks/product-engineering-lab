@@ -18,6 +18,36 @@ This is not simply a text-to-3D showcase. It explores the engineering layer arou
 
 Sand3D remains an independently maintained third-party project. We respect its own licence, notices and API boundaries and integrate through documented adapters rather than assuming ownership of its internals.
 
+## Antirez reference projects: why they matter
+
+The lab also studies selected small, inspectable computational-graphics and geometry projects by [Salvatore Sanfilippo (antirez)](https://github.com/antirez). These are not presented as a ready-made 3D engine or as replacements for Sand3D. They are focused reference implementations chosen because their source makes specific transformations and rendering techniques easier to inspect, test and learn from.
+
+| Upstream project | Why it is relevant to this lab | Intended research use |
+|---|---|---|
+| [jsrt](https://github.com/antirez/jsrt) | A deliberately small JavaScript ray tracer. Its limited scene primitives make the rendering pipeline approachable rather than hiding it behind a large graphics framework. | Study ray/primitive intersection, camera rays, shading and the relationship between scene data and rendered pixels. A possible minimal renderer reference for visual debugging and educational demonstrations. |
+| [pngtostl](https://github.com/antirez/pngtostl) | Converts image luminance into variable-thickness lithophane geometry and exports STL. It is a concrete example of turning 2D pixel evidence into 3D printable geometry. | Study image sampling, intensity-to-height mapping, mesh construction, STL export, resolution trade-offs and manufacturability checks. This is especially relevant to evidence-to-geometry experiments. |
+| [strabo](https://github.com/antirez/strabo) | Converts HGT digital-elevation data into 2D map products and 3D VRML models, including interpolation, projection, contour and terrain operations. | Study data-driven terrain reconstruction, coordinate transformations, interpolation, contour extraction and conversion of measured data into 3D representations. |
+
+### Why keep these as separate reference projects?
+
+Each project demonstrates a different part of the visual-engineering problem:
+
+- **jsrt — rendering:** how geometry and camera/light calculations become an image.
+- **pngtostl — 2D-to-3D conversion:** how image values become physical dimensions and a mesh.
+- **strabo — measured-data reconstruction:** how geospatial samples become projected maps, contours and terrain surfaces.
+
+Together they provide useful, bounded case studies for a future in-house computational core. The objective is to understand and evaluate the algorithms, document their limitations, and identify which concepts are worth reimplementing behind our own interfaces. They are not dependencies of the active Nyfasi reconstruction and do not imply that the lab has adopted or integrated their code.
+
+### Forking, licensing and attribution
+
+A fork is intended to preserve an upstream project’s history and provide a controlled place for experiments; it is not a claim of authorship or a licence to relicense the original work.
+
+- **pngtostl:** upstream README identifies the BSD 2-Clause licence. Any fork or adaptation must retain the applicable copyright and licence notices.
+- **strabo:** upstream README identifies a BSD licence; GitHub currently identifies the repository licence as BSD 3-Clause. Preserve the upstream notices and verify the exact licence text in the fork before redistribution.
+- **jsrt:** no licence is currently declared in the repository metadata or README inspected for this research. Public visibility is not a reuse licence. Keep it as an upstream study reference unless the author adds a licence or grants permission; do not copy, modify or redistribute its code on the assumption that it is open source.
+
+Forks and integrations must be recorded explicitly once created. Until then, the upstream repositories linked above are the source of truth. The lab will keep third-party code, notices and any local modifications clearly separated from original Product Engineering Lab work.
+
 ## Canonical Sand3D engineering stack
 
 The Nyfasi reconstruction now uses [Sand3D](https://github.com/Sandflow-ai/sand3d) as its single canonical modelling and assembly engine. The Python program, parameter ledger, assembly hierarchy, joint metadata, GLB/URDF/USDA/OBJ/STL exports, benchmark and source-linked browser gallery form one reproducible path. The gallery follows the core interaction model of Sandflow's [official articulated gallery](https://sand3d.sandflow.ai/gallery.html): inspect the model beside its real source, select a part to trace its construction, and operate exported joints.
