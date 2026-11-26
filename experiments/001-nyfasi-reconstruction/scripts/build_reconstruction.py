@@ -473,7 +473,7 @@ def build_comb_teeth():
             P["tooth_corner_r"],
             P["tooth_tip_thickness"] * 0.25,
         )
-        tooth = s3d.fillet(tooth, tip_radius, edges="top")
+        tooth = s3d.fillet(tooth, tip_radius, edges="end")
         # Loft sections run along +Z; rotate to extend radially away from the
         # curved wall along -Z. Elliptical stations preserve the rounded blade.
         tooth = s3d.at(
