@@ -431,36 +431,52 @@ def build_housing_gasket():
     return s3d.group("housing_interface_gasket_proxy", gasket)
 
 
-def tooth_profile_points(width, thickness, tip_width):
-    """Return the elliptical blade-root profile; validate the intended narrow tip."""
-    if not (0 < tip_width < width):
-        raise ValueError("Tooth tip width must be positive and narrower than its root.")
-    return s3d.ellipse(width, thickness)
+def tooth_profile_points(width, thickness):
+    """Return the root elliptical loft section for one comb blade."""
+    return s3d.station(0, width, thickness, n=2)
 
 
 def build_comb_teeth():
-    """Eight wide-spaced, tapered elliptical blades with softened distal tips.
+    """Eight wide-spaced, elliptical blades lofted to narrow, softened tips.
 
     Patent text describes an approximately 5 mm tooth width and a length
-    approximately twice its width (about 10 mm). Section thickness, taper
-    ratio and tip rounding remain explicit modelling assumptions.
+    approximately twice its width (about 10 mm). Section thickness and tip
+    proportions remain explicit modelling assumptions.
     """
     teeth = []
     for index in range(P["tooth_count"]):
         x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
-        profile = tooth_profile_points(P["tooth_width"], P["tooth_thickness"], P["tooth_tip_width"])
-        tooth = s3d.extrude(
-            f"blade_tooth_{index + 1:02d}",
-            profile,
-            P["tooth_length"],
+        root = tooth_profile_points(P["tooth_width"], P["tooth_thickness"])
+        mid = s3d.station(
+            P["tooth_length"] * 0.78,
+            P["tooth_width"] * 0.62,
+            P["tooth_thickness"] * 0.82,
+            n=2,
         )
-        tooth = s3d.taper(tooth, P["tooth_tip_ratio"], axis="+Z")
+        tip_width = min(
+            P["tooth_tip_width"],
+            P["tooth_width"] * P["tooth_tip_ratio"],
+        )
+        tip = s3d.station(
+            P["tooth_length"],
+            tip_width,
+            P["tooth_tip_thickness"],
+            n=2,
+        )
+        tooth = s3d.loft(
+            f"blade_tooth_{index + 1:02d}",
+            root,
+            mid,
+            tip,
+            tip="round",
+        )
         tip_radius = min(
             P["tooth_corner_r"],
-            P["tooth_thickness"] * P["tooth_tip_ratio"] * 0.35,
+            P["tooth_tip_thickness"] * 0.25,
         )
         tooth = s3d.fillet(tooth, tip_radius, edges="top")
-        # Extrusion is +Z; rotate to extend radially away from the wall along -Z.
+        # Loft sections run along +Z; rotate to extend radially away from the
+        # curved wall along -Z. Elliptical stations preserve the rounded blade.
         tooth = s3d.at(
             tooth,
             x=x,
