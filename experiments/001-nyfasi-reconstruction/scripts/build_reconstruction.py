@@ -59,9 +59,10 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
     for tooth_node in tooth_node_records:
         rotation = tooth_node.get("rotation", [0, 0, 0, 1])
         translation = tooth_node.get("translation", [0, 0, 0])
+        half_turn_component = 1.0  # 180-degree X rotation points the blade along -Z
         if (
             len(rotation) != 4
-            or abs(abs(rotation[0]) - 1.0) > 1e-3
+            or abs(abs(rotation[0]) - half_turn_component) > 1e-3
             or abs(rotation[1]) > 1e-3
             or abs(rotation[2]) > 1e-3
             or abs(rotation[3]) > 1e-3
@@ -153,7 +154,6 @@ def rounded_tray(name, width, depth, height, wall, corner):
     )
     cavity = s3d.at(cavity, z=-height / 2 + wall)
     shell = s3d.cut(blank, cavity)
-    s3d.smooth(shell, angle=48)
     s3d.material(shell, "plastic", color="#e7a58c", roughness=0.58)
     return s3d.group(name, shell)
 
@@ -431,6 +431,13 @@ def build_housing_gasket():
     return s3d.group("housing_interface_gasket_proxy", gasket)
 
 
+def tooth_profile_points(width, thickness, tip_width):
+    """Return the elliptical blade-root profile; validate the intended narrow tip."""
+    if not (0 < tip_width < width):
+        raise ValueError("Tooth tip width must be positive and narrower than its root.")
+    return s3d.ellipse(width, thickness)
+
+
 def build_comb_teeth():
     """Eight wide-spaced, tapered elliptical blades with softened distal tips.
 
@@ -441,7 +448,7 @@ def build_comb_teeth():
     teeth = []
     for index in range(P["tooth_count"]):
         x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
-        profile = s3d.ellipse(P["tooth_width"], P["tooth_thickness"])
+        profile = tooth_profile_points(P["tooth_width"], P["tooth_thickness"], P["tooth_tip_width"])
         tooth = s3d.extrude(
             f"blade_tooth_{index + 1:02d}",
             profile,
@@ -461,7 +468,6 @@ def build_comb_teeth():
             z=P["tooth_root_z"],
             rx=180,
         )
-        s3d.smooth(tooth, angle=60)
         s3d.material(tooth, "plastic", color="#efb49a", roughness=0.48)
         teeth.append(tooth)
     return s3d.group("eight_comb_teeth", *teeth)
