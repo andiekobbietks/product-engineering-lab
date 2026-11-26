@@ -528,7 +528,7 @@ def build_research_assembly(exploded=False):
         ("curved-slotted-wall", "Curved slotted wall", wall, "Patent-led interpretation",
          "180-degree concave seat with seven interpreted axial through-slots."),
         ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
-         "Eight-tooth illustrated embodiment; approximate width and length are patent-described, while height and pitch remain assumptions."),
+         "Eight-tooth illustrated embodiment and 5 mm root width are patent-described; active 28 mm retail-form length is a low-confidence PDR image estimate, while tip and centreline sweep remain assumptions."),
         ("roller-end-features", "Roller end features", roller_ends, "Engineering assumption",
          "Two end walls, spindle pins and annular spindle-seal proxies. Seal fit and retention geometry remain unverified assumptions."),
     ]
