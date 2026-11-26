@@ -111,5 +111,13 @@
     "type": "official_product_description_and_visual_reference",
     "rights": "Brand-owned product text and imagery; link and attribute, do not mirror or redistribute without permission.",
     "access_note": "Public product page observed 2026-11-05. Used only as a visual reference for low-confidence image-estimated external proportions and colour blocking; not as dimensioned CAD or a verified engineering drawing."
+  },
+  {
+    "id": "SRC-014",
+    "title": "Glee Birmingham 2023 New To Glee Look Book — Nyfasi exhibitor page",
+    "url": "https://cdn.asp.events/CLIENT_Ascentia_4E961A52_5056_B739_54289B84DF34E888/sites/Glee-Birmingham-2022/media/New-To-Glee---Look-Book.pdf",
+    "type": "third_party_trade_show_product_photography",
+    "rights": "Trade-show publisher and Nyfasi product imagery remain rights-holder property; cite and inspect only, do not extract, mirror or redistribute without permission.",
+    "access_note": "Nyfasi entry on printed page 125 (PDF page index 124), Glee Birmingham 27–29 June 2023. Text extraction records closed, open, front, side and comb views, plus usage sequence. Useful for qualitative silhouette, part boundaries and colour blocking only; no calibrated dimensions."
   }
 ]
