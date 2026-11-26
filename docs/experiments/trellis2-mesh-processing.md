@@ -8,6 +8,8 @@ This stage starts after the official Microsoft TRELLIS.2 Space, Colab notebook o
 
 ```bash
 python -m pip install -r requirements-reconstruction.txt
+# Optional repair backend; AGPL-3.0, review before use:
+python -m pip install -r requirements-mesh-repair.txt
 ```
 
 The baseline stack includes NumPy/SciPy and Trimesh. PyMeshFix is kept in a separate optional requirements file because it is AGPL-3.0 licensed; review that licence against the intended distribution and deployment model before installing or redistributing it. Open3D and PyMeshLab are also deliberately not mandatory: they add substantial binary dependencies and should be introduced only when the experiment needs point-cloud registration, surface reconstruction or advanced remeshing.
