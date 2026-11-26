@@ -10,7 +10,7 @@ This stage starts after the official Microsoft TRELLIS.2 Space, Colab notebook o
 python -m pip install -r requirements-reconstruction.txt
 ```
 
-The baseline stack includes NumPy/SciPy, Trimesh and PyMeshFix. Open3D and PyMeshLab are deliberately not mandatory: they add substantial binary dependencies and should be introduced only when the experiment needs point-cloud registration, surface reconstruction or advanced remeshing.
+The baseline stack includes NumPy/SciPy and Trimesh. PyMeshFix is kept in a separate optional requirements file because it is AGPL-3.0 licensed; review that licence against the intended distribution and deployment model before installing or redistributing it. Open3D and PyMeshLab are also deliberately not mandatory: they add substantial binary dependencies and should be introduced only when the experiment needs point-cloud registration, surface reconstruction or advanced remeshing.
 
 ## Inspect a downloaded GLB
 
@@ -33,7 +33,7 @@ python experiments/001-nyfasi-reconstruction/scripts/process_trellis2_mesh.py \
   --repair-output output/trellis2/nyfasi_mesh_repaired.glb
 ```
 
-The pipeline first removes unreferenced vertices and corrects winding/normals. If the mesh is still open, PyMeshFix attempts a topology repair. It does not silently discard small connected components. The original GLB is never overwritten.
+The pipeline first removes unreferenced vertices and corrects winding/normals. If the mesh is still open, the optional PyMeshFix backend attempts a topology repair. It does not silently discard small connected components. The original GLB is never overwritten.
 
 PyMeshFix can change geometry and may not preserve PBR materials, UVs, or the appearance of fine comb teeth. Treat the repaired GLB as a diagnostic derivative. Compare it with the untouched GLB before using it for any downstream work.
 
