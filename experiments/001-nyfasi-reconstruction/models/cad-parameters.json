@@ -500,14 +500,14 @@
       "note": "Legacy CadFlow-only blade envelope retained for the archived B-rep builder. The active Sand3D gallery uses tooth_length for radial blade length and tooth_thickness for the thin extrusion."
     },
     "housing_edge_r": {
-      "value": 3,
+      "value": 2.5,
       "unit": "mm",
       "provenance": "IMAGE_ESTIMATED",
       "evidence_ids": [
         "SRC-014"
       ],
       "confidence": "low",
-      "note": "Provisional 3 mm perimeter-edge radius selected to reproduce the soft moulded appearance in the 2023 Glee Nyfasi product photography. The look-book images are not calibrated; this is an image-led visual assumption, not measured CAD."
+      "note": "Provisional 2.5 mm perimeter-edge radius selected to reproduce the soft moulded appearance in the 2023 Glee Nyfasi product photography. The look-book images are not calibrated; this is an image-led visual assumption, not measured CAD."
     },
     "tooth_tip_ratio": {
       "value": 0.45,
