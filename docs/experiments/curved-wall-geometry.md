@@ -26,7 +26,7 @@ The model preserves component names and separate solids in assembly groups where
 
 ## Visual-reference refinement (2026-11-26)
 
-A further multi-view source has been registered as [SRC-014](../../experiments/001-nyfasi-reconstruction/evidence/source-register.json): the Nyfasi exhibitor page in the Glee Birmingham 2023 *New To Glee* look book (printed page 125). The page describes closed, open, front, side and comb views. It supports qualitative visual decisions that the earlier patent-only proxy did not capture clearly: a compact rounded clamshell, dark-purple outer casing, pale peach/pink comb section, a visibly curved ergonomic profile, and a central dispensing region. It is not dimensioned or calibrated.
+A further multi-view source has been registered as [SRC-014](https://github.com/andiekobbietks/product-engineering-lab/blob/main/experiments/001-nyfasi-reconstruction/evidence/source-register.json): the Nyfasi exhibitor page in the Glee Birmingham 2023 *New To Glee* look book (printed page 125). The page describes closed, open, front, side and comb views. It supports qualitative visual decisions that the earlier patent-only proxy did not capture clearly: a compact rounded clamshell, dark-purple outer casing, pale peach/pink comb section, a visibly curved ergonomic profile, and a central dispensing region. It is not dimensioned or calibrated.
 
 The latest Sand3D pass therefore:
 - rounds both top and bottom perimeter rims of the upper and lower clamshell blanks before hollowing, using a 2.5 mm image-led edge-radius parameter (clipped at build time to fit the shell height and wall thickness);
