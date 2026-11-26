@@ -25,11 +25,11 @@
         },
         {
           "name": "overall_width",
-          "value": 110,
+          "value": 130,
           "unit": "mm",
           "evidence_ids": [],
           "confidence": "low",
-          "assumption": "Illustrative envelope parameter; replace with calibrated measurement.",
+          "assumption": "Current 130 mm modelling envelope in cad-parameters.json; engineering assumption only, not a measured retail width.",
           "provenance": "ENGINEERING_ASSUMPTION"
         },
         {
@@ -127,6 +127,30 @@
           ],
           "confidence": "low",
           "assumption": "Patent description says approximately 1 cm spacing; interpretation of spacing convention and retail mapping require review.",
+          "provenance": "PATENT_DISCLOSED"
+        },
+        {
+          "name": "illustrated_tooth_length",
+          "value": 10,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-004",
+            "SRC-007"
+          ],
+          "confidence": "medium",
+          "assumption": "Patent describes tooth length approximately twice the approximately 5 mm width, giving about 10 mm. Patent embodiment estimate, not a verified retail sample measurement.",
+          "provenance": "PATENT_DISCLOSED"
+        },
+        {
+          "name": "blade_cross_section",
+          "value": "elliptical",
+          "unit": "profile",
+          "evidence_ids": [
+            "SRC-004",
+            "SRC-007"
+          ],
+          "confidence": "medium",
+          "assumption": "The patent describes an elliptical cross-sectional profile; the active Sand3D model uses an elliptical profile with assumed thickness and tapered tip.",
           "provenance": "PATENT_DISCLOSED"
         }
       ]
