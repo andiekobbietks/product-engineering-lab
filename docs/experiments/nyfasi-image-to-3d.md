@@ -11,26 +11,32 @@ python -m pip install Pillow
 python experiments/001-nyfasi-reconstruction/scripts/download_reference_images.py
 ```
 
+## Generate with the official Hugging Face Space
+
+Use Microsoft's hosted TRELLIS.2 Space directly:
+
+**https://huggingface.co/spaces/microsoft/TRELLIS.2**
+
+The Space is currently listed as running on ZeroGPU. It exposes an image upload, generation preview and an **Extract GLB** step. Its UI accepts PNG images and recommends an alpha-masked foreground object. For ordinary opaque product photographs, its upload preprocessing attempts background removal automatically. Check the preview carefully: the fine comb teeth and narrow gaps can be damaged by segmentation.
+
+Recommended Nyfasi runs, one image per generation:
+
+1. **REF-PDR-01** `pdr-hero.jpg`: best first pass for the closed retail form and overall silhouette.
+2. **REF-PDR-02** `pdr-detail.jpg`: separate pass for cover/comb detail.
+3. **REF-NYFASI-01** `nyfasi-open-product.png`: separate pass for the open reservoir and roller configuration.
+4. **REF-NYFASI-02** `nyfasi-front.jpg`: separate pass for front-facing tooth arrangement.
+5. **REF-CORE77-01** `core77-comb-angle.jpg`: separate pass for another angled view.
+
+Do not combine the open and closed product photographs into one input. They depict different configurations. Generate separate candidates and retain the source ID with each downloaded GLB. Start at 1024 resolution; increase only if the first result preserves the thin teeth and silhouette. Use **Extract GLB** after reviewing the preview, then download the model.
+
+The Space reports that uploaded images are temporarily cached on Hugging Face and deleted after the session ends. Avoid uploading confidential or private material. The source photographs remain third-party copyrighted material; public accessibility does not grant redistribution permission.
+
 ## Why both Sand3D and TRELLIS.2 are used
 
 - **Sand3D** remains the canonical editable, parameter-driven assembly. It is where explicit dimensions, component relationships, joints and provenance are controlled.
-- **Microsoft TRELLIS.2** is an optional image-to-3D generative route. Its model can produce a textured GLB from a single image, but the output is a visual hypothesis. It cannot establish hidden dimensions, exact scale, mechanical fits, tooth count from occluded views, or internal reservoir construction.
-- Compare TRELLIS.2's generated silhouette and surface form against the calibrated photographs. Do not copy its arbitrary scale into the CAD parameter ledger.
-- Use the open-product Nyfasi image for a separate generation pass to explore the roller/reservoir appearance. The open and closed images depict different configurations; do not ask one generation to merge them into one physically impossible object.
-
-## TRELLIS.2 requirements and execution
-
-The official Microsoft Research implementation is at https://github.com/microsoft/TRELLIS.2. Its published setup expects Linux, CUDA 12.4 and an NVIDIA GPU with at least 24 GB VRAM; the project reports validation on A100/H100. Standard GitHub-hosted runners do not provide that GPU. The model inference script is therefore opt-in and must run on an appropriately provisioned GPU machine or the official hosted demo.
-
-Example, from the official TRELLIS.2 environment:
-
-```bash
-python experiments/001-nyfasi-reconstruction/scripts/run_trellis2_image_to_3d.py \
-  experiments/001-nyfasi-reconstruction/output/reference-images/nyfasi-front.jpg \
-  --output experiments/001-nyfasi-reconstruction/output/trellis2/front-hypothesis.glb
-```
-
-Repeat with the angled PDR image and the open Nyfasi image as separate inputs. Keep the generated GLBs as separate candidates. The image-to-3D outputs are not engineering measurements or verified digital twins.
+- **Microsoft TRELLIS.2** generates a textured GLB from one image. Its output is a visual hypothesis, not a measured reconstruction.
+- Compare generated silhouettes and surface form against calibrated photographs. Do not copy arbitrary generated scale into the CAD parameter ledger.
+- A single photograph cannot establish hidden geometry, exact physical scale, mechanical fits, tooth count where occluded, or internal reservoir construction. Use multiple calibrated views and physical measurements for those.
 
 ## Source and rights register
 
@@ -41,6 +47,9 @@ Repeat with the angled PDR image and the open Nyfasi image as separate inputs. K
 | REF-CORE77-01 | Core77 | Angled comb/tooth profile | Copyrighted; research artifact only |
 
 Sources:
+- https://www.microsoft.com/en-us/research/workbench/project/trellis
+- https://huggingface.co/spaces/microsoft/TRELLIS.2
+- https://www.github.com/microsoft/TRELLIS.2
 - https://www.pdr-consultancy.com/work/deluxe-detangler
 - https://nyfasi.com/en-us/products/deluxe-detangler
 - https://www.core77.com/posts/126476
