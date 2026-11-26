@@ -468,7 +468,6 @@ def build_comb_teeth():
             root,
             mid,
             tip,
-            tip="round",
         )
         tip_radius = min(
             P["tooth_corner_r"],
