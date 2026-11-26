@@ -152,6 +152,17 @@
           "confidence": "medium",
           "assumption": "The patent describes an elliptical cross-sectional profile; the active Sand3D model uses an elliptical profile with assumed thickness and tapered tip.",
           "provenance": "PATENT_DISCLOSED"
+        },
+        {
+          "name": "illustrated_tooth_tip_thickness",
+          "value": 0.9,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "low",
+          "assumption": "Engineering assumption used for the elliptical lofted tip section; patent does not dimension this thickness.",
+          "provenance": "ENGINEERING_ASSUMPTION"
         }
       ]
     },
