@@ -28,6 +28,7 @@ def main():
         (abs(P["tooth_length"] - 2 * P["tooth_width"]) <= 0.5, "Patent embodiment tooth length should remain approximately twice the disclosed width."),
         (0 < P["tooth_tip_ratio"] < 1, "Tooth tip taper ratio must narrow the blade without collapsing it."),
         (abs(P["tooth_tip_ratio"] - P["tooth_tip_width"] / P["tooth_width"]) < 1e-6, "Tooth taper ratio must match the declared tip-to-root width ratio."),
+        (0 < P["tooth_tip_thickness"] <= P["tooth_thickness"], "Elliptical tooth tip thickness must be positive and no greater than its root thickness."),
         (clear_gap >= 5, "Patent embodiment requires at least 5 mm clear spacing between adjacent teeth."),
         (P["reservoir_corner_r"] > 0, "Reservoir corner radius must be positive."),
         (P["roller_axis_y"] == P["housing_d"] / 2, "Roller axis Y datum must match the current housing-centre convention."),
