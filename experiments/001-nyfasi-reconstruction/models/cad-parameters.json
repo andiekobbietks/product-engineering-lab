@@ -510,14 +510,14 @@
       "note": "Provisional 2.5 mm perimeter-edge radius selected to reproduce the soft moulded appearance in the 2023 Glee Nyfasi product photography. The look-book images are not calibrated; this is an image-led visual assumption, not measured CAD."
     },
     "tooth_tip_ratio": {
-      "value": 0.45,
+      "value": 0.3,
       "unit": "ratio",
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [
         "SRC-004"
       ],
       "confidence": "low",
-      "note": "Far-end scale ratio used by Sand3D taper to narrow the elliptical blade toward its rounded tip. The patent specifies tapering but does not give a numerical taper ratio."
+      "note": "Far-end scale ratio used by Sand3D taper to narrow the elliptical blade from 5 mm root width to the 1.5 mm assumed tip width (0.30 ratio). The patent specifies tapering but does not give a numerical taper ratio."
     }
   },
   "provenance_legend": {
