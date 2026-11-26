@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0.0",
+  "units": "mm",
+  "observations": [
+    {
+      "parameter": "housing_w",
+      "value_mm": 0.0,
+      "sigma_mm": 0.0,
+      "source_id": "IMG-REPLACE",
+      "view_id": "top-orthographic-01",
+      "calibration_id": "scale-target-01",
+      "method": "planar-homography",
+      "notes": "Replace zero values with measurements from a rights-cleared, calibrated image."
+    }
+  ]
+}

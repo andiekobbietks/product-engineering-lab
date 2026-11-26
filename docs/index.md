@@ -8,7 +8,7 @@ An applied research environment for turning product evidence into traceable engi
 
 - [Vision](vision.md), [methodology](methodology.md), [architecture](architecture.md) and [roadmap](roadmap.md).
 - [Nyfasi independent research case study](experiments/nyfasi.md), [patent reading notes](experiments/patent-reading-notes.md), [China IP/manufacturing dossier](experiments/nyfasi-china-due-diligence.md) and [validation protocol](experiments/nyfasi-validation.md).
-- [CAD parameter provenance](experiments/cad-parameter-provenance.md), [curved-wall geometry](experiments/curved-wall-geometry.md), [CadFlow B-rep reconstruction](experiments/cadflow-reconstruction.md), [Sand3D dataset strategy](experiments/sand3d-dataset-strategy.md), and [interactive assembly explorer](experiments/assembly-explorer.md).
+- [Metric reconstruction workflow](experiments/metric-reconstruction-workflow.md), [CAD parameter provenance](experiments/cad-parameter-provenance.md), [curved-wall geometry](experiments/curved-wall-geometry.md), [CadFlow B-rep reconstruction](experiments/cadflow-reconstruction.md), [Sand3D dataset strategy](experiments/sand3d-dataset-strategy.md), and [interactive assembly explorer](experiments/assembly-explorer.md).
 - [IP register](ip-register.md), [commercial proposal structure](commercial-proposal.md) and [licensing status](licensing.md).
 
 ## Current implementation
