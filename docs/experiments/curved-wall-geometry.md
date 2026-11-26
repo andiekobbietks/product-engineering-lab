@@ -11,7 +11,7 @@ The patent figures are schematic. They do not provide overall housing dimensions
 
 ## Components now represented in Sand3D
 
-The reconstruction script follows Sand3D's current component-first guidance: one named function per distinct part, dimensions sourced from the provenance ledger, parts placed in a parent frame, and assembly articulation represented explicitly. The roller is now a separate assembly with a continuous X-axis rotation joint. The roller is modelled as a smooth 24 mm drum with seven circumferential bands of discrete spheroidal dome projections, rather than generic knurling. The bands retain smooth sealing lands between them and align with the seven wall slots. The eight teeth use elliptical cross-sections, a tapered distal profile and a softened tip, rooted on the wall's outer surface and pointing away from the roller. The active builder now uses Sand3D `ellipse`, `extrude`, `taper` and `fillet` operations. The taper ratio (0.30), section thickness and tip fillet remain explicit engineering assumptions. The curved-wall thickness is provisionally 1.3 mm so the 2 mm projections reach approximately flush with the wall's outer envelope through the slots. The clamshell housing uses the waisted planform illustrated in patent Figure 2B, with a 54 mm waist depth marked as image-estimated. A separate perimeter gasket proxy and rounded/waisted housing-shell proxies have also been added. See the [Sand3D demos, API and Hugging Face dataset strategy](sand3d-dataset-strategy.md).
+The reconstruction script follows Sand3D's current component-first guidance: one named function per distinct part, dimensions sourced from the provenance ledger, parts placed in a parent frame, and assembly articulation represented explicitly. The roller is now a separate assembly with a continuous X-axis rotation joint. The roller is modelled as a smooth 24 mm drum with seven circumferential bands of discrete spheroidal dome projections, rather than generic knurling. The bands retain smooth sealing lands between them and align with the seven wall slots. The eight teeth use elliptical cross-sections, a tapered distal profile and a softened tip, rooted on the wall's outer surface and pointing away from the roller. The active builder now uses Sand3D `station`, `loft` and `fillet` operations to preserve an elliptical section while narrowing the blade in both width and thickness. The 0.30 width ratio, root/tip section thicknesses and tip fillet remain explicit engineering assumptions. The curved-wall thickness is provisionally 1.3 mm so the 2 mm projections reach approximately flush with the wall's outer envelope through the slots. The clamshell housing uses the waisted planform illustrated in patent Figure 2B, with a 54 mm waist depth marked as image-estimated. A separate perimeter gasket proxy and rounded/waisted housing-shell proxies have also been added. See the [Sand3D demos, API and Hugging Face dataset strategy](sand3d-dataset-strategy.md).
 
 1. Smooth 24 mm roller drum and intervening sealing lands.
 2. Seven circumferential projection bands, each with 18 spheroidal dome proxies, aligned with the seven modelled wall slots.
@@ -33,7 +33,7 @@ The latest Sand3D pass therefore:
 - keeps the moulded shell perimeter geometry rounded;
 - corrects the active comb blade from a flat polygonal prism to an elliptical section, tapered toward its distal end and softly filleted;
 - corrects tooth length from the earlier unsupported 28 mm image estimate to approximately 10 mm, following the patent's statement that a tooth is about twice its approximately 5 mm width;
-- records the 0.30 far-end taper ratio and 1.5 mm section thickness as assumptions rather than patent facts;
+- records the 0.30 far-end width ratio, 1.5 mm root section thickness and 0.9 mm tip section thickness as assumptions rather than patent facts;
 - adds validation for the patent-derived tooth proportion, minimum clear spacing and shell edge-radius envelope.
 
 The look-book imagery is used for qualitative shape and colour blocking only. It does not justify changing the assumed 130 × 68 mm housing envelope into a claimed exact measurement. The public source does not expose a calibrated ruler, dimensioned orthographic drawing or physical sample. Exact retail dimensions remain unresolved until authorised CAD or physical metrology is available.
@@ -54,7 +54,8 @@ Two separately named annular elastomer seal proxies are included around the spin
 | Curved slotted-wall thickness | 1.3 mm | Engineering assumption to align projection tips with the outer envelope |
 | Band axial footprint | 2 mm | Engineering assumption |
 | Housing waist depth | 54 mm | Image-estimated from Figure 2B; low confidence |
-| Tooth taper | 0.30 far-end scale ratio | Engineering assumption; not dimensioned by patent |
+| Tooth tip width ratio | 0.30 far-end/root width ratio | Engineering assumption; not dimensioned by patent |
+| Tooth tip section thickness | 0.9 mm | Engineering assumption; not dimensioned by patent |
 | Housing vertical edge fillet | 2.5 mm | Low-confidence image-led assumption from SRC-014; clipped to fit shell height and wall thickness |
 | Tooth-root datum | -20.8 mm | Derived from the wall outer radius; teeth point away from the roller |
 | End-wall diameter | 25 mm | Engineering assumption |
