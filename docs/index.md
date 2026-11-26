@@ -16,3 +16,4 @@ An applied research environment for turning product evidence into traceable engi
 The repository contains an evidence-linked product model, JSON Schema, uncertainty register, source/image/patent-figure registers, a single-source CAD parameter ledger, a provenance validator, Sand3D and CadFlow reconstruction scripts, a dataset metadata discovery tool and a Colab notebook. The script exports a patent-led curved-wall GLB/OBJ research proxy. The browser-based assembly explorer offers a procedural preview, component inspection, exploded spacing and local GLB loading.
 
 The project-wide licence remains undecided. See the licensing note before reusing any material. The model is not a validated digital twin or manufacturing CAD and has not been validated against a measured retail sample.
+\n\n## Image-to-3D research\n\n- [Nyfasi image references and Microsoft TRELLIS.2 workflow](experiments/nyfasi-image-to-3d.md)\n
