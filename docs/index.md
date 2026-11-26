@@ -17,3 +17,7 @@ The repository contains an evidence-linked product model, JSON Schema, uncertain
 
 The project-wide licence remains undecided. See the licensing note before reusing any material. The model is not a validated digital twin or manufacturing CAD and has not been validated against a measured retail sample.
 \n\n## Image-to-3D research\n\n- [Nyfasi image references and Microsoft TRELLIS.2 workflow](experiments/nyfasi-image-to-3d.md)\n
+
+## Engineering decisions
+
+- [ADR-0004: Retain multiple TRELLIS.2 execution routes](adr/ADR-0004-retain-multiple-trellis2-execution-routes.md)
