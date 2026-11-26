@@ -59,13 +59,13 @@ def validate_articulated_glb(path, expected_component_nodes, expected_joint):
     for tooth_node in tooth_node_records:
         rotation = tooth_node.get("rotation", [0, 0, 0, 1])
         translation = tooth_node.get("translation", [0, 0, 0])
-        half_turn_component = 2 ** -0.5
+        half_turn_component = 1.0  # 180-degree X rotation points the blade along -Z
         if (
             len(rotation) != 4
             or abs(abs(rotation[0]) - half_turn_component) > 1e-3
-            or abs(abs(rotation[3]) - half_turn_component) > 1e-3
             or abs(rotation[1]) > 1e-3
             or abs(rotation[2]) > 1e-3
+            or abs(rotation[3]) > 1e-3
         ):
             raise ValueError(f"Comb tooth {tooth_node.get('name')} is not oriented radially away from the curved wall")
         if len(translation) < 2 or abs(translation[1] - P["tooth_root_z"]) > 1e-3:
@@ -136,6 +136,10 @@ def rounded_tray(name, width, depth, height, wall, corner):
     waist_depth = P["housing_waist_depth"]
     blank_profile = housing_outline_profile(width, depth, waist_depth, corner)
     blank = s3d.extrude(name + "_blank", blank_profile, height)
+    # Rounded moulded perimeter: radius remains an explicit image-led assumption.
+    edge_radius = min(P["housing_edge_r"], height * 0.22, wall * 1.5)
+    blank = s3d.fillet(blank, edge_radius, edges="top")
+    blank = s3d.fillet(blank, edge_radius, edges="bottom")
     blank = s3d.at(blank, z=-height / 2)
     cavity_profile = housing_outline_profile(
         width - 2 * wall,
@@ -427,48 +431,61 @@ def build_housing_gasket():
     return s3d.group("housing_interface_gasket_proxy", gasket)
 
 
-def tooth_profile_points(width, length, tip_width):
-    """Planform of a thin tapered blade, root first and narrow tip last."""
-    half_root = width / 2
-    half_tip = tip_width / 2
-    return [
-        (-half_root, 0),
-        (half_root, 0),
-        (half_root * 0.82, length * 0.22),
-        (half_root * 0.55, length * 0.62),
-        (half_tip, length * 0.92),
-        (half_tip, length),
-        (-half_tip, length),
-        (-half_tip, length * 0.92),
-        (-half_root * 0.55, length * 0.62),
-        (-half_root * 0.82, length * 0.22),
-    ]
+def tooth_profile_points(width, thickness):
+    """Return the root elliptical loft section for one comb blade."""
+    return s3d.station(0, width, thickness, n=2)
 
 
 def build_comb_teeth():
-    """Eight thin tapered blades rooted on the outside of the curved wall."""
+    """Eight wide-spaced, elliptical blades lofted to narrow, softened tips.
+
+    Patent text describes an approximately 5 mm tooth width and a length
+    approximately twice its width (about 10 mm). Section thickness and tip
+    proportions remain explicit modelling assumptions.
+    """
     teeth = []
     for index in range(P["tooth_count"]):
         x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
-        profile = s3d.poly(
-            tooth_profile_points(P["tooth_width"], P["tooth_length"], P["tooth_tip_width"]),
-            fillet=P["tooth_corner_r"],
+        root = tooth_profile_points(P["tooth_width"], P["tooth_thickness"])
+        mid = s3d.station(
+            P["tooth_length"] * 0.16,
+            P["tooth_width"] * 0.94,
+            P["tooth_thickness"] * 0.95,
+            y=P["tooth_curve_offset"] * 0.30,
+            n=2,
         )
-        tooth = s3d.extrude(
+        tip_width = min(
+            P["tooth_tip_width"],
+            P["tooth_width"] * P["tooth_tip_ratio"],
+        )
+        tip = s3d.station(
+            P["tooth_length"],
+            tip_width,
+            P["tooth_tip_thickness"],
+            y=P["tooth_curve_offset"],
+            n=2,
+        )
+        tooth = s3d.loft(
             f"blade_tooth_{index + 1:02d}",
-            profile,
-            P["tooth_thickness"],
+            root,
+            mid,
+            tip,
         )
-        # Profile +Y is rotated onto radial -Z. The thin extrusion is centred
-        # across the local tangential Y datum at the bottom of the 180-degree wall.
+        tip_radius = min(
+            P["tooth_corner_r"],
+            P["tooth_tip_thickness"] * 0.25,
+        )
+        tooth = s3d.fillet(tooth, tip_radius, edges="end")
+        # Loft sections run along +Z; rotate to extend radially away from the
+        # curved wall along -Z. Elliptical stations preserve the rounded blade.
         tooth = s3d.at(
             tooth,
             x=x,
-            y=P["roller_axis_y"] - P["tooth_thickness"] / 2,
+            y=P["roller_axis_y"],
             z=P["tooth_root_z"],
-            rx=-90,
+            rx=180,
         )
-        s3d.material(tooth, "plastic", color="#efb49a", roughness=0.54)
+        s3d.material(tooth, "plastic", color="#efb49a", roughness=0.48)
         teeth.append(tooth)
     return s3d.group("eight_comb_teeth", *teeth)
 
@@ -511,7 +528,7 @@ def build_research_assembly(exploded=False):
         ("curved-slotted-wall", "Curved slotted wall", wall, "Patent-led interpretation",
          "180-degree concave seat with seven interpreted axial through-slots."),
         ("eight-comb-teeth", "Eight comb teeth", teeth, "Patent disclosed / derived",
-         "Eight-tooth illustrated embodiment; approximate width and length are patent-described, while height and pitch remain assumptions."),
+         "Eight-tooth illustrated embodiment and 5 mm root width are patent-described; active 28 mm retail-form length is a low-confidence PDR image estimate, while tip and centreline sweep remain assumptions."),
         ("roller-end-features", "Roller end features", roller_ends, "Engineering assumption",
          "Two end walls, spindle pins and annular spindle-seal proxies. Seal fit and retention geometry remain unverified assumptions."),
     ]

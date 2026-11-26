@@ -9,6 +9,7 @@ What product architecture can be reconstructed from public product pages, design
 - [Nyfasi official website](https://nyfasi.com/)
 - [PDR Deluxe Detangler case study](https://www.pdr-consultancy.com/work/deluxe-detangler)
 - [iF Design entry](https://ifdesign.com/en/winner-ranking/project/deluxe-detangler/345596)
+- [Glee Birmingham 2023 Nyfasi multi-view look book (printed page 125)](https://cdn.asp.events/CLIENT_Ascentia_4E961A52_5056_B739_54289B84DF34E888/sites/Glee-Birmingham-2022/media/New-To-Glee---Look-Book.pdf)
 - [UK patent GB2591502A](https://patents.google.com/patent/GB2591502A/en)
 - [US design patent USD1031151S1](https://patents.google.com/patent/USD1031151S1/en)
 
@@ -22,7 +23,7 @@ The China patent-family record and secondary reports of mould manufacture/initia
 
 Sand3D is used as a text-driven editable 3D generation experiment. This study asks what additional structure makes generated output useful in product engineering: component identity, evidence-linked dimensions, assembly relationships, editability, constraint checks and provenance.
 
-The current iteration replaces the earlier flat slotted carrier with a 180-degree cylindrical wall segment, concave roller seat and seven circumferential arc-slot cuts positioned between the eight illustrated teeth. The geometric interpretation and its limits are documented in [curved-wall geometry](../../docs/experiments/curved-wall-geometry.md). It remains a patent-led proxy, not original Nyfasi CAD or a verified retail reconstruction.
+The current iteration uses a 180-degree cylindrical wall segment, concave roller seat and seven circumferential arc-slot cuts positioned between the eight illustrated teeth. The clamshell has softened perimeter rims; the comb blades have elliptical sections, a gently swept centreline, tapered ends and rounded tips. The active 28 mm retail-form length is a low-confidence PDR image estimate; the separate approximately 10 mm patent embodiment length remains in the parameter ledger. See [visual-reference refinement](../../docs/experiments/curved-wall-geometry.md#visual-reference-refinement-2026-11-26) and the [PDR multi-angle product photography](https://www.pdr-consultancy.com/work/deluxe-detangler). The geometric interpretation and its limits are documented in [curved-wall geometry](../../docs/experiments/curved-wall-geometry.md). It remains a patent-led proxy, not original Nyfasi CAD or a verified retail reconstruction.
 
 Compare text-only generation, evidence-conditioned generation, component-by-component generation, assembly reconstruction and independent validation. The repository pins Sand3D 1.6.2 for the initial adapter experiment.
 

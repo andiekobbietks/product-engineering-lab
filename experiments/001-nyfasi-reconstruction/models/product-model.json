@@ -25,11 +25,11 @@
         },
         {
           "name": "overall_width",
-          "value": 110,
+          "value": 130,
           "unit": "mm",
           "evidence_ids": [],
           "confidence": "low",
-          "assumption": "Illustrative envelope parameter; replace with calibrated measurement.",
+          "assumption": "Current 130 mm modelling envelope in cad-parameters.json; engineering assumption only, not a measured retail width.",
           "provenance": "ENGINEERING_ASSUMPTION"
         },
         {
@@ -128,6 +128,64 @@
           "confidence": "low",
           "assumption": "Patent description says approximately 1 cm spacing; interpretation of spacing convention and retail mapping require review.",
           "provenance": "PATENT_DISCLOSED"
+        },
+        {
+          "name": "patent_illustrated_tooth_length",
+          "value": 10,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-004",
+            "SRC-007"
+          ],
+          "confidence": "medium",
+          "assumption": "Patent embodiment describes a tooth longitudinal length approximately twice its approximately 5 mm width. This is a patent-described approximate value, not the retail-form length inferred from PDR imagery.",
+          "provenance": "PATENT_DISCLOSED"
+        },
+        {
+          "name": "blade_cross_section",
+          "value": "elliptical",
+          "unit": "profile",
+          "evidence_ids": [
+            "SRC-004",
+            "SRC-007"
+          ],
+          "confidence": "medium",
+          "assumption": "The patent describes an elliptical cross-sectional profile; the active Sand3D model uses an elliptical profile with assumed thickness and tapered tip.",
+          "provenance": "PATENT_DISCLOSED"
+        },
+        {
+          "name": "illustrated_tooth_tip_thickness",
+          "value": 0.9,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-004"
+          ],
+          "confidence": "low",
+          "assumption": "Engineering assumption used for the elliptical lofted tip section; patent does not dimension this thickness.",
+          "provenance": "ENGINEERING_ASSUMPTION"
+        },
+        {
+          "name": "retail_tooth_length_estimate",
+          "value": 28,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-002",
+            "SRC-015"
+          ],
+          "confidence": "low",
+          "assumption": "Low-confidence visual estimate from PDR product photography, scaled against the current assumed housing envelope. No calibrated retail measurement is available.",
+          "provenance": "IMAGE_ESTIMATED"
+        },
+        {
+          "name": "tooth_curve_offset",
+          "value": 1.5,
+          "unit": "mm",
+          "evidence_ids": [
+            "SRC-015"
+          ],
+          "confidence": "low",
+          "assumption": "Low-confidence lateral offset for a gently swept tooth centreline, inferred qualitatively from the PDR product photographs.",
+          "provenance": "IMAGE_ESTIMATED"
         }
       ]
     },
@@ -273,7 +331,9 @@
     "SRC-010",
     "SRC-011",
     "SRC-012",
-    "SRC-006"
+    "SRC-006",
+    "SRC-014",
+    "SRC-015"
   ],
   "toolchain": {
     "cad_library": "Sand3D",
