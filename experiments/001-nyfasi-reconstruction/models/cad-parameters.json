@@ -102,15 +102,15 @@
       "note": "Approximate 0.5 cm width in the described embodiment; not verified on retail sample."
     },
     "tooth_length": {
-      "value": 10,
+      "value": 28,
       "unit": "mm",
-      "provenance": "PATENT_DISCLOSED",
+      "provenance": "IMAGE_ESTIMATED",
       "evidence_ids": [
-        "SRC-004",
-        "SRC-007"
+        "SRC-002",
+        "SRC-015"
       ],
-      "confidence": "medium",
-      "note": "The patent embodiment describes a tooth longitudinal length approximately twice its approximately 5 mm width, giving about 10 mm. This is a patent-described approximate embodiment dimension, not a verified measurement of a specific retail revision."
+      "confidence": "low",
+      "note": "Active retail-form visual estimate from PDR product photography, scaled against the current assumed 130 mm housing envelope. The images are perspective views without a calibrated ruler; this is not a measured retail dimension. The patent's approximately 10 mm illustrated embodiment length is retained separately as patent_illustrated_tooth_length."
     },
     "tooth_pitch": {
       "value": 15,
@@ -517,7 +517,7 @@
         "SRC-004"
       ],
       "confidence": "low",
-      "note": "Far-end scale ratio used by Sand3D taper to narrow the elliptical blade from 5 mm root width to the 1.5 mm assumed tip width (0.30 ratio). The patent specifies tapering but does not give a numerical taper ratio."
+      "note": "Far-end width ratio used by the loft to narrow the blade from 5 mm root width to the 1.5 mm assumed tip width (0.30 ratio). The patent describes tapering but does not give a numerical retail taper ratio."
     },
     "tooth_tip_thickness": {
       "value": 0.9,
@@ -528,6 +528,27 @@
       ],
       "confidence": "low",
       "note": "Assumed elliptical section thickness at the distal tooth tip for the lofted tapered blade. Patent describes an elliptical section and taper but does not dimension this value."
+    },
+    "patent_illustrated_tooth_length": {
+      "value": 10,
+      "unit": "mm",
+      "provenance": "PATENT_DISCLOSED",
+      "evidence_ids": [
+        "SRC-004",
+        "SRC-007"
+      ],
+      "confidence": "medium",
+      "note": "Patent description gives an approximately 5 mm tooth width and a longitudinal length approximately twice that width (about 10 mm) for the described embodiment. This is not asserted to be the exact retail product revision visible in PDR photographs."
+    },
+    "tooth_curve_offset": {
+      "value": 1.5,
+      "unit": "mm",
+      "provenance": "IMAGE_ESTIMATED",
+      "evidence_ids": [
+        "SRC-015"
+      ],
+      "confidence": "low",
+      "note": "Small lateral centreline offset introduced between root and tip to reproduce the gentle swept/curved tooth profile visible in PDR product photography. Not a calibrated measurement."
     }
   },
   "provenance_legend": {
