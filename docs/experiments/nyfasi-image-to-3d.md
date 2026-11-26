@@ -11,6 +11,17 @@ python -m pip install Pillow
 python experiments/001-nyfasi-reconstruction/scripts/download_reference_images.py
 ```
 
+## Execution routes and experiment lifecycle
+
+This lab intentionally retains multiple execution paths. They are complementary experiments, not mutually exclusive replacements:
+
+1. **Hugging Face Space (primary hosted route):** quickest way to run the published Microsoft demo without managing dependencies. Use the official Space below and record the selected image ID and downloaded GLB.
+2. **Google Colab (alternative reproducible route):** retained notebook for users who need explicit setup, repeatable steps, GPU preflight checks, and a downloadable artifact. GPU type, quota and runtime duration depend on the account and allocation.
+3. **Local CUDA (developer route):** the repository inference script supports a self-managed Linux/NVIDIA environment that meets TRELLIS.2 requirements.
+4. **Sand3D (engineering route):** canonical parametric assembly and dimension ledger. AI-generated meshes remain comparison inputs, never silent replacements for measured CAD geometry.
+
+Record each run's source image ID, model/version, execution route, settings, output filename and SHA-256 in the experiment results. Keep failures and limitations as lab evidence rather than deleting the route.
+
 ## Generate with the official Hugging Face Space
 
 Use Microsoft's hosted TRELLIS.2 Space directly:
