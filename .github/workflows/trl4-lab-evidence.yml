@@ -1,0 +1,77 @@
+name: TRL 4 laboratory evidence preparation
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "experiments/001-nyfasi-reconstruction/**"
+      - "requirements-cad.txt"
+      - ".github/workflows/trl4-lab-evidence.yml"
+  push:
+    branches: [main]
+    paths:
+      - "experiments/001-nyfasi-reconstruction/**"
+      - "requirements-cad.txt"
+      - ".github/workflows/trl4-lab-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: trl4-lab-evidence-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  software-evidence:
+    name: Controlled software verification and evidence capture
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements-cad.txt
+      - name: Create evidence bundle
+        shell: bash
+        run: |
+          mkdir -p evidence-bundle/logs evidence-bundle/outputs
+          {
+            echo "commit=$(git rev-parse HEAD)"
+            echo "workflow_run_id=${{ github.run_id }}"
+            echo "workflow_attempt=${{ github.run_attempt }}"
+            echo "python=$(python --version 2>&1)"
+            echo "platform=$(python -c 'import platform; print(platform.platform())')"
+            echo "requirements_sha256=$(sha256sum requirements-cad.txt | cut -d' ' -f1)"
+            echo "parameter_sha256=$(sha256sum experiments/001-nyfasi-reconstruction/models/cad-parameters.json | cut -d' ' -f1)"
+          } | tee evidence-bundle/environment.txt
+          cp experiments/001-nyfasi-reconstruction/evidence/trl4-evidence-register.json evidence-bundle/
+          cp docs/validation/trl4-laboratory-validation-protocol.md evidence-bundle/
+      - name: Validate parameter and source provenance
+        run: set -o pipefail; python experiments/001-nyfasi-reconstruction/scripts/validate_provenance.py 2>&1 | tee evidence-bundle/logs/provenance.log
+      - name: Validate geometric invariants
+        run: set -o pipefail; python experiments/001-nyfasi-reconstruction/scripts/validate_geometry.py 2>&1 | tee evidence-bundle/logs/geometry.log
+      - name: Test tolerance calculations
+        run: set -o pipefail; python -m unittest discover -s experiments/001-nyfasi-reconstruction/tests -v 2>&1 | tee evidence-bundle/logs/unit-tests.log
+      - name: Analyse interface stack-ups
+        run: set -o pipefail; python experiments/001-nyfasi-reconstruction/scripts/analyse_interaction.py 2>&1 | tee evidence-bundle/logs/interface-analysis.log
+      - name: Install pinned CAD engine
+        run: set -o pipefail; python -m pip install --upgrade pip -r requirements-cad.txt
+      - name: Run parametric edit benchmark
+        run: set -o pipefail; python experiments/001-nyfasi-reconstruction/benchmark/nyfasi_sand3d_benchmark.py --output evidence-bundle/benchmark.json 2>&1 | tee evidence-bundle/logs/benchmark.log
+      - name: Build baseline assembly
+        run: set -o pipefail; python experiments/001-nyfasi-reconstruction/scripts/build_reconstruction.py 2>&1 | tee evidence-bundle/logs/build.log
+      - name: Copy generated outputs and calculate hashes
+        shell: bash
+        run: |
+          cp -R experiments/001-nyfasi-reconstruction/output/. evidence-bundle/outputs/
+          find evidence-bundle -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > evidence-bundle/SHA256SUMS
+      - name: Upload immutable run evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: trl4-software-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: evidence-bundle/
+          if-no-files-found: error
+          retention-days: 90
