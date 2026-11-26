@@ -448,9 +448,10 @@ def build_comb_teeth():
         x = (index - (P["tooth_count"] - 1) / 2) * P["tooth_pitch"]
         root = tooth_profile_points(P["tooth_width"], P["tooth_thickness"])
         mid = s3d.station(
-            P["tooth_length"] * 0.78,
-            P["tooth_width"] * 0.62,
-            P["tooth_thickness"] * 0.82,
+            P["tooth_length"] * 0.16,
+            P["tooth_width"] * 0.94,
+            P["tooth_thickness"] * 0.95,
+            y=P["tooth_curve_offset"] * 0.30,
             n=2,
         )
         tip_width = min(
@@ -461,6 +462,7 @@ def build_comb_teeth():
             P["tooth_length"],
             tip_width,
             P["tooth_tip_thickness"],
+            y=P["tooth_curve_offset"],
             n=2,
         )
         tooth = s3d.loft(
