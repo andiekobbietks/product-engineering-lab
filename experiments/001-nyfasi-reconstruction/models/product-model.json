@@ -297,7 +297,8 @@
     "SRC-010",
     "SRC-011",
     "SRC-012",
-    "SRC-006"
+    "SRC-006",
+    "SRC-014"
   ],
   "toolchain": {
     "cad_library": "Sand3D",
