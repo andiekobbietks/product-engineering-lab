@@ -21,7 +21,7 @@ The reconstruction script follows Sand3D's current component-first guidance: one
 6. Two bored housing bearing-support blocks, two upper-housing spindle-retaining arms with cut-outs, and two simplified snap-fit tabs.
 7. A waisted upper/lower clamshell housing, perimeter gasket and reservoir envelope proxy.
 
-The model preserves component names and separate solids in assembly groups where supported. The eight-tooth embodiment and approximate tooth width/length are patent-described; the 18 projections per band, seven-band mapping, waist depth and most other dimensions remain derived or assumed values as classified in the parameter ledger.
+The model preserves component names and separate solids in assembly groups where supported. The eight-tooth embodiment and approximate 5 mm root width are patent-described; the approximately 10 mm patent-embodiment length is retained separately from the 28 mm image-estimated retail-form length used in the active visual model; the 18 projections per band, seven-band mapping, waist depth and most other dimensions remain derived or assumed values as classified in the parameter ledger.
 
 
 ## Visual-reference refinement (2026-11-26)
@@ -32,11 +32,11 @@ The latest Sand3D pass therefore:
 - rounds both top and bottom perimeter rims of the upper and lower clamshell blanks before hollowing, using a 2.5 mm image-led edge-radius parameter (clipped at build time to fit the shell height and wall thickness);
 - keeps the moulded shell perimeter geometry rounded;
 - corrects the active comb blade from a flat polygonal prism to an elliptical section, tapered toward its distal end and softly filleted;
-- corrects tooth length from the earlier unsupported 28 mm image estimate to approximately 10 mm, following the patent's statement that a tooth is about twice its approximately 5 mm width;
-- records the 0.30 far-end width ratio, 1.5 mm root section thickness and 0.9 mm tip section thickness as assumptions rather than patent facts;
+- separates the patent's approximately 10 mm illustrated-embodiment length from the active 28 mm low-confidence retail-form estimate inferred from PDR product photography; the Sand3D builder uses the latter for visual matching while retaining both values in the parameter ledger;
+- records the 0.30 far-end width ratio, 1.5 mm root section thickness, 0.9 mm tip section thickness and 1.5 mm centreline sweep as assumptions rather than patent facts;
 - adds validation for the patent-derived tooth proportion, minimum clear spacing and shell edge-radius envelope.
 
-The look-book imagery is used for qualitative shape and colour blocking only. It does not justify changing the assumed 130 × 68 mm housing envelope into a claimed exact measurement. The public source does not expose a calibrated ruler, dimensioned orthographic drawing or physical sample. Exact retail dimensions remain unresolved until authorised CAD or physical metrology is available.
+The Glee look-book and PDR imagery are used for qualitative shape, colour blocking and relative proportions only. It does not justify changing the assumed 130 × 68 mm housing envelope into a claimed exact measurement. The public source does not expose a calibrated ruler, dimensioned orthographic drawing or physical sample. Exact retail dimensions remain unresolved until authorised CAD or physical metrology is available.
 
 ## Spindle-seal research proxies
 
@@ -55,7 +55,10 @@ Two separately named annular elastomer seal proxies are included around the spin
 | Band axial footprint | 2 mm | Engineering assumption |
 | Housing waist depth | 54 mm | Image-estimated from Figure 2B; low confidence |
 | Tooth tip width ratio | 0.30 far-end/root width ratio | Engineering assumption; not dimensioned by patent |
+| Retail-form tooth length | 28 mm | Low-confidence image estimate from PDR product photography |
+| Patent illustrated tooth length | 10 mm | Patent-described approximate embodiment value (twice the 5 mm width) |
 | Tooth tip section thickness | 0.9 mm | Engineering assumption; not dimensioned by patent |
+| Tooth centreline sweep | 1.5 mm | Low-confidence image estimate from PDR product photography |
 | Housing vertical edge fillet | 2.5 mm | Low-confidence image-led assumption from SRC-014; clipped to fit shell height and wall thickness |
 | Tooth-root datum | -20.8 mm | Derived from the wall outer radius; teeth point away from the roller |
 | End-wall diameter | 25 mm | Engineering assumption |
