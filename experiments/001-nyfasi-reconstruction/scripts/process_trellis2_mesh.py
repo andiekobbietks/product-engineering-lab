@@ -67,10 +67,10 @@ def repair_mesh(mesh: trimesh.Trimesh) -> tuple[trimesh.Trimesh, dict[str, Any]]
             np.asarray(candidate.vertices, dtype=np.float64),
             np.asarray(candidate.faces, dtype=np.int32),
         )
-        fixer.repair(verbose=False, joincomp=False, remove_smallest_components=False)
+        fixer.repair(joincomp=False, remove_smallest_components=False)
         candidate = trimesh.Trimesh(
-            vertices=np.asarray(fixer.v),
-            faces=np.asarray(fixer.f),
+            vertices=np.asarray(fixer.points),
+            faces=np.asarray(fixer.faces),
             process=True,
         )
         meshfix_used = True
