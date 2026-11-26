@@ -518,6 +518,16 @@
       ],
       "confidence": "low",
       "note": "Far-end scale ratio used by Sand3D taper to narrow the elliptical blade from 5 mm root width to the 1.5 mm assumed tip width (0.30 ratio). The patent specifies tapering but does not give a numerical taper ratio."
+    },
+    "tooth_tip_thickness": {
+      "value": 0.9,
+      "unit": "mm",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [
+        "SRC-004"
+      ],
+      "confidence": "low",
+      "note": "Assumed elliptical section thickness at the distal tooth tip for the lofted tapered blade. Patent describes an elliptical section and taper but does not dimension this value."
     }
   },
   "provenance_legend": {
