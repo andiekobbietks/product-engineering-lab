@@ -1,0 +1,4 @@
+# Optional topology repair backend.
+# PyMeshFix is licensed AGPL-3.0. Review licence obligations before use,
+# redistribution, or incorporation into a commercial deployment.
+pymeshfix>=0.18.1,<0.19
