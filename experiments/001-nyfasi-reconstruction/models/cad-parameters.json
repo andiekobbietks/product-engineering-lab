@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.1.0",
+  "schema_version": "1.2.0",
   "product_id": "GB2591502A-HAIR-APPLICATOR-RESEARCH",
   "units": "mm",
   "model_status": "research_only",
@@ -102,16 +102,15 @@
       "note": "Approximate 0.5 cm width in the described embodiment; not verified on retail sample."
     },
     "tooth_length": {
-      "value": 28,
+      "value": 10,
       "unit": "mm",
-      "provenance": "IMAGE_ESTIMATED",
+      "provenance": "PATENT_DISCLOSED",
       "evidence_ids": [
-        "SRC-002",
-        "SRC-003",
-        "SRC-013"
+        "SRC-004",
+        "SRC-007"
       ],
-      "confidence": "low",
-      "note": "Visual estimate from official Nyfasi/PDR product photographs, using the current assumed body envelope as a scale reference. Perspective, image cropping and the unmeasured retail sample prevent this being treated as a measured dimension; replace with calibrated sample metrology or authorised CAD."
+      "confidence": "medium",
+      "note": "The patent embodiment describes a tooth longitudinal length approximately twice its approximately 5 mm width, giving about 10 mm. This is a patent-described approximate embodiment dimension, not a verified measurement of a specific retail revision."
     },
     "tooth_pitch": {
       "value": 15,
@@ -292,7 +291,7 @@
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Placeholder external corner radius for the housing envelope; not calibrated."
+      "note": "Plan-view corner radius for the waisted clamshell outline; provisional image-led geometry, distinct from the new vertical perimeter-edge fillet."
     },
     "reservoir_corner_r": {
       "value": 4,
@@ -340,7 +339,7 @@
       "provenance": "ENGINEERING_ASSUMPTION",
       "evidence_ids": [],
       "confidence": "none",
-      "note": "Small illustrative edge radius on each tooth; not disclosed."
+      "note": "Small Sand3D edge fillet used to soften the distal tooth tip after tapering; visual/geometry assumption, not a disclosed dimension."
     },
     "snap_tab_pitch": {
       "value": 100,
@@ -499,6 +498,26 @@
       "evidence_ids": [],
       "confidence": "low",
       "note": "Legacy CadFlow-only blade envelope retained for the archived B-rep builder. The active Sand3D gallery uses tooth_length for radial blade length and tooth_thickness for the thin extrusion."
+    },
+    "housing_edge_r": {
+      "value": 3,
+      "unit": "mm",
+      "provenance": "IMAGE_ESTIMATED",
+      "evidence_ids": [
+        "SRC-014"
+      ],
+      "confidence": "low",
+      "note": "Provisional 3 mm perimeter-edge radius selected to reproduce the soft moulded appearance in the 2023 Glee Nyfasi product photography. The look-book images are not calibrated; this is an image-led visual assumption, not measured CAD."
+    },
+    "tooth_tip_ratio": {
+      "value": 0.45,
+      "unit": "ratio",
+      "provenance": "ENGINEERING_ASSUMPTION",
+      "evidence_ids": [
+        "SRC-004"
+      ],
+      "confidence": "low",
+      "note": "Far-end scale ratio used by Sand3D taper to narrow the elliptical blade toward its rounded tip. The patent specifies tapering but does not give a numerical taper ratio."
     }
   },
   "provenance_legend": {
